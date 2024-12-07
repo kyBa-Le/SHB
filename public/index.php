@@ -15,7 +15,7 @@ $config = [
 ];
 $app = new app\core\Application($config);
 
-$app->router->get('/', [new SiteController(), 'home']);
+// Create routes
 
-$app->router->get('/contact', 'notFound');
+
 $app->run();
