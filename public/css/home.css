@@ -1,1 +1,48 @@
 /*style for home page*/
+
+/*css for call to action*/
+#call-to-action-container #cards-container {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    column-gap: 2%;
+    margin-bottom: 15vh;
+}
+.call-to-action-card {
+    width: 100%;
+    height: 80vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.call-to-action-hover {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -70%);
+    font-weight: bold;
+    color: white;
+    visibility: hidden;
+}
+.call-to-action-hover button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: none;
+}
+.call-to-action-hover button:hover {
+    background-color: #0F0E0E;
+    color: white;
+}
+.call-to-action-overlay {
+    background-color: #0F0E0E;
+    border-radius: 10px;
+    opacity: 0.4;
+    visibility: hidden;
+}
+.call-to-action-card:hover {
+    .call-to-action-hover, .call-to-action-overlay {
+        visibility: visible;
+    }
+}
