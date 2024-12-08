@@ -38,7 +38,6 @@
         color: white; 
     }
 
-
     .search-header {
         border-radius: 20px;
         background-color: white;
@@ -58,20 +57,20 @@
 
 <div class="container-fluid p-0" id="container-header">
     <div class="header-content">
-        <img id="header-logo" src="./images/logo.png">
+        <img id="header-logo" src="images/logo.png" onclick="{window.location.href='/'}">
         <div class="header-nav">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="#">HOME</a>
+                <a class="nav-link active" href="/">HOME</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">MEN</a>
+                <a class="nav-link" href="/men">MEN</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">WOMEN</a>
+                <a class="nav-link" href="/women">WOMEN</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">KIDS & BABY</a>
+                <a class="nav-link" href="/children">CHILDREN</a>
             </li>
         </ul>
     </div>
@@ -82,8 +81,8 @@
         </button>
     </div>
     <div class="logIn-signUp">
-        <a href="">Log In</a>
+        <a href="/login">Log In</a>
         <span>/</span>
-        <a href="">Sign Up</a>
+        <a href="/sign-up">Sign Up</a>
     </div>
 </div>
