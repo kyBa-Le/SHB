@@ -2,6 +2,8 @@
 <style>
     #container-footer {
         background-color: #0F0E0E;
+        box-sizing: border-box;
+        padding: 1vh 2vw;
     }
     #container-footer * {
         color: white;
@@ -33,13 +35,25 @@
             </div>
         </div>
         <div class="col">
-            Column
+            <h2>About SHB Store</h2>
+            <p>Introduction</p>
+            <p>News</p>
+            <p>Store system</p>
+            <p>Promotional news</p>
         </div>
         <div class="col">
-            Column
+            <h2>Customer Services</h2>
+            <p>Loyalty policy</p>
+            <p>Return policy</p>
+            <p>Privacy policy</p>
+            <p>Payment and delivery policy</p>
         </div>
         <div class="col">
-            Column
+            <h2>Contact</h2>
+            <p>Contact to order</p>
+            <p>0244 222 890</p>
+            <p>Email</p>
+            <p>shbstore@gmail.com</p>
         </div>
     </div>
 </div>
