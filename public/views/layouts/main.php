@@ -13,7 +13,7 @@
     <title>SHB Store</title>
 </head>
 <body>
-<div>Header before login</div>
+<?php require_once 'views/components/header.php' ?>
  {{content}}
 <?php require_once 'views/components/footer.php'?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
