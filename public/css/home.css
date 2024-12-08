@@ -1,1 +1,15 @@
 /*style for home page*/
+
+/*css for call to action*/
+#call-to-action-container #cards-container {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    column-gap: 2%;
+}
+.call-to-action-card {
+    width: 100%;
+    height: 80vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+}
