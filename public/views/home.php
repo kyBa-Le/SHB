@@ -22,7 +22,7 @@
         <div class="call-to-action-card" style="background-image: url('https://www.kkami.nl/wp-content/uploads/2024/11/Soye-Korean-Children-Fashion-Brand-kidsshorts-4560990BS13tete-large8.jpg')">
             <div class="w-100 h-100 call-to-action-overlay"></div>
             <div class="call-to-action-hover">
-                <h1>Women's products</h1>
+                <h1>Children's products</h1>
                 <p class="w-50">The childhood with full of memorable moment with SHB clothes.</p>
                 <button onclick="{window.location.href='/children'}">See more <i class="fa-solid fa-arrow-right-long"></i></button>
             </div>
