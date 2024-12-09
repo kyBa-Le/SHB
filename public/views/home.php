@@ -1,4 +1,13 @@
 <link rel="stylesheet" href="css/home.css">
+<!-- Banner -->
+<div class="container-fluid p-0" id="banner-container">
+    <div class="box-banner" style="background-image: url('images/home-banner.png')">
+        <div class="banner-content">
+            <p class="banner-title-logo">SHB</p>
+            <p class="banner-slogan">Make your appearance be different</p>
+        </div>
+    </div>
+</div>
 <!--Call to action -->
 <div class="container-fluid p-0" id="call-to-action-container">
     <h1 class="text-center mt-5 mb-5">Explore out products</h1>

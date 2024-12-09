@@ -1,5 +1,22 @@
 /*style for home page*/
-
+/* Banner */
+.box-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-position: -90px -90px;
+}
+.banner-content {
+    text-align: center;
+    color: white;
+}
+.banner-title-logo {
+    font-size: 100px;
+}
+.banner-slogan {
+    font-size: 50px;
+}
 /*css for call to action*/
 #call-to-action-container #cards-container {
     display: grid;
