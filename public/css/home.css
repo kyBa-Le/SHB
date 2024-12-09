@@ -124,3 +124,8 @@
     border-radius: 10px;
     border: none;
 }
+#card-products-container {
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    column-gap: 1.3%;
+}
