@@ -7,7 +7,8 @@ use app\core\Controller;
 class SiteController extends Controller
 {
     public function home() {
-        $data = ['outStandingProducts' => [new ProductController, 'getTop4OutStandingProducts']];
+        $productController = new ProductController();
+        $data = ['outStandingProducts' => $productController->getTop4OutStandingProducts()];
         return $this->render('home', $data);
     }
 }
