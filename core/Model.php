@@ -27,4 +27,20 @@ class Model
         $result = self::$db->query($sql);
         return $result->fetch();
     }
+
+    public function queryManyRows($sql)
+    {
+        $results = self::$db->query($sql);
+        $data = [];
+        while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+
+    public function queryOneRow($sql) {
+        $results = self::$db->query($sql);
+        return $results->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

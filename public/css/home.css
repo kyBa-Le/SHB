@@ -1,0 +1,131 @@
+/*style for home page*/
+/* Banner */
+.box-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-size: cover;
+}
+.banner-content {
+    text-align: center;
+    color: white;
+}
+.banner-title-logo {
+    font-size: 100px;
+}
+.banner-slogan {
+    font-size: 50px;
+}
+/* Slogan */
+.box-slogan {
+    margin: 96px 0px 96px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slogan-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 23vw;
+    height: 30vh;
+    padding: 40px;
+    color: white;
+    background-color: #0F0E0E;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 28px;
+}
+.slogan-text {
+    margin: 0px;
+    text-align: center;
+}
+/*css for call to action*/
+#call-to-action-container #cards-container {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    column-gap: 2%;
+    margin-bottom: 15vh;
+}
+.call-to-action-card {
+    width: 100%;
+    height: 80vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.call-to-action-hover {
+    width: 85%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    font-weight: bold;
+    color: white;
+    visibility: hidden;
+}
+.call-to-action-hover button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: none;
+}
+.call-to-action-hover button:hover {
+    background-color: #0F0E0E;
+    color: white;
+}
+.call-to-action-overlay {
+    background-color: #0F0E0E;
+    border-radius: 10px;
+    opacity: 0.4;
+    visibility: hidden;
+}
+.call-to-action-card:hover {
+    .call-to-action-hover, .call-to-action-overlay {
+        visibility: visible;
+    }
+}
+/* top trending products */
+.product-card {
+    width: 100%;
+    height: 80vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.product-card:hover {
+    .product-card-hover, .product-card-overlay{
+        visibility: visible !important;
+    }
+}
+.product-card-hover {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    color: white;
+    visibility: hidden;
+}
+.product-card-overlay {
+    background-color: #0F0E0E;
+    border-radius: 10px;
+    opacity: 0.6;
+    visibility: hidden;
+}
+.product-card-hover button:hover {
+    background-color: #0F0E0E;
+    color: white;
+}
+.product-card-hover button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: none;
+}
+#card-products-container {
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    column-gap: 1.3%;
+}
