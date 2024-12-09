@@ -54,35 +54,35 @@
         box-shadow: none; 
     }
 </style>
-
 <div class="container-fluid p-0" id="container-header">
     <div class="header-content">
         <img id="header-logo" src="images/logo.png" onclick="{window.location.href='/'}">
         <div class="header-nav">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">HOME</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/men">MEN</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/women">WOMEN</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/children">CHILDREN</a>
-            </li>
-        </ul>
-    </div>
-    <div class="search-header d-flex">
-        <input id="search-focus" type="search" class="form-control" placeholder="Search"/> 
-        <button type="button" class="btn" data-mdb-ripple-init>
-            <i class="fas fa-search"></i>
-        </button>
-    </div>
-    <div class="logIn-signUp">
-        <a href="/login">Log In</a>
-        <span>/</span>
-        <a href="/sign-up">Sign Up</a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/men">MEN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/women">WOMEN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/children">CHILDREN</a>
+                </li>
+            </ul>
+        </div>
+        <div class="search-header d-flex">
+            <input id="search-focus" type="search" class="form-control" placeholder="Search"/> 
+            <button type="button" class="btn" data-mdb-ripple-init>
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="logIn-signUp">
+            <a href="/login">Log In</a>
+            <span>/</span>
+            <a href="/sign-up">Sign Up</a>
+        </div>
     </div>
 </div>
