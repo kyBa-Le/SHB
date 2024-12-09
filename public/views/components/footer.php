@@ -3,7 +3,7 @@
     #container-footer {
         background-color: #0F0E0E;
         box-sizing: border-box;
-        padding: 1vh 2vw;
+        padding: 20px;
     }
     #container-footer * {
         color: white;
@@ -12,14 +12,17 @@
         width: 10%;
         height: auto;
     }
+    .footer-title {
+        font-size: 25px;
+    }
 </style>
 <div class="container-fluid" id="container-footer">
     <div class="row">
         <div class="col">
             <div class="row">
-                <div class="col d-flex justify-content-start align-items-center" onclick="{window.location.href='/'}" style="cursor: pointer">
+                <div class="col d-flex justify-content-start align-items-center" style="gap:5px;" onclick="{window.location.href='/'}" style="cursor: pointer">
                     <img id="footer-logo" src="images/logo.png">
-                    <h2 class="fw-bold m-0">SHB STORE</h2>
+                    <h4 class="fw-bold m-0">SHB STORE</h4>
                 </div>
             </div>
             <div class="row">
@@ -35,21 +38,21 @@
             </div>
         </div>
         <div class="col">
-            <h2>About SHB Store</h2>
+            <p class="footer-title">About SHB Store</p>
             <p>Introduction</p>
             <p>News</p>
             <p>Store system</p>
             <p>Promotional news</p>
         </div>
         <div class="col">
-            <h2>Customer Services</h2>
+            <p class="footer-title">Customer Services</p>
             <p>Loyalty policy</p>
             <p>Return policy</p>
             <p>Privacy policy</p>
             <p>Payment and delivery policy</p>
         </div>
         <div class="col">
-            <h2>Contact</h2>
+            <p class="footer-title">Contact</p>
             <p>Contact to order</p>
             <p>0244 222 890</p>
             <p>Email</p>

@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-position: -90px -90px;
+    background-size: cover;
 }
 .banner-content {
     text-align: center;
@@ -58,11 +58,11 @@
     cursor: pointer;
 }
 .call-to-action-hover {
-    width: 70%;
+    width: 85%;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-40%, -70%);
+    transform: translate(-50%, -70%);
     font-weight: bold;
     color: white;
     visibility: hidden;
