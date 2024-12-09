@@ -17,6 +17,30 @@
 .banner-slogan {
     font-size: 50px;
 }
+/* Slogan */
+.box-slogan {
+    margin: 96px 0px 96px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slogan-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 23vw;
+    height: 30vh;
+    padding: 40px;
+    color: white;
+    background-color: #0F0E0E;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 28px;
+}
+.slogan-text {
+    margin: 0px;
+    text-align: center;
+}
 /*css for call to action*/
 #call-to-action-container #cards-container {
     display: grid;

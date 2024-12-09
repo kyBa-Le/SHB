@@ -8,6 +8,23 @@
         </div>
     </div>
 </div>
+<!-- Slogan -->
+<div class="container-fluid p-0" id="slogan-container">
+    <div class="box-slogan">
+        <div class="slogan-content">
+            <p class="slogan-text">New here?<br>Get your first- timer discount</p>
+        </div>
+        <div class="slogan-content">
+            <p class="slogan-text">Download our app for exclusive discounts and the latest drops.</p>
+        </div>
+        <div class="slogan-content">
+            <p class="slogan-text">Worldwide delivery</p>
+        </div>
+        <div class="slogan-content">
+            <p class="slogan-text">Easy returns</p>
+        </div>
+    </div>
+</div>
 <!--Call to action -->
 <div class="container-fluid p-0" id="call-to-action-container">
     <h1 class="text-center mt-5 mb-5">Explore out products</h1>
