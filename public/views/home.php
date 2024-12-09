@@ -32,6 +32,7 @@
     <?php  
         for ($i = 0; $i < 4; $i++) {
             $product = $outStandingProducts[$i];
+            $id = $product["id"];
             $imageLink = $product["image_link"];
             $name = $product["product_name"];
             $price = $product["price"];
@@ -43,7 +44,7 @@
                             <h3>$name</h3>
                             <p>Purchases: $purchases</p>
                             <p style=\"color: #ED685D\">$price VNĐ</p>
-                            <button onclick=\"{window.location.href='#'}\">See more <i class=\"fa-solid fa-arrow-right-long\"></i></button>
+                            <button onclick=\"{window.location.href='/product-details?id=$id'}\">See more <i class=\"fa-solid fa-arrow-right-long\"></i></button>
                         </div>
                     </div>
                 </div>";
