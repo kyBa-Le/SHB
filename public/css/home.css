@@ -87,3 +87,40 @@
         visibility: visible;
     }
 }
+/* top trending products */
+.product-card {
+    width: 100%;
+    height: 80vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.product-card:hover {
+    .product-card-hover, .product-card-overlay{
+        visibility: visible !important;
+    }
+}
+.product-card-hover {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    color: white;
+    visibility: hidden;
+}
+.product-card-overlay {
+    background-color: #0F0E0E;
+    border-radius: 10px;
+    opacity: 0.6;
+    visibility: hidden;
+}
+.product-card-hover button:hover {
+    background-color: #0F0E0E;
+    color: white;
+}
+.product-card-hover button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: none;
+}

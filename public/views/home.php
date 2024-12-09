@@ -25,6 +25,32 @@
         </div>
     </div>
 </div>
+<!-- Top trending products -->
+<div class="container-fluid p-0" id="trending-products-container">
+    <h1 class="text-center mt-5 mb-5">Top Trending Products</h1>
+    <div class="row justify-content-center">
+    <?php  
+        for ($i = 0; $i < 4; $i++) {
+            $product = $outStandingProducts[$i];
+            $imageLink = $product["image_link"];
+            $name = $product["product_name"];
+            $price = $product["price"];
+            $purchases = $product["purchases"];
+            echo "<div class=\"col-6 col-sm-4 col-md-3\">
+                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\">
+                        <div class=\"product-card-overlay w-100 h-100\"></div>
+                        <div class=\"product-card-hover\">
+                            <h3>$name</h3>
+                            <p>Purchases: $purchases</p>
+                            <p style=\"color: #ED685D\">$price VNĐ</p>
+                            <button onclick=\"{window.location.href='#'}\">See more <i class=\"fa-solid fa-arrow-right-long\"></i></button>
+                        </div>
+                    </div>
+                </div>";
+        }     
+    ?>
+    </div>
+</div>
 <!--Call to action -->
 <div class="container-fluid p-0" id="call-to-action-container">
     <h1 class="text-center mt-5 mb-5">Explore out products</h1>
