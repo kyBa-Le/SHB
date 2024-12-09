@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-position: -90px -90px;
+    background-size: cover;
 }
 .banner-content {
     text-align: center;
