@@ -17,5 +17,6 @@ $app = new app\core\Application($config);
 
 // Create routes
 $app->router->get('/', [new SiteController(), 'home']);
+$app->router->get('/sign-up', [new SiteController(), 'signUp']);
 
 $app->run();
