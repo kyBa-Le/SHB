@@ -10,6 +10,19 @@ create table Products (
     quantity INT NOT NULL
 );
 
+create table Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    fullName VARCHAR(50) NOT NULL,
+    phone VARCHAR(10),
+    avatar_link VARCHAR(255),
+    province VARCHAR(255),
+    district VARCHAR(255),
+    detailed_address VARCHAR(255)
+);
+
 INSERT INTO Products (product_name, category, price, image_link, purchases, quantity)
 VALUES
     ('Baggy Jeans', 'MEN', 800000, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 8, 40),
