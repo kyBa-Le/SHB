@@ -57,3 +57,16 @@ VALUES
     ('Knitted high neck structured trapeze jumper in navy', 'WOMEN', 300000, 'https://images.asos-media.com/products/asos-design-knitted-high-neck-structured-trapeze-jumper-in-navy/207771742-2?$n_480w$&wid=476&fit=constrain', 9, 34),
     ('Wool knitted semi sheer long sleeve top in black', 'WOMEN', 250000, 'https://images.asos-media.com/products/arket-merino-wool-knitted-semi-sheer-long-sleeve-top-in-black/207139432-1-black?$n_240w$&wid=168&fit=constrain', 23, 59),
     ('Mini Rude Bart Simpson Tee - Black', 'BABY', 450000, 'https://cdn.shopify.com/s/files/1/0293/9277/files/MiniRudeBartSimpsonTee-Black_MERcopy.jpg?v=1698428719&width=400&height=599&crop=center', 24, 47);
+
+INSERT INTO Users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address)
+VALUES 
+('holykimsa05@gmail.com', 'kimsa', MD5('holykimsa@123'), 'Hồ Ly Kim Sa', '0877152961', NULL, NULL, NULL, NULL),
+('jane.smith@example.com', 'janesmith', MD5('securepass456'), 'Jane Smith', '0987654321', NULL, NULL, NULL, NULL),
+('alex.taylor@example.com', 'alextaylor', MD5('mypassword789'), 'Alex Taylor', '0112233445', NULL, NULL, NULL, NULL),
+('michael.brown@example.com', 'michaelb', MD5('passw0rd123'), 'Michael Brown', '0123451122', NULL, NULL, NULL, NULL),
+('emily.davis@example.com', 'emilyd', MD5('1234abcd'), 'Emily Davis', '0987745632', NULL, NULL, NULL, NULL),
+('chris.wilson@example.com', 'chrisw', MD5('qwerty789'), 'Chris Wilson', '0178901234', NULL, NULL, NULL, NULL),
+('sarah.jones@example.com', 'sarahj', MD5('ilovecoding'), 'Sarah Jones', '0912233445', NULL, NULL, NULL, NULL),
+('david.lee@example.com', 'davidl', MD5('passme123'), 'David Lee', '0908877665', NULL, NULL, NULL, NULL),
+('laura.martin@example.com', 'lauram', MD5('letmein2023'), 'Laura Martin', '0865543321', NULL, NULL, NULL, NULL),
+('kevin.thomas@example.com', 'kevint', MD5('kevinrocks'), 'Kevin Thomas', '0934567890', NULL, NULL, NULL, NULL);
