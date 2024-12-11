@@ -23,7 +23,7 @@ class Model
     }
 
     public function getById($id) {
-        $sql = "SELECT * FROM ". $this->table." WHERE id = :id";
+        $sql = "SELECT * FROM ". $this->table." WHERE id = $id";
         $result = self::$db->query($sql);
         return $result->fetch();
     }
@@ -40,7 +40,7 @@ class Model
 
     public function queryOneRow($sql) {
         $results = self::$db->query($sql);
-        return $results->fetch(PDO::FETCH_ASSOC);
+        return $results->fetch();
     }
 
 }

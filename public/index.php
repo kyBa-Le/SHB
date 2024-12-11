@@ -2,7 +2,6 @@
 
 use app\controller\SiteController;
 require __DIR__ . "/../vendor/autoload.php";
-
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
@@ -16,6 +15,13 @@ $config = [
 $app = new app\core\Application($config);
 
 // Create routes
+
+// Get request
 $app->router->get('/', [new SiteController(), 'home']);
+$app->router->get('/sign-up', 'signUp');
+$app->router->get('/sign-up/success', 'signUpSuccess');
+
+// Post request
+$app->router->post('/sign-up', [new SiteController(), 'signUp']);
 
 $app->run();
