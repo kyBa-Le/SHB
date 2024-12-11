@@ -45,8 +45,8 @@
         <img class="image" src="images/successTick.gif" alt="">
         <p class="text-signUpSuccess">Sign up successfully</p>
         <div class="signUpSuccess-button">
-            <button class="nav-button" id="nav-home">Home</button>
-            <button class="nav-button" id="nav-logIn">Log in</button>
+            <button class="nav-button" id="nav-home" onclick="{window.location.href='/'}">Home</button>
+            <button class="nav-button" id="nav-logIn" onclick="{window.location.href='/login'}">Log in</button>
         </div>
     </div>
 </div>
