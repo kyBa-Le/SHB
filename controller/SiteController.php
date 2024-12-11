@@ -4,6 +4,8 @@ namespace app\controller;
 
 use app\core\Controller;
 use app\core\Request;
+use app\thirdPartyService\EmailSender;
+use app\thirdPartyService\SignUpEmail;
 
 class SiteController extends Controller
 {
@@ -26,6 +28,9 @@ class SiteController extends Controller
         $message = $this->userController->signUp($data);
         $message['data'] = $data;
         if ($message['isSuccess']) {
+            $emailSender = new EmailSender() ;
+            $signUpEmail = new SignUpEmail($data['username']);
+            $emailSender->sendEmail($data['email'], $data['username'], $signUpEmail->subject, $signUpEmail->emailContent);
             header('Location: /sign-up/success');
             exit;
         }
