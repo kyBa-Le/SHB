@@ -13,4 +13,10 @@ class UserModel extends Model
                 VALUES ('$email', '$username', '$password', '$fullName', '$phone', NULL, '$province', '$district', '$detailed_address')";
         return Model::$db->query($sql);
     }
+
+    public function getUserByEmail(mixed $email)
+    {
+        $sql = "SELECT * FROM $this->table WHERE email = '$email'";;
+        return $this->queryOneRow($sql);
+    }
 }

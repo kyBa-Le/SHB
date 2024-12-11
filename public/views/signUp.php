@@ -10,16 +10,26 @@
     </ul>
     <form id="myForm" action="/sign-up" method="POST">
         <div class="form-group">
-            <input type="text" name="fullname" placeholder="Full name*" required>
+            <input type="text" name="fullName" placeholder="Full name*" required value="<?php echo $data['fullName'] ?? '' ?>">
         </div>
         <div class="form-group">
-            <input type="text" name="username" placeholder="User name*" required>
+            <input type="text" name="username" placeholder="User name*" required value="<?php echo $data['username'] ?? '' ?>">
         </div>
         <div class="form-group">
-            <input type="email" name="email" placeholder="Email*" required>
+            <input type="email" name="email" placeholder="Email*" required value="<?php echo $data['email'] ?? '' ?>">
+            <?php
+                if(isset($isValid) && $isValid === false && isset($errors['email'])) {
+                    echo ("<span class='error-message'>" . $errors['email'] . "</span>");
+                }
+            ?>
         </div>
         <div class="form-group">
-            <input type="text" name="phone" placeholder="Phone number" minlength="10" maxlength="10">
+            <input type="text" name="phone" placeholder="Phone number" minlength="10" maxlength="10" value="<?php echo $data['phone'] ?? '' ?>">
+            <?php
+            if(isset($isValid) && $isValid === false && isset($errors['phone'])) {
+                echo ("<span class='error-message'>" . $errors['phone'] . "</span>");
+            }
+            ?>
         </div>
         <div class="form-group">
             <select name="province" id="province">
@@ -28,14 +38,13 @@
             <select name="district" id="district">
                 <option value="" disabled selected>District</option>
             </select>
-            <input type="text" name="detail_address" placeholder="Detail address">
+            <input type="text" name="detailed_address" placeholder="Detail address">
         </div>
         <div class="form-group">
             <input type="password" id="password" name="password" placeholder="Password*" required minlength="6">
         </div>
         <div class="form-group">
             <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password*" required minlength="6">
-            <span id="error-message" style="color: red; display: none;">Passwords do not match.</span>
         </div>
         <div class="form-group checkbox-group">
             <label>

@@ -2,13 +2,12 @@ const form = document.getElementById('myForm');
 form.addEventListener('submit', function (event) {
     const passwordInput = document.getElementById('password');
     const confirmInput = document.getElementById('confirm_password');
-    if (confirmInput.value !== passwordInput.value) {
+    if (confirmInput.value.trim() != passwordInput.value.trim()) {
         event.preventDefault(); 
         confirmInput.setCustomValidity('Confirm password does not match'); 
         confirmInput.reportValidity(); 
     } else {
         confirmInput.setCustomValidity(''); 
-        alert("Successful registration!");
     }
 });
 // Handle API to show select address
@@ -30,6 +29,7 @@ provinceSelect.addEventListener('change', function () {
 });
 function renderDistrict(province) {
     if (province && province.districts) {
+        districtSelect.innerHTML = '';
         province.districts.forEach((district) => {
             districtSelect.innerHTML += `<option value="${district.code}">${district.name}</option>`;
         }); 
