@@ -32,6 +32,7 @@ class UserValidation
         if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Invalid email';
         }
+        var_dump($userModel->getUserByEmail($user['email']));
         if ($userModel->getUserByEmail($user['email']) !== null) {
             $errors['email'] = 'Email already exists';
         }
@@ -41,8 +42,9 @@ class UserValidation
         if (strlen($user['phone']) !== 10) {
             $errors['phone'] = 'Must be 10 digits number';
         }
-        else {
+        if (count($errors) == 0) {
             $this->message['isValid'] = true;
+            var_dump($this->message);
         }
         $this->message['errors'] = $errors;
 

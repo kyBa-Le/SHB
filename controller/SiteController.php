@@ -24,11 +24,10 @@ class SiteController extends Controller
         $request = new Request();
         $data = $request->getBody();
         $message = $this->userController->signUp($data);
-        if ($message['isValid']) {
-            return $this->render('signUpSuccess', ['message' => $message]);
+        if ($message['isSuccess']) {
+            header('Location: /sign-up/success');
+            exit;
         }
-        else {
-            return $this->render('signUp', ['message' => $message]);
-        }
+        return $this->render('signUp', ['message' => $message]);
     }
 }

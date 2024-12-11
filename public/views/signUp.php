@@ -10,7 +10,7 @@
     </ul>
     <form id="myForm" action="/sign-up" method="POST">
         <div class="form-group">
-            <input type="text" name="fullname" placeholder="Full name*" required>
+            <input type="text" name="fullName" placeholder="Full name*" required>
         </div>
         <div class="form-group">
             <input type="text" name="username" placeholder="User name*" required>
@@ -28,7 +28,7 @@
             <select name="district" id="district">
                 <option value="" disabled selected>District</option>
             </select>
-            <input type="text" name="detail_address" placeholder="Detail address">
+            <input type="text" name="detailed_address" placeholder="Detail address">
         </div>
         <div class="form-group">
             <input type="password" id="password" name="password" placeholder="Password*" required minlength="6">

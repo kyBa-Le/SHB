@@ -4,9 +4,6 @@ use app\controller\SiteController;
 require __DIR__ . "/../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
-ini_set('display_errors', 1); // Show errors
-ini_set('display_startup_errors', 1); // Show startup errors
-error_reporting(E_ALL); // Report all types of errors (including warnings, notices, and fatal errors)
 
 $config = [
     'database' => [
