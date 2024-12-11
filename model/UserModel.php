@@ -16,7 +16,7 @@ class UserModel extends Model
 
     public function getUserByEmail(mixed $email)
     {
-        $sql = "SELECT * FROM $this->table WHERE email = '$email'";
+        $sql = "SELECT * FROM $this->table WHERE email = '$email'";;
         return $this->queryOneRow($sql);
     }
 }
