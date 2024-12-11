@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/signUp.css">
 <div class="signup">
     <h1>Sign up</h1>
-    <p>Enjoy a more personalised shopping experience with a Jimmy Choo account</p>
+    <p>Enjoy a more personalised shopping experience with a SHB Store account</p>
     <ul>
         <li>Manage wishlist</li>
         <li>Follow orders & returns</li>
@@ -40,18 +40,18 @@
         <div class="form-group checkbox-group">
             <label>
                 <input type="checkbox" name="privacy_policy" required>
-                Required Field I have read and understood the <a href="#">Privacy Policy</a> regarding the processing of my personal information by Jimmy Choo
+                Required Field I have read and understood the <a href="#">Privacy Policy</a> regarding the processing of my personal information by SHB Store
             </label>
         </div>
         <div class="form-group checkbox-group">
             <label>
                 <input type="checkbox" name="newsletter">
-                Yes, I would like to receive Jimmy Choo updates
+                Yes, I would like to receive SHB Store updates
             </label>
         </div>
         <button type="submit" class="signup-button" id="sign-up-button">SIGN UP</button>
         <p class="footer-note">
-            By proceeding, you confirm you have read and understood the Jimmy Choo <a href="#">Privacy Policy</a>
+            By proceeding, you confirm you have read and understood the SHB Store <a href="#">Privacy Policy</a>
         </p>
     </form>
 </div>
