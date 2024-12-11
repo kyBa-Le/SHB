@@ -15,9 +15,12 @@ $config = [
 $app = new app\core\Application($config);
 
 // Create routes
-$app->router->get('/', [new SiteController(), 'home']);
+
 // Get request
+$app->router->get('/', [new SiteController(), 'home']);
 $app->router->get('/sign-up', 'signUp');
+$app->router->get('/sign-up/success', 'signUpSuccess');
+
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
 
