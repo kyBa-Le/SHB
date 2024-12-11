@@ -8,7 +8,7 @@
         <li>Exclusive early access to collections and events</li>
         <li>Faster Checkout</li>
     </ul>
-    <form id="myForm" action="/signUp" method="POST">
+    <form id="myForm" action="/sign-up" method="POST">
         <div class="form-group">
             <input type="text" name="fullname" placeholder="Full name*" required>
         </div>
