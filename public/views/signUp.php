@@ -55,4 +55,4 @@
         </p>
     </form>
 </div>
-<script src="js/signUp.js"></script>
+<script type="module" src="js/signUp.js"></script>
