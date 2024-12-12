@@ -6,12 +6,17 @@
         <form id="form-login" action="/login" method="post" class="d-flex flex-column justify-content-between">
             <label class="w-100 login-label">
                 <p class="m-0">Email</p>
-                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="email" name="email" placeholder="Enter your email" value="<?php echo $data['email'] ?? '' ?>" required>
             </label>
             <label class="w-100 login-label">
                 <p class="m-0">Password</p>
-                <input type="password" name="password" placeholder="Enter your password" required>
+                <input type="password" name="password" placeholder="Enter your password" value="<?php echo $data['password'] ?? '' ?>" required>
             </label>
+            <?php
+                if (isset($isLoggedIn) && $isLoggedIn == false) {
+                    echo "<span class='text-center' style='color:red;'>Email or password is incorrect</span>";
+                }
+            ?>
             <a class="text-end login-link" href="/forgot-password">Forgot password?</a>
             <button id="login-button">LOGIN</button>
         </form>
