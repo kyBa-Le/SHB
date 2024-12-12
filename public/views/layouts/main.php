@@ -15,6 +15,7 @@
 </head>
 <body>
 <?php require_once 'views/components/header.php' ?>
+<?php require_once 'views/components/loading.php' ?>
  {{content}}
 <?php require_once 'views/components/footer.php'?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
