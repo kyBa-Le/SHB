@@ -34,6 +34,16 @@
         color: white; 
     }
 
+    .logIn-signUp {
+        width: 15vw;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+    }
+    .logIn-signUp i {
+        font-size: 1.75vw;
+    }
     .nav-item a:focus{
         color: white; 
     }
@@ -80,9 +90,20 @@
             </button>
         </div>
         <div class="logIn-signUp">
-            <a href="/login">Log In</a>
-            <span>/</span>
-            <a href="/sign-up">Sign Up</a>
+            <?php 
+                if(isset($_SESSION['user'])) {
+                    echo '<div class="header-profile">
+                            <i class="fa-solid fa-circle-user"></i>
+                          </div>
+                          <div class="header-cart" onclick="{window.location.href=\'/cart\'}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </div>';
+                }else {
+                    echo '<a href="/login">Log In</a>
+                            <span>/</span>
+                          <a href="/sign-up">Sign Up</a>';
+                }
+            ?>
         </div>
     </div>
 </div>
