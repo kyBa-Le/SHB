@@ -30,6 +30,9 @@ form {
 .form-group {
     display: flex;
 }
+.form-group:not(:has(select)) {
+    flex-direction: column;
+}
 .form-group input, .form-group select {
     flex: 1;
     padding: 10px;
