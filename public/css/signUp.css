@@ -22,6 +22,12 @@
 .signup ul li {
     margin-bottom: 5px;
 }
+.error-message {
+    color: red;
+    font-size: 14px;
+    display: none;
+    margin-top: 5px;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -29,11 +35,6 @@ form {
 }
 .form-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.form-group:not(:has(select)) {
-    flex-direction: column;
 }
 .form-group input, .form-group select {
     flex: 1;
@@ -45,6 +46,11 @@ form {
 }
 .form-group input:focus, .form-group select:focus {
     outline: none;
+}
+.form-group-select {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    gap: 2%;
 }
 .checkbox-group {
     display: flex;
@@ -68,8 +74,4 @@ form {
 .footer-note {
     font-size: 12px;
     margin-top: 20px;
-}
-.error-message {
-    text-align: center;
-    color: red;
 }
