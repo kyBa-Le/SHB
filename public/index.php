@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use app\controller\SiteController;
 require __DIR__ . "/../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -20,9 +20,11 @@ $app = new app\core\Application($config);
 $app->router->get('/', [new SiteController(), 'home']);
 $app->router->get('/sign-up', 'signUp');
 $app->router->get('/sign-up/success', 'signUpSuccess');
+$app->router->get('/login', 'login');
 $app->router->get('/logout',[new SiteController(), 'logout']);
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
+$app->router->post('/login', [new SiteController(), 'login']);
 
 $app->run();

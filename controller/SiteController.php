@@ -37,6 +37,17 @@ class SiteController extends Controller
         return $this->render('signUp', $message);
     }
 
+    public function logIn() {
+        $request = new Request();
+        $data = $request->getBody();
+        $message = $this->userController->login($data);
+        $message['data'] = $data;
+        if ($message['isLoggedIn']) {
+            header('Location: /');
+            exit;
+        }
+        return $this->render('login', $message);
+
     public function logout() {
         session_start();
         session_destroy();

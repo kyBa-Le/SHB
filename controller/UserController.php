@@ -32,6 +32,18 @@ class UserController
             $message['isSuccess'] = false;
             return $message;
         }
-
     }
+
+    public function login($data) {
+        $email = $data['email'];
+        $password = $data['password'];
+        $user = $this->userModel->getUserByEmailAndPassword($email, md5($password));
+        if ($user !== false) {
+            $_SESSION['user'] = $user;
+            $_SESSION['login_time'] > 10 * 24 * 60 * 60;
+            return ['isLoggedIn' => true];
+        }else {
+            return ['isLoggedIn' => false];
+        }
+    }  
 }
