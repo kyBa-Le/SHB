@@ -20,6 +20,7 @@ $app = new app\core\Application($config);
 $app->router->get('/', [new SiteController(), 'home']);
 $app->router->get('/sign-up', 'signUp');
 $app->router->get('/sign-up/success', 'signUpSuccess');
+$app->router->get('/logout',[new SiteController(), 'logout']);
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);

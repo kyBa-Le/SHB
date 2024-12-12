@@ -31,7 +31,7 @@
             }
             ?>
         </div>
-        <div class="form-group">
+        <div class="form-group form-group-select">
             <select name="province" id="province">
                 <option value="" disabled selected>Province</option>
             </select>
