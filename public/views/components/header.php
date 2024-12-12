@@ -143,13 +143,14 @@
             </button>
         </div>
         <div class="logIn-signUp">
-        <?php 
-            if (isset($_SESSION['user'])) {
+        <?php
+            if ($authentication === true) {
+                $avatar_link = $_SESSION['user']['avatar_link'] ?? 'images/avatarDefault.png';
                 echo '<div class="header-profile">
                         <i class="fa-solid fa-circle-user" id="header-profile-icon" style="cursor: pointer;"></i>
                         <div class="profile-content" id="profile-content">
                             <div class="infor-profile">
-                                <div class="image-profile" style="background-image: url(\'' . $_SESSION["user"]["avatar_link"] . '\');"></div>
+                                <div class="image-profile" style="background-image: url(\'' . $avatar_link . '\');"></div>
                                 <p class="username-profile">' . $_SESSION["user"]["username"] . '</p>
                             </div>
                             <div class="edit-profile profile-icon" onclick="window.location.href=\'/user/edit\'">
