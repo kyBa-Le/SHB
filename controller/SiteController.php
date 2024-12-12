@@ -37,7 +37,7 @@ class SiteController extends Controller
         return $this->render('signUp', $message);
     }
 
-    public function logIn() {
+    public function login() {
         $request = new Request();
         $data = $request->getBody();
         $message = $this->userController->login($data);

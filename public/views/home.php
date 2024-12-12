@@ -29,7 +29,7 @@
 <div class="container-fluid p-0" id="trending-products-container">
     <h1 class="text-center mt-5 mb-5">Top Trending Products</h1>
     <div id="card-products-container">
-    <?php  
+    <?php
         for ($i = 0; $i < 4; $i++) {
             $product = $outStandingProducts[$i];
             $id = $product["id"];

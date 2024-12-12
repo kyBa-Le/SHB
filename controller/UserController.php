@@ -40,7 +40,7 @@ class UserController
         $user = $this->userModel->getUserByEmailAndPassword($email, md5($password));
         if ($user !== false) {
             $_SESSION['user'] = $user;
-            $_SESSION['login_time'] > 10 * 24 * 60 * 60;
+            $_SESSION['login_time'] = time();
             return ['isLoggedIn' => true];
         }else {
             return ['isLoggedIn' => false];
