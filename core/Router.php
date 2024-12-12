@@ -51,6 +51,7 @@ class Router
 
     protected function layoutContent()
     {
+        $authentication = MiddleWare::getInstance()->isLoggedIn();
         $layout = Application::$app->controller->layout;
         ob_start();
         include_once "views/layouts/$layout.php";
@@ -58,6 +59,7 @@ class Router
     }
 
     protected function renderOnlyView($view, $params) {
+        $params['authentication'] = MiddleWare::getInstance()->isLoggedIn();
         foreach ($params as $key => $value) {
             $$key = $value;
         }

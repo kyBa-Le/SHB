@@ -1,0 +1,39 @@
+#container-login {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: relative;
+}
+#login-box {
+    min-height: 60vh;
+    width: 40vw;
+    box-sizing: border-box;
+    padding: 2vh 2vw;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.login-link {
+    color: #0F0E0E;
+}
+.login-link:hover {
+    font-weight: bolder;
+    color: #0F0E0E;
+}
+.login-label * {
+    width: 100%;
+}
+.login-label input , #login-button{
+    padding: 10px;
+}
+#login-button {
+    background-color: #0F0E0E;
+    color: white;
+}
+#form-login  *{
+    margin: 0.5rem 0 ;
+}
+/* For screens smaller than 600px (adjust as needed) */
+@media (max-width: 600px) {
+    #login-box {
+        width: 100%; /* Or a specific width in pixels or percentages */
+        height: 100%;
+    }
+}
