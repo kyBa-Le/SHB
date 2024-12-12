@@ -36,4 +36,10 @@ class SiteController extends Controller
         }
         return $this->render('signUp', $message);
     }
+
+    public function logout() {
+        session_start();
+        session_destroy();
+        header('Location: /sign-up');
+    }
 }
