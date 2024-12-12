@@ -29,8 +29,6 @@ form {
 }
 .form-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 .form-group:not(:has(select)) {
     flex-direction: column;
@@ -45,6 +43,11 @@ form {
 }
 .form-group input:focus, .form-group select:focus {
     outline: none;
+}
+.form-group-select {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    gap: 2%;
 }
 .checkbox-group {
     display: flex;

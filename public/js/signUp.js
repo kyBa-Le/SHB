@@ -1,3 +1,5 @@
+import {loadWaiting} from "./components.js";
+
 const form = document.getElementById('myForm');
 form.addEventListener('submit', function (event) {
     const passwordInput = document.getElementById('password');
@@ -7,7 +9,8 @@ form.addEventListener('submit', function (event) {
         confirmInput.setCustomValidity('Confirm password does not match'); 
         confirmInput.reportValidity(); 
     } else {
-        confirmInput.setCustomValidity(''); 
+        confirmInput.setCustomValidity('');
+        loadWaiting();
     }
 });
 // Handle API to show select address
@@ -35,3 +38,4 @@ function renderDistrict(province) {
         }); 
     }
 }
+

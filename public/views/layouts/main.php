@@ -12,9 +12,18 @@
           integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>SHB Store</title>
+    <style>
+        body {
+            background-color: #F0F0F0;
+        }
+        .signup, #login-box {
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
 <?php require_once 'views/components/header.php' ?>
+<?php require_once 'views/components/loading.php' ?>
  {{content}}
 <?php require_once 'views/components/footer.php'?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

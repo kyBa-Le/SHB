@@ -19,4 +19,9 @@ class UserModel extends Model
         $sql = "SELECT * FROM $this->table WHERE email = '$email'";;
         return $this->queryOneRow($sql);
     }
+
+    public function getUserByEmailAndPassword(mixed $email, string $password){
+        $sql = "SELECT * FROM $this->table WHERE email = '$email' AND password = '$password'";
+        return $this->queryOneRow($sql);
+    }
 }
