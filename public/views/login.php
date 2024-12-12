@@ -17,7 +17,7 @@
                     echo "<span class='text-center' style='color:red;'>Email or password is incorrect</span>";
                 }
             ?>
-            <a class="text-end login-link" href="/forgot-password">Forgot password?</a>
+            <a class="text-end login-link" href="/user/forgot-password">Forgot password?</a>
             <button id="login-button">LOGIN</button>
         </form>
         <p class="text-center">Don't have an account? <a class="login-link" href="/sign-up">Create new account</a></p>

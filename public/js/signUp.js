@@ -9,9 +9,9 @@ form.addEventListener('submit', function (event) {
         confirmInput.setCustomValidity('Confirm password does not match'); 
         confirmInput.reportValidity(); 
     } else {
-        confirmInput.setCustomValidity(''); 
+        confirmInput.setCustomValidity('');
+        loadWaiting();
     }
-    loadWaiting();
 });
 // Handle API to show select address
 async function getProvince() {

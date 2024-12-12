@@ -15,6 +15,7 @@
 
     #header-logo {
         width: 5%;
+        cursor: pointer;
     }
 
     .nav {

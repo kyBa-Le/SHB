@@ -15,6 +15,7 @@
 }
 .login-link:hover {
     font-weight: bolder;
+    color: #0F0E0E;
 }
 .login-label * {
     width: 100%;

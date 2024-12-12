@@ -12,6 +12,14 @@
           integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>SHB Store</title>
+    <style>
+        body {
+            background-color: #F0F0F0;
+        }
+        .signup, #login-box {
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
 <?php require_once 'views/components/header.php' ?>
