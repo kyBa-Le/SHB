@@ -22,12 +22,6 @@
 .signup ul li {
     margin-bottom: 5px;
 }
-.error-message {
-    color: red;
-    font-size: 14px;
-    display: none;
-    margin-top: 5px;
-}
 form {
     display: flex;
     flex-direction: column;
@@ -74,4 +68,8 @@ form {
 .footer-note {
     font-size: 12px;
     margin-top: 20px;
+}
+.error-message {
+    text-align: center;
+    color: red;
 }
