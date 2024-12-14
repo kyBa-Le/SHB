@@ -122,6 +122,10 @@
     }
     /*Responsive CSS for header*/
     @media (max-width: 1160px) {
+        .image-profile {
+            width: 3rem;
+            height: 3rem;
+        }
         .header-content {
             justify-content: space-between;
         }

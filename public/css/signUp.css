@@ -76,3 +76,14 @@ form {
     text-align: center;
     color: red;
 }
+/*Responsive sign up form*/
+@media (max-width: 1160px) {
+    .signup {
+        max-width: 70vw;
+    }
+}
+@media (max-width: 600px) {
+    .signup {
+        max-width: 100%;
+    }
+}

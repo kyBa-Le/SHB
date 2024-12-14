@@ -6,6 +6,7 @@
     justify-content: center;
     height: 100vh;
     background-size: cover;
+    background-position: left;
 }
 .banner-content {
     text-align: center;
@@ -169,4 +170,20 @@
     display: grid;
     grid-template-columns: 24% 24% 24% 24%;
     column-gap: 1.3%;
+}
+/* For screens smaller than 600px (adjust as needed) */
+@media (max-width: 600px) {
+    .box-banner {
+        background-position: -650px 0;
+    }
+    #card-products-container {
+        display: flex;
+        width: 100%;
+        overflow-x: scroll;
+        justify-content: start;
+        align-items: center;
+    }
+    .product-card {
+        width: 95vw;
+    }
 }
