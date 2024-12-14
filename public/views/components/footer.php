@@ -9,17 +9,50 @@
         color: white;
     }
     #footer-logo {
-        width: 10%;
+        width: 10vh;
         height: auto;
     }
     .footer-title {
         font-size: 25px;
     }
+    @media (max-width: 600px) {
+        #container-footer > .row{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        #container-footer > .row > .col > *:not(.footer-title) {
+            display: none;
+        }
+        #container-footer > .row > .col:hover > *:not(.footer-title) {
+            display: block;
+            background-color: #333333;
+            padding: 2px;
+        }
+        #container-footer > .row > .col:hover {
+            .footer-title {
+                background-color: white;
+                color: #0F0E0E ;
+                div > h4 {
+                    color: #0F0E0E;
+                }
+            }
+        }
+        .footer-title {
+            border-bottom: 1px solid #333333;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        #footer-icons {
+            display: none !important;
+        }
+    }
 </style>
 <div class="container-fluid" id="container-footer">
     <div class="row">
         <div class="col">
-            <div class="row">
+            <div class="row  footer-title">
                 <div class="col d-flex justify-content-start align-items-center" style="gap:5px;" onclick="{window.location.href='/'}" style="cursor: pointer">
                     <img id="footer-logo" src="images/logo.png">
                     <h4 class="fw-bold m-0">SHB STORE</h4>
@@ -30,7 +63,7 @@
                 <p>all feedback from customers to be able to upgrade</p>
                 <p>our service and product experience even better.</p>
             </div>
-            <div class="row d-flex justify-content-around" style="max-width: 80%">
+            <div class="row d-flex justify-content-around" style="max-width: 80%" id="footer-icons">
                 <i class="fa-brands fa-facebook-f col text-center fs-3"></i>
                 <i class="fa-brands fa-square-instagram col text-center fs-3"></i>
                 <i class="fa-brands fa-twitter col text-center fs-3"></i>

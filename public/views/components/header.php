@@ -14,7 +14,7 @@
     }
 
     #header-logo {
-        width: 5%;
+        width: 10vh;
         cursor: pointer;
     }
 
@@ -43,7 +43,7 @@
         color: white;
     }
     .logIn-signUp i {
-        font-size: 23px;
+        font-size: 30px;
     }
     .nav-item a:focus{
         color: white; 
@@ -117,12 +117,65 @@
         gap: 10px;
         align-items: center;
     }
+    #responsive-header-dropdown-icon {
+        display: none;
+    }
+    /*Responsive CSS for header*/
+    @media (max-width: 1160px) {
+        .image-profile {
+            width: 3rem;
+            height: 3rem;
+        }
+        .header-content {
+            justify-content: space-between;
+        }
+        .logIn-signUp {
+            width: 30vw;
+        }
+        .search-header {
+            width: 30%;
+        }
+        * {
+            font-size: small;
+        }
+        .header-nav .nav{
+            width: 30vw;
+            display: none;
+            position: absolute;
+            top: 11vh;
+            right: 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2vh;
+            background-color: #0F0E0E;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+            li {
+                width: 100%;
+            }
+        }
+        .header-nav .nav li:hover {
+            background-color: #F0F0F0;
+            a {
+                color: #0F0E0E;
+            }
+        }
+        #responsive-header-dropdown-icon {
+            font-size: 30px;
+            color: white;
+            display: inline;
+        }
+        .profile-content {
+            width: 250px;
+        }
+    }
 </style>
 <div class="container-fluid p-0" id="container-header">
     <div class="header-content">
         <img id="header-logo" src="images/logo.png" onclick="{window.location.href='/'}">
         <div class="header-nav">
-            <ul class="nav">
+            <ul class="nav" id="header-navigation">
                 <li class="nav-item">
                     <a class="nav-link active" href="/">HOME</a>
                 </li>
@@ -180,6 +233,7 @@
             }
             ?>
         </div>
+        <i class="fa-solid fa-bars" id="responsive-header-dropdown-icon"></i>
     </div>
 </div>
 <script type="module" src="js/header.js"></script>
