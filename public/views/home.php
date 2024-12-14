@@ -55,7 +55,7 @@
 <!--Call to action -->
 <div class="container-fluid p-0" id="call-to-action-container">
     <h1 class="text-center mt-5 mb-5">Explore out products</h1>
-    <div class="container-fluid p-0" id="cards-container">
+    <div id="call-to-action-cards-container">
         <div class="call-to-action-card" style="background-image: url('https://imgcdn.stablediffusionweb.com/2024/9/15/f127ef07-3612-4a88-bdc9-fc3e5671f02a.jpg')">
             <div class="w-100 h-100 call-to-action-overlay"></div>
             <div class="call-to-action-hover">
