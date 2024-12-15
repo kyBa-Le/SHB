@@ -52,4 +52,15 @@ class SiteController extends Controller
         session_destroy();
         header('Location: /');
     }
+    public function editProfile($data) {
+        $request = new Request();
+        $data = $request->getBody();
+        $message = $this->userController->editProfile($data);
+        $message['data'] = $data;
+        if ($message['isEdited']) {
+            header('Location: /user/edit');
+            exit;
+        }
+        return $this->render('test', $message);
+    }
 }
