@@ -52,4 +52,22 @@ class SiteController extends Controller
         session_destroy();
         header('Location: /');
     }
+
+    private function product($category) {
+        $products = $this->productController->getProductsByCondition($category, 1, 6);
+        $data = ['products' => $products, 'category' => $category];
+        return $this->render('product', $data);
+    }
+
+    public function women() {
+        return $this->product('Women');
+    }
+
+    public function men() {
+        return $this->product('Men');
+    }
+
+    public function children() {
+        return $this->product('Children');
+    }
 }
