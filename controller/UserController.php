@@ -46,4 +46,23 @@ class UserController
             return ['isLoggedIn' => false];
         }
     }  
+
+    public function editProfile($data) {
+        $userID = $_SESSION['user']['id'];
+        $username = $data['username'];
+        $fullName = $data['fullName'];
+        $phone = $data['phone'];
+        $province = $data['province'];
+        $district = $data['district'];
+        $detailed_address = $data['detailed_address'];
+        $updateUser = $this->userModel->updateUserById($username, $fullName,  $phone,  $province, $district, $detailed_address, $userID);
+        if ($updateUser !== false) {
+            $user = $this->userModel->getUserById($userID);
+            $_SESSION['user'] = $user;
+            $_SESSION['login_time'] = time();
+            return ['isEdited' => true];
+        }else {
+            return ['isEdited' => false];
+        }
+    }
 }
