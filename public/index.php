@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+use app\controller\Rest;
 use app\controller\SiteController;
 require __DIR__ . "/../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -29,5 +31,10 @@ $app->router->get('/children', [new SiteController(), 'children']);
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
 $app->router->post('/login', [new SiteController(), 'login']);
+
+
+// API REQUEST
+// get API
+$app->router->get('/api/products', [new Rest(), 'getProducts']);
 
 $app->run();

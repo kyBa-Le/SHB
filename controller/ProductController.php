@@ -17,8 +17,8 @@ class ProductController
         return array_slice($products, 0, 4);
     }
 
-    public function getProductByCategory($category)
+    public function getProductsByCondition($category, $pageNo, $pageSize)
     {
-        return $this->productModel->getProductsByCategory($category);
+        return $this->productModel->getPaginatedProductsByCategory($category, $pageNo, $pageSize);
     }
 }
