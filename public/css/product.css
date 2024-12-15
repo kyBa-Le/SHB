@@ -31,7 +31,7 @@
 .category-product-card .product-image {
     width: 100%;
     aspect-ratio: 0.9;
-    background-position: center;
+    background-position: 50% 20%;
     background-size: cover;
 }
 #category-products-see-more {

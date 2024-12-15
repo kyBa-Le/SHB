@@ -1,6 +1,6 @@
 <?php ?>
 <link rel="stylesheet" href="css/product.css">
-<h1 class="text-center mt-2"><span><script></script></span>'s fashion</h1>
+<h1 class="text-center mt-2"><?php echo $category ?>'s fashion</h1>
 <div id="category-products-container">
     <?php
         foreach ($products as $product) {

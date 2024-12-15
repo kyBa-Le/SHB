@@ -52,4 +52,10 @@ class SiteController extends Controller
         session_destroy();
         header('Location: /');
     }
+
+    public function women() {
+        $products = $this->productController->getProductByCategory('women');
+        $data = ['products' => $products, 'category' => 'Women'];
+        return $this->render('product', $data);
+    }
 }
