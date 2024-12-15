@@ -16,4 +16,9 @@ class ProductController
         $products = $this->productModel->getProductsSortedByPurchases();
         return array_slice($products, 0, 4);
     }
+
+    public function getProductByCategory($category)
+    {
+        return $this->productModel->getProductsByCategory($category);
+    }
 }
