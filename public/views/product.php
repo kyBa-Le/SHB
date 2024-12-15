@@ -12,7 +12,7 @@
                  <div class='category-product-card'>
                     <div class='product-image' style='background-image: url($image_link)'></div>
                     <div class='product-contents'>
-                        <p class='fw-bold fs-5'>$name</p>
+                        <p class='fw-bold fs-5 category-product-name'>$name</p>
                         <div class='product-price-and-sold d-flex justify-content-between align-items-center mb-2'>
                             <div>
                                 <p class='m-0'><span class='money'>$price</span> vnd</p>

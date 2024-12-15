@@ -5,3 +5,7 @@ export function loadWaiting() {
         overlay.classList.remove('active');
     };
 }
+
+export function moneyFormater(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
