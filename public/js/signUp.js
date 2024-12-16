@@ -34,7 +34,7 @@ function renderDistrict(province) {
     if (province && province.districts) {
         districtSelect.innerHTML = '';
         province.districts.forEach((district) => {
-            districtSelect.innerHTML += `<option value="${district.code}">${district.name}</option>`;
+            districtSelect.innerHTML += `<option value="${district.name}">${district.name}</option>`;
         }); 
     }
 }
