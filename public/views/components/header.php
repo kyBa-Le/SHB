@@ -191,7 +191,7 @@
             </ul>
         </div>
         <form class="search-header d-flex" action="/product/search" method="get">
-            <input id="search-focus" type="search" class="form-control" name="product-name" placeholder="Search"/>
+            <input id="search-focus" type="search" class="form-control" name="product-name" placeholder="Search" value="<?php echo $_GET['product-name'] ?? '' ?>"/>
             <button type="submit" class="btn" data-mdb-ripple-init>
                 <i class="fas fa-search"></i>
             </button>
