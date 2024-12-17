@@ -29,6 +29,22 @@
                 <button type="button" id="otp-button">Verify</button>
             </form>
         </div>
+
+        <!-- Form nhập mật khẩu mới -->
+        <div class="position-absolute top-50 start-50 translate-middle justify-content-around flex-column" id="newPassword-box" style="background-color: white; display: none;">
+            <h1 class="text-center">New Password</h1>
+            <span style="text-align: center;"><i>Please enter your new password!!!</i></span>
+            <div id="newPassword-container">
+                <form id="form-newPassword"  action="/user/forgot-password" method="post"  class="d-flex flex-column justify-content-between">
+                    <label class="w-100 newPassword-label">
+                        <p class="m-0">New password</p>
+                        <input type="password" name="newPassword" placeholder="Enter your new password" required minlength="6">
+                    </label>
+                    <p>You want to log in ? <a href="/login">Click here</a></p>
+                    <button type="submit" id="newPassword-button">Save</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <script type="module" src="js/forgotPassword.js"></script>

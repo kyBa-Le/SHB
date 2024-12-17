@@ -34,7 +34,7 @@ $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
 $app->router->post('/login', [new SiteController(), 'login']);
 $app->router->post('/user/edit',[new SiteController(), 'editProfile']);
-$app->router->post('/user/forgot-password', 'forgotPassword');
+$app->router->post('/user/forgot-password', [new SiteController(),'saveNewPassword']);
 
 // API REQUEST
 // get API

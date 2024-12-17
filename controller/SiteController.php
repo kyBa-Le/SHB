@@ -80,4 +80,12 @@ class SiteController extends Controller
     public function children() {
         return $this->product('Children');
     }
+
+    public function saveNewPassword($data) {
+        $request = new Request();
+        $data = $request->getBody();
+        $message = $this->userController->saveNewPassword($data);
+        $message['data'] = $data;
+        return $this->render('/login', $message);
+    }
 }

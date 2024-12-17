@@ -69,4 +69,10 @@ class UserController
     public function getUserModel() {
         return $this->userModel;
     }
+
+    public function saveNewPassword($data) {
+        $email = $_SESSION['email'];
+        $newPassword = $data['newPassword'];
+        $this->userModel->updatePasswordByEmail($email, md5($newPassword ));
+    }
 }
