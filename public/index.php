@@ -42,5 +42,6 @@ $app->router->get('/api/products', [new Rest(), 'getProducts']);
 
 // post API
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
+$app->router->post('/api/user/otp', [new Rest(), 'getOTPcode']);
 
 $app->run();

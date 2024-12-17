@@ -44,10 +44,24 @@ class Rest
             $_SESSION['otp_time'] = time();
             $emailOtp = new OtpEmail($email, $otp);
             $this->emailSender->sendEmail($email, "user", $emailOtp->subject, $emailOtp->emailContent, $altBody = '');
+            $_SESSION['email'] = $email;
             $message['isSent'] = true;
         } else {
             $message['isSent'] = false;
             $message['error'] = 'This email has not registered an account!!!';
+        }
+        $this->response->sendJson($message);
+    }
+
+    public function getOTPcode() {
+        $otpCode = $this->request->getBody()['otp'];
+        $currentTime = time();
+        if ( $otpCode == $_SESSION['otp'] && ($currentTime - $_SESSION['otp_time'] < 60)) {
+
+            $message['isCorrectOtp'] = true;
+        } else {
+            $message['isCorrectOtp'] = false;
+            $message['error'] = 'The OTP code is incorrect or has expired after 60 seconds!!!';
         }
         $this->response->sendJson($message);
     }

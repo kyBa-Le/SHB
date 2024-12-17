@@ -19,13 +19,14 @@
 
         <!-- Form nhập OTP -->
         <div id="otp-container" style="display: none;">
-            <form id="form-otp"  action="/user/forgot-password" method="post"  class="d-flex flex-column justify-content-between">
+            <form id="form-otp" class="d-flex flex-column justify-content-between">
                 <label class="w-100 otp-label">
                     <p class="m-0">OTP Code</p>
-                    <input type="text" name="otp" placeholder="Enter the OTP code" required>
+                    <input type="text" name="otp" id="otpCode" placeholder="Enter the OTP code" required>
                 </label>
-                <p>You want to change email ?<span><u style="color:blue; cursor: pointer;"> Click here</u></span></p>
-                <button type="submit" id="otp-button">Verify</button>
+                <span id="error-isIncorrectOtp" style="color: red;"></span>
+                <p>You want to change email ?<span id="display-email-input"><u style="color:blue; cursor: pointer;"> Click here</u></span></p>
+                <button type="button" id="otp-button">Verify</button>
             </form>
         </div>
     </div>

@@ -4,7 +4,10 @@ import {sendData} from "./components.js";
 let forgotPasswordBtn = document.getElementById('forgotPassword-button');
 let emailContainer = document.getElementById('email-container');
 let otpContainer = document.getElementById('otp-container');
-
+let emailPageClick = document.getElementById('display-email-input');
+let otpBtn = document.getElementById('otp-button');
+let forgotPasswordBox = document.getElementById('forgotPassword-box');
+let newPasswordBox = document.getElementById('newPassword-box');
 // Xử lý sự kiện khi nhấn nút Send Code
 forgotPasswordBtn.addEventListener('click', async function (event) {
     event.preventDefault();
@@ -27,3 +30,11 @@ forgotPasswordBtn.addEventListener('click', async function (event) {
         }
     }
 });
+
+// xử lý nút ẩn hiện khi bấm click here ở trang OTP
+emailPageClick.addEventListener('click', function () {
+    document.getElementById("error-incorrectOtp").remove();
+    emailContainer.style.display = 'block';
+    otpContainer.style.display = 'none';
+});
+
