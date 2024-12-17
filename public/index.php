@@ -27,6 +27,7 @@ $app->router->get('/logout',[new SiteController(), 'logout']);
 $app->router->get('/women', [new SiteController(), 'women']);
 $app->router->get('/men', [new SiteController(), 'men']);
 $app->router->get('/children', [new SiteController(), 'children']);
+$app->router->get('/product/search', [new SiteController(), 'search']);
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
