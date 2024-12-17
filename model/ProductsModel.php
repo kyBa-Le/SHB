@@ -18,4 +18,9 @@ class ProductsModel extends Model
         $sql = "SELECT * FROM $this->table WHERE category = '$category' LIMIT $size OFFSET $offset";
         return $this->queryManyRows($sql);
     }
+
+    public function getProductsByName ($name) {
+        $sql = "SELECT * FROM $this->table WHERE product_name LIKE '%$name%'";
+        return $this->queryManyRows($sql);
+    }
 }
