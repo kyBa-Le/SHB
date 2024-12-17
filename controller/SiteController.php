@@ -48,6 +48,7 @@ class SiteController extends Controller
         }
         return $this->render('login', $message);
     }
+  
     public function logout() {
         session_destroy();
         header('Location: /');
@@ -70,6 +71,7 @@ class SiteController extends Controller
     public function children() {
         return $this->product('Children');
     }
+  
     public function editProfile($data) {
         $request = new Request();
         $data = $request->getBody();        
@@ -88,6 +90,15 @@ class SiteController extends Controller
         }
         return $this->render('test', $message);
     }
+
+    public function saveNewPassword($data) {
+        $request = new Request();
+        $data = $request->getBody();
+        $message = $this->userController->saveNewPassword($data);
+        $message['data'] = $data;
+        return $this->render('/login', $message);
+    }
+  
     private function saveImage($fieldName, $path){
         if (isset($_FILES[$fieldName])) {
             $fileTmpPath = $_FILES[$fieldName]['tmp_name'];

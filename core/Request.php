@@ -16,19 +16,36 @@ class Request
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
     public function getBody() {
-        $body = [];
-        if ($this->getMethod() == 'get') {
-            foreach ($_GET as $key => $value) {
-                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+        $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+        if (strpos($contentType, 'application/json') !== false) {
+            $rawBody = file_get_contents('php://input');
+            error_log("Raw JSON Body: " . $rawBody);
+            $body = json_decode($rawBody, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return $body;
+            } else {
+                error_log("JSON decode error: " . json_last_error_msg());
+                return null;
             }
         }
-        if ($this->getMethod() == 'post') {
-            foreach ($_POST as $key => $value) {
-                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+        if (strpos($contentType, 'application/x-www-form-urlencoded') !== false || 
+            strpos($contentType, 'multipart/form-data') !== false) {
+            $body = [];
+            if ($this->getMethod() == 'get') {
+                foreach ($_GET as $key => $value) {
+                    $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+                }
             }
+            if ($this->getMethod() == 'post') {
+                foreach ($_POST as $key => $value) {
+                    $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+                }
+            }
+            return $body;
         }
-        return $body;
+        return null;
     }
+    
     public function isPost() {
         return $this->getMethod() == 'post';
     }

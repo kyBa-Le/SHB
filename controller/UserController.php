@@ -65,6 +65,17 @@ class UserController
             return ['isEdited' => false];
         }
     }
+
+    public function getUserModel() {
+        return $this->userModel;
+    }
+
+    public function saveNewPassword($data) {
+        $email = $_SESSION['email'];
+        $newPassword = $data['newPassword'];
+        $this->userModel->updatePasswordByEmail($email, md5($newPassword ));
+    }
+  
     public function editAvatarLink($link, $userId){
         $this->userModel->changeAvatar($link, $userId);
         $user = $this->userModel->getUserById($userId);

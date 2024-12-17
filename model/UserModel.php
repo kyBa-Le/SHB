@@ -37,8 +37,16 @@ class UserModel extends Model
         $sql = "SELECT * FROM $this->table WHERE id = '$userID'";
         return $this->queryOneRow($sql);
     }
+
+    public function updatePasswordByEmail($email, $newPassword )
+    {
+        $sql = "UPDATE $this->table SET password = '$newPassword'
+                WHERE email = '$email'";
+        return Model::$db->query($sql);
+    }
     
-    public function changeAvatar($link, $userId) {
+    public function changeAvatar($link, $userId) 
+    {
         $sql = "UPDATE $this->table SET avatar_link = '$link' WHERE id = '$userId'";
         return Model::$db->query($sql);
     }
