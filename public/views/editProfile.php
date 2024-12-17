@@ -6,12 +6,16 @@
 <link rel="stylesheet" href="js/editProfile.js">
 <div class="container-edit-profile">
     <h1>Edit profile</h1>
-    <div class="profile-image">
-        <h5>Edit personal information</h5>
-        <img src="<?php echo $avatar ?>" alt="Profile Image">
-        <p>Upload your new profile image</p>
-        <button>CHANGE</button>
-    </div>
+    <form action="/user/edit" method="POST" enctype="multipart/form-data">
+        <div class="profile-image">
+            <h5>Edit personal information</h5>
+            <img id="profile-image" src="<?php echo $avatar ?>" alt="Profile Image" width="150px" height="150px" class="edit-profile-input" readonly>
+            <p>Upload your new profile image</p>
+            <button type="button" id="change-image-button" style="display: none">CHANGE</button>
+            <button type="submit" id="submit-image-button" style="display: none">SAVE</button>
+            <input type="file" id="image-upload" accept="image/*" style="display: none;" name="file_uploaded">
+        </div>
+    </form>
     <form action="/user/edit" method="POST">
         <div class="form-container-profile">
             <div class="form">
