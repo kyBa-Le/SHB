@@ -48,21 +48,12 @@ class SiteController extends Controller
         }
         return $this->render('login', $message);
     }
+  
     public function logout() {
         session_destroy();
         header('Location: /');
     }
-    public function editProfile($data) {
-        $request = new Request();
-        $data = $request->getBody();
-        $message = $this->userController->editProfile($data);
-        $message['data'] = $data;
-        if ($message['isEdited']) {
-            header('Location: /user/edit');
-            exit;
-        }
-        return $this->render('test', $message);
-    }
+
     private function product($category) {
         $products = $this->productController->getProductsByCondition($category, 1, 6);
         $data = ['products' => $products, 'category' => $category];
@@ -80,6 +71,25 @@ class SiteController extends Controller
     public function children() {
         return $this->product('Children');
     }
+  
+    public function editProfile($data) {
+        $request = new Request();
+        $data = $request->getBody();        
+        $imageUploaded = $this->saveImage('file_uploaded', 'images/avatar/');
+        if ($imageUploaded != false){
+            $userId = $_SESSION['user']['id'];
+            $this->userController->editAvatarLink( $imageUploaded, $userId);
+            header('Location: /user/edit');
+            exit;
+        }
+        $message = $this->userController->editProfile($data);
+        $message['data'] = $data;
+        if ($message['isEdited']) {
+            header('Location: /user/edit');
+            exit;
+        }
+        return $this->render('test', $message);
+    }
 
     public function saveNewPassword($data) {
         $request = new Request();
@@ -87,5 +97,21 @@ class SiteController extends Controller
         $message = $this->userController->saveNewPassword($data);
         $message['data'] = $data;
         return $this->render('/login', $message);
+    }
+  
+    private function saveImage($fieldName, $path){
+        if (isset($_FILES[$fieldName])) {
+            $fileTmpPath = $_FILES[$fieldName]['tmp_name'];
+            $originalFileName = $_FILES[$fieldName]['name'];
+            $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+            $newFileName = uniqid('file_', true) . '.' . $fileExtension;
+            $uploadFolder = $path;
+            $destinationPath = $uploadFolder . $newFileName;
+            if (move_uploaded_file($fileTmpPath, $destinationPath)) {
+                return $destinationPath;
+            }
+        } else {
+            return false;
+        }
     }
 }

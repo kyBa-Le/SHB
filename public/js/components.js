@@ -5,6 +5,7 @@ export function loadWaiting() {
         overlay.classList.remove('active');
     };
 }
+
 export function hideWaiting() {
     const overlay = document.getElementById('loading-overlay');
     overlay.classList.remove('active');
