@@ -65,4 +65,10 @@ class UserController
             return ['isEdited' => false];
         }
     }
+    public function editAvatarLink($link, $userId){
+        $this->userModel->changeAvatar($link, $userId);
+        $user = $this->userModel->getUserById($userId);
+        $_SESSION['user'] = $user;
+        $_SESSION['login_time'] = time();
+    }
 }

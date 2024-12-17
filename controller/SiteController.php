@@ -52,9 +52,34 @@ class SiteController extends Controller
         session_destroy();
         header('Location: /');
     }
+
+    private function product($category) {
+        $products = $this->productController->getProductsByCondition($category, 1, 6);
+        $data = ['products' => $products, 'category' => $category];
+        return $this->render('product', $data);
+    }
+
+    public function women() {
+        return $this->product('Women');
+    }
+
+    public function men() {
+        return $this->product('Men');
+    }
+
+    public function children() {
+        return $this->product('Children');
+    }
     public function editProfile($data) {
         $request = new Request();
-        $data = $request->getBody();
+        $data = $request->getBody();        
+        $imageUploaded = $this->saveImage('file_uploaded', 'images/avatar/');
+        if ($imageUploaded != false){
+            $userId = $_SESSION['user']['id'];
+            $this->userController->editAvatarLink( $imageUploaded, $userId);
+            header('Location: /user/edit');
+            exit;
+        }
         $message = $this->userController->editProfile($data);
         $message['data'] = $data;
         if ($message['isEdited']) {
@@ -62,5 +87,20 @@ class SiteController extends Controller
             exit;
         }
         return $this->render('test', $message);
+    }
+    private function saveImage($fieldName, $path){
+        if (isset($_FILES[$fieldName])) {
+            $fileTmpPath = $_FILES[$fieldName]['tmp_name'];
+            $originalFileName = $_FILES[$fieldName]['name'];
+            $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+            $newFileName = uniqid('file_', true) . '.' . $fileExtension;
+            $uploadFolder = $path;
+            $destinationPath = $uploadFolder . $newFileName;
+            if (move_uploaded_file($fileTmpPath, $destinationPath)) {
+                return $destinationPath;
+            }
+        } else {
+            return false;
+        }
     }
 }
