@@ -24,9 +24,8 @@ export async function sendData(path, data) {
         },
         body: JSON.stringify(data),
     });
-    console.log(data);
-    // const returnData = await response.json();
-    // return (returnData);
+    const returnData = await response.json();
+    return (returnData);
 }
 
 export function moneyFormater(price) {

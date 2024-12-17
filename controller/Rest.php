@@ -31,19 +31,24 @@ class Rest
 
     public function getEmailForgotPassword() {
         $email = $this->request->getBody()['email'];
-        $user = $this->userController->get
         $message = [];
-
-        $characters = '0123456789';
-        $charactersLength = strlen($characters);
-        $otp = '';
-        for ($i = 0; $i < 6; $i++) {
-            $otp .= $characters[random_int(0, $charactersLength - 1)];
-        } 
-        $_SESSION['otp'] = $otp;
-        $_SESSION['otp_time'] = time();
-        $emailOtp = new OtpEmail($email, $otp);
-        $this->emailSender->sendEmail($email, "user", $emailOtp->subject, $emailOtp->emailContent, $altBody = '');
-        $this->response->sendJson($email);
+        $user = $this->userController->getUserModel()->getUserByEmail($email);
+        if ($user) {
+            $characters = '0123456789';
+            $charactersLength = strlen($characters);
+            $otp = '';
+            for ($i = 0; $i < 6; $i++) {
+                $otp .= $characters[random_int(0, $charactersLength - 1)];
+            } 
+            $_SESSION['otp'] = $otp;
+            $_SESSION['otp_time'] = time();
+            $emailOtp = new OtpEmail($email, $otp);
+            $this->emailSender->sendEmail($email, "user", $emailOtp->subject, $emailOtp->emailContent, $altBody = '');
+            $message['isSent'] = true;
+        } else {
+            $message['isSent'] = false;
+            $message['error'] = 'This email has not registered an account!!!';
+        }
+        $this->response->sendJson($message);
     }
 }

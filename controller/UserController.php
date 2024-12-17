@@ -65,4 +65,8 @@ class UserController
             return ['isEdited' => false];
         }
     }
+
+    public function getUserModel() {
+        return $this->userModel;
+    }
 }
