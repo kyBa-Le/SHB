@@ -65,5 +65,19 @@ class Rest
         }
         $this->response->sendJson($message);
     }
+    
+    public function saveChangePassword() {
+        $data = Application::$app->request->getBody();
+        $message = [];
+        if (md5($data['currentPassword']) == $_SESSION['user']['password']) {
+            $this->userController->saveChangePassword($data, $_SESSION['user']['email']);
+            $_SESSION['user']['password'] = md5($data['currentPassword']);
+            $message['isUpdate'] = true;
+        } else {
+            $message['isUpdate'] = false;
+            $message['error'] = 'Password is incorrect';
+        }
+        $this->response->sendJson($message);
+    }
 
 }

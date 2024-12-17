@@ -33,7 +33,7 @@
     transition: background 0.3s ease;
 }
 
-.form-container-profile {
+.form-container-profile, .form-container-password {
     padding: 30px;
 }
 form .form {
@@ -76,7 +76,7 @@ form .form {
     cursor: pointer;
     transition: background 0.3s ease;
 }
-#click-change-password {
+#click-change-password, #click-change-personalInfor {
     cursor: pointer;
     color: blue;
 }
