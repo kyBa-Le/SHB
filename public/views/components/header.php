@@ -190,12 +190,12 @@
                 </li>
             </ul>
         </div>
-        <div class="search-header d-flex">
-            <input id="search-focus" type="search" class="form-control" placeholder="Search"/> 
-            <button type="button" class="btn" data-mdb-ripple-init>
+        <form class="search-header d-flex" action="/product/search" method="get">
+            <input id="search-focus" type="search" class="form-control" name="product-name" placeholder="Search"/>
+            <button type="submit" class="btn" data-mdb-ripple-init>
                 <i class="fas fa-search"></i>
             </button>
-        </div>
+        </form>
         <div class="logIn-signUp">
         <?php
             if ($authentication === true) {

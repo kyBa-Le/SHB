@@ -1,0 +1,34 @@
+.searchProduct-content {
+    min-height: 60vh;
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    column-gap: 2%;
+    margin: 5vh 10vw;
+    row-gap: 1vw;
+    * {
+        border-radius: 10px;
+    }
+}
+#form-filter-product {
+    background-color: #DBDBDB;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+#form-filter-product > *{
+    margin: 0 5vw;
+    min-width: 10vw;
+    padding: 5px 0;
+    background-color: white;
+}
+#form-filter-product > select {
+    border: none;
+    border-bottom: 1px solid #494949;
+    border-top: 1px solid #494949;
+}
+#search-filter-button:hover {
+    color: white;
+    background-color: #0F0E0E;
+}
+.searchProduct-content {
+    min-height: 60vh;
+}
