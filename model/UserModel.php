@@ -44,4 +44,10 @@ class UserModel extends Model
                 WHERE email = '$email'";
         return Model::$db->query($sql);
     }
+    
+    public function changeAvatar($link, $userId) 
+    {
+        $sql = "UPDATE $this->table SET avatar_link = '$link' WHERE id = '$userId'";
+        return Model::$db->query($sql);
+    }
 }

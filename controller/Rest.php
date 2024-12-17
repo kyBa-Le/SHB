@@ -65,4 +65,5 @@ class Rest
         }
         $this->response->sendJson($message);
     }
+
 }
