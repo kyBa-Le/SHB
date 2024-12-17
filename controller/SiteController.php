@@ -72,7 +72,14 @@ class SiteController extends Controller
     }
     public function editProfile($data) {
         $request = new Request();
-        $data = $request->getBody();
+        $data = $request->getBody();        
+        $imageUploaded = $this->saveImage('file_uploaded', 'images/avatar/');
+        if ($imageUploaded != false){
+            $userId = $_SESSION['user']['id'];
+            $this->userController->editAvatarLink( $imageUploaded, $userId);
+            header('Location: /user/edit');
+            exit;
+        }
         $message = $this->userController->editProfile($data);
         $message['data'] = $data;
         if ($message['isEdited']) {
@@ -91,7 +98,7 @@ class SiteController extends Controller
             $destinationPath = $uploadFolder . $newFileName;
             if (move_uploaded_file($fileTmpPath, $destinationPath)) {
                 return $destinationPath;
-}
+            }
         } else {
             return false;
         }

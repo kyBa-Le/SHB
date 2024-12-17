@@ -37,4 +37,9 @@ class UserModel extends Model
         $sql = "SELECT * FROM $this->table WHERE id = '$userID'";
         return $this->queryOneRow($sql);
     }
+    
+    public function changeAvatar($link, $userId) {
+        $sql = "UPDATE $this->table SET avatar_link = '$link' WHERE id = '$userId'";
+        return Model::$db->query($sql);
+    }
 }
