@@ -10,14 +10,20 @@ forgotPasswordBtn.addEventListener('click', async function (event) {
     event.preventDefault();
     let emailInput = document.getElementById('forgot-password-email'); 
     let emailValue = emailInput.value; 
-    if (!emailValue) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValue || !emailRegex.test(emailValue)) {
         emailInput.setCustomValidity('Please enter a valid email address.'); 
         emailInput.reportValidity();
         return;
     } else {
-        let isSent = await sendData('/api/user/forgot-password', {email: emailValue}); 
-        console.log(isSent);
-        emailContainer.style.display = 'none';
-        otpContainer.style.display = 'block';
+        let response = await sendData('/api/user/forgot-password', {email: emailValue}); 
+        if (response['isSent'] == false) {
+            emailContainer.style.display = 'block';
+            otpContainer.style.display = 'none';
+            document.getElementById('error-isSent').innerHTML += `<p style="color: red;">${response['error']}</p>`;
+        } else {
+            emailContainer.style.display = 'none';
+            otpContainer.style.display = 'block';
+        }
     }
 });

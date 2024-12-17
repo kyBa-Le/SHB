@@ -11,6 +11,7 @@
                     <p class="m-0">Email</p>
                     <input type="email" name="email"  id="forgot-password-email" placeholder="Enter your email" required>
                 </label>
+                <span id="error-isSent" style="color: red;"></span>
                 <p>You want to log in ? <a href="/login">Click here</a></p>
                 <button type="button" id="forgotPassword-button">Send Code</button>
             </form>
