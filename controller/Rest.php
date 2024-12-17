@@ -1,0 +1,49 @@
+<?php
+
+namespace app\controller;
+
+use app\core\Application;
+use app\thirdPartyService\EmailSender;
+use app\thirdPartyService\OtpEmail;
+
+class Rest
+{
+    private $productController;
+    private $emailSender;
+    private $userController;
+    private $request;
+    private $response;
+    public function __construct() {
+        $this->request = Application::$app->request;
+        $this->response = Application::$app->response;
+        $this->productController = new ProductController();
+        $this->emailSender = new EmailSender();
+        $this->userController = new UserController();
+    }
+
+    public function getProducts() {
+        $category = $this->request->getBody()['category'];
+        $pageNo = $this->request->getBody()['pageNo'];
+        $pageSize = $this->request->getBody()['pageSize'];
+        $products = $this->productController->getProductsByCondition($category, $pageNo, $pageSize);
+        $this->response->sendJson($products);
+    }
+
+    public function getEmailForgotPassword() {
+        $email = $this->request->getBody()['email'];
+        $user = $this->userController->get
+        $message = [];
+
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $otp = '';
+        for ($i = 0; $i < 6; $i++) {
+            $otp .= $characters[random_int(0, $charactersLength - 1)];
+        } 
+        $_SESSION['otp'] = $otp;
+        $_SESSION['otp_time'] = time();
+        $emailOtp = new OtpEmail($email, $otp);
+        $this->emailSender->sendEmail($email, "user", $emailOtp->subject, $emailOtp->emailContent, $altBody = '');
+        $this->response->sendJson($email);
+    }
+}
