@@ -29,6 +29,7 @@ $app->router->get('/women', [new SiteController(), 'women']);
 $app->router->get('/men', [new SiteController(), 'men']);
 $app->router->get('/children', [new SiteController(), 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
+$app->router->get('/product/search', [new SiteController(), 'search']);
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
@@ -44,5 +45,10 @@ $app->router->get('/api/products', [new Rest(), 'getProducts']);
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
 $app->router->post('/api/user/otp', [new Rest(), 'getOTPcode']);
 $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
+
+
+// API REQUEST
+// get API
+$app->router->get('/api/products', [new Rest(), 'getProducts']);
 
 $app->run();

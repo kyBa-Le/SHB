@@ -21,4 +21,9 @@ class ProductController
     {
         return $this->productModel->getPaginatedProductsByCategory($category, $pageNo, $pageSize);
     }
+
+    public function getProductByName($name) {
+        return $this->productModel->getProductsByName($name);
+    }
+
 }

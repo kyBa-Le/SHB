@@ -2,6 +2,7 @@
 
 namespace app\controller;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\thirdPartyService\EmailSender;
@@ -113,5 +114,13 @@ class SiteController extends Controller
         } else {
             return false;
         }
+    }
+
+
+    public function search() {
+        $name = Application::$app->request->getBody()['product-name'];
+        $products = $this->productController->getProductByName($name);
+        $data = ['products' => $products];
+        return $this->render('searchProduct', $data);
     }
 }
