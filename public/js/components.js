@@ -6,6 +6,11 @@ export function loadWaiting() {
     };
 }
 
+export function hideWaiting() {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.classList.remove('active');
+}
+
 export async function getData(path) {
     try {
         const response = await fetch(path); // Đợi fetch hoàn thành
@@ -17,6 +22,7 @@ export async function getData(path) {
 }
 
 export async function sendData(path, data) {
+    loadWaiting();
     const response = await fetch(path, {
         method: 'POST',
         headers: {
@@ -25,6 +31,7 @@ export async function sendData(path, data) {
         body: JSON.stringify(data),
     });
     const returnData = await response.json();
+    hideWaiting();
     return (returnData);
 }
 

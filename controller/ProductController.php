@@ -25,4 +25,5 @@ class ProductController
     public function getProductByName($name) {
         return $this->productModel->getProductsByName($name);
     }
+
 }

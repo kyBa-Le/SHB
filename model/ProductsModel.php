@@ -23,4 +23,5 @@ class ProductsModel extends Model
         $sql = "SELECT * FROM $this->table WHERE product_name LIKE '%$name%'";
         return $this->queryManyRows($sql);
     }
+  
 }

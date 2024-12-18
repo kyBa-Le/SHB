@@ -22,7 +22,7 @@
 .signup ul li {
     margin-bottom: 5px;
 }
-form {
+#myForm {
     display: flex;
     flex-direction: column;
     gap: 15px;
