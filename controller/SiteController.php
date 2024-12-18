@@ -123,4 +123,8 @@ class SiteController extends Controller
         $data = ['products' => $products];
         return $this->render('searchProduct', $data);
     }
+
+    public function detail() {
+        return $this->render('detailProducts', []);
+    }
 }

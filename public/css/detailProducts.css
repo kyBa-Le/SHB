@@ -1,0 +1,137 @@
+.container {
+    width: 60vw;
+    margin: 30px auto;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.product-header {
+    display: flex;
+    padding: 20px;
+}
+.product-image {
+    flex: 1;
+}
+.product-info {
+    flex: 1;
+    padding-left: 20px;
+}
+.product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+.price {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+}
+.old-price {
+    text-decoration: line-through;
+    color: gray;
+    margin-left: 10px;
+}
+.color-selection, .size-selection, .quantity-selection {
+    margin: 10px 0;
+}
+.color-selection button, 
+.size-selection button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+}
+.quantity-selection input {
+    width: 40px;
+    text-align: center;
+    margin-right: 10px;
+}
+.buttons {
+    margin-top: 20px;
+}
+.buttons button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+.product-details {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+.reviews {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+.review-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+.review-user {
+    font-weight: bold;
+    margin-right: 10px;
+}
+.review-comment {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 1160px) {
+    .container {
+        width: 70vw;
+    }
+    .product-header {
+        flex-direction: column; /* Stacks image and info */
+        text-align: center; /* Aligns content to the center */
+    }
+    .product-info {
+        padding-left: 0;
+    }
+    .buttons {
+        text-align: center;
+    }
+    .buttons button {
+        margin-bottom: 10px;
+    }
+}
+
+/* Small screens (e.g., phones) */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100vw;
+        margin: 20px 0;
+        border-radius: 0; /* Removes border-radius for edge-to-edge view */
+    }
+    .product-header {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .product-info {
+        text-align: center;
+        padding-left: 0;
+    }
+    .color-selection button, 
+    .size-selection button {
+        margin: 5px 5px 5px 0;
+        padding: 5px;
+    }
+    .quantity-selection input {
+        width: 40px;
+    }
+    .buttons button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    .product-details, .reviews {
+        padding: 15px;
+    }
+    .review-item {
+        flex-direction: column;
+    }
+    .review-user {
+        margin-bottom: 5px;
+    }
+}

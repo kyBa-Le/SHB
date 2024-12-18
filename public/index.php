@@ -30,6 +30,7 @@ $app->router->get('/men', [new SiteController(), 'men']);
 $app->router->get('/children', [new SiteController(), 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [new SiteController(), 'search']);
+$app->router->get('/detailed-product', [new SiteController(), 'detail']);
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
