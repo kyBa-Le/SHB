@@ -40,6 +40,10 @@ emailPageClick.addEventListener('click', function () {
 
 // Xử lý dữ liệu và ẩn hiện form khi nhấn nút xác nhận mã OTP
 otpBtn.addEventListener('click', async function () {
+    let error = document.getElementById("error-incorrectOtp");
+    if (error !== null) {
+        error.remove();
+    }
     let otpInput = document.getElementById('otpCode').value; 
     let response = await sendData('/api/user/otp', {otp: otpInput});
     console.log(response['isCorrectOtp']);

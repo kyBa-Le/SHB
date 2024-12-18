@@ -82,4 +82,8 @@ class UserController
         $_SESSION['user'] = $user;
         $_SESSION['login_time'] = time();
     }
+
+    public function saveChangePassword($data, $email) {
+        $this->userModel->updatePasswordByEmail($email, md5($data['newPassword'] ));
+    }
 }
