@@ -116,10 +116,17 @@ class SiteController extends Controller
         }
     }
 
-
     public function search() {
         $name = Application::$app->request->getBody()['product-name'];
         $products = $this->productController->getProductByName($name);
+        $data = ['products' => $products];
+        return $this->render('searchProduct', $data);
+    }
+
+    public function getFilteredProducts() {
+        $request = new Request();
+        $data = $request->getBody();
+        $products = $this->productController->getFilteredProducts($data);
         $data = ['products' => $products];
         return $this->render('searchProduct', $data);
     }
