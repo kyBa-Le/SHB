@@ -51,5 +51,5 @@ $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword'])
 // API REQUEST
 // get API
 $app->router->get('/api/products', [new Rest(), 'getProducts']);
-
+$app->router->get('/api/detailed-product', [new Rest(), 'getDetailedProduct']);
 $app->run();

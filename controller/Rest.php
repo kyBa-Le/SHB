@@ -80,4 +80,9 @@ class Rest
         $this->response->sendJson($message);
     }
 
+    public function getDetailedProduct(){
+        $id = Application::$app->request->getBody()['id'];   
+        $product = $this->productController->getProductById($id);
+        $this->response->sendJson($product);  
+    }
 }
