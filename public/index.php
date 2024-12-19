@@ -31,6 +31,7 @@ $app->router->get('/children', [new SiteController(), 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [new SiteController(), 'search']);
 $app->router->get('/detailed-product', [new SiteController(), 'detail']);
+$app->router->get('/product/filter', [new SiteController(), 'getFilteredProducts']);
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
@@ -43,7 +44,6 @@ $app->router->post('/user/forgot-password', [new SiteController(),'saveNewPasswo
 $app->router->get('/api/products', [new Rest(), 'getProducts']);
 $app->router->get('/api/detailed-product', [new Rest(), 'getDetailedProduct']);
 $app->router->get('/api/products/colors', [new Rest(), 'getColors']);
-//todo: review this branch carefully before merge
 
 // post API
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);

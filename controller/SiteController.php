@@ -126,4 +126,12 @@ class SiteController extends Controller
     public function detail() {
         return $this->render('detailProducts', []);
     }
+
+    public function getFilteredProducts() {
+        $request = new Request();
+        $data = $request->getBody();
+        $products = $this->productController->getFilteredProducts($data);
+        $data = ['products' => $products];
+        return $this->render('searchProduct', $data);
+    }
 }
