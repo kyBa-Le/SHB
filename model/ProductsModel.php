@@ -23,5 +23,50 @@ class ProductsModel extends Model
         $sql = "SELECT * FROM $this->table WHERE product_name LIKE '%$name%'";
         return $this->queryManyRows($sql);
     }
-  
+
+    public function getFilteredProducts ($name, $price, $categories) {
+        $sql = "SELECT * FROM $this->table 
+            WHERE product_name LIKE '%$name%'
+            AND (
+                ($price = 500000 AND price <= 500000) OR
+                ($price = 1000000 AND price <= 1000000) OR
+                ($price = 1001000 AND price > 1001000)
+            )
+            AND category = '$categories'";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getProductsByCategories ($name, $categories) {
+        $sql = "SELECT * FROM $this->table 
+            WHERE product_name LIKE '%$name%'
+            AND category = '$categories'";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getProductsByPrice ($name, $price) {
+        $sql = "SELECT * FROM $this->table 
+            WHERE product_name LIKE '%$name%'
+            AND (
+                ($price = 500000 AND price <= 500000) OR
+                ($price = 1000000 AND price <= 1000000) OR
+                ($price = 1001000 AND price > 1001000)
+            )";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getProducts () {
+        $sql = "SELECT * FROM $this->table";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getProductsByPriceCategories ($price, $categories) {
+        $sql = "SELECT * FROM $this->table 
+            WHERE  (
+                    ($price = 500000 AND price <= 500000) OR
+                    ($price = 1000000 AND price <= 1000000) OR
+                    ($price = 1001000 AND price > 1001000)
+            )
+            AND category = '$categories'";
+        return $this->queryManyRows($sql);
+    }
 }
