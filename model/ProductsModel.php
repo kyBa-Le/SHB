@@ -32,7 +32,8 @@ class ProductsModel extends Model
                 ($price = 1000000 AND price <= 1000000) OR
                 ($price = 1001000 AND price > 1001000)
             )
-            AND category = '$categories'";
+            AND category = '$categories'
+            ORDER BY price DESC";
         return $this->queryManyRows($sql);
     }
 
@@ -50,7 +51,7 @@ class ProductsModel extends Model
                 ($price = 500000 AND price <= 500000) OR
                 ($price = 1000000 AND price <= 1000000) OR
                 ($price = 1001000 AND price > 1001000)
-            )";
+            ) ORDER BY price DESC";
         return $this->queryManyRows($sql);
     }
 
@@ -66,7 +67,8 @@ class ProductsModel extends Model
                     ($price = 1000000 AND price <= 1000000) OR
                     ($price = 1001000 AND price > 1001000)
             )
-            AND category = '$categories'";
+            AND category = '$categories'
+            ORDER BY price DESC";
         return $this->queryManyRows($sql);
     }
 }
