@@ -1,3 +1,4 @@
+drop database SHB;
 create database SHB;
 use SHB;
 create table Products (
@@ -90,31 +91,26 @@ VALUES
 ('laura.martin@example.com', 'lauram', MD5('letmein2023'), 'Laura Martin', '0865543321', NULL, NULL, NULL, NULL),
 ('kevin.thomas@example.com', 'kevint', MD5('kevinrocks'), 'Kevin Thomas', '0934567890', NULL, NULL, NULL, NULL);
 
--- insert cho mỗi products một product_details
-INSERT INTO Product_colors (product_id, color, image_link)
-SELECT id, color, image_link
-FROM Products;
-
 -- insert data mẫu cho product details
 INSERT INTO Product_colors (id, product_id, color, image_link) 
 VALUES 
-    (NULL, 43, 'WHITE', 'https://images.asos-media.com/products/allsaints-underground-oversized-t-shirt-in-yellow-exclusive-to-asos/206433461-1-yellow?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 41, 'BROWN', 'https://images.asos-media.com/products/allsaints-underground-oversized-t-shirt-in-deep-red/206980609-1-winehousered?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 1, 'WHITE', 'https://images.asos-media.com/products/allsaints-underground-oversized-t-shirt-in-yellow-exclusive-to-asos/206433461-1-yellow?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 2, 'BROWN', 'https://images.asos-media.com/products/allsaints-underground-oversized-t-shirt-in-deep-red/206980609-1-winehousered?$n_640w$&wid=513&fit=constrain'),
     (NULL, 3, 'BROWN', 'https://images.asos-media.com/products/vero-moda-kyla-mid-rise-wide-straight-leg-jeans-in-light-blue-wash/205972254-1-lightblue?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 1, 'WHITE', 'https://images.asos-media.com/products/collusion-x001-antifit-jeans-in-stone-stone/205997993-1-stone?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 85, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-reversable-bomber-jacket-in-brown/206268458-1-green?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 73, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-reversable-bomber-jacket-in-brown/206268458-1-green?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 78, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 59, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 35, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 91, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 4, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 91, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 29, 'WHITE', 'https://images.asos-media.com/products/only-roll-neck-jumper-in-light-grey-melange/206796337-1-lightgrey?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 71, 'WHITE', 'https://images.asos-media.com/products/only-roll-neck-jumper-in-light-grey-melange/206796337-1-lightgrey?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 4, 'WHITE', 'https://images.asos-media.com/products/collusion-x001-antifit-jeans-in-stone-stone/205997993-1-stone?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 5, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-reversable-bomber-jacket-in-brown/206268458-1-green?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 6, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-reversable-bomber-jacket-in-brown/206268458-1-green?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 7, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 10, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 9, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 10, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 11, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 11, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 12, 'WHITE', 'https://images.asos-media.com/products/only-roll-neck-jumper-in-light-grey-melange/206796337-1-lightgrey?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 13, 'WHITE', 'https://images.asos-media.com/products/only-roll-neck-jumper-in-light-grey-melange/206796337-1-lightgrey?$n_640w$&wid=513&fit=constrain'),
     (NULL, 9, 'BROWN', 'https://images.asos-media.com/products/only-roll-neck-jumper-in-light-grey-melange/206796337-1-lightgrey?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 76, 'BROWN', 'https://images.asos-media.com/products/reclaimed-vintage-cable-jumper-in-stone/206506770-1-stone?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 79, 'WHITE', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 94, 'WHITE', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 45, 'BROWN', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 8, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-wool-look-overcoat-in-khaki/206095382-1-khaki?$n_640w$&wid=513&fit=constrain');
+    (NULL, 14, 'BROWN', 'https://images.asos-media.com/products/reclaimed-vintage-cable-jumper-in-stone/206506770-1-stone?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 14, 'WHITE', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 15, 'WHITE', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 16, 'BROWN', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 20, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-wool-look-overcoat-in-khaki/206095382-1-khaki?$n_640w$&wid=513&fit=constrain');

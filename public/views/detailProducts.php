@@ -2,31 +2,26 @@
 <div class="container-detailProducts">
     <div class="product-header">
         <div class="product-image-detail">
-            <div class="container-product-image">
-                <img id="detailed-product-image-link" src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
+            <div id="container-product-detail-image" class="container-product-image">
             </div>
             <div id="sub-product-image" class="sub-product-image">
-                <img id="sub-product-image" src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
-                <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
-                <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
+
             </div>
         </div>
         <div class="product-info-detail">
             <h4 class="product-name-detail" id="product-name-detail">Product name</h4>
-            <p>Available: <span style="color: green;">quantities in stock</span></p>
+            <p>Available: <span id="product-detail-quantity" style="color: green;"></span></p>
             <p class="mb-0">
-                <span class="price-detail" id="product-detail-price">100.000 đ</span>
-                <span class="old-price-detail">120.000 đ</span>
+                <span class="price-detail" id="product-detail-price"></span>
             </p>
             <hr>
             <div class="color-selection-detail">
                 <p>Colors:</p>
                 <div id="button-color-detail" class="button-color-detail">
-                    <button>Black</button>
                 </div>
             </div>
             <div class="size-selection-detail">
-                <p>Size:</p>
+                <p class="mt-3">Size:</p>
                 <div class="button-size-detail">
                     <button>S</button>
                     <button>M</button>
@@ -49,10 +44,7 @@
     </div>
     <div class="product-description-details">
         <h4>Product details</h4>
-        <ul>Highlighted features of oversized unisex T-shirts.
-            <li>A must-have item for comfort, ease of wear, and versatile styling.</li>
-            <li>Suitable for both men and women, perfect for couples or group uniforms.</li>
-            <li>Oversized T-shirts are easy to mix and match, showcasing a trendy Korean style.</li>
+        <ul id="product-detail-description">Highlighted features of oversized unisex T-shirts.
         </ul>
     </div>
     <div class="product-reviews-detail">
@@ -65,4 +57,4 @@
             </div>
         </div>
     </div>
-    <script src="js/detailedProduct.js" type="module"></script>
+<script src="js/detailedProduct.js" type="module"></script>

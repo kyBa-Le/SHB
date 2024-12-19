@@ -58,9 +58,8 @@ foreach ($products as $product) {
                         <div class='product-price-and-sold d-flex justify-content-between align-items-center mb-2'>
                             <div>
                                 <p class='m-0'><span class='money'>$price</span> vnd</p>
-                                <p class='text-decoration-line-through m-0 fst-italic'><span class='money'>$sale_price</span> vnd</p>
                             </div>
-                            <p class='text-end'>Sold: $purchases</p>
+                            <p class='text-end mb-0'>Sold: $purchases</p>
                         </div>
                         <div class='product-add-cart-and-order d-flex justify-content-between align-items-center w-100'>
                             <button>Add to cart</button>

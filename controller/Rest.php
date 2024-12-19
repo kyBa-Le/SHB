@@ -83,7 +83,7 @@ class Rest
     }
 
     public function getDetailedProduct(){
-        $id = Application::$app->request->getBody()['id'];
+        $id = Application::$app->request->getBody()['product-id'];
         $product = $this->productController->getProductById($id);
         $this->response->sendJson($product);
     }
