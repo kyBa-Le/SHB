@@ -3,7 +3,7 @@
     <div class="product-header">
         <div class="product-image-detail">
             <div class="container-product-image">
-                <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
+                <img id="detailed-product-image-link" src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
             </div>
             <div class="sub-product-image">
                 <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
@@ -12,10 +12,10 @@
             </div>
         </div>
         <div class="product-info-detail">
-            <h4 class="product-name-detail">Product name</h4>
+            <h4 class="product-name-detail" id="product-name-detail">Product name</h4>
             <p>Available: <span style="color: green;">quantities in stock</span></p>
             <p class="mb-0">
-                <span class="price-detail">100.000 đ</span>
+                <span class="price-detail" id="product-detail-price">100.000 đ</span>
                 <span class="old-price-detail">120.000 đ</span>
             </p>
             <hr>
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="product-descript-details">
+    <div class="product-description-details">
         <h4>Product details</h4>
         <ul>Highlighted features of oversized unisex T-shirts.
             <li>A must-have item for comfort, ease of wear, and versatile styling.</li>
