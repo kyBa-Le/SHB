@@ -24,4 +24,8 @@ class ProductsModel extends Model
         return $this->queryManyRows($sql);
     }
   
+    public function getProductById ($id) {
+        $sql = "SELECT * FROM $this->table WHERE id = '$id'";
+        return $this->queryOneRow($sql);
+    }
 }

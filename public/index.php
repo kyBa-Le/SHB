@@ -41,11 +41,11 @@ $app->router->post('/user/forgot-password', [new SiteController(),'saveNewPasswo
 // API REQUEST
 // get API
 $app->router->get('/api/products', [new Rest(), 'getProducts']);
-$app->router->get('/api/products/colors', [new Rest(), 'getColors']);
+$app->router->get('/api/products', [new Rest(), 'getProducts']);
 
 // post API
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
-$app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
+$app->router->post('/api/user/otp', [new Rest(), 'getOTPcode']);
 $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
 
 $app->run();

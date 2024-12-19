@@ -116,7 +116,6 @@ class SiteController extends Controller
         }
     }
 
-
     public function search() {
         $name = Application::$app->request->getBody()['product-name'];
         $products = $this->productController->getProductByName($name);
