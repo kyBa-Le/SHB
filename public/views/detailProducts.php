@@ -5,8 +5,8 @@
             <div class="container-product-image">
                 <img id="detailed-product-image-link" src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
             </div>
-            <div class="sub-product-image">
-                <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
+            <div id="sub-product-image" class="sub-product-image">
+                <img id="sub-product-image" src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
                 <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
                 <img src="https://images.asos-media.com/products/adidas-originals-bermuda-trainers-in-yellow-and-black/207195540-2?$n_480w$&wid=476&fit=constrain" alt="Product Image" name="image_link">
             </div>
@@ -21,10 +21,8 @@
             <hr>
             <div class="color-selection-detail">
                 <p>Colors:</p>
-                <div class="button-color-detail">
+                <div id="button-color-detail" class="button-color-detail">
                     <button>Black</button>
-                    <button>White</button>
-                    <button>Red</button>
                 </div>
             </div>
             <div class="size-selection-detail">
@@ -67,3 +65,4 @@
             </div>
         </div>
     </div>
+    <script src="js/detailedProduct.js" type="module"></script>
