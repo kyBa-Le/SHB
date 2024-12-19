@@ -25,5 +25,23 @@ class ProductController
     public function getProductByName($name) {
         return $this->productModel->getProductsByName($name);
     }
-
+    
+    public function getFilteredProducts ($data) {
+       $name = $data['product-name'];
+       $price = $data['filter-price'];
+       $categories = $data['filter-categories'];
+       if ($name &&  $price && $categories) {
+            return $this->productModel->getFilteredProducts($name, $price, $categories);
+       } elseif ($name && $categories && !$price) {
+            return $this->productModel->getProductsByCategories($name, $categories);
+       } elseif ($name && $price) {
+            return $this->productModel->getProductsByPrice($name, $price);
+       } elseif ($price && $categories) {
+            return $this->productModel->getProductsByPriceCategories ($price, $categories);
+       } elseif ($name) {
+            return $this->productModel->getProductsByName ($name);
+       }else {
+            return $this->productModel->getProducts();
+       }
+    }
 }
