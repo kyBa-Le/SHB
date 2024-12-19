@@ -38,13 +38,13 @@
             $price = $product["price"];
             $purchases = $product["purchases"];
             echo "<div>
-                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\">
+                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\" onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">
                         <div class=\"product-card-overlay w-100 h-100\"></div>
                         <div class=\"product-card-hover\">
-                            <h5 style='font-weight: bold'>$name</h5>
+                            <h5 style='font-weight: bold' onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">$name</h5>
                             <p>Purchases: $purchases</p>
                             <p style=\"color: #ED685D; font-weight: bold\">$price VNĐ</p>
-                            <button onclick=\"{window.location.href='/product-details?id=$id'}\">View details <i class=\"fa-solid fa-arrow-right-long\"></i></button>
+                            <button onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">View details <i class=\"fa-solid fa-arrow-right-long\"></i></button>
                         </div>
                     </div>
                 </div>";
