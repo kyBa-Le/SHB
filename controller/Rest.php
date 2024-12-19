@@ -11,6 +11,7 @@ class Rest
     private $productController;
     private $emailSender;
     private $userController;
+    private $productColorsController;
     private $request;
     private $response;
     public function __construct() {
@@ -19,6 +20,7 @@ class Rest
         $this->productController = new ProductController();
         $this->emailSender = new EmailSender();
         $this->userController = new UserController();
+        $this->productColorsController = new ProductColorsController();
     }
 
     public function getProducts() {
@@ -53,7 +55,7 @@ class Rest
         $this->response->sendJson($message);
     }
 
-    public function getOTPcode() {
+    public function getOTPCode() {
         $otpCode = $this->request->getBody()['otp'];
         $currentTime = time();
         if ( $otpCode == $_SESSION['otp'] && ($currentTime - $_SESSION['otp_time'] < 60)) {
@@ -78,6 +80,17 @@ class Rest
             $message['error'] = 'Password is incorrect';
         }
         $this->response->sendJson($message);
+    }
+
+    public function getDetailedProduct(){
+        $id = Application::$app->request->getBody()['product-id'];
+        $product = $this->productController->getProductById($id);
+        $this->response->sendJson($product);
+    }
+    public function getColors() {
+        $productId = $this->request->getBody()['product-id'];
+        $productColors = $this->productColorsController->getProductColorsByProductId($productId);
+        $this->response->sendJson($productColors);
     }
 
 }

@@ -30,6 +30,7 @@ $app->router->get('/men', [new SiteController(), 'men']);
 $app->router->get('/children', [new SiteController(), 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [new SiteController(), 'search']);
+$app->router->get('/detailed-product', [new SiteController(), 'detail']);
 $app->router->get('/product/filter', [new SiteController(), 'getFilteredProducts']);
 
 // Post request
@@ -41,15 +42,12 @@ $app->router->post('/user/forgot-password', [new SiteController(),'saveNewPasswo
 // API REQUEST
 // get API
 $app->router->get('/api/products', [new Rest(), 'getProducts']);
+$app->router->get('/api/detailed-product', [new Rest(), 'getDetailedProduct']);
+$app->router->get('/api/products/colors', [new Rest(), 'getColors']);
 
 // post API
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
-$app->router->post('/api/user/otp', [new Rest(), 'getOTPcode']);
+$app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
 $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
-
-
-// API REQUEST
-// get API
-$app->router->get('/api/products', [new Rest(), 'getProducts']);
 
 $app->run();

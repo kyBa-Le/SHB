@@ -25,6 +25,10 @@ class ProductController
     public function getProductByName($name) {
         return $this->productModel->getProductsByName($name);
     }
+
+    public function getProductById($id){
+        return $this->productModel->getProductById($id);
+    }
     
     public function getFilteredProducts ($data) {
        $name = $data['product-name'];

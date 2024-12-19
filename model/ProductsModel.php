@@ -23,6 +23,11 @@ class ProductsModel extends Model
         $sql = "SELECT * FROM $this->table WHERE product_name LIKE '%$name%'";
         return $this->queryManyRows($sql);
     }
+  
+    public function getProductById ($id) {
+        $sql = "SELECT * FROM $this->table WHERE id = '$id'";
+        return $this->queryOneRow($sql);
+    }
 
     public function getFilteredProducts ($name, $price, $categories) {
         $sql = "SELECT * FROM $this->table 
