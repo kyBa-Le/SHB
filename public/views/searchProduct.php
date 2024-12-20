@@ -1,9 +1,17 @@
 <link rel="stylesheet" href="css/searchProduct.css">
 <div class="searchProduct-container">
     <div class="search-text-result d-flex justify-content-center align-items-center flex-column mt-5">
-        <p>Your search results for:</p>
-        <p><b>"<?php echo $_GET['product-name'] ?>"</b></p>
-        <p><?php echo count($products) ?> products found</p>
+        <?php
+            if (isset($_GET['product-name']) && empty($_GET['product-name'])) {
+                echo "<p>This is all of our products</p>";
+            } else {
+                ?>
+                    <p>Your search results for:</p>
+                    <p><b>"<?php echo $_GET['product-name'] ?>"</b></p>
+                    <p><?php echo count($products) ?> products found</p>
+                <?php
+            }
+        ?>
     </div>
     <form id="form-filter-product" action="/product/filter" method="get" class="d-flex justify-content-center">
         <input type="search" id="product-name-filter" name="product-name" style="display: none;" />
@@ -43,7 +51,8 @@
         ?>
     </div>
 </div>
-<script>
+<script type="module">
+    import {moneyFormater} from "../js/components.js";
     let form = document.getElementById('form-filter-product');
     form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -51,4 +60,8 @@
         document.getElementById('product-name-filter').value = searchValue ?? '';
         this.submit();
     });
+    let moneyItems = document.getElementsByClassName('money');
+    for (let item of moneyItems) {
+        item.innerHTML = moneyFormater(item.innerHTML);
+    }
 </script>
