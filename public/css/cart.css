@@ -1,0 +1,40 @@
+.cart-container {
+    display: grid;
+    grid-template-columns: 65% 32%;
+    column-gap: 3%;
+    min-height: 90vh;
+    box-sizing: border-box;
+    margin: 3vh 1vw;
+    * {
+        border-radius: 10px;
+    }
+}
+.container > div {
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+}
+.cart-items-column {
+    display: grid;
+    grid-template-rows: 10% auto;
+    row-gap: 2vh;
+}
+.total-price-column {
+    min-height: 30vh;
+    height: fit-content;
+}
+.cart-container .items-header {
+    display: grid;
+    grid-template-columns: 45% 17% 16% 17% 5%;
+    > * {
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+    align-items: center;
+}
+.total-price-column > div > * {
+    font-weight: bold;
+    font-size: large;
+    margin: 10px 0;
+}

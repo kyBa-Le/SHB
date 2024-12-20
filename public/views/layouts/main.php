@@ -16,7 +16,7 @@
         body {
             background-color: #F0F0F0;
         }
-        .signup, #login-box {
+        .signup, #login-box, .element-white {
             background-color: white;
         }
     </style>

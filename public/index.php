@@ -32,6 +32,7 @@ $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [new SiteController(), 'search']);
 $app->router->get('/detailed-product', [new SiteController(), 'detail']);
 $app->router->get('/product/filter', [new SiteController(), 'getFilteredProducts']);
+$app->router->get('/cart', 'cart');
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
