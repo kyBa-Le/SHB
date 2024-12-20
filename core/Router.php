@@ -27,6 +27,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
         if ($callback === false) {
             $this->response->setStatusCode(404);
+            Application::$app->controller->layout = 'noLayout';
             return $this->renderView('notFound');
         }
         if (is_string($callback)) {

@@ -6,6 +6,7 @@
     justify-content: center;
     height: 100vh;
     background-size: cover;
+    background-position: left;
 }
 .banner-content {
     text-align: center;
@@ -26,6 +27,7 @@
 }
 .slogan-content {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     width: 23vw;
@@ -36,13 +38,35 @@
     border-radius: 10px;
     font-weight: bold;
     font-size: 28px;
+    overflow: hidden;
 }
 .slogan-text {
+    position: relative;
+    z-index: 2; 
     margin: 0px;
     text-align: center;
+    transition: color 0.4s ease; 
 }
+.slogan-content::before {
+    content: "";
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transition: bottom 0.4s ease-in-out; 
+    z-index: 1; 
+}
+.slogan-content:hover::before {
+    bottom: 0;
+}
+.slogan-content:hover .slogan-text {
+    color: #0F0E0E; 
+}
+
 /*css for call to action*/
-#call-to-action-container #cards-container {
+#call-to-action-container #call-to-action-cards-container {
     display: grid;
     grid-template-columns: 32% 32% 32%;
     column-gap: 2%;
@@ -56,16 +80,19 @@
     border-radius: 10px;
     position: relative;
     cursor: pointer;
+    overflow: hidden;
 }
 .call-to-action-hover {
     width: 85%;
     position: absolute;
-    top: 50%;
+    top: 100%;
     left: 50%;
-    transform: translate(-50%, -70%);
+    transform: translate(-50%, 0);
     font-weight: bold;
     color: white;
     visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
 }
 .call-to-action-hover button {
     padding: 5px 15px;
@@ -79,13 +106,19 @@
 .call-to-action-overlay {
     background-color: #0F0E0E;
     border-radius: 10px;
-    opacity: 0.4;
+    opacity: 0;
     visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
 }
-.call-to-action-card:hover {
-    .call-to-action-hover, .call-to-action-overlay {
-        visibility: visible;
-    }
+.call-to-action-card:hover .call-to-action-overlay {
+    visibility: visible;
+    opacity: 0.4;
+}
+.call-to-action-card:hover .call-to-action-hover {
+    visibility: visible;
+    opacity: 1;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 /* top trending products */
 .product-card {
@@ -96,36 +129,71 @@
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-}
-.product-card:hover {
-    .product-card-hover, .product-card-overlay{
-        visibility: visible !important;
-    }
+    overflow: hidden;
 }
 .product-card-hover {
     position: absolute;
-    top: 30%;
+    top: 100%;
     left: 5%;
     color: white;
     visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
 }
 .product-card-overlay {
     background-color: #0F0E0E;
     border-radius: 10px;
-    opacity: 0.6;
+    opacity: 0;
     visibility: hidden;
-}
-.product-card-hover button:hover {
-    background-color: #0F0E0E;
-    color: white;
+    transition: opacity 0.5s ease-in-out;
 }
 .product-card-hover button {
     padding: 5px 15px;
     border-radius: 10px;
     border: none;
 }
+.product-card-hover button:hover {
+    background-color: #0F0E0E;
+    color: white;
+}
+.product-card:hover .product-card-hover {
+    visibility: visible;
+    opacity: 1;
+    top: 30%;
+    transform: translateY(-30%);
+}
+.product-card:hover .product-card-overlay {
+    visibility: visible;
+    opacity: 0.6;
+}
 #card-products-container {
     display: grid;
     grid-template-columns: 24% 24% 24% 24%;
     column-gap: 1.3%;
+}
+/* For screens smaller than 600px (adjust as needed) */
+@media (max-width: 600px) {
+    .box-banner {
+        background-position: -650px 0;
+    }
+    #card-products-container {
+        display: flex;
+        width: 100%;
+        overflow-x: scroll;
+        justify-content: start;
+        align-items: center;
+    }
+    .product-card {
+        width: 95vw;
+    }
+    #call-to-action-container #call-to-action-cards-container {
+        display: flex;
+        width: 100vw;
+        overflow-x: scroll;
+        justify-content: start;
+        align-items: center;
+    }
+    .call-to-action-card {
+        min-width: 100vw;
+    }
 }

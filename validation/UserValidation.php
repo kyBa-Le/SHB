@@ -38,7 +38,7 @@ class UserValidation
         if (strlen($user['password']) < 6) {
             $errors['password'] = 'Password should be at least 6 characters';
         }
-        if (!ctype_digit($user['phone'])) {
+        if ($user['phone'] !=null && !ctype_digit($user['phone'])) {
             $errors['phone'] = 'Phone number must be a 10-digit number.';
         }
         if (count($errors) == 0) {

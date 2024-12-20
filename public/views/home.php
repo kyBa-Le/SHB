@@ -38,13 +38,13 @@
             $price = $product["price"];
             $purchases = $product["purchases"];
             echo "<div>
-                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\">
+                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\" onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">
                         <div class=\"product-card-overlay w-100 h-100\"></div>
                         <div class=\"product-card-hover\">
-                            <h5 style='font-weight: bold'>$name</h5>
+                            <h5 style='font-weight: bold' onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">$name</h5>
                             <p>Purchases: $purchases</p>
-                            <p style=\"color: #ED685D\">$price VNĐ</p>
-                            <button onclick=\"{window.location.href='/product-details?id=$id'}\">View details <i class=\"fa-solid fa-arrow-right-long\"></i></button>
+                            <p style=\"color: #ED685D; font-weight: bold\" class='money'>$price VNĐ</p>
+                            <button onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">View details <i class=\"fa-solid fa-arrow-right-long\"></i></button>
                         </div>
                     </div>
                 </div>";
@@ -55,7 +55,7 @@
 <!--Call to action -->
 <div class="container-fluid p-0" id="call-to-action-container">
     <h1 class="text-center mt-5 mb-5">Explore out products</h1>
-    <div class="container-fluid p-0" id="cards-container">
+    <div id="call-to-action-cards-container">
         <div class="call-to-action-card" style="background-image: url('https://imgcdn.stablediffusionweb.com/2024/9/15/f127ef07-3612-4a88-bdc9-fc3e5671f02a.jpg')">
             <div class="w-100 h-100 call-to-action-overlay"></div>
             <div class="call-to-action-hover">
@@ -82,3 +82,4 @@
         </div>
     </div>
 </div>
+<script src="js/home.js" type="module"></script>

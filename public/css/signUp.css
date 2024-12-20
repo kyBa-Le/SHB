@@ -22,7 +22,7 @@
 .signup ul li {
     margin-bottom: 5px;
 }
-form {
+#myForm {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -75,4 +75,15 @@ form {
 .error-message {
     text-align: center;
     color: red;
+}
+/*Responsive sign up form*/
+@media (max-width: 1160px) {
+    .signup {
+        max-width: 70vw;
+    }
+}
+@media (max-width: 600px) {
+    .signup {
+        max-width: 100%;
+    }
 }
