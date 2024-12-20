@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="product-info-detail">
-            <h4 class="product-name-detail" id="product-name-detail">Product name</h4>
+            <h4 class="product-name-detail" id="product-name-detail"></h4>
             <p>Available: <span id="product-detail-quantity" style="color: green;"></span></p>
             <p class="mb-0">
                 <span class="price-detail" id="product-detail-price"></span>

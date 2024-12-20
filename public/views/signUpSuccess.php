@@ -39,6 +39,19 @@
         font-weight: bold;
         background-color: #0F0E0E;
     }
+    @media (max-width: 600px) {
+        .signUpSuccess-content {
+            width: 80vw;
+            height: 60vh;
+        }
+        .image {
+            width: 80vw;
+        }
+        .nav-button {
+            width: 30vw;
+            height: 7vh;
+        }
+    }
 </style>
 <div id="container-signUpSuccess">
     <div class="signUpSuccess-content">

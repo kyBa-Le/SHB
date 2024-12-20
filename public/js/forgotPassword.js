@@ -33,7 +33,10 @@ forgotPasswordBtn.addEventListener('click', async function (event) {
 
 // xử lý nút ẩn hiện khi bấm click here ở trang OTP
 emailPageClick.addEventListener('click', function () {
-    document.getElementById("error-incorrectOtp").remove();
+    let error = document.getElementById("error-incorrectOtp");
+    if (error !== null) {
+        error.remove();
+    }
     emailContainer.style.display = 'block';
     otpContainer.style.display = 'none';
 });

@@ -23,8 +23,8 @@ class UserController
             $password = $data['password'];
             $fullName = $data['fullName'];
             $phone = $data['phone'];
-            $province = $data['province'];
-            $district = $data['district'];
+            $province = $data['province'] ?? '';
+            $district = $data['district'] ?? '';
             $detailed_address = $data['detailed_address'];
             $this->userModel->saveUser($email, $username, md5($password), $fullName, $phone, $province, $district, $detailed_address);
             return ['isSuccess' => true];
