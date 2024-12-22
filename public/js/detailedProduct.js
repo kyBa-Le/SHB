@@ -85,3 +85,27 @@ document.querySelectorAll('.size-btn').forEach(button => {
         defaultButton.click(); 
     }
 });
+
+// Quantity
+let quantityBuyValue = parseInt(document.getElementById('quantity-buy').value, 10);
+let quantityLimit = parseInt(detailedProduct['quantity']); 
+minusBtn.addEventListener('click', function () {
+    document.getElementById('quantity-error').innerHTML = '';
+    console.log('Trước khi trừ:', quantityBuyValue);
+    if (quantityBuyValue > 1) {
+        quantityBuyValue -= 1;
+        document.getElementById('quantity-buy').value = quantityBuyValue;
+    } else {
+        document.getElementById('quantity-error').innerHTML = 'Quantity less than 1';
+    }
+});
+plusBtn.addEventListener('click', function () {
+    document.getElementById('quantity-error').innerHTML = '';
+    console.log('Plus button clicked');
+    if (quantityBuyValue < quantityLimit) {
+        quantityBuyValue += 1;
+        document.getElementById('quantity-buy').value = quantityBuyValue;
+    } else {
+        document.getElementById('quantity-error').innerHTML = 'Quantity exceeds stock';
+    }
+});

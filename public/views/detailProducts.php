@@ -32,10 +32,11 @@
             <hr>
             <div class="quantity-detail">
                     <p>Quantity:</p>
-                    <button>-</button>
-                    <input type="text" value="1" style="width: 30px; text-align: center; border:none;">
-                    <button>+</button>
-                </div>
+                    <button id="minusBtn">-</button>
+                    <input type="text" id="quantity-buy" value="1" style="width: 30px; text-align: center; border:none;">
+                    <button id="plusBtn">+</button>
+                    <span id="quantity-error" style="color: red; margin-left: 5px;"></span>
+            </div>
             <div class="button-detail">
                 <button class="addToCartBtn-detail">Add to cart</button>
                 <button class="orderBtn-detail">Order</button>
