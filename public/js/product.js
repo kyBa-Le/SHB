@@ -36,9 +36,8 @@ function renderProducts(products) {
                     </div>
                     <p class="text-end mb-0">Sold: ${purchases}</p>
                 </div>
-                <div class="product-add-cart-and-order d-flex justify-content-between align-items-center w-100">
-                    <button>Add to cart</button>
-                    <button>Order</button>
+                <div class='product-detail' onclick="{window.location.href='${detailedLink}'}">
+                    <button>Discover the details</button>
                 </div>
             </div>
         </div>
