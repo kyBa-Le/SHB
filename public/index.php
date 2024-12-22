@@ -44,6 +44,7 @@ $app->router->post('/user/forgot-password', [new SiteController(),'saveNewPasswo
 $app->router->get('/api/products', [new Rest(), 'getProducts']);
 $app->router->get('/api/detailed-product', [new Rest(), 'getDetailedProduct']);
 $app->router->get('/api/products/colors', [new Rest(), 'getColors']);
+$app->router->get('/api/order-items', [new Rest(), 'getOrderItemsByUserId']);
 
 // post API
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);

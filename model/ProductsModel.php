@@ -76,4 +76,9 @@ class ProductsModel extends Model
             ORDER BY price DESC";
         return $this->queryManyRows($sql);
     }
+
+    public function getOrderItemById($id) {
+        $sql = "SELECT * FROM $this->table WHERE id = ?";
+        return $this->queryOneRow($sql, [$id]); 
+    }
 }
