@@ -5,18 +5,19 @@ orderItems = await getData('/api/order-items')
 
 let cartItemsBody = document.getElementById('cart-items-body');
 // render data to screen
-if (orderItems.length === 0) {
-    cartItemsBody.innerHTML = `
+function renderOrderItems(orderItems) {
+    if (orderItems.length === 0) {
+        cartItemsBody.innerHTML = `
         <div class="w-100 h-100 d-flex justify-content-center align-items-center flex-column">
                 <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRiP3u0Wiokd_JTbjmrB6P_KcYKjVI2EeA1hGLawYteCYSqB0gO">
                 <h2>Your cart is empty</h2>
                 <p>Browse the store, shop now</p>
                 <button class="w-25 p-2" style="color: white; background: black" onclick="{document.getElementById('search-focus').focus()}">Search products</button>
         </div>`;
-}else {
-    for (let item of orderItems) {
-        let totalPrice = parseFloat(item['quantity']) * parseFloat(item['unit_price']);
-        cartItemsBody.innerHTML += `
+    }else {
+        for (let item of orderItems) {
+            let totalPrice = parseFloat(item['quantity']) * parseFloat(item['unit_price']);
+            cartItemsBody.innerHTML += `
             <div class="cart-item" id="cart-item-${item['id']}">
                 <div>
                     <input class="ms-3 item-checkbox" type="checkbox" data-id="${item['id']}">
@@ -38,8 +39,10 @@ if (orderItems.length === 0) {
                 </div>
             </div>
         `
+        }
     }
 }
+renderOrderItems(orderItems);
 
 async function updateQuantity (updatedQuantity, id) {
      let quantity = parseInt(updatedQuantity);
@@ -68,8 +71,9 @@ for (let button of updateButtons) {
 // xóa phần tử trong
 for (let icon of document.getElementsByClassName('icon-remove')) {
     icon.addEventListener('click', async function() {
-        await sendData('/api/cart-items/delete?id=' + icon.dataset.id);
+        await sendData('/api/order-items/delete', {id:icon.dataset.id}, false);
         document.getElementById(`cart-item-${icon.dataset.id}`).remove();
+        updatePurchaseButton()
     });
 }
 //todo: check and change the api endpoint before finish this task
@@ -106,3 +110,22 @@ let checkboxes = document.getElementsByClassName('item-checkbox');
 for (let box of checkboxes) {
     box.addEventListener('change', updatePurchaseButton);
 }
+document.getElementById('remove-all').addEventListener('click', async function () {
+    let items = document.querySelectorAll('.item-checkbox:checked');
+    for (let item of items) {
+        let id = item.dataset.id;
+        await sendData('/api/order-items/delete', {id:id}, false);
+        document.getElementById(`cart-item-${id}`).remove();
+        updatePurchaseButton();
+        let orderItems = await getData('/api/order-items');
+        if (orderItems.length === 0) {
+            cartItemsBody.innerHTML = `
+                <div class="w-100 h-100 d-flex justify-content-center align-items-center flex-column">
+                        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRiP3u0Wiokd_JTbjmrB6P_KcYKjVI2EeA1hGLawYteCYSqB0gO">
+                        <h2>Your cart is empty</h2>
+                        <p>Browse the store, shop now</p>
+                        <button class="w-25 p-2" style="color: white; background: black" onclick="{document.getElementById('search-focus').focus()}">Search products</button>
+                </div>`;
+        }
+    }
+})

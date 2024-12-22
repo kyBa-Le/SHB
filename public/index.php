@@ -51,6 +51,5 @@ $app->router->get('/api/order-items', [new Rest(), 'getOrderItemsByUserId']);
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
 $app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
 $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
-$app->router->post('/api/order-items/update-quantity', [new Rest(), 'updateOrderItemQuantity']);
 
 $app->run();

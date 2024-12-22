@@ -15,7 +15,7 @@
             <p>Unit price</p>
             <p>Quantity</p>
             <p>Total</p>
-            <i class="fa-regular fa-trash-can"></i>
+            <i class="fa-regular fa-trash-can" id="remove-all"></i>
         </div>
         <div id="cart-items-body" class="items-body element-white">
 
