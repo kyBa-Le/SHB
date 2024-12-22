@@ -23,10 +23,10 @@
             <div class="size-selection-detail">
                 <p class="mt-3">Size:</p>
                 <div class="button-size-detail">
-                    <button>S</button>
-                    <button>M</button>
-                    <button>L</button>
-                    <button>XL</button>
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
                 </div>
             </div>
             <hr>

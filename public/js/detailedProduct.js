@@ -63,3 +63,25 @@ for (let element of changeColorItems) {
         changeBorder(color);
     });
 }
+
+// Chose size
+let size = ''; 
+let selectedButton = null; 
+document.querySelectorAll('.size-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        if (selectedButton) {
+            selectedButton.style.backgroundColor = ''; 
+            selectedButton.style.border = '';
+            selectedButton.style.color = '';
+        }
+        selectedButton = this;
+        this.style.backgroundColor = '#0F0E0E';
+        this.style.border = '#0F0E0E';
+        this.style.color = 'white';
+        size = this.getAttribute('data-size'); 
+    });
+    const defaultButton = document.querySelector('.size-btn[data-size="S"]');
+    if (defaultButton) {
+        defaultButton.click(); 
+    }
+});
