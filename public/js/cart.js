@@ -1,3 +1,4 @@
+import {moneyFormater, getData, sendData} from "./components.js";
 //todo: remove these sample data
 let orderItems = [
     {
@@ -31,6 +32,8 @@ let orderItems = [
 ];
 // todo: declare orderItems above
 let cartItemsBody = document.getElementById('cart-items-body');
+
+// render data to screen
 if (orderItems.length === 0) {
     cartItemsBody.innerHTML = `
         <div class="w-100 h-100 d-flex justify-content-center align-items-center flex-column">
@@ -42,7 +45,7 @@ if (orderItems.length === 0) {
 }else {
     for (let item of orderItems) {
         cartItemsBody.innerHTML += `
-            <div class="cart-item">
+            <div class="cart-item" id="cart-item-${item['id']}">
                 <div>
                     <input class="ms-3" type="checkbox">
                     <img class="item-image ms-4" src="${item['image_link']}">
@@ -51,18 +54,41 @@ if (orderItems.length === 0) {
                     <h5>${item['product_name']}</h5>
                     <div  class="cart-item-detail">
                         <p>${item['color']} / ${item['size']}</p>
-                        <p class="money">${item['unit_price']}</p>
+                        <p class="money">${moneyFormater(item['unit_price'])} đ</p>
                         <form>
-                            <button class="update-quantity">-</button>
-                            <input class="text-center" style="width: 30px" value="${item['quantity']}">
-                            <button class="update-quantity">+</button>
+                            <button type="button" class="update-quantity" data-id="${item['id']}">-</button>
+                            <input id="input-quantity-${item['id']}" class="text-center" style="width: 30px" value="${item['quantity']}" readonly>
+                            <button type="button" class="update-quantity" data-id="${item['id']}">+</button>
                         </form>
-                        <p class="money">${item['total_price']}</p>
-                        <i class="fa-regular fa-trash-can"></i>
+                        <p class="money">${moneyFormater(item['total_price'])} đ</p>
+                        <i class="fa-regular fa-trash-can icon-remove" data-id="${item['id']}"></i>
                     </div>
                 </div>
-                <div></div>
             </div>
         `
     }
+}
+
+async function updateQuantity (updatedQuantity, id) {
+     let quantity = parseInt(updatedQuantity);
+     let response = await sendData('/api/cart-items/update-quantity', {quantity: quantity, id:id});
+     document.getElementById('input-quantity-' + id).value = response['quantity'];
+}
+
+// thêm hàm cập nhật số lượng vào 2 nút cộng trừ
+let updateButtons = document.getElementsByClassName('update-quantity');
+for (let button of updateButtons) {
+    button.addEventListener('click', async () => {
+        let quantity = button.dataset.quantity;
+        let id = button.dataset.id;
+        await updateQuantity(quantity, id);
+    });
+}
+
+// xóa phần tử trong
+for (let icon of document.getElementsByClassName('icon-remove')) {
+    icon.addEventListener('click', async function() {
+        await sendData('/api/cart-items/delete?id=' + icon.dataset.id);
+        document.getElementById(`cart-item-${icon.dataset.id}`).remove();
+    });
 }
