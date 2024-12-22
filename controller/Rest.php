@@ -6,6 +6,7 @@ use app\core\Application;
 use app\thirdPartyService\EmailSender;
 use app\thirdPartyService\OtpEmail;
 
+
 class Rest
 {
     private $productController;
@@ -14,6 +15,8 @@ class Rest
     private $productColorsController;
     private $request;
     private $response;
+    private $orderItemController;
+
     public function __construct() {
         $this->request = Application::$app->request;
         $this->response = Application::$app->response;
@@ -21,6 +24,7 @@ class Rest
         $this->emailSender = new EmailSender();
         $this->userController = new UserController();
         $this->productColorsController = new ProductColorsController();
+        $this->orderItemController = new OrderItemController();
     }
 
     public function getProducts() {
@@ -93,4 +97,9 @@ class Rest
         $this->response->sendJson($productColors);
     }
 
+    public function getOrderItemsByUserId() {
+        $id = $_SESSION['user']['id'];
+        $orderItems = $this->orderItemController->getOrderItemsByUserId($id);
+        $this->response->sendJson($orderItems);
+    }
 }
