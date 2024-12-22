@@ -1,38 +1,9 @@
 import {moneyFormater, getData, sendData} from "./components.js";
-//todo: remove these sample data
-let orderItems = [
-    {
-        id: 1,
-        product_name: "Wireless Headphones",
-        quantity: 2,
-        total_price: 300,
-        size: "M",
-        product_id: 101,
-        image_link: "https://images.asos-media.com/products/topman-belted-car-coat-in-brown/206513615-1-oatmeal?$n_640w$&wid=513&fit=constrain",
-        color: "Black",
-        payments_id: 501,
-        user_id: 1001,
-        status: "Shipped",
-        unit_price: 100
-    },
-    {
-        id: 2,
-        product_name: "Running Shoes",
-        quantity: 1,
-        total_price: 120,
-        size: "L",
-        product_id: 102,
-        image_link: "https://images.asos-media.com/products/topman-belted-car-coat-in-brown/206513615-1-oatmeal?$n_640w$&wid=513&fit=constrain",
-        color: "Blue",
-        payments_id: 502,
-        user_id: 1002,
-        status: "Processing",
-        unit_price: 100
-    }
-];
-// todo: declare orderItems above
-let cartItemsBody = document.getElementById('cart-items-body');
+let orderItems = [];
 
+orderItems = await getData('/api/order-items')
+
+let cartItemsBody = document.getElementById('cart-items-body');
 // render data to screen
 if (orderItems.length === 0) {
     cartItemsBody.innerHTML = `
@@ -44,23 +15,24 @@ if (orderItems.length === 0) {
         </div>`;
 }else {
     for (let item of orderItems) {
+        let totalPrice = parseFloat(item['quantity']) * parseFloat(item['unit_price']);
         cartItemsBody.innerHTML += `
             <div class="cart-item" id="cart-item-${item['id']}">
                 <div>
-                    <input class="ms-3" type="checkbox">
-                    <img class="item-image ms-4" src="${item['image_link']}">
+                    <input class="ms-3 item-checkbox" type="checkbox" data-id="${item['id']}">
+                    <img class="item-image ms-4" src="${item['product_image_link']}">
                 </div>
                 <div class="d-flex flex-column justify-content-between">
                     <h5>${item['product_name']}</h5>
                     <div  class="cart-item-detail">
-                        <p>${item['color']} / ${item['size']}</p>
-                        <p class="money">${moneyFormater(item['unit_price'])} đ</p>
+                        <p>${item['product_color']} / ${item['size']}</p>
+                        <p class="money" data-value="${item['unit_price']}" id="unit-price-${item['id']}">${moneyFormater(item['unit_price'])} đ</p>
                         <form>
-                            <button type="button" class="update-quantity" data-id="${item['id']}">-</button>
-                            <input id="input-quantity-${item['id']}" class="text-center" style="width: 30px" value="${item['quantity']}" readonly>
-                            <button type="button" class="update-quantity" data-id="${item['id']}">+</button>
+                            <button data-quantity=${-1} type="button" class="update-quantity rounded-2" data-id="${item['id']}">-</button>
+                            <input id="input-quantity-${item['id']}" class="text-center rounded-2" style="width: 30px" value="${item['quantity']}" readonly>
+                            <button data-quantity=${1} type="button" class="update-quantity rounded-2" data-id="${item['id']}">+</button>
                         </form>
-                        <p class="money">${moneyFormater(item['total_price'])} đ</p>
+                        <p class="money" id="total-price-${item['id']}" data-value=${totalPrice}>${moneyFormater(totalPrice)} đ</p>
                         <i class="fa-regular fa-trash-can icon-remove" data-id="${item['id']}"></i>
                     </div>
                 </div>
@@ -71,17 +43,25 @@ if (orderItems.length === 0) {
 
 async function updateQuantity (updatedQuantity, id) {
      let quantity = parseInt(updatedQuantity);
-     let response = await sendData('/api/cart-items/update-quantity', {quantity: quantity, id:id});
-     document.getElementById('input-quantity-' + id).value = response['quantity'];
+     let orderItem = await sendData('/api/order-items/update-quantity', {quantity: quantity, id:id}, false);
+     let totalPrice = orderItem['quantity'] * orderItem['unit_price'];
+     document.getElementById('input-quantity-' + id).value = orderItem['quantity'];
+     document.getElementById('total-price-' + id).dataset.value = totalPrice;
+     document.getElementById('total-price-' + id).innerHTML = moneyFormater(totalPrice) + ' VND';
 }
 
 // thêm hàm cập nhật số lượng vào 2 nút cộng trừ
 let updateButtons = document.getElementsByClassName('update-quantity');
 for (let button of updateButtons) {
     button.addEventListener('click', async () => {
-        let quantity = button.dataset.quantity;
+        let quantity = parseInt(button.dataset.quantity);
         let id = button.dataset.id;
-        await updateQuantity(quantity, id);
+        let oldQuantity = document.getElementById('input-quantity-' + id).value;
+        quantity = parseInt(oldQuantity) + quantity;
+        if (quantity > 0) {
+            await updateQuantity(quantity , id);
+        }
+        updatePurchaseButton();
     });
 }
 
@@ -91,4 +71,38 @@ for (let icon of document.getElementsByClassName('icon-remove')) {
         await sendData('/api/cart-items/delete?id=' + icon.dataset.id);
         document.getElementById(`cart-item-${icon.dataset.id}`).remove();
     });
+}
+//todo: check and change the api endpoint before finish this task
+
+// Xử lý sự kiện cho các ô checkbox
+let masterCheckbox = document.getElementById('choose-all');
+// Đồng bộ chọn tất cả hoặc không
+masterCheckbox.addEventListener('change', function (event) {
+    let checkboxes = document.getElementsByClassName('item-checkbox');
+    let isChecked = event.target.checked;
+    for (let box of checkboxes) {
+        box.checked = isChecked;
+    }
+    updatePurchaseButton();
+})
+
+// Thay đổi nội dung của nút mua hàng
+function updatePurchaseButton() {
+    const checkedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+    let totalQuantity = 0;
+    let totalPricePurchase = 0;
+    checkedCheckboxes.forEach((checkbox) => {
+        let id = checkbox.dataset.id;
+        let quantity = parseFloat(document.getElementById('input-quantity-' + id).value);
+        let totalPrice = parseFloat(document.getElementById('total-price-' + id).dataset.value);
+        totalQuantity += quantity;
+        totalPricePurchase += totalPrice ;
+    })
+    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' VND';
+    document.getElementById('quantity-purchase').innerHTML = `Purchases (${totalQuantity})`;
+}
+
+let checkboxes = document.getElementsByClassName('item-checkbox');
+for (let box of checkboxes) {
+    box.addEventListener('change', updatePurchaseButton);
 }

@@ -17,4 +17,9 @@ class OrderItemController
         $orderItems = $this->orderItemsModel->getOrderItemsByUserId($userId);
         return $orderItems;
     }
+
+    private function getOrderItemById($orderItemId) {
+        $orderItemId = (int) $orderItemId;
+        return $this->orderItemsModel->getOrderItemById($orderItemId);
+    }
 }

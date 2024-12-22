@@ -71,7 +71,7 @@
         color: red;
     }
 }
-.fa-trash-can {
+.fa-trash-can, input[type=checkbox] {
     cursor: pointer;
 }
 button.update-quantity:hover {
@@ -80,4 +80,8 @@ button.update-quantity:hover {
 }
 button.update-quantity {
     padding: 2px 8px;
+}
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 5px;
 }

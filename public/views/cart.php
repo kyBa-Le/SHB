@@ -23,15 +23,15 @@
     </div>
     <div class="total-price-column element-white">
         <div class="mt-2 ms-3 me-3 row align-items-center total-price-header border-bottom rounded">
-            <p class="col-9">Provisional</p>
-            <p class="col-3">Price</p>
+            <p class="col-7">Provisional</p>
+            <p class="col-5">Price</p>
         </div>
         <div class="ms-3 me-3 mt-2 row">
-            <p class="col-9">Total</p>
-            <p class="col-3" style="color: #FF0000">Price</p>
+            <p class="col-7">Total</p>
+            <p class="col-5" id="total-price-purchase" style="color: #FF0000">0 VND</p>
         </div>
         <div class="mt-5 mb-2 w-100 d-flex justify-content-center align-items-center">
-            <button class="w-75 p-2" style="color: white; background: black" onclick="{document.getElementById('search-focus').focus()}">Search products</button>
+            <button class="w-75 p-2" style="color: white; background: black" id="quantity-purchase">Purchases (0)</button>
         </div>
     </div>
 </div>
