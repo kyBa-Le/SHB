@@ -3,10 +3,11 @@
         header('Location: /login');
     }
 ?>
+
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-container">
     <div class="cart-items-column">
-        <div class="items-header element-white">
+        <div class="items-header element-white items-table">
             <label for="choose-all">
                 <input class="ms-3 me-3" type="checkbox" id="choose-all" name="choose-all">
                 Product
@@ -16,13 +17,8 @@
             <p>Total</p>
             <i class="fa-regular fa-trash-can"></i>
         </div>
-        <div class="items-body element-white">
-            <div class="w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRiP3u0Wiokd_JTbjmrB6P_KcYKjVI2EeA1hGLawYteCYSqB0gO">
-                <h2>Your cart is empty</h2>
-                <p>Browse the store, shop now</p>
-                <button class="w-25 p-2" style="color: white; background: black" onclick="{document.getElementById('search-focus').focus()}">Search products</button>
-            </div>
+        <div id="cart-items-body" class="items-body element-white">
+
         </div>
     </div>
     <div class="total-price-column element-white">
