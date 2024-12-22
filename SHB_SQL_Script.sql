@@ -50,7 +50,7 @@ CREATE TABLE Order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(255),
     quantity INT,
-    total_price INT,
+    unit_price INT,
     size VARCHAR(20),
     product_id INT, 
     product_image_link VARCHAR(255),
@@ -153,7 +153,7 @@ VALUES
     ('2024-12-19', 400000, 'Payment for sweater', 'Momo Wallet', 'Hanoi', 'Dong Da', '78 Nguyen Chi Thanh Street', 'Failed'),
     ('2024-12-20', 1200000, 'Payment for coats', 'Cash', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Completed');
 
-INSERT INTO Order_items (product_name, quantity, total_price, size, product_id, product_image_link, product_color, payments_id, user_id, status)
+INSERT INTO Order_items (product_name, quantity, unit_price, size, product_id, product_image_link, product_color, payments_id, user_id, status)
 VALUES
     ('Baggy Jeans', 2, 1600000, 'L', 1, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$', 'DARK', 1, 1, 'Delivered'),
     ('Oversized knitted midaxi dress', 1, 900000, 'M', 2, 'https://images.asos-media.com/products/arket-oversized-knitted-midaxi-dress-with-side-splits-in-black/207139601-2?$n_480w$', 'DARK', 2, 2, 'Pending'),
