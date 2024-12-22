@@ -34,6 +34,36 @@ create table Product_colors (
     CONSTRAINT fk_productColors_products FOREIGN KEY (product_id)  REFERENCES products(id)
 );
 
+CREATE TABLE Payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE,
+    total_cost INT,
+    description VARCHAR(255),
+    method VARCHAR(50),
+    province VARCHAR(50),
+    district VARCHAR(50),
+    detailed_address VARCHAR(255),
+    status VARCHAR(50)
+);
+
+CREATE TABLE Order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(255),
+    quantity INT,
+    total_price INT,
+    size VARCHAR(20),
+    product_id INT, 
+    product_image_link VARCHAR(255),
+    product_color VARCHAR(20),
+    payments_id INT, 
+    user_id INT, 
+    status VARCHAR(255),
+    CONSTRAINT fk_orderItems_products FOREIGN KEY (product_id) REFERENCES Products(id),
+    CONSTRAINT fk_orderItems_payments FOREIGN KEY (payments_id) REFERENCES Payments(id),
+    CONSTRAINT fk_orderItems_users FOREIGN KEY (user_id) REFERENCES Users(id)
+);
+
+
 INSERT INTO Products (product_name, category, price, image_link, purchases, quantity, color)
 VALUES
     ('Baggy Jeans', 'MEN', 800000, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 8, 40, 'DARK'),
@@ -114,3 +144,19 @@ VALUES
     (NULL, 15, 'WHITE', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
     (NULL, 16, 'BROWN', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
     (NULL, 20, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-wool-look-overcoat-in-khaki/206095382-1-khaki?$n_640w$&wid=513&fit=constrain');
+
+INSERT INTO Payments (date, total_cost, description, method, province, district, detailed_address, status)
+VALUES
+    ('2024-12-15', 1500000, 'Payment for clothing order', 'Momo Wallet', 'Hanoi', 'Cau Giay', '23 Duy Tan Street', 'Completed'),
+    ('2024-12-16', 800000, 'Payment for jacket', 'Cash', 'Ho Chi Minh City', 'District 1', '45 Le Duan Street', 'Pending'),
+    ('2024-12-18', 600000, 'Payment for children’s wear', 'Cash', 'Danang', 'Hai Chau', '56 Tran Phu Street', 'Completed'),
+    ('2024-12-19', 400000, 'Payment for sweater', 'Momo Wallet', 'Hanoi', 'Dong Da', '78 Nguyen Chi Thanh Street', 'Failed'),
+    ('2024-12-20', 1200000, 'Payment for coats', 'Cash', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Completed');
+
+INSERT INTO Order_items (product_name, quantity, total_price, size, product_id, product_image_link, product_color, payments_id, user_id, status)
+VALUES
+    ('Baggy Jeans', 2, 1600000, 'L', 1, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$', 'DARK', 1, 1, 'Delivered'),
+    ('Oversized knitted midaxi dress', 1, 900000, 'M', 2, 'https://images.asos-media.com/products/arket-oversized-knitted-midaxi-dress-with-side-splits-in-black/207139601-2?$n_480w$', 'DARK', 2, 2, 'Pending'),
+    ('Mini King Teddy Crew Pant Set', 3, 1500000, 'S', 4, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-27-24_S6_2_RB4F22_Black_P_RA_AA_09-16-53_57438_PXF.jpg', 'DARK', 3, 3, 'Delivered'),
+    ('Logo backprint t-shirt', 2, 900000, 'XL', 8, 'https://images.asos-media.com/products/calvin-klein-jeans-logo-backprint-t-shirt-in-dark-brown-asos-exclusive/207312118-2?$n_480w$', 'DARK', 4, 4, 'Cancelled'),
+    ('Mini Mock Neck Knit Dress', 4, 800000, 'M', 24, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-20-23Studio6_RA_AA_15-01-53_57_THRD005_Black_39419_DG.jpg', 'DARK', 5, 5, 'Delivered');
