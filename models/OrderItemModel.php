@@ -1,5 +1,5 @@
 <?php
-namespace app\model;
+namespace app\models;
 
 use app\core\Model;
 class OrderItemModel extends Model {
