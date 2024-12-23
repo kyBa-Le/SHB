@@ -32,6 +32,7 @@ $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [new SiteController(), 'search']);
 $app->router->get('/detailed-product', [new SiteController(), 'detail']);
 $app->router->get('/product/filter', [new SiteController(), 'getFilteredProducts']);
+$app->router->get('/cart', 'cart');
 
 // Post request
 $app->router->post('/sign-up', [new SiteController(), 'signUp']);
@@ -44,10 +45,14 @@ $app->router->post('/user/forgot-password', [new SiteController(),'saveNewPasswo
 $app->router->get('/api/products', [new Rest(), 'getProducts']);
 $app->router->get('/api/detailed-product', [new Rest(), 'getDetailedProduct']);
 $app->router->get('/api/products/colors', [new Rest(), 'getColors']);
+$app->router->get('/api/order-items', [new Rest(), 'getOrderItemsByUserId']);
 
 // post API
 $app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
 $app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
 $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
+$app->router->post('/api/order-items/update', [new Rest(), 'updateOrderItemQuantityById']);
+$app->router->post('/api/order-items/delete', [new Rest(), 'deleteOrderItemById']);
+$app->router->post('/api/order-items/add-to-cart', [new Rest(),'addToCart']);
 
 $app->run();
