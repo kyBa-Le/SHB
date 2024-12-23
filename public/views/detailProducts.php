@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/detailProducts.css">
+<span id="product-details-data" class="d-none" data-color="" data-image-link="" data-size="S"></span>
 <div class="container-detailProducts">
     <div class="product-header">
         <div class="product-image-detail">

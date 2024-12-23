@@ -43,4 +43,10 @@ class OrderItemController
         $productId = (int) $productId;
         return $this->orderItemsModel->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
     }
+
+    public function getExistingOrderItem($userId, $size, $productId,  $productColor) {
+        $userId = (int) $userId;
+        $productId = (int) $productId;
+        return $this->orderItemsModel->getExistingOrderItem($userId, $size, $productId,  $productColor);
+    }
 }

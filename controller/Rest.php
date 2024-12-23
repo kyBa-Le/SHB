@@ -131,7 +131,14 @@ class Rest
         $productImageLink = $data['productImageLink'];
         $productColor = $data['productColor'];
         if ($userId == true) {
-            $addToCart = $this->orderItemController->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+            $existingOrderItem = $this->orderItemController->getExistingOrderItem($userId, $size, $productId,  $productColor);
+            if ($existingOrderItem !== false) {
+                $orderItemId = $existingOrderItem['id'];
+                $newQuantity = $existingOrderItem['quantity'] + (int) $quantity;
+                $addToCart = $this->orderItemController->updateOrderItemQuantity($orderItemId, $newQuantity);
+            } else {
+                $addToCart = $this->orderItemController->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+            }
             if ($addToCart) {
                 $message['isAddToCartSuccess'] = true; 
                 $message['success'] = 'Successfully added to cart';

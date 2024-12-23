@@ -33,4 +33,10 @@ class OrderItemModel extends Model {
                VALUES ('$productName', $quantity, $unitPrice, '$size', $productId, '$productImageLink', '$productColor', NULL, $userId, 'Pending')";
         return Model::$db->query($sql);
     }
+
+    public function getExistingOrderItem($userId, $size, $productId,  $productColor) {
+        $sql = "SELECT * FROM $this->table 
+            WHERE user_id = $userId AND size ='$size' AND product_id = $productId AND product_color = '$productColor'";
+        return $this->queryOneRow($sql);
+    }
 }
