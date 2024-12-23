@@ -46,7 +46,7 @@ renderOrderItems(orderItems);
 
 async function updateQuantity (updatedQuantity, id) {
      let quantity = parseInt(updatedQuantity);
-     let orderItem = await sendData('/api/order-items/update-quantity', {quantity: quantity, id:id}, false);
+     let orderItem = await sendData('/api/order-items/update', {quantity: quantity, id:id}, false);
      let totalPrice = orderItem['quantity'] * orderItem['unit_price'];
      document.getElementById('input-quantity-' + id).value = orderItem['quantity'];
      document.getElementById('total-price-' + id).dataset.value = totalPrice;
@@ -76,7 +76,6 @@ for (let icon of document.getElementsByClassName('icon-remove')) {
         updatePurchaseButton()
     });
 }
-//todo: check and change the api endpoint before finish this task
 
 // Xử lý sự kiện cho các ô checkbox
 let masterCheckbox = document.getElementById('choose-all');
