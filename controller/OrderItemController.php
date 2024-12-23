@@ -17,4 +17,22 @@ class OrderItemController
         $orderItems = $this->orderItemsModel->getOrderItemsByUserId($userId);
         return $orderItems;
     }
+
+    public function updateOrderItemQuantity($id, $quantity)
+    {
+        $id = (int) $id;
+        $quantity = (int) $quantity;
+        $this->orderItemsModel->updateOrderItemQuantity($id, $quantity);
+        return $this->orderItemsModel->getOrderItemById($id);
+    }
+
+    public function deleteOrderItem($id)
+    {
+        return $this->orderItemsModel->deleteOrderItemById($id);
+    }
+
+    public function getOrderItemById($id) 
+    {
+        return $this->orderItemsModel->getOrderItemById($id);
+    }
 }
