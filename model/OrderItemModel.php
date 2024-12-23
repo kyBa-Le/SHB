@@ -12,7 +12,7 @@ class OrderItemModel extends Model {
 
     public function updateOrderItemQuantity($id, $quantity)
     {
-        $sql = "UPDATE $this->table SET quantity = $quantity WHERE id = $id and quantity = $quantity";
+        $sql = "UPDATE $this->table SET quantity = $quantity WHERE id = $id ";
         return Model::$db->query($sql);
     }
 

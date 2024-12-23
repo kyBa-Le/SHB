@@ -105,19 +105,18 @@ class Rest
 
     public function updateOrderItemQuantityById()
     {
-        if ($authentication) {
-            $data = $this->request->getBody(); 
+        if ($_SESSION['user']) {
+            $data = $this->request->getBody();
             $id = $data['id'];
             $quantity = $data['quantity'];
-            $this->orderItemController->updateOrderItemQuantity($id, $quantity);
-            // lấy lên order vừa update theo id sau đó trả về json
-            $this->response->sendJson($i);
+            $orderItem = $this->orderItemController->updateOrderItemQuantity($id, $quantity);
+            $this->response->sendJson($orderItem);
         }
     }
 
     public function deleteOrderItemById()
     {
-        if ($authentication) {
+        if ($_SESSION['user']) {
             $id = $this->request->getBody()['id'];
             $this->orderItemController->deleteOrderItem($id);
             $this->response->sendJson($id);
