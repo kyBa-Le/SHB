@@ -2,88 +2,98 @@
 
 namespace app\controller;
 
+use app\core\Controller;
+use app\core\Request;
 use app\model\UserModel;
+use app\services\emailService\EmailSender;
+use app\services\emailService\SignUpEmail;
+use app\services\UserService;
 use app\validation\UserValidation;
 
-class UserController
+class UserController extends Controller
 {
     private $userModel;
     private $userValidation;
+    private $userService;
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->userValidation = new UserValidation();
+        $this->userService = new UserService();
     }
 
-    public function signUp($data) {
-        $message = $this->userValidation->validateSignUp($data);
-        if ($message['isValid']) {
-            $email = $data['email'];
-            $username = $data['username'];
-            $password = $data['password'];
-            $fullName = $data['fullName'];
-            $phone = $data['phone'];
-            $province = $data['province'] ?? '';
-            $district = $data['district'] ?? '';
-            $detailed_address = $data['detailed_address'];
-            $this->userModel->saveUser($email, $username, md5($password), $fullName, $phone, $province, $district, $detailed_address);
-            return ['isSuccess' => true];
-        }else {
-            $message['isSuccess'] = false;
-            return $message;
+    public function signUp() {
+        $request = new Request();
+        $data = $request->getBody();
+        $message = $this->userService->signUp($data);
+        $message['data'] = $data;
+        if ($message['isSuccess']) {
+            $emailSender = new EmailSender() ;
+            $signUpEmail = new SignUpEmail($data['username']);
+            $emailSender->sendEmail($data['email'], $data['username'], $signUpEmail->subject, $signUpEmail->emailContent);
+            header('Location: /sign-up/success');
+            exit;
         }
+        return $this->render('signUp', $message);
     }
 
-    public function login($data) {
-        $email = $data['email'];
-        $password = $data['password'];
-        $user = $this->userModel->getUserByEmailAndPassword($email, md5($password));
-        if ($user !== false) {
-            $_SESSION['user'] = $user;
-            $_SESSION['login_time'] = time();
-            return ['isLoggedIn' => true];
-        }else {
-            return ['isLoggedIn' => false];
+    public function login() {
+        $request = new Request();
+        $data = $request->getBody();
+        $message = $this->userService->login($data);
+        $message['data'] = $data;
+        if ($message['isLoggedIn']) {
+            header('Location: /');
+            exit;
         }
-    }  
+        return $this->render('login', $message);
+    }
 
-    public function editProfile($data) {
-        $userID = $_SESSION['user']['id'];
-        $username = $data['username'];
-        $fullName = $data['fullName'];
-        $phone = $data['phone'];
-        $province = $data['province'];
-        $district = $data['district'];
-        $detailed_address = $data['detailed_address'];
-        $updateUser = $this->userModel->updateUserById($username, $fullName,  $phone,  $province, $district, $detailed_address, $userID);
-        if ($updateUser !== false) {
-            $user = $this->userModel->getUserById($userID);
-            $_SESSION['user'] = $user;
-            $_SESSION['login_time'] = time();
-            return ['isEdited' => true];
-        }else {
-            return ['isEdited' => false];
+    public function logout() {
+        session_destroy();
+        header('Location: /');
+    }
+
+    public function editProfile() {
+        $request = new Request();
+        $data = $request->getBody();
+        $imageUploaded = $this->saveImage('file_uploaded', 'images/avatar/');
+        if ($imageUploaded){
+            $userId = $_SESSION['user']['id'];
+            $this->userService->editAvatarLink( $imageUploaded, $userId);
+            header('Location: /user/edit');
+            exit;
         }
+        $message = $this->userService->editProfile($data);
+        $message['data'] = $data;
+        if ($message['isEdited']) {
+            header('Location: /user/edit');
+            exit;
+        }
+        return $this->render('editProfile', $message);
     }
 
-    public function getUserModel() {
-        return $this->userModel;
+    private function saveImage($fieldName, $path){
+        if (isset($_FILES[$fieldName])) {
+            $fileTmpPath = $_FILES[$fieldName]['tmp_name'];
+            $originalFileName = $_FILES[$fieldName]['name'];
+            $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+            $newFileName = uniqid('file_', true) . '.' . $fileExtension;
+            $uploadFolder = $path;
+            $destinationPath = $uploadFolder . $newFileName;
+            if (move_uploaded_file($fileTmpPath, $destinationPath)) {
+                return $destinationPath;
+            }
+        }
+        return false;
     }
 
-    public function saveNewPassword($data) {
-        $email = $_SESSION['email'];
-        $newPassword = $data['newPassword'];
-        $this->userModel->updatePasswordByEmail($email, md5($newPassword ));
-    }
-  
-    public function editAvatarLink($link, $userId){
-        $this->userModel->changeAvatar($link, $userId);
-        $user = $this->userModel->getUserById($userId);
-        $_SESSION['user'] = $user;
-        $_SESSION['login_time'] = time();
+    public function saveNewPassword() {
+        $request = new Request();
+        $data = $request->getBody();
+        $this->userService->saveNewPassword($data);
+        $message['data'] = $data;
+        return $this->render('login', $message);
     }
 
-    public function saveChangePassword($data, $email) {
-        $this->userModel->updatePasswordByEmail($email, md5($data['newPassword'] ));
-    }
 }
