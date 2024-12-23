@@ -1,3 +1,9 @@
+.editProfile {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container-edit-profile {
     width: 60vw;
     margin: 50px auto; 

@@ -9,14 +9,24 @@
             margin-bottom: 5px;
         }
     }
-    .product-add-cart-and-order {
+    .product-detail {
+        display: flex;
+        justify-content: flex-end;
         button {
-            width: 48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
             padding: 5px 0;
+            border: 1px solid #0F0E0E;
+            background-color: white;
+            transition: all 0.5s ease-in;
         }
         button:hover {
             background-color: #0F0E0E;
+            border: none;
             color: white;
+            transition: all 0.5s ease-in;
         }
     }
     .category-product-name {
@@ -48,7 +58,6 @@ foreach ($products as $product) {
     $image_link = $product['image_link'];
     $name = $product['product_name'];
     $price = $product['price'];
-    $sale_price = 1.2 * (int)$price;
     $purchases = $product['purchases'];
     echo "
                  <div class='category-product-card'>
@@ -61,9 +70,8 @@ foreach ($products as $product) {
                             </div>
                             <p class='text-end mb-0'>Sold: $purchases</p>
                         </div>
-                        <div class='product-add-cart-and-order d-flex justify-content-between align-items-center w-100'>
-                            <button>Add to cart</button>
-                            <button>Order</button>
+                        <div class='product-detail' onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">
+                            <button>Discover the details</button>
                         </div>
                     </div>
                 </div>

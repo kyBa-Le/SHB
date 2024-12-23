@@ -53,5 +53,6 @@ $app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
 $app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
 $app->router->post('/api/order-items/update', [new Rest(), 'updateOrderItemQuantityById']);
 $app->router->post('/api/order-items/delete', [new Rest(), 'deleteOrderItemById']);
+$app->router->post('/api/order-items/add-to-cart', [new Rest(),'addToCart']);
 
 $app->run();

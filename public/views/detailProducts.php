@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/detailProducts.css">
+<span id="product-details-data" class="d-none" data-color="" data-image-link="" data-size="S"></span>
 <div class="container-detailProducts">
     <div class="product-header">
         <div class="product-image-detail">
@@ -23,21 +24,23 @@
             <div class="size-selection-detail">
                 <p class="mt-3">Size:</p>
                 <div class="button-size-detail">
-                    <button>S</button>
-                    <button>M</button>
-                    <button>L</button>
-                    <button>XL</button>
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
                 </div>
             </div>
             <hr>
             <div class="quantity-detail">
                     <p>Quantity:</p>
-                    <button>-</button>
-                    <input type="text" value="1" style="width: 30px; text-align: center; border:none;">
-                    <button>+</button>
-                </div>
+                    <button id="minusBtn">-</button>
+                    <input type="text" id="quantity-buy" value="1" style="width: 30px; text-align: center; border:none;">
+                    <button id="plusBtn">+</button>
+                    <span id="quantity-error" style="color: red; margin-left: 5px;"></span>
+            </div>
+            <span id="addToCartMessage"></span>
             <div class="button-detail">
-                <button class="addToCartBtn-detail">Add to cart</button>
+                <button id="addToCartBtn" class="addToCartBtn-detail">Add to cart</button>
                 <button class="orderBtn-detail">Order</button>
             </div>
         </div>

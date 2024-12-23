@@ -28,4 +28,15 @@ class OrderItemModel extends Model {
         return $this->queryOneRow($sql);
     }
 
+    public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId){
+        $sql = "INSERT INTO $this->table (product_name, quantity, unit_price, size, product_id, product_image_link, product_color, payments_id, user_id, status) 
+               VALUES ('$productName', $quantity, $unitPrice, '$size', $productId, '$productImageLink', '$productColor', NULL, $userId, 'Pending')";
+        return Model::$db->query($sql);
+    }
+
+    public function getExistingOrderItem($userId, $size, $productId,  $productColor) {
+        $sql = "SELECT * FROM $this->table 
+            WHERE user_id = $userId AND size ='$size' AND product_id = $productId AND product_color = '$productColor'";
+        return $this->queryOneRow($sql);
+    }
 }
