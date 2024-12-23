@@ -37,8 +37,9 @@
                     <button id="plusBtn">+</button>
                     <span id="quantity-error" style="color: red; margin-left: 5px;"></span>
             </div>
+            <span id="addToCartMessage"></span>
             <div class="button-detail">
-                <button class="addToCartBtn-detail">Add to cart</button>
+                <button id="addToCartBtn" class="addToCartBtn-detail">Add to cart</button>
                 <button class="orderBtn-detail">Order</button>
             </div>
         </div>

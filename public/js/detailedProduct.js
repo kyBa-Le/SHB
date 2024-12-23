@@ -1,4 +1,5 @@
 import {getData, moneyFormater} from "./components.js"; //todo
+import {sendData} from "./components.js";
 
 // This place is to get product and show to the screen
 let params = new URLSearchParams(window.location.search);
@@ -91,7 +92,7 @@ let quantityBuyValue = parseInt(document.getElementById('quantity-buy').value, 1
 let quantityLimit = parseInt(detailedProduct['quantity']); 
 minusBtn.addEventListener('click', function () {
     document.getElementById('quantity-error').innerHTML = '';
-    console.log('Trước khi trừ:', quantityBuyValue);
+    document.getElementById('addToCartMessage').innerHTML = '';
     if (quantityBuyValue > 1) {
         quantityBuyValue -= 1;
         document.getElementById('quantity-buy').value = quantityBuyValue;
@@ -101,7 +102,7 @@ minusBtn.addEventListener('click', function () {
 });
 plusBtn.addEventListener('click', function () {
     document.getElementById('quantity-error').innerHTML = '';
-    console.log('Plus button clicked');
+    document.getElementById('addToCartMessage').innerHTML = '';
     if (quantityBuyValue < quantityLimit) {
         quantityBuyValue += 1;
         document.getElementById('quantity-buy').value = quantityBuyValue;
@@ -109,3 +110,26 @@ plusBtn.addEventListener('click', function () {
         document.getElementById('quantity-error').innerHTML = 'Quantity exceeds stock';
     }
 });
+
+// handle API to add to cart
+let addToCartBtn = document.getElementById('addToCartBtn');
+addToCartBtn.addEventListener('click', async function () {
+    let response = await sendData('/api/order-items/add-to-cart', {
+        productName: detailedProduct['product_name'],
+        quantity: quantityBuyValue,
+        unitPrice: detailedProduct['price'],
+        size: size,
+        productId: detailedProduct['id'],
+        productImageLink: detailedProduct['image_link'],
+        productColor: detailedProduct['color']
+    });
+    if (response['isAddToCartSuccess'] === true) {
+        document.getElementById('addToCartMessage').innerHTML = '';
+        document.getElementById('addToCartMessage').innerHTML += `<span style="color: green;">${response['success']}</span>`;
+    } else {
+        document.getElementById('addToCartMessage').innerHTML = '';
+        document.getElementById('addToCartMessage').innerHTML += `<span style="color: red;">${response['error']}</span>`;
+    }
+});
+
+

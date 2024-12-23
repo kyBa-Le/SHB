@@ -16,7 +16,6 @@ class Rest
     private $request;
     private $response;
     private $orderItemController;
-
     public function __construct() {
         $this->request = Application::$app->request;
         $this->response = Application::$app->response;
@@ -96,10 +95,34 @@ class Rest
         $productColors = $this->productColorsController->getProductColorsByProductId($productId);
         $this->response->sendJson($productColors);
     }
-
     public function getOrderItemsByUserId() {
         $id = $_SESSION['user']['id'];
         $orderItems = $this->orderItemController->getOrderItemsByUserId($id);
         $this->response->sendJson($orderItems);
+    }
+    public function addToCart() {
+        $userId = $_SESSION['user']['id'];
+        $data = $this->request->getBody();
+        $productName = $data['productName'];
+        $quantity = $data['quantity'];
+        $unitPrice = $data['unitPrice'];
+        $size = $data['size'];
+        $productId = $data['productId'];
+        $productImageLink = $data['productImageLink'];
+        $productColor = $data['productColor'];
+        if ($userId == true) {
+            $addToCart = $this->orderItemController->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+            if ($addToCart) {
+                $message['isAddToCartSuccess'] = true; 
+                $message['success'] = 'Successfully added to cart';
+            } else {
+                $message['isAddToCartSuccess'] = false; 
+                $message['success'] = 'Failed to add to cart';
+            }
+        } else {
+            $message['isUpdate'] = false;
+            $message['error'] = 'Please log in before adding items to the cart';
+        }
+        $this->response->sendJson($message);
     }
 }
