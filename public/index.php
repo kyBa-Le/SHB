@@ -16,9 +16,10 @@ $config = [
 ];
 $app = new app\core\Application($config);
 
-$apiUserController = new \app\controllers\api\UserController();
+// Initialize controller for the router
 $userController = new \app\controllers\UserController();
 $productController = new \app\controllers\ProductController();
+$apiUserController = new \app\controllers\api\UserController();
 $apiProductController = new \app\controllers\api\ProductController();
 $apiProductColorController = new \app\controllers\api\ProductColorController();
 $apiOrderItemController = new \app\controllers\api\OrderItemController();
@@ -61,5 +62,12 @@ $app->router->post('/api/user/edit/password', [$apiUserController,'saveChangePas
 $app->router->post('/api/order-items/update', [$apiOrderItemController, 'updateOrderItemQuantityById']);
 $app->router->post('/api/order-items/delete', [$apiOrderItemController, 'deleteOrderItemById']);
 $app->router->post('/api/order-items/add-to-cart', [$apiOrderItemController,'addToCart']);
+
+// put API
+
+// delete API
+
+// patch API
+
 
 $app->run();

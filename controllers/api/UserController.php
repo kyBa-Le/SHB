@@ -23,16 +23,7 @@ class UserController extends BaseController
         $message = [];
         $user = $this->userService->getUserModel()->getUserByEmail($email);
         if ($user) {
-            $characters = '0123456789';
-            $charactersLength = strlen($characters);
-            $otp = '';
-            for ($i = 0; $i < 6; $i++) {
-                $otp .= $characters[random_int(0, $charactersLength - 1)];
-            }
-            $_SESSION['otp'] = $otp;
-            $_SESSION['otp_time'] = time();
-            $emailOtp = new OtpEmail($email, $otp);
-            $this->emailSender->sendEmail($email, "user", $emailOtp->subject, $emailOtp->emailContent, $altBody = '');
+            $this->sendOtpCode($email);
             $_SESSION['email'] = $email;
             $message['isSent'] = true;
         } else {
@@ -42,11 +33,24 @@ class UserController extends BaseController
         $this->response->sendJson($message);
     }
 
+    private function sendOtpCode($email)
+    {
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $otp = '';
+        for ($i = 0; $i < 6; $i++) {
+            $otp .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        $emailOtp = new OtpEmail($email, $otp);
+        $this->emailSender->sendEmail($email, "user", $emailOtp->subject, $emailOtp->emailContent, $altBody = '');
+        $_SESSION['otp'] = $otp;
+        $_SESSION['otp_time'] = time();
+    }
+
     public function getOTPCode() {
         $otpCode = $this->request->getBody()['otp'];
         $currentTime = time();
         if ( $otpCode == $_SESSION['otp'] && ($currentTime - $_SESSION['otp_time'] < 60)) {
-
             $message['isCorrectOtp'] = true;
         } else {
             $message['isCorrectOtp'] = false;

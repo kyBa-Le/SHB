@@ -12,22 +12,6 @@ class Model
         self::$db = Application::$database;
     }
 
-    public function getAll() {
-        $sql = "SELECT * FROM ". $this->table;
-        $results = self::$db->query($sql);
-        $data = [];
-        while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data;
-    }
-
-    public function getById($id) {
-        $sql = "SELECT * FROM ". $this->table." WHERE id = $id";
-        $result = self::$db->query($sql);
-        return $result->fetch();
-    }
-
     public function queryManyRows($sql)
     {
         $results = self::$db->query($sql);
@@ -41,6 +25,10 @@ class Model
     public function queryOneRow($sql) {
         $results = self::$db->query($sql);
         return $results->fetch();
+    }
+
+    public function excuteSql($sql) {
+        return self::$db->query($sql);
     }
 
 }

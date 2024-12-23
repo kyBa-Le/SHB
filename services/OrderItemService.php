@@ -30,17 +30,20 @@ class OrderItemService
         return $this->orderItemsModel->deleteOrderItemById($id);
     }
 
-    public function getOrderItemById($id)
-    {
-        return $this->orderItemsModel->getOrderItemById($id);
+    public function createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
+        return $this->orderItemsModel->createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
     }
 
     public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
-        $userId = (int) $userId;
-        $quantity = (int) $quantity;
-        $unitPrice = (int) $unitPrice;
-        $productId = (int) $productId;
-        return $this->orderItemsModel->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+        $existingOrderItem = $this->getExistingOrderItem($userId, $size, $productId,  $productColor);
+        if ($existingOrderItem !== false) {
+            $orderItemId = $existingOrderItem['id'];
+            $newQuantity = $existingOrderItem['quantity'] + (int) $quantity;
+            $addToCart = $this->updateOrderItemQuantity($orderItemId, $newQuantity);
+        } else {
+            $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+        }
+        return $addToCart;
     }
 
     public function getExistingOrderItem($userId, $size, $productId,  $productColor) {

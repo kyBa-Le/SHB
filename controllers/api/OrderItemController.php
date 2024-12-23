@@ -38,30 +38,23 @@ class OrderItemController extends BaseController
         }
     }
     public function addToCart() {
-        $userId = $_SESSION['user']['id'];
+        $userId = (int) $_SESSION['user']['id'];
         $data = $this->request->getBody();
         $productName = $data['productName'];
-        $quantity = $data['quantity'];
-        $unitPrice = $data['unitPrice'];
+        $quantity = (int) $data['quantity'];
+        $unitPrice = (int) $data['unitPrice'];
         $size = $data['size'];
-        $productId = $data['productId'];
+        $productId = (int) $data['productId'];
         $productImageLink = $data['productImageLink'];
         $productColor = $data['productColor'];
         if ($userId) {
-            $existingOrderItem = $this->orderItemService->getExistingOrderItem($userId, $size, $productId,  $productColor);
-            if ($existingOrderItem !== false) {
-                $orderItemId = $existingOrderItem['id'];
-                $newQuantity = $existingOrderItem['quantity'] + (int) $quantity;
-                $addToCart = $this->orderItemService->updateOrderItemQuantity($orderItemId, $newQuantity);
-            } else {
-                $addToCart = $this->orderItemService->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
-            }
-            if ($addToCart) {
-                $message['isAddToCartSuccess'] = true;
+            $idAddedToCart = $this->orderItemService->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $userId);
+            if ($idAddedToCart) {
                 $message['success'] = 'Successfully added to cart';
+                $message['isAddToCartSuccess'] = true;
             } else {
-                $message['isAddToCartSuccess'] = false;
                 $message['success'] = 'Failed to add to cart';
+                $message['isAddToCartSuccess'] = false;
             }
         } else {
             $message['isUpdate'] = false;
