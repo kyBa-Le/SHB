@@ -1,5 +1,4 @@
-import {getData, moneyFormater} from "./components.js"; //todo
-import {sendData} from "./components.js";
+import {getData, moneyFormater, sendData} from "./components.js"; //todo
 
 // This place is to get product and show to the screen
 let params = new URLSearchParams(window.location.search);
