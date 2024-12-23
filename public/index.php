@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-use app\controller\api\Rest;
-use app\controller\SiteController;
-use app\controller\UserController;
+use app\controllers\api\Rest;
+use app\controllers\ProductController;
+use app\controllers\SiteController;
+use app\controllers\UserController;
 
 require __DIR__ . "/../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -27,13 +28,13 @@ $app->router->get('/sign-up/success', 'signUpSuccess');
 $app->router->get('/login', 'login');
 $app->router->get('/logout',[new UserController(), 'logout']);
 $app->router->get('/user/edit', 'editProfile');
-$app->router->get('/women', [new SiteController(), 'women']);
-$app->router->get('/men', [new SiteController(), 'men']);
-$app->router->get('/children', [new SiteController(), 'children']);
+$app->router->get('/women', [new ProductController(), 'women']);
+$app->router->get('/men', [new ProductController(), 'men']);
+$app->router->get('/children', [new ProductController(), 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
-$app->router->get('/product/search', [new SiteController(), 'search']);
+$app->router->get('/product/search', [new ProductController(), 'search']);
 $app->router->get('/detailed-product', 'detailedProduct');
-$app->router->get('/product/filter', [new SiteController(), 'getFilteredProducts']);
+$app->router->get('/product/filter', [new ProductController(), 'filter']);
 $app->router->get('/cart', 'cart');
 
 // Post request
