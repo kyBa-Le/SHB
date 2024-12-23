@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controller;
-use app\model\OrderItemModel; 
+namespace app\services;
 
-class OrderItemController
+use app\models\OrderItemModel;
+
+class OrderItemService
 {
-
     private $orderItemsModel;
     public function __construct()
     {
@@ -14,8 +14,7 @@ class OrderItemController
 
     public function getOrderItemsByUserId ($userId) {
         $userId = (int) $userId;
-        $orderItems = $this->orderItemsModel->getOrderItemsByUserId($userId);
-        return $orderItems;
+        return $this->orderItemsModel->getOrderItemsByUserId($userId);
     }
 
     public function updateOrderItemQuantity($id, $quantity)
@@ -31,11 +30,11 @@ class OrderItemController
         return $this->orderItemsModel->deleteOrderItemById($id);
     }
 
-    public function getOrderItemById($id) 
+    public function getOrderItemById($id)
     {
         return $this->orderItemsModel->getOrderItemById($id);
     }
-    
+
     public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
         $userId = (int) $userId;
         $quantity = (int) $quantity;
