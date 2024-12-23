@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controller;
+namespace app\controllers;
 
 use app\core\Controller;
 use app\core\Request;
-use app\model\UserModel;
+use app\models\UserModel;
 use app\services\emailService\EmailSender;
 use app\services\emailService\SignUpEmail;
 use app\services\UserService;

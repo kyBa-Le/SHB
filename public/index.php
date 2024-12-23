@@ -19,6 +19,9 @@ $config = [
 ];
 $app = new app\core\Application($config);
 
+$apiUserController = new \app\controllers\api\UserController();
+$userController = new \app\controllers\UserController();
+
 // Create routes
 
 // Get request
@@ -26,7 +29,7 @@ $app->router->get('/', [new SiteController(), 'home']);
 $app->router->get('/sign-up', 'signUp');
 $app->router->get('/sign-up/success', 'signUpSuccess');
 $app->router->get('/login', 'login');
-$app->router->get('/logout',[new UserController(), 'logout']);
+$app->router->get('/logout',[$userController, 'logout']);
 $app->router->get('/user/edit', 'editProfile');
 $app->router->get('/women', [new ProductController(), 'women']);
 $app->router->get('/men', [new ProductController(), 'men']);
@@ -38,10 +41,10 @@ $app->router->get('/product/filter', [new ProductController(), 'filter']);
 $app->router->get('/cart', 'cart');
 
 // Post request
-$app->router->post('/sign-up', [new UserController(), 'signUp']);
-$app->router->post('/login', [new UserController(), 'login']);
-$app->router->post('/user/edit',[new UserController(), 'editProfile']);
-$app->router->post('/user/forgot-password', [new UserController(),'saveNewPassword']);
+$app->router->post('/sign-up', [$userController, 'signUp']);
+$app->router->post('/login', [$userController, 'login']);
+$app->router->post('/user/edit',[$userController, 'editProfile']);
+$app->router->post('/user/forgot-password', [$userController,'saveNewPassword']);
 
 // API REQUEST
 // get API
@@ -51,9 +54,9 @@ $app->router->get('/api/products/colors', [new Rest(), 'getColors']);
 $app->router->get('/api/order-items', [new Rest(), 'getOrderItemsByUserId']);
 
 // post API
-$app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
-$app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
-$app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
+$app->router->post('/api/user/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
+$app->router->post('/api/user/otp', [$apiUserController, 'getOTPCode']);
+$app->router->post('/api/user/edit/password', [$apiUserController,'saveChangePassword']);
 $app->router->post('/api/order-items/update', [new Rest(), 'updateOrderItemQuantityById']);
 $app->router->post('/api/order-items/delete', [new Rest(), 'deleteOrderItemById']);
 $app->router->post('/api/order-items/add-to-cart', [new Rest(),'addToCart']);

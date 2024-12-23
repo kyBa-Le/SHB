@@ -2,7 +2,7 @@
 
 namespace app\services;
 
-use app\model\UserModel;
+use app\models\UserModel;
 use app\validation\UserValidation;
 
 class UserService
