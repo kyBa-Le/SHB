@@ -15,6 +15,7 @@ class Request
     public function getMethod() {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
+
     public function getBody() {
         $body = [];
         if ($this->isGet()) {
@@ -22,7 +23,7 @@ class Request
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
-        if ($this->isPost()) {
+        if ($this->isPost() || $this->isPut() || $this->isDelete() || $this->isPatch()) {
             $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
             if (strpos($contentType, 'application/json') !== false) {
                 $rawBody = file_get_contents('php://input');
@@ -41,5 +42,14 @@ class Request
     }
     public function isGet() {
         return $this->getMethod() == 'get';
+    }
+    public function isPut() {
+        return $this->getMethod() == 'put';
+    }
+    public function isDelete() {
+        return $this->getMethod() == 'delete';
+    }
+    public function isPatch() {
+        return $this->getMethod() == 'patch';
     }
 }
