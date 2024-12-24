@@ -80,6 +80,7 @@
         color: #0F0E0E;
         right: 12%;
         top: 150%;
+        z-index: 1;
     }
     .infor-profile {
         padding: 0px 20px 0px 20px;

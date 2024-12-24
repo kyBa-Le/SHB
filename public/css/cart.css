@@ -15,7 +15,7 @@
     height: 100%;
 }
 #cart-items-body {
-    max-height: 70vh;
+    height: 70vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -79,6 +79,9 @@
 .fa-trash-can, input[type=checkbox] {
     cursor: pointer;
 }
+button.update-quantity {
+    border: 1px solid #0F0E0E;
+}
 button.update-quantity:hover {
     background-color: #0F0E0E;
     color: white;
@@ -102,7 +105,7 @@ input[type="checkbox"] {
 .total-price-column {
     flex: 1;
 }
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .cart-container .items-table {
         grid-template-columns: 36% 22% 19% 17% 5%;
     }
@@ -121,6 +124,9 @@ input[type="checkbox"] {
         width: 15vw;
         height: 15vw;
         margin-left: 5px !important;
+    }
+    .total-price-column {
+        min-height: 20vh;
     }
 }
 @media (max-width: 850px) {

@@ -24,7 +24,7 @@ async function renderOrderItems(orderItems) {
                         <p class="money" data-value="${item['unit_price']}" id="unit-price-${item['id']}">${moneyFormater(item['unit_price'])} đ</p>
                         <form>
                             <button data-quantity=${-1} type="button" class="update-quantity rounded-2" data-id="${item['id']}">-</button>
-                            <input id="input-quantity-${item['id']}" class="text-center rounded-2" style="width: 30px" value="${item['quantity']}" readonly>
+                            <input id="input-quantity-${item['id']}" class="text-center rounded-2 border-0" style="width: 30px" value="${item['quantity']}" readonly>
                             <button data-quantity=${1} type="button" class="update-quantity rounded-2" data-id="${item['id']}">+</button>
                         </form>
                         <p class="money" id="total-price-${item['id']}" data-value=${totalPrice}>${moneyFormater(totalPrice)} đ</p>
@@ -44,7 +44,7 @@ async function updateQuantity (updatedQuantity, id) {
      let totalPrice = orderItem['quantity'] * orderItem['unit_price'];
      document.getElementById('input-quantity-' + id).value = orderItem['quantity'];
      document.getElementById('total-price-' + id).dataset.value = totalPrice;
-     document.getElementById('total-price-' + id).innerHTML = moneyFormater(totalPrice) + ' VND';
+     document.getElementById('total-price-' + id).innerHTML = moneyFormater(totalPrice) + ' đ';
 }
 
 // thêm hàm cập nhật số lượng vào 2 nút cộng trừ
@@ -96,7 +96,7 @@ function updatePurchaseButton() {
         totalQuantity += quantity;
         totalPricePurchase += totalPrice ;
     })
-    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' VND';
+    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' ';
     document.getElementById('quantity-purchase').innerHTML = `Purchases (${totalQuantity})`;
 }
 

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="cart-container">
     <div class="cart-items-column">
-        <div class="items-header element-white items-table">
+        <div class="items-header element-white items-table shadow-sm">
             <label for="choose-all">
                 <input class="ms-3 me-3" type="checkbox" id="choose-all" name="choose-all">
                 Product
@@ -17,11 +17,11 @@
             <p>Total</p>
             <i class="fa-regular fa-trash-can" id="remove-all"></i>
         </div>
-        <div id="cart-items-body" class="items-body element-white">
+        <div id="cart-items-body" class="items-body element-white shadow-sm">
 
         </div>
     </div>
-    <div class="total-price-column element-white">
+    <div class="total-price-column element-white shadow-sm">
         <div class="mt-2 ms-3 me-3 row align-items-center total-price-header border-bottom rounded">
             <p class="col-7">Provisional</p>
             <p class="col-5">Price</p>

@@ -15,6 +15,12 @@
     .footer-title {
         font-size: 25px;
     }
+    @media (max-width: 1200px) {
+        #footer-icons {
+            display: none !important;
+        }
+    }
+
     @media (max-width: 600px) {
         #container-footer > .row{
             display: flex;

@@ -10,10 +10,7 @@
     </ul>
     <form id="myForm" action="/sign-up" method="POST">
         <div class="form-group">
-            <input type="text" name="fullName" placeholder="Full name*" required value="<?php echo $data['fullName'] ?? '' ?>">
-        </div>
-        <div class="form-group">
-            <input type="text" name="username" placeholder="User name*" required value="<?php echo $data['username'] ?? '' ?>">
+            <input type="text" name="username" placeholder="Username*" required value="<?php echo $data['username'] ?? '' ?>">
         </div>
         <div class="form-group">
             <input type="email" name="email" placeholder="Email*" required value="<?php echo $data['email'] ?? '' ?>">
@@ -21,14 +18,6 @@
                 if(isset($isValid) && $isValid === false && isset($errors['email'])) {
                     echo ("<span class='error-message'>" . $errors['email'] . "</span>");
                 }
-            ?>
-        </div>
-        <div class="form-group">
-            <input type="text" name="phone" placeholder="Phone number" minlength="10" maxlength="10" value="<?php echo $data['phone'] ?? '' ?>">
-            <?php
-            if(isset($isValid) && $isValid === false && isset($errors['phone'])) {
-                echo ("<span class='error-message'>" . $errors['phone'] . "</span>");
-            }
             ?>
         </div>
         <div class="form-group form-group-select">

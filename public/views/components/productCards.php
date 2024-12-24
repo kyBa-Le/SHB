@@ -66,7 +66,7 @@ foreach ($products as $product) {
                         <p class='fw-bold fs-5 category-product-name' onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">$name</p>
                         <div class='product-price-and-sold d-flex justify-content-between align-items-center mb-2'>
                             <div>
-                                <p class='m-0'><span class='money'>$price</span> vnd</p>
+                                <p class='m-0'><span class='money'>$price</span> đ</p>
                             </div>
                             <p class='text-end mb-0'>Sold: $purchases</p>
                         </div>
