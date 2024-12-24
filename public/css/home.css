@@ -197,3 +197,15 @@
         min-width: 100vw;
     }
 }
+@media (max-width: 1100px) {
+    #card-products-container {
+        display: flex;
+        width: 100%;
+        overflow-x: scroll;
+        justify-content: start;
+        align-items: center;
+    }
+    .product-card {
+        width: 50vw;
+    }
+}
