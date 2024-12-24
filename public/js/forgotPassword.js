@@ -27,6 +27,7 @@ forgotPasswordBtn.addEventListener('click', async function (event) {
         } else {
             emailContainer.style.display = 'none';
             otpContainer.style.display = 'block';
+            countDown();
         }
     }
 });
@@ -48,7 +49,7 @@ otpBtn.addEventListener('click', async function () {
         error.remove();
     }
     let otpInput = document.getElementById('otpCode').value; 
-    let response = await patchData('/api/users/otp', {otp: otpInput});
+    let response = await sendData('/api/users/otp', {otp: otpInput});
     console.log(response['isCorrectOtp']);
     if (response['isCorrectOtp'] == true) {
         newPasswordBox.style.display = 'flex';
@@ -57,3 +58,16 @@ otpBtn.addEventListener('click', async function () {
         document.getElementById('error-isIncorrectOtp').innerHTML += `<p id="error-incorrectOtp" style="color: red;">${response['error']}</p>`;
     }
 });
+
+function countDown() {
+    let countdownValue = 60;
+    const countdownElement = document.getElementById('countdown');
+    const countdown = setInterval(() => {
+        countdownValue--;
+        countdownElement.innerHTML = `Your OTP code will be expired after <i class='fw-bold' style="color: red">${countdownValue}</i> seconds !!!`;
+        if (countdownValue <= 0) {
+            clearInterval(countdown);
+            countdownElement.textContent = `Your OTP code is expired !!!`
+        }
+    }, 1000);
+}

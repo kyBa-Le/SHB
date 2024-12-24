@@ -43,7 +43,7 @@
                         <div class=\"product-card-hover\">
                             <h5 style='font-weight: bold' onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">$name</h5>
                             <p>Purchases: $purchases</p>
-                            <p style=\"color: #ED685D; font-weight: bold\" class='money'>$price VNĐ</p>
+                            <p style=\"color: #ED685D; font-weight: bold\" class='money'>$price đ</p>
                             <button onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">View details <i class=\"fa-solid fa-arrow-right-long\"></i></button>
                         </div>
                     </div>

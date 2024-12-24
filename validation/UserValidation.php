@@ -26,9 +26,6 @@ class UserValidation
         if (empty($user['username'])) {
             $errors['name'] = 'must not be empty';
         }
-        if (empty($user['fullName'])) {
-            $errors['fullName'] = 'must not be empty';
-        }
         if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Invalid email';
         }
