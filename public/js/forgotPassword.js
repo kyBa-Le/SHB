@@ -1,4 +1,4 @@
-import {sendData} from "./components.js";
+import {patchData, sendData} from "./components.js";
 
 // Lấy các phần tử DOM
 let forgotPasswordBtn = document.getElementById('forgotPassword-button');
@@ -19,7 +19,7 @@ forgotPasswordBtn.addEventListener('click', async function (event) {
         emailInput.reportValidity();
         return;
     } else {
-        let response = await sendData('/api/user/forgot-password', {email: emailValue}); 
+        let response = await sendData('/api/users/forgot-password', {email: emailValue});
         if (response['isSent'] == false) {
             emailContainer.style.display = 'block';
             otpContainer.style.display = 'none';
@@ -48,7 +48,7 @@ otpBtn.addEventListener('click', async function () {
         error.remove();
     }
     let otpInput = document.getElementById('otpCode').value; 
-    let response = await sendData('/api/user/otp', {otp: otpInput});
+    let response = await patchData('/api/users/otp', {otp: otpInput});
     console.log(response['isCorrectOtp']);
     if (response['isCorrectOtp'] == true) {
         newPasswordBox.style.display = 'flex';

@@ -37,7 +37,7 @@ function changeData(color , image_link, size) {
 
 // This place is to get product colors to show to the small image under the
 let param = new URLSearchParams(window.location.search);
-let productColorPath = '/api/products/colors?' + param;
+let productColorPath = '/api/product-colors?' + param;
 let productColors = await getData(productColorPath);
 
 let subproduct = document.getElementById('sub-product-image');
@@ -126,7 +126,7 @@ plusBtn.addEventListener('click', function () {
 // handle API to add to cart
 let addToCartBtn = document.getElementById('addToCartBtn');
 addToCartBtn.addEventListener('click', async function () {
-    let response = await sendData('/api/order-items/add-to-cart', {
+    let response = await sendData('/api/order-items', {
         productName: detailedProduct['product_name'],
         quantity: quantityBuyValue,
         unitPrice: detailedProduct['price'],
@@ -134,10 +134,14 @@ addToCartBtn.addEventListener('click', async function () {
         productId: detailedProduct['id'],
         productImageLink: data.dataset.imageLink,
         productColor: data.dataset.color
-    });
+    }, false);
     if (response['isAddToCartSuccess'] === true) {
         document.getElementById('addToCartMessage').innerHTML = '';
         document.getElementById('addToCartMessage').innerHTML += `<span style="color: green;">${response['success']}</span>`;
+        // Chờ 2 giây (2000 ms) trước khi xóa nội dung
+        setTimeout(() => {
+            document.getElementById('addToCartMessage').innerHTML = '';
+        }, 1500);
     } else {
         document.getElementById('addToCartMessage').innerHTML = '';
         document.getElementById('addToCartMessage').innerHTML += `<span style="color: red;">${response['error']}</span>`;

@@ -18,21 +18,19 @@ class OrderItemController extends BaseController
         $this->response->sendJson($orderItems);
     }
 
-    public function updateOrderItemQuantityById()
+    public function updateOrderItemQuantityById($id)
     {
         if ($_SESSION['user']) {
             $data = $this->request->getBody();
-            $id = $data['id'];
             $quantity = $data['quantity'];
             $orderItem = $this->orderItemService->updateOrderItemQuantity($id, $quantity);
             $this->response->sendJson($orderItem);
         }
     }
 
-    public function deleteOrderItemById()
+    public function deleteOrderItemById($id)
     {
         if ($_SESSION['user']) {
-            $id = $this->request->getBody()['id'];
             $this->orderItemService->deleteOrderItem($id);
             $this->response->sendJson($id);
         }

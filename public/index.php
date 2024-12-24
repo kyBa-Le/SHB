@@ -52,22 +52,26 @@ $app->router->post('/user/forgot-password', [$userController,'saveNewPassword'])
 // get API
 $app->router->get('/api/products', [$apiProductController, 'getProducts']);
 $app->router->get('/api/detailed-product', [$apiProductController, 'getDetailedProduct']);
-$app->router->get('/api/products/colors', [$apiProductColorController, 'getColors']);
+$app->router->get('/api/product-colors', [$apiProductColorController, 'getColors']);
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 
 // post API
-$app->router->post('/api/user/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
-$app->router->post('/api/user/otp', [$apiUserController, 'getOTPCode']);
-$app->router->post('/api/user/edit/password', [$apiUserController,'saveChangePassword']);
-$app->router->post('/api/order-items/update', [$apiOrderItemController, 'updateOrderItemQuantityById']);
-$app->router->post('/api/order-items/delete', [$apiOrderItemController, 'deleteOrderItemById']);
-$app->router->post('/api/order-items/add-to-cart', [$apiOrderItemController,'addToCart']);
+$app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
+$app->router->post('/api/users/otp', [$apiUserController, 'getOTPCode']);
+$app->router->post('/api/order-items', [$apiOrderItemController,'addToCart']);
 
 // put API
 
 // delete API
+$app->router->delete('/api/order-items/{id}', function ($id) {
+    (new \app\controllers\api\OrderItemController())->deleteOrderItemById($id);
+});
 
 // patch API
+$app->router->patch('/api/order-items/{id}', function ($id) {
+    (new \app\controllers\api\OrderItemController())->updateOrderItemQuantityById($id);
+});
+$app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangePassword']);
 
 
 $app->run();
