@@ -1,4 +1,4 @@
-import {moneyFormater, getData, sendData} from "./components.js";
+import {moneyFormater, getData, sendData, patchData, deleteData} from "./components.js";
 let orderItems = [];
 
 orderItems = await getData('/api/order-items')
@@ -40,7 +40,7 @@ renderOrderItems(orderItems);
 
 async function updateQuantity (updatedQuantity, id) {
      let quantity = parseInt(updatedQuantity);
-     let orderItem = await sendData('/api/order-items/update', {quantity: quantity, id:id}, false);
+     let orderItem = await patchData(`/api/order-items/${id}`, {quantity: quantity}, false);
      let totalPrice = orderItem['quantity'] * orderItem['unit_price'];
      document.getElementById('input-quantity-' + id).value = orderItem['quantity'];
      document.getElementById('total-price-' + id).dataset.value = totalPrice;
@@ -65,7 +65,7 @@ for (let button of updateButtons) {
 // xóa phần tử trong
 for (let icon of document.getElementsByClassName('icon-remove')) {
     icon.addEventListener('click', async function() {
-        await sendData('/api/order-items/delete', {id:icon.dataset.id}, false);
+        await deleteData(`/api/order-items/${icon.dataset.id}`, null, false);
         document.getElementById(`cart-item-${icon.dataset.id}`).remove();
         updatePurchaseButton();
         await renderEmptyCart();
@@ -108,7 +108,7 @@ document.getElementById('remove-all').addEventListener('click', async function (
     let items = document.querySelectorAll('.item-checkbox:checked');
     for (let item of items) {
         let id = item.dataset.id;
-        await sendData('/api/order-items/delete', {id:id}, false);
+        await deleteData('/api/order-items/' + id, null, false);
         document.getElementById(`cart-item-${id}`).remove();
         updatePurchaseButton();
         await renderEmptyCart();

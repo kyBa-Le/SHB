@@ -1,11 +1,11 @@
 <?php
 
-namespace app\controller;
-use app\model\OrderItemModel; 
+namespace app\services;
 
-class OrderItemController
+use app\models\OrderItemModel;
+
+class OrderItemService
 {
-
     private $orderItemsModel;
     public function __construct()
     {
@@ -14,8 +14,7 @@ class OrderItemController
 
     public function getOrderItemsByUserId ($userId) {
         $userId = (int) $userId;
-        $orderItems = $this->orderItemsModel->getOrderItemsByUserId($userId);
-        return $orderItems;
+        return $this->orderItemsModel->getOrderItemsByUserId($userId);
     }
 
     public function updateOrderItemQuantity($id, $quantity)
@@ -31,17 +30,20 @@ class OrderItemController
         return $this->orderItemsModel->deleteOrderItemById($id);
     }
 
-    public function getOrderItemById($id) 
-    {
-        return $this->orderItemsModel->getOrderItemById($id);
+    public function createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
+        return $this->orderItemsModel->createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
     }
-    
+
     public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
-        $userId = (int) $userId;
-        $quantity = (int) $quantity;
-        $unitPrice = (int) $unitPrice;
-        $productId = (int) $productId;
-        return $this->orderItemsModel->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+        $existingOrderItem = $this->getExistingOrderItem($userId, $size, $productId,  $productColor);
+        if ($existingOrderItem !== false) {
+            $orderItemId = $existingOrderItem['id'];
+            $newQuantity = $existingOrderItem['quantity'] + (int) $quantity;
+            $addToCart = $this->updateOrderItemQuantity($orderItemId, $newQuantity);
+        } else {
+            $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+        }
+        return $addToCart;
     }
 
     public function getExistingOrderItem($userId, $size, $productId,  $productColor) {

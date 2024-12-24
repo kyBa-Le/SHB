@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-use app\controller\Rest;
-use app\controller\SiteController;
+use app\controllers\SiteController;
+
 require __DIR__ . "/../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
@@ -16,6 +16,14 @@ $config = [
 ];
 $app = new app\core\Application($config);
 
+// Initialize controller for the router
+$userController = new \app\controllers\UserController();
+$productController = new \app\controllers\ProductController();
+$apiUserController = new \app\controllers\api\UserController();
+$apiProductController = new \app\controllers\api\ProductController();
+$apiProductColorController = new \app\controllers\api\ProductColorController();
+$apiOrderItemController = new \app\controllers\api\OrderItemController();
+
 // Create routes
 
 // Get request
@@ -23,36 +31,47 @@ $app->router->get('/', [new SiteController(), 'home']);
 $app->router->get('/sign-up', 'signUp');
 $app->router->get('/sign-up/success', 'signUpSuccess');
 $app->router->get('/login', 'login');
-$app->router->get('/logout',[new SiteController(), 'logout']);
+$app->router->get('/logout',[$userController, 'logout']);
 $app->router->get('/user/edit', 'editProfile');
-$app->router->get('/women', [new SiteController(), 'women']);
-$app->router->get('/men', [new SiteController(), 'men']);
-$app->router->get('/children', [new SiteController(), 'children']);
+$app->router->get('/women', [$productController, 'women']);
+$app->router->get('/men', [$productController, 'men']);
+$app->router->get('/children', [$productController, 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
-$app->router->get('/product/search', [new SiteController(), 'search']);
-$app->router->get('/detailed-product', [new SiteController(), 'detail']);
-$app->router->get('/product/filter', [new SiteController(), 'getFilteredProducts']);
+$app->router->get('/product/search', [$productController, 'search']);
+$app->router->get('/detailed-product', 'detailedProduct');
+$app->router->get('/product/filter', [$productController, 'filter']);
 $app->router->get('/cart', 'cart');
 
 // Post request
-$app->router->post('/sign-up', [new SiteController(), 'signUp']);
-$app->router->post('/login', [new SiteController(), 'login']);
-$app->router->post('/user/edit',[new SiteController(), 'editProfile']);
-$app->router->post('/user/forgot-password', [new SiteController(),'saveNewPassword']);
+$app->router->post('/sign-up', [$userController, 'signUp']);
+$app->router->post('/login', [$userController, 'login']);
+$app->router->post('/user/edit',[$userController, 'editProfile']);
+$app->router->post('/user/forgot-password', [$userController,'saveNewPassword']);
 
 // API REQUEST
 // get API
-$app->router->get('/api/products', [new Rest(), 'getProducts']);
-$app->router->get('/api/detailed-product', [new Rest(), 'getDetailedProduct']);
-$app->router->get('/api/products/colors', [new Rest(), 'getColors']);
-$app->router->get('/api/order-items', [new Rest(), 'getOrderItemsByUserId']);
+$app->router->get('/api/products', [$apiProductController, 'getProducts']);
+$app->router->get('/api/detailed-product', [$apiProductController, 'getDetailedProduct']);
+$app->router->get('/api/product-colors', [$apiProductColorController, 'getColors']);
+$app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 
 // post API
-$app->router->post('/api/user/forgot-password', [new Rest(), 'getEmailForgotPassword']);
-$app->router->post('/api/user/otp', [new Rest(), 'getOTPCode']);
-$app->router->post('/api/user/edit/password', [new Rest(),'saveChangePassword']);
-$app->router->post('/api/order-items/update', [new Rest(), 'updateOrderItemQuantityById']);
-$app->router->post('/api/order-items/delete', [new Rest(), 'deleteOrderItemById']);
-$app->router->post('/api/order-items/add-to-cart', [new Rest(),'addToCart']);
+$app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
+$app->router->post('/api/users/otp', [$apiUserController, 'getOTPCode']);
+$app->router->post('/api/order-items', [$apiOrderItemController,'addToCart']);
+
+// put API
+
+// delete API
+$app->router->delete('/api/order-items/{id}', function ($id) {
+    (new \app\controllers\api\OrderItemController())->deleteOrderItemById($id);
+});
+
+// patch API
+$app->router->patch('/api/order-items/{id}', function ($id) {
+    (new \app\controllers\api\OrderItemController())->updateOrderItemQuantityById($id);
+});
+$app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangePassword']);
+
 
 $app->run();

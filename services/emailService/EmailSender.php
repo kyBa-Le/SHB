@@ -1,6 +1,6 @@
 <?php
 
-namespace app\thirdPartyService;
+namespace app\services\emailService;
 
 use Exception;
 use PHPMailer\PHPMailer\PHPMailer;

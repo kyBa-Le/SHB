@@ -20,16 +20,43 @@ class Router
         $this->routes['post'][$path] = $callback;
     }
 
+    public function put($path, $callback): void
+    {
+        $this->routes['put'][$path] = $callback;
+    }
+
+    public function delete($path, $callback): void
+    {
+        $this->routes['delete'][$path] = $callback;
+    }
+
+    public function patch($path, $callback): void
+    {
+        $this->routes['patch'][$path] = $callback;
+    }
+
     public function resolve()
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
+        // Xử lý route tĩnh
         $callback = $this->routes[$method][$path] ?? false;
         if ($callback === false) {
+            // Xử lý route động
+            foreach ($this->routes[$method] as $pattern => $callback) {
+                $regexPattern = preg_replace('#\{(\w+)\}#', '([^/]+)', $pattern);
+                $regexPattern = "#^" . $regexPattern . "$#";
+                if (preg_match($regexPattern, $path, $matches)) {
+                    array_shift($matches); // Loại bỏ phần tử đầu tiên (chuỗi khớp toàn bộ)
+                    return call_user_func_array($callback, $matches); // Gọi callback với các tham số động
+                }
+            }
+            // Nếu không tìm thấy route phù hợp, trả về lỗi 404
             $this->response->setStatusCode(404);
             Application::$app->controller->layout = 'noLayout';
             return $this->renderView('notFound');
         }
+        // Xử lý route tĩnh (callback là string hoặc array)
         if (is_string($callback)) {
             return $this->renderView($callback);
         }

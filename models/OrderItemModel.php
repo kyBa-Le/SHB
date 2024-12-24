@@ -1,5 +1,5 @@
 <?php
-namespace app\model;
+namespace app\models;
 
 use app\core\Model;
 class OrderItemModel extends Model {
@@ -13,13 +13,13 @@ class OrderItemModel extends Model {
     public function updateOrderItemQuantity($id, $quantity)
     {
         $sql = "UPDATE $this->table SET quantity = $quantity WHERE id = $id ";
-        return Model::$db->query($sql);
+        return $this->excuteSql($sql);
     }
 
     public function deleteOrderItemById($id)
     {
         $sql = "DELETE FROM $this->table WHERE id = $id";
-        return Model::$db->query($sql);
+        return $this->excuteSql($sql);
     }
 
     public function getOrderItemById($id) 
@@ -28,10 +28,10 @@ class OrderItemModel extends Model {
         return $this->queryOneRow($sql);
     }
 
-    public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId){
+    public function createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $userId){
         $sql = "INSERT INTO $this->table (product_name, quantity, unit_price, size, product_id, product_image_link, product_color, payments_id, user_id, status) 
                VALUES ('$productName', $quantity, $unitPrice, '$size', $productId, '$productImageLink', '$productColor', NULL, $userId, 'Pending')";
-        return Model::$db->query($sql);
+        return $this->excuteSql($sql);
     }
 
     public function getExistingOrderItem($userId, $size, $productId,  $productColor) {

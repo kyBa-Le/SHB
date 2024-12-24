@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/searchProduct.css">
+<link rel="stylesheet" href="css/search.css">
 <div class="searchProduct-container">
     <div class="search-text-result d-flex justify-content-center align-items-center flex-column mt-5">
         <?php

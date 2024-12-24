@@ -2,7 +2,7 @@
 
 namespace app\validation;
 
-use app\model\UserModel;
+use app\models\UserModel;
 
 class UserValidation
 {
