@@ -130,3 +130,26 @@ async function renderEmptyCart(orderItems = null) {
                     </div>`;
     }
 }
+// Track order Delivered Order
+let orderPaid = document.getElementById('order-delivered-infor-content');
+let orderShipping = document.getElementById('order-shipping-infor-content');
+let orderPaidBtn = document.getElementById('btn-order-delivered');
+let orderShippingBtn = document.getElementById('btn-order-shipping');
+
+orderPaidBtn.addEventListener('click', function () {
+    orderPaid.style.display = 'block';
+    orderShipping.style.display = 'none';
+    orderPaidBtn.style.backgroundColor = '#0F0E0E';
+    orderPaidBtn.style.color = 'white';
+    orderShippingBtn.style.backgroundColor = 'white';
+    orderShippingBtn.style.color = 'black';
+});
+
+orderShippingBtn.addEventListener('click', function () {
+    orderPaid.style.display = 'none';
+    orderShipping.style.display = 'block';
+    orderShippingBtn.style.backgroundColor = '#0F0E0E';
+    orderShippingBtn.style.color = 'white';
+    orderPaidBtn.style.backgroundColor = 'white';
+    orderPaidBtn.style.color = 'black';
+});
