@@ -3,13 +3,16 @@
 namespace app\services;
 
 use app\models\OrderItemModel;
+use app\validation\OrderItemValidation;
 
 class OrderItemService
 {
     private $orderItemsModel;
+    private $orderItemValidation;
     public function __construct()
     {
         $this->orderItemsModel = new OrderItemModel();
+        $this->orderItemValidation = new OrderItemValidation();
     }
 
     public function getOrderItemsByUserId ($userId) {
@@ -39,7 +42,11 @@ class OrderItemService
         if ($existingOrderItem !== false) {
             $orderItemId = $existingOrderItem['id'];
             $newQuantity = $existingOrderItem['quantity'] + (int) $quantity;
-            $addToCart = $this->updateOrderItemQuantity($orderItemId, $newQuantity);
+            if ($this->orderItemValidation->validateOrderItemQuantity($existingOrderItem, $newQuantity)) {
+                $addToCart = $this->updateOrderItemQuantity($orderItemId, $newQuantity);
+            } else {
+                $addToCart = false;
+            }
         } else {
             $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
         }

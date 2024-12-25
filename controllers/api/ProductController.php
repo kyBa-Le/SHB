@@ -23,8 +23,7 @@ class ProductController extends BaseController
         $products = $this->productService->getProductsByCondition($category, $pageNo, $pageSize);
         $this->response->sendJson($products);
     }
-    public function getDetailedProduct(){
-        $id = $this->request->getBody()['product-id'];
+    public function getProductById($id){
         $product = $this->productService->getProductById($id);
         $this->response->sendJson($product);
     }
