@@ -182,3 +182,87 @@ input[type="checkbox"] {
         padding: 1px 7px !important;
     }
 }
+/* Track order*/
+.container-track-order {
+    margin-top: 40px;
+    margin: 5vh 1vw;
+}
+.container-track-order-content {
+    width: 100%;
+}
+
+.btn-order {
+    display: flex;
+    width: 40vw;
+    .btn-order-paid {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    }
+    .btn-order-shipping {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    }
+}
+.btn-order button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 20vw;
+    height: 7vh;
+    border: none;
+    padding: 0px;
+}
+.order-infor {
+    margin-top: 2vh;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.noOfOrder {
+    padding: 8px 25px;
+    background-color: #0F0E0E;
+    color: white;
+    width: fit-content;
+}
+.review-product {
+    justify-self: end; 
+    align-self: center;
+    width: 10vw;
+    border: 1px solid #0F0E0E;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+.review-product:hover {
+    background-color: #0F0E0E;
+    color: white;
+    transition: all 0.2s ease;
+}
+.product-item-infor {
+    display: grid;
+    grid-template-columns:  25% 25% 25% 25%;
+    align-items: center;
+    margin-right: 10px;
+}
+.order-infor-content {
+    min-height: 30vh;
+    max-height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+@media (max-width: 800px) {
+    .review-product {
+        width: 15vw;
+    }
+    .product-item-infor {
+        grid-template-columns: 42% 15% 19% 25%;
+    }
+    .btn-order {
+        width: unset;
+    }
+    .btn-order button {
+        width: 50vw;
+        height: 6vh;
+    }
+}
