@@ -251,3 +251,18 @@ input[type="checkbox"] {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+@media (max-width: 800px) {
+    .review-product {
+        width: 15vw;
+    }
+    .product-item-infor {
+        grid-template-columns: 42% 15% 19% 25%;
+    }
+    .btn-order {
+        width: unset;
+    }
+    .btn-order button {
+        width: 50vw;
+        height: 6vh;
+    }
+}

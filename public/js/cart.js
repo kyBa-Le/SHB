@@ -23,7 +23,7 @@ async function renderPendingOrder(orderItems) {
                         <img class="item-image ms-4" src="${item['product_image_link']}">
                     </div>
                     <div class="d-flex flex-column justify-content-between">
-                        <h5 onclick="{window.location.href='/detailed-product?product-id=' + ${item['product_id']}}">${item['product_name']}</h5>
+                        <h5 class="pe-1" onclick="{window.location.href='/detailed-product?product-id=' + ${item['product_id']}}">${item['product_name']}</h5>
                         <div  class="cart-item-detail">
                             <p>${item['product_color']} / ${item['size']}</p>
                             <p class="money" data-value="${item['unit_price']}" id="unit-price-${item['id']}">${moneyFormater(item['unit_price'])} đ</p>
@@ -80,15 +80,15 @@ function renderOrderByStatus(orderItems, status, orderBodyElement) {
                                 <span class="product-size" style="font-size: 16px; color: #777070;">${product['size']}</span>
                             </span>
                         </span>
-                        <span class="produc-quantity">x ${product['quantity']}</span>
-                        <span class="produc-total-prie">Total price: ${itemTotalPrice.toLocaleString()}đ</span>
+                        <span class="product-quantity">x ${product['quantity']}</span>
+                        <span class="product-total-price">Total price: ${itemTotalPrice.toLocaleString()}đ</span>
                         ${status === 'Delivered' ? '<button class="review-product">Review</button>' : ''}
                     </div>
             `;
         });
         orderBodyElement.innerHTML += `
                 <hr>
-                <p class="produc-total-order" style="font-weight:bold; text-align:end;">Total order price: ${totalOrderPrice.toLocaleString()}đ</p>
+                <p class="product-total-order me-3" style="font-weight:bold; text-align:end;">Total order price: ${totalOrderPrice.toLocaleString()}đ</p>
             </div>
         `;
     }
@@ -182,7 +182,7 @@ async function renderEmptyCart(orderItems = null) {
         pendingItems = orderItems.filter(item => item['status'] === 'Pending');
     }
     if (pendingItems.length === 0) {
-        cartItemsBody = document.getElementById('cart-items-body');
+        let cartItemsBody = document.getElementById('cart-items-body');
         cartItemsBody.innerHTML = `
                     <div class="w-100 h-100 d-flex justify-content-center align-items-center flex-column">
                             <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRiP3u0Wiokd_JTbjmrB6P_KcYKjVI2EeA1hGLawYteCYSqB0gO">
