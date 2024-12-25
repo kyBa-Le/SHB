@@ -38,7 +38,7 @@ $app->router->get('/men', [$productController, 'men']);
 $app->router->get('/children', [$productController, 'children']);
 $app->router->get('/user/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [$productController, 'search']);
-$app->router->get('/detailed-product', 'detailedProduct');
+$app->router->get('/products/{id}', 'details');
 $app->router->get('/product/filter', [$productController, 'filter']);
 $app->router->get('/cart', 'cart');
 
@@ -51,7 +51,9 @@ $app->router->post('/user/forgot-password', [$userController,'saveNewPassword'])
 // API REQUEST
 // get API
 $app->router->get('/api/products', [$apiProductController, 'getProducts']);
-$app->router->get('/api/detailed-product', [$apiProductController, 'getDetailedProduct']);
+$app->router->get('/api/products/{id}', function ($id) {
+    (new \app\controllers\api\ProductController())->getProductById($id);
+});
 $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors']);
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 

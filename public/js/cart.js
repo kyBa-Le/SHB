@@ -16,7 +16,7 @@ async function renderPendingOrder(orderItems) {
         for (let item of pendingItems) {
             let totalPrice = parseFloat(item['quantity']) * parseFloat(item['unit_price']);
             cartItemsBody.innerHTML += `
-            <div id="product-id" class="d-none" data-id="${item['product_id']}"></div>
+                <div id="product-id" class="d-none" data-id="${item['product_id']}"></div>
                 <div class="cart-item" id="cart-item-${item['id']}">
                     <div class='cart-item-select'>
                         <input class="ms-3 item-checkbox" type="checkbox" data-id="${item['id']}">
