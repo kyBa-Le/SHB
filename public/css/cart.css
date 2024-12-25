@@ -243,4 +243,11 @@ input[type="checkbox"] {
     display: grid;
     grid-template-columns:  25% 25% 25% 25%;
     align-items: center;
+    margin-right: 10px;
+}
+.order-infor-content {
+    min-height: 30vh;
+    max-height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }

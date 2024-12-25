@@ -38,110 +38,17 @@
 <div class="container-track-order">
     <div class="container-track-order-content" style="font-size: 18px;">
         <div class="btn-order">
-            <button id="btn-order-delivered" class="btn-order-paid" style="background-color:#0F0E0E;color:white;">Delivered Order</button>
-            <button id="btn-order-shipping" class="btn-order-shipping" style="background-color:white;">Order Shipping</button>
+            <button id="btn-order-delivered" class="btn-order-paid" style="background-color:#0F0E0E;color:white;">Delivered Orders</button>
+            <button id="btn-order-shipping" class="btn-order-shipping" style="background-color:white;">Shipping Orders</button>
         </div>
         <div class="order-infor">
             <!-- Order paid -->
             <div class="order-infor-content" id="order-delivered-infor-content">
-                <div class="product-infor-content">
-                    <p class="noOfOrder">Order 1</p>
-                    <div class="product-item-infor">
-                        <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">Logo backprint t-shirt in dark brown</span>
-                            <span class="product-color-size">
-                                <span class="product-color" style="font-size: 16px; color: #777070;">Dark</span>
-                                <span style="font-size: 16px; color: #777070;">/</span>
-                                <span class="product-size" style="font-size: 16px; color: #777070;">L</span>
-                            </span>
-                        </span>
-                        <span class="produc-quantity">x1</span>
-                        <span class="produc-total-prie">Total price: 300.000đ</span>
-                        <button class="review-product">Review</button>
-                    </div>
-                    <div class="product-item-infor">
-                        <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">Bomber co-ord in blacks</span>
-                            <span class="product-color-size">
-                                <span class="product-color" style="font-size: 16px; color: #777070;">Dark</span>
-                                <span style="font-size: 16px; color: #777070;">/</span>
-                                <span class="product-size" style="font-size: 16px; color: #777070;">L</span>
-                            </span>
-                        </span>
-                        <span class="produc-quantity">x2</span>
-                        <span class="produc-total-prie">Total price: 600.000đ</span>
-                        <button class="review-product">View review</button>
-                    </div>
-                    <hr>
-                    <p class="produc-total-order" style="font-weight:bold; text-align:end;">Total price: 900.000đ</p>
-                </div>
-                <div class="product-infor-content">
-                    <p class="noOfOrder">Order 2</p>
-                    <div class="product-item-infor">
-                        <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">Down puffer long line jacket in burgundy</span>
-                            <span class="product-color-size">
-                                <span class="product-color" style="font-size: 16px; color: #777070;">Dark</span>
-                                <span style="font-size: 16px; color: #777070;">/</span>
-                                <span class="product-size" style="font-size: 16px; color: #777070;">L</span>
-                            </span>
-                        </span>
-                        <span class="produc-quantity">x1</span>
-                        <span class="produc-total-prie">Total price: 300.000đ</span>
-                        <button class="review-product">Review</button>
-                    </div>
-                    <hr>
-                    <p class="produc-total-order" style="font-weight:bold; text-align:end;">Total price: 300.000đ</p>
-                </div>
+                
             </div>
             <!-- Order shipping -->
             <div class="order-infor-content" id="order-shipping-infor-content" style="display:none;">
-                <div class="product-infor-content">
-                    <p class="noOfOrder">Order 1</p>
-                    <div class="product-item-infor">
-                        <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">Knitted semi sheer long sleeve top in dark grey</span>
-                            <span class="product-color-size">
-                                <span class="product-color" style="font-size: 16px; color: #777070;">Dark</span>
-                                <span style="font-size: 16px; color: #777070;">/</span>
-                                <span class="product-size" style="font-size: 16px; color: #777070;">L</span>
-                            </span>
-                        </span>
-                        <span class="produc-quantity">x1</span>
-                        <span class="produc-total-prie">Total price: 300.000đ</span>
-                    </div>
-                    <div class="product-item-infor">
-                        <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">Western suede look jacket in brown</span>
-                            <span class="product-color-size">
-                                <span class="product-color" style="font-size: 16px; color: #777070;">Dark</span>
-                                <span style="font-size: 16px; color: #777070;">/</span>
-                                <span class="product-size" style="font-size: 16px; color: #777070;">L</span>
-                            </span>
-                        </span>
-                        <span class="produc-quantity">x2</span>
-                        <span class="produc-total-prie">Total price: 600.000đ</span>
-                    </div>
-                    <hr>
-                    <p class="produc-total-order" style="font-weight:bold; text-align:end;">Total price: 900.000đ</p>
-                </div>
-                <div class="product-infor-content">
-                    <p class="noOfOrder">Order 2</p>
-                    <div class="product-item-infor">
-                        <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">Knitted semi sheer long sleeve top in dark grey</span>
-                            <span class="product-color-size">
-                                <span class="product-color" style="font-size: 16px; color: #777070;">Dark</span>
-                                <span style="font-size: 16px; color: #777070;">/</span>
-                                <span class="product-size" style="font-size: 16px; color: #777070;">L</span>
-                            </span>
-                        </span>
-                        <span class="produc-quantity">x1</span>
-                        <span class="produc-total-prie">Total price: 300.000đ</span>
-                    </div>
-                    <hr>
-                    <p class="produc-total-order" style="font-weight:bold; text-align:end;">Total price: 300.000đ</p>
-                </div>
+                
             </div>
             <!-- End order shipping -->
         </div>
