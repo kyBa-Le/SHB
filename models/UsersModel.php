@@ -4,13 +4,13 @@ namespace app\models;
 
 use app\core\Model;
 
-class UserModel extends Model
+class UsersModel extends Model
 {
     protected $table = 'users';
 
     public function saveUser($email, $username, $password, $fullName, $phone, $province, $district, $detailed_address ) {
         $sql = "INSERT INTO $this->table (`email`, `username`, `password`, `fullName`, `phone`, `avatar_link`, `province`, `district`, `detailed_address`)
-                VALUES ('$email', '$username', '$password', '$fullName', '$phone', NULL, '$province', '$district', '$detailed_address')";
+                VALUES ('$email', '$username', '$password', '$fullName', '$phone', 'images/avatarDefault.png', '$province', '$district', '$detailed_address')";
         return $this->excuteSql($sql);
     }
 

@@ -7,6 +7,12 @@
     overflow: hidden;
     padding: 20px;
 }
+.product-reviews-detail {
+    min-height: 20vh;
+    max-height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 .product-header {
     display: flex;
 }
@@ -104,7 +110,7 @@
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
 }
-.review-detail img {
+.review-detail .user-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -181,14 +187,24 @@
         height: 45px;
     }
     .review-detail {
-        flex-direction: column;
         align-items: flex-start;
     }
-    .review-detail img {
+    .review-detail .user-avatar {
         width: 40px;
         height: 40px;
     }
     #addToCartMessage {
         text-align: center;
     }
+    .image-review {
+        width: 100px;
+        height: 100px;
+    }
+}
+.image-review {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    border: 1px solid #b7b7b7;
+    object-fit: cover;
 }

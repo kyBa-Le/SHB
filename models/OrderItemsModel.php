@@ -2,7 +2,7 @@
 namespace app\models;
 
 use app\core\Model;
-class OrderItemModel extends Model {
+class OrderItemsModel extends Model {
     protected $table = 'order_items';
 
     public function getOrderItemsByUserId($userId){
@@ -36,7 +36,7 @@ class OrderItemModel extends Model {
 
     public function getExistingOrderItem($userId, $size, $productId,  $productColor) {
         $sql = "SELECT * FROM $this->table 
-            WHERE user_id = $userId AND size ='$size' AND product_id = $productId AND product_color = '$productColor'";
+            WHERE user_id = $userId AND size ='$size' AND product_id = $productId AND product_color = '$productColor' AND status='Pending'";
         return $this->queryOneRow($sql);
     }
 }
