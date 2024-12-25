@@ -18,7 +18,7 @@ async function renderOrderItems(orderItems) {
                     <img class="item-image ms-4" src="${item['product_image_link']}">
                 </div>
                 <div class="d-flex flex-column justify-content-between">
-                    <h5 onclick="{window.location.href='/detailed-product?product-id=' + ${item['product_id']}}">${item['product_name']}</h5>
+                    <h5 onclick="{window.location.href='/products/' + ${item['product_id']}}" style="cursor: pointer">${item['product_name']}</h5>
                     <div  class="cart-item-detail">
                         <p>${item['product_color']} / ${item['size']}</p>
                         <p class="money" data-value="${item['unit_price']}" id="unit-price-${item['id']}">${moneyFormater(item['unit_price'])} đ</p>

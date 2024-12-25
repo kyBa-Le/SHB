@@ -1,8 +1,7 @@
 import {getData, moneyFormater, sendData} from "./components.js";
 
 // This place is to get product and show to the screen
-let params = new URLSearchParams(window.location.search);
-let productPath = '/api' + window.location.pathname + "?" + params;
+let productPath = '/api' + window.location.pathname;
 let detailedProduct = await getData(productPath);
 let data = document.getElementById('product-details-data');
 let productName = document.getElementById('product-name-detail')
@@ -36,8 +35,8 @@ function changeData(color , image_link, size) {
 }
 
 // This place is to get product colors to show to the small image under the
-let param = new URLSearchParams(window.location.search);
-let productColorPath = '/api/product-colors?' + param;
+let productId = detailedProduct['id'];
+let productColorPath = '/api/product-colors?product-id=' + productId;
 let productColors = await getData(productColorPath);
 
 let subproduct = document.getElementById('sub-product-image');
@@ -135,17 +134,12 @@ addToCartBtn.addEventListener('click', async function () {
         productImageLink: data.dataset.imageLink,
         productColor: data.dataset.color
     }, false);
-    if (response['isAddToCartSuccess'] === true) {
+    let messageColor = response['isAddToCartSuccess'] ? 'green' : 'red';
+    document.getElementById('addToCartMessage').innerHTML = '';
+    document.getElementById('addToCartMessage').innerHTML += `<span style="color: ${messageColor};">${response['message']}</span>`;
+    setTimeout(() => {
         document.getElementById('addToCartMessage').innerHTML = '';
-        document.getElementById('addToCartMessage').innerHTML += `<span style="color: green;">${response['success']}</span>`;
-        // Chờ 2 giây (2000 ms) trước khi xóa nội dung
-        setTimeout(() => {
-            document.getElementById('addToCartMessage').innerHTML = '';
-        }, 1500);
-    } else {
-        document.getElementById('addToCartMessage').innerHTML = '';
-        document.getElementById('addToCartMessage').innerHTML += `<span style="color: red;">${response['error']}</span>`;
-    }
+    }, 1500);
 });
 
 

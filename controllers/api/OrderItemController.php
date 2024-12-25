@@ -48,15 +48,15 @@ class OrderItemController extends BaseController
         if ($userId) {
             $idAddedToCart = $this->orderItemService->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $userId);
             if ($idAddedToCart) {
-                $message['success'] = 'Successfully added to cart';
+                $message['message'] = 'Successfully added to cart';
                 $message['isAddToCartSuccess'] = true;
             } else {
-                $message['success'] = 'Failed to add to cart';
+                $message['message'] = 'Failed to add to cart, please check and try again !';
                 $message['isAddToCartSuccess'] = false;
             }
         } else {
             $message['isUpdate'] = false;
-            $message['error'] = 'Please log in before adding items to the cart';
+            $message['message'] = 'Please log in before adding items to the cart';
         }
         $this->response->sendJson($message);
     }

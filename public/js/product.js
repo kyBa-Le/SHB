@@ -25,7 +25,7 @@ function renderProducts(products) {
         let name = product['product_name'];
         let price = moneyFormater(product['price']);
         let purchases = product['purchases'];
-        let detailedLink = '/detailed-product?product-id=' + product['id'];
+        let detailedLink = '/products/' + product['id'];
         document.getElementById('category-products-container').innerHTML += `<div class="category-product-card">
             <div class="product-image" style="background-image: url(${image_link})" onclick="{window.location.href='${detailedLink}'}"></div>
             <div class="product-contents">
