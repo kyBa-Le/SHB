@@ -1,5 +1,5 @@
 .editProfile {
-    height: 100vh;
+    min-height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,5 +104,8 @@ form .form {
     .form-group-select select,
     .form-group-select input {
         width: 100%;
+    }
+    .form-container-profile {
+        padding: 10px;
     }
 }

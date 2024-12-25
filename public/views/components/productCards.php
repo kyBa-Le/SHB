@@ -20,13 +20,13 @@
             padding: 5px 0;
             border: 1px solid #0F0E0E;
             background-color: white;
-            transition: all 0.5s ease-in;
+            transition: all 0.1s ease-in;
         }
         button:hover {
             background-color: #0F0E0E;
             border: none;
             color: white;
-            transition: all 0.5s ease-in;
+            transition: all 0.1s ease-in;
         }
     }
     .category-product-name {
