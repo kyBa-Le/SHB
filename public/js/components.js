@@ -122,3 +122,7 @@ export async function deleteData (path, data = null, isDisplayWaiting = false) {
 export function moneyFormater(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+export function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

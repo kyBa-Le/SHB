@@ -41,6 +41,7 @@ $app->router->get('/product/search', [$productController, 'search']);
 $app->router->get('/products/{id}', 'details');
 $app->router->get('/product/filter', [$productController, 'filter']);
 $app->router->get('/cart', 'cart');
+$app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
@@ -56,11 +57,15 @@ $app->router->get('/api/products/{id}', function ($id) {
 });
 $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors']);
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
+$app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
+$app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
 $app->router->post('/api/users/otp', [$apiUserController, 'getOTPCode']);
 $app->router->post('/api/order-items', [$apiOrderItemController,'addToCart']);
+$app->router->post('/api/reviews', [new \app\controllers\api\ReviewController(), 'reviewOrder']); //todo: change the callback
+$app->router->post('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'reviewOrder']); //todo: remove this
 
 // put API
 

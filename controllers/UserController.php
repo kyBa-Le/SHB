@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\Request;
-use app\models\UserModel;
+use app\models\UsersModel;
 use app\services\emailService\EmailSender;
 use app\services\emailService\SignUpEmail;
 use app\services\UserService;
@@ -17,7 +17,7 @@ class UserController extends Controller
     private $userService;
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->userModel = new UsersModel();
         $this->userValidation = new UserValidation();
         $this->userService = new UserService();
     }
