@@ -156,7 +156,7 @@ function updatePurchaseButton() {
         totalQuantity += quantity;
         totalPricePurchase += totalPrice ;
     })
-    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' ';
+    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' đ';
     document.getElementById('quantity-purchase').innerHTML = `Purchases (${totalQuantity})`;
 }
 
@@ -216,3 +216,35 @@ orderShippingBtn.addEventListener('click', function () {
     orderPaidBtn.style.backgroundColor = 'white';
     orderPaidBtn.style.color = 'black';
 });
+
+
+document.getElementById('quantity-purchase').addEventListener('click', function() {
+    const checkedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+    const selectedIds = [];
+    checkedCheckboxes.forEach((checkbox) => {
+        let id = checkbox.dataset.id; // Lấy id từ thuộc tính data-id của checkbox
+        selectedIds.push(id); // Thêm id vào mảng selectedIds
+    });
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/payment'; // Địa chỉ nhận request
+
+    // Tạo input ẩn để chứa dữ liệu ids
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'ids';  // Tên của trường sẽ được gửi lên server
+    input.value = JSON.stringify(selectedIds);  // Chuyển mảng thành chuỗi JSON
+    form.appendChild(input);
+
+    // Thêm form vào body và submit
+    document.body.appendChild(form);
+
+    // Gửi form đi mà không cần tải lại trang
+    form.submit();  // Tương tự như submit form truyền thống
+
+});
+
+
+
+

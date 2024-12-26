@@ -3,7 +3,7 @@
         header('Location: /login');
         exit;
     }
-    $data = $_SESSION['user'];
+    $data = $_SESSION['user'];  
 ?>
 <link rel="stylesheet" href="css/payment.css">
 
@@ -38,30 +38,19 @@
     <h4>Product</h4>
     <div class="order-summary">
         <?php
-            if ($isArray === false) {
-                $imageLink = $orderItems['productImageLink'];
-                $price = (int) $orderItems['unitPrice'];
-                $quantity = (int) $orderItems['quantity'];
-                $name = $orderItems['productName'];
-                $color = $orderItems['productColor'];
-                $total = $quantity * $price;
-                echo "<div class='item'>
-                        <img src='$imageLink' alt='Product'>
-                        <div class='details'>
-                            <span class='money'>$price đ</span>
-                            <p>$name</p>
-                            <p>$color / M</p>
-                            <p>x $quantity</p> 
-                        </div>
-                        <p>Total: <span> $total  đ</span></p>
-                    </div>";    
-            } else {
+        
+        if (is_array($orderItems) && !empty($orderItems)) {
+            // Kiểm tra nếu $orderItems là một mảng
+            // Nếu phần tử đầu tiên là một mảng associative
+            if (isset($orderItems[0]) && is_array($orderItems[0]) && array_keys($orderItems[0]) !== range(0, count($orderItems[0]) - 1)) {
+                // Nếu phần tử đầu tiên là mảng associative
+                // Điều này nghĩa là $orderItems là một mảng chứa các mảng associative
                 foreach ($orderItems as $value) {
-                    $imageLink = $value['productImageLink'];
-                    $price = (int) $value['unitPrice'];
+                    $imageLink = $value['product_image_link'];
+                    $price = (int) $value['unit_price'];
                     $quantity = (int) $value['quantity'];
-                    $name = $value['productName'];
-                    $color = $value['productColor'];
+                    $name = $value['product_name'];
+                    $color = $value['product_color'];
                     $total = $quantity * $price;
                     echo "<div class='item'>
                             <img src='$imageLink' alt='Product'>
@@ -71,10 +60,32 @@
                                 <p>$color / M</p>
                                 <p>x $quantity</p> 
                             </div>
-                            <p>Total: <span> $total  đ</span></p>
-                        </div>";    
+                            <p>Total: <span> $total đ</span></p>
+                        </div>";
                 }
+            } else {
+                // Nếu $orderItems chỉ là một mảng associative (không phải mảng của các mảng)
+                $imageLink = $orderItems['product_image_link'];
+                $price = (int) $orderItems['unit_price'];
+                $quantity = (int) $orderItems['quantity'];
+                $name = $orderItems['product_name'];
+                $color = $orderItems['product_color'];
+                $total = $quantity * $price;
+                echo "<div class='item'>
+                        <img src='$imageLink' alt='Product'>
+                        <div class='details'>
+                            <span class='money'>$price đ</span>
+                            <p>$name</p>
+                            <p>$color / M</p>
+                            <p>x $quantity</p> 
+                        </div>
+                        <p>Total: <span> $total đ</span></p>
+                    </div>";
             }
+        } else {
+            echo "Không có dữ liệu sản phẩm.";
+        }
+        
         ?>
     </div>
   </div>

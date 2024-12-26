@@ -31,7 +31,7 @@
             <p class="col-5" id="total-price-purchase" style="color: #FF0000">0 VND</p>
         </div>
         <div class="mt-5 mb-2 w-100 d-flex justify-content-center align-items-center">
-            <button class="w-75 p-2" style="color: white; background: black" id="quantity-purchase" onclick="window.location.href='/payment'">Purchases (0)</button>
+            <button class="w-75 p-2" style="color: white; background: black" id="quantity-purchase">Purchases (0)</button>
         </div>
     </div>
 </div>

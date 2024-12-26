@@ -58,4 +58,9 @@ class OrderItemService
         $productId = (int) $productId;
         return $this->orderItemsModel->getExistingOrderItem($userId, $size, $productId,  $productColor);
     }
+
+    public function getOrderItemById($id) {
+        $id = (int) $id;
+        return $this->orderItemsModel->getOrderItemById($id);
+    }
 }

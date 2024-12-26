@@ -149,13 +149,13 @@ let orderButton = document.getElementById('orderBtn').addEventListener('click', 
     form.method = 'POST';
     form.action = '/payment';
     const productData = [{
-        productName: detailedProduct['product_name'],
+        product_name: detailedProduct['product_name'],
         quantity: quantityBuyValue,
-        unitPrice: detailedProduct['price'],
+        unit_price: detailedProduct['price'],
         size: data.dataset.size,
-        productId: detailedProduct['id'],
-        productImageLink: data.dataset.imageLink,
-        productColor: data.dataset.color
+        product_id: detailedProduct['id'],
+        product_image_link: data.dataset.imageLink,
+        product_color: data.dataset.color
     }];
     productData.forEach(item => {
         Object.keys(item).forEach(key => {
