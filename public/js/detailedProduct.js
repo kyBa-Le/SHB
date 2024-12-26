@@ -142,4 +142,33 @@ addToCartBtn.addEventListener('click', async function () {
     }, 1500);
 });
 
+// handle order button
+let orderButton = document.getElementById('orderBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    let form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/payment';
+    const productData = [{
+        productName: detailedProduct['product_name'],
+        quantity: quantityBuyValue,
+        unitPrice: detailedProduct['price'],
+        size: data.dataset.size,
+        productId: detailedProduct['id'],
+        productImageLink: data.dataset.imageLink,
+        productColor: data.dataset.color
+    }];
+    productData.forEach(item => {
+        Object.keys(item).forEach(key => {
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = item[key];
+            form.appendChild(input);
+        });
+    });
+    document.body.appendChild(form);
+    form.submit();
+});
+
+
 

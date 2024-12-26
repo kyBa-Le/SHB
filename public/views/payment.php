@@ -6,6 +6,7 @@
     $data = $_SESSION['user'];
 ?>
 <link rel="stylesheet" href="css/payment.css">
+
 <div class="wrapper">
   <div class="payment-method-container">
     <div class="payment-method">
@@ -27,7 +28,7 @@
         <input type="text" placeholder="Note">
         <div>
           <h3>Order Summary</h3>
-          <p>Order Total: <span>885,000₫</span></p>
+          <p>Order Total: <span class="money"><?php echo $totalPrice ?>₫</span></p>
         </div>
         <button class="btn-buy">Order</button>
       </form>
@@ -36,66 +37,45 @@
   <div class="order-summary-container">
     <h4>Product</h4>
     <div class="order-summary">
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
+        <?php
+            if ($isArray === false) {
+                $imageLink = $orderItems['productImageLink'];
+                $price = (int) $orderItems['unitPrice'];
+                $quantity = (int) $orderItems['quantity'];
+                $name = $orderItems['productName'];
+                $color = $orderItems['productColor'];
+                $total = $quantity * $price;
+                echo "<div class='item'>
+                        <img src='$imageLink' alt='Product'>
+                        <div class='details'>
+                            <span class='money'>$price đ</span>
+                            <p>$name</p>
+                            <p>$color / M</p>
+                            <p>x $quantity</p> 
+                        </div>
+                        <p>Total: <span> $total  đ</span></p>
+                    </div>";    
+            } else {
+                foreach ($orderItems as $value) {
+                    $imageLink = $value['productImageLink'];
+                    $price = (int) $value['unitPrice'];
+                    $quantity = (int) $value['quantity'];
+                    $name = $value['productName'];
+                    $color = $value['productColor'];
+                    $total = $quantity * $price;
+                    echo "<div class='item'>
+                            <img src='$imageLink' alt='Product'>
+                            <div class='details'>
+                                <span class='money'>$price đ</span>
+                                <p>$name</p>
+                                <p>$color / M</p>
+                                <p>x $quantity</p> 
+                            </div>
+                            <p>Total: <span> $total  đ</span></p>
+                        </div>";    
+                }
+            }
+        ?>
     </div>
   </div>
 </div>

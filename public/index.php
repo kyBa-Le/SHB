@@ -48,6 +48,7 @@ $app->router->post('/sign-up', [$userController, 'signUp']);
 $app->router->post('/login', [$userController, 'login']);
 $app->router->post('/user/edit',[$userController, 'editProfile']);
 $app->router->post('/user/forgot-password', [$userController,'saveNewPassword']);
+$app->router->post('/payment', [new app\controllers\PaymentController(), 'show']);
 
 // API REQUEST
 // get API
