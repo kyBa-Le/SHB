@@ -1,3 +1,10 @@
+<?php 
+    if(!$authentication) {
+        header('Location: /login');
+        exit;
+    }
+    $data = $_SESSION['user'];
+?>
 <link rel="stylesheet" href="css/payment.css">
 <div class="wrapper">
   <div class="payment-method-container">
@@ -6,14 +13,14 @@
       <label><input type="radio" name="payment" value="cod" checked> COD</label>
       <label><input type="radio" name="payment" value="momo"> Momo</label>
       <form>
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Phone Number">
+        <input type="text" placeholder="Full Name" value="<?php echo $data['fullName'] ?? '' ?>">
+        <input type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
         <div class="form-group form-group-select">
             <select name="province" id="province">
-                <option value="" disabled selected>Province</option>
+                <option value="<?php echo $data['province'] ?? '' ?>"><?php echo $data['province'] ?? '' ?></option>
             </select>
             <select name="district" id="district">
-                <option value="" disabled selected>District</option>
+                <option value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
             </select>
             <input type="text" name="detailed_address" placeholder="Detail address">
         </div>
@@ -22,7 +29,7 @@
           <h3>Order Summary</h3>
           <p>Order Total: <span>885,000₫</span></p>
         </div>
-        <button class="btn-buy">Buy Now</button>
+        <button class="btn-buy">Order</button>
       </form>
     </div>
   </div>
@@ -92,3 +99,4 @@
     </div>
   </div>
 </div>
+<script src="js/payment.js" type="module"></script>
