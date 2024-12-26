@@ -41,6 +41,7 @@ $app->router->get('/product/search', [$productController, 'search']);
 $app->router->get('/products/{id}', 'details');
 $app->router->get('/product/filter', [$productController, 'filter']);
 $app->router->get('/cart', 'cart');
+$app->router->get('/payment', 'payment');
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
