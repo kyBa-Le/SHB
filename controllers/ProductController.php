@@ -15,22 +15,22 @@ class ProductController extends Controller
         $this->productService = new ProductService();
         $this->request = new Request();
     }
-    private function product($category) {
+    private function products($category) {
         $products = $this->productService->getProductsByCondition($category, 1, 6);
         $data = ['products' => $products, 'category' => $category];
         return $this->render('product', $data);
     }
 
     public function women() {
-        return $this->product('Women');
+        return $this->products('Women');
     }
 
     public function men() {
-        return $this->product('Men');
+        return $this->products('Men');
     }
 
     public function children() {
-        return $this->product('Children');
+        return $this->products('Children');
     }
 
     public function search() {

@@ -35,4 +35,23 @@
         </div>
     </div>
 </div>
+<div class="container-track-order">
+    <div class="container-track-order-content" style="font-size: 18px;">
+        <div class="btn-order">
+            <button id="btn-order-delivered" class="btn-order-paid" style="background-color:#0F0E0E;color:white;">Delivered Orders</button>
+            <button id="btn-order-shipping" class="btn-order-shipping" style="background-color:white;">Shipping Orders</button>
+        </div>
+        <div class="order-infor">
+            <!-- Order paid -->
+            <div class="order-infor-content" id="order-delivered-infor-content">
+                
+            </div>
+            <!-- Order shipping -->
+            <div class="order-infor-content" id="order-shipping-infor-content" style="display:none;">
+                
+            </div>
+            <!-- End order shipping -->
+        </div>
+    </div>
+</div>
 <script type="module" src="js/cart.js"></script>
