@@ -50,14 +50,8 @@
         <ul id="product-detail-description">Highlighted features of oversized unisex T-shirts.
         </ul>
     </div>
-    <div class="product-reviews-detail">
+    <div class="product-reviews-detail" id="review-container">
         <h4>Product reviews</h4>
-        <div class="review-detail">
-            <img src="https://via.placeholder.com/40" alt="User">
-            <div class="review-content-detail">
-                <h5>Username</h5>
-                <p>Chất lượng quá tuyệt vời! Áo rất đẹp và mình sẽ ủng hộ thêm nhiều lần nữa.</p>
-            </div>
-        </div>
+
     </div>
 <script src="js/detailedProduct.js" type="module"></script>

@@ -2,7 +2,7 @@
 
 namespace app\validation;
 
-use app\models\UserModel;
+use app\models\UsersModel;
 
 class UserValidation
 {
@@ -16,7 +16,7 @@ class UserValidation
     public function validateSignUp($user): array
     {
         $errors = array();
-        $userModel = new UserModel();
+        $userModel = new UsersModel();
         if (empty($user['email'])) {
             $errors['email'] = 'must not be empty';
         }

@@ -20,7 +20,7 @@ create table Users (
     password VARCHAR(255) NOT NULL,
     fullName VARCHAR(50) NOT NULL,
     phone VARCHAR(10),
-    avatar_link VARCHAR(255),
+    avatar_link VARCHAR(255) DEFAULT 'images/avatarDefault.png',
     province VARCHAR(255),
     district VARCHAR(255),
     detailed_address VARCHAR(255)
@@ -63,6 +63,21 @@ CREATE TABLE Order_items (
     CONSTRAINT fk_orderItems_users FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
+CREATE TABLE Reviews (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    order_items_id INT,
+    content TEXT,
+    user_id INT,
+    CONSTRAINT fk_reviews_orderItems FOREIGN KEY (order_items_id) REFERENCES order_items(id),
+    CONSTRAINT fk_reviews_users FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE Review_images (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    image_link VARCHAR(255),
+    review_id INT,
+    CONSTRAINT fk_reviewsImages_review FOREIGN KEY (review_id) REFERENCES reviews(id)
+);
 
 INSERT INTO Products (product_name, category, price, image_link, purchases, quantity, color)
 VALUES
@@ -158,5 +173,22 @@ VALUES
     ('Baggy Jeans', 2, 1600000, 'L', 1, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$', 'DARK', 1, 1, 'Shipping'),
     ('Oversized knitted midaxi dress', 1, 900000, 'M', 2, 'https://images.asos-media.com/products/arket-oversized-knitted-midaxi-dress-with-side-splits-in-black/207139601-2?$n_480w$', 'DARK', 1, 1, 'Shipping'),
     ('Mini King Teddy Crew Pant Set', 3, 1500000, 'S', 4, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-27-24_S6_2_RB4F22_Black_P_RA_AA_09-16-53_57438_PXF.jpg', 'DARK', 3, 3, 'Shipping'),
-    ('Logo backprint t-shirt', 2, 900000, 'XL', 8, 'https://images.asos-media.com/products/calvin-klein-jeans-logo-backprint-t-shirt-in-dark-brown-asos-exclusive/207312118-2?$n_480w$', 'DARK', 4, 4, 'Delivered'),
-    ('Mini Mock Neck Knit Dress', 4, 800000, 'M', 24, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-20-23Studio6_RA_AA_15-01-53_57_THRD005_Black_39419_DG.jpg', 'DARK', 4, 4, 'Delivered');
+    ('Logo backprint t-shirt', 2, 900000, 'XL', 8, 'https://images.asos-media.com/products/calvin-klein-jeans-logo-backprint-t-shirt-in-dark-brown-asos-exclusive/207312118-2?$n_480w$', 'DARK', 4, 1, 'Delivered'),
+    ('Mini Mock Neck Knit Dress', 4, 800000, 'M', 24, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-20-23Studio6_RA_AA_15-01-53_57_THRD005_Black_39419_DG.jpg', 'DARK', 4, 4, 'Delivered'),
+    ('Mini Mock Neck Knit Dress', 4, 800000, 'M', 24, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-20-23Studio6_RA_AA_15-01-53_57_THRD005_Black_39419_DG.jpg', 'DARK', 4, 1, 'Delivered');
+
+INSERT INTO Reviews (order_items_id, content, user_id)
+VALUES 
+(1, 'Great quality, fits perfectly!', 1),
+(1, 'Nice product, but size runs large.', 1),
+(1, 'Color slightly different from the image.', 1),
+(1, 'Very comfortable, would recommend.', 1),
+(1, 'Not worth the price, returned it.', 1);
+
+INSERT INTO Review_images (image_link, review_id)
+VALUES
+('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 1),
+('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 2),
+('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 3),
+('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 4),
+('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 5);

@@ -2,7 +2,7 @@
 
 namespace app\services;
 
-use app\models\UserModel;
+use app\models\UsersModel;
 use app\validation\UserValidation;
 
 class UserService
@@ -11,7 +11,7 @@ class UserService
     private $userValidation;
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->userModel = new UsersModel();
         $this->userValidation = new UserValidation();
     }
 
