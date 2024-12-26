@@ -8,11 +8,18 @@
       <form>
         <input type="text" placeholder="Name">
         <input type="text" placeholder="Phone Number">
-        <input type="text" placeholder="Address">
+        <div class="form-group form-group-select">
+            <select name="province" id="province">
+                <option value="" disabled selected>Province</option>
+            </select>
+            <select name="district" id="district">
+                <option value="" disabled selected>District</option>
+            </select>
+            <input type="text" name="detailed_address" placeholder="Detail address">
+        </div>
         <input type="text" placeholder="Note">
         <div>
           <h3>Order Summary</h3>
-          <p>Product name: <span>295,000₫</span></p>
           <p>Order Total: <span>885,000₫</span></p>
         </div>
         <button class="btn-buy">Buy Now</button>
@@ -20,56 +27,68 @@
     </div>
   </div>
   <div class="order-summary-container">
-    <h4>3 ITEMS</h4>
+    <h4>Product</h4>
     <div class="order-summary">
-      <div class="item">
-        <img src="https://via.placeholder.com/50" alt="Product">
-        <div class="details">
-          <p>Product name</p>
-          <p>Black / M</p>
-          <p class="price">295,000₫</p>
+        <div class="item">
+            <img src="https://via.placeholder.com/50" alt="Product">
+            <div class="details">
+                <span>295.000</span>
+                <p>Product name</p>
+                <p>Black / M</p>
+                <p>x 1</p> 
+            </div>
+            <p>Total: <span>295.000đ</span></p>
         </div>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/50" alt="Product">
-        <div class="details">
-          <p>Product name</p>
-          <p>Black / M</p>
-          <p class="price">295,000₫</p>
+        <div class="item">
+            <img src="https://via.placeholder.com/50" alt="Product">
+            <div class="details">
+                <span>295.000</span>
+                <p>Product name</p>
+                <p>Black / M</p>
+                <p>x 1</p> 
+            </div>
+            <p>Total: <span>295.000đ</span></p>
         </div>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/50" alt="Product">
-        <div class="details">
-          <p>Product name</p>
-          <p>Black / M</p>
-          <p class="price">295,000₫</p>
+        <div class="item">
+            <img src="https://via.placeholder.com/50" alt="Product">
+            <div class="details">
+                <span>295.000</span>
+                <p>Product name</p>
+                <p>Black / M</p>
+                <p>x 1</p> 
+            </div>
+            <p>Total: <span>295.000đ</span></p>
         </div>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/50" alt="Product">
-        <div class="details">
-          <p>Product name</p>
-          <p>Black / M</p>
-          <p class="price">295,000₫</p>
+        <div class="item">
+            <img src="https://via.placeholder.com/50" alt="Product">
+            <div class="details">
+                <span>295.000</span>
+                <p>Product name</p>
+                <p>Black / M</p>
+                <p>x 1</p> 
+            </div>
+            <p>Total: <span>295.000đ</span></p>
         </div>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/50" alt="Product">
-        <div class="details">
-          <p>Product name</p>
-          <p>Black / M</p>
-          <p class="price">295,000₫</p>
+        <div class="item">
+            <img src="https://via.placeholder.com/50" alt="Product">
+            <div class="details">
+                <span>295.000</span>
+                <p>Product name</p>
+                <p>Black / M</p>
+                <p>x 1</p> 
+            </div>
+            <p>Total: <span>295.000đ</span></p>
         </div>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/50" alt="Product">
-        <div class="details">
-          <p>Product name</p>
-          <p>Black / M</p>
-          <p class="price">295,000₫</p>
+        <div class="item">
+            <img src="https://via.placeholder.com/50" alt="Product">
+            <div class="details">
+                <span>295.000</span>
+                <p>Product name</p>
+                <p>Black / M</p>
+                <p>x 1</p> 
+            </div>
+            <p>Total: <span>295.000đ</span></p>
         </div>
-      </div>
     </div>
   </div>
 </div>
