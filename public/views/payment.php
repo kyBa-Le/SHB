@@ -3,7 +3,11 @@
         header('Location: /login');
         exit;
     }
-    $data = $_SESSION['user'];  
+    $data = $_SESSION['user'];
+    if (!isset($orderItems)) {
+        header('Location: /');
+        exit;
+    }
 ?>
 <link rel="stylesheet" href="css/payment.css">
 
@@ -38,7 +42,6 @@
     <h4>Product</h4>
     <div class="order-summary">
         <?php
-        
         if (is_array($orderItems) && !empty($orderItems)) {
             // Kiểm tra nếu $orderItems là một mảng
             // Nếu phần tử đầu tiên là một mảng associative
@@ -52,7 +55,10 @@
                     $name = $value['product_name'];
                     $color = $value['product_color'];
                     $total = $quantity * $price;
-                    echo "<div class='item' data-isNew='false'>
+                    $size = $value['size'];
+                    $product_id = $value['product_id'];
+                    $id = $value['id'];
+                    echo "<div class='item'  data-id='$id' data-is-new='false' data-product-name='$name' data-quantity='$quantity', data-unit-price='$price', data-size='$size', data-product-id='$product_id', data-image-link='$imageLink', data-product-color='$color'>
                             <img src='$imageLink' alt='Product'>
                             <div class='details'>
                                 <span class='money'>$price đ</span>
@@ -73,7 +79,7 @@
                 $total = $quantity * $price;
                 $size = $orderItems['size'];
                 $product_id = $orderItems['product_id'];
-                echo "<div class='item' data-isNew='true' data-product-name=$name data-quantit=$quantity, data-unit-price=$price, data-size=$size, data-product-id=$product_id, data-image-link=$imageLink, data-product-color=$color>
+                echo "<div class='item' data-is-new='true' data-product-name=$name data-quantity=$quantity, data-unit-price=$price, data-size=$size, data-product-id=$product_id, data-image-link=$imageLink, data-product-color=$color>
                         <img src='$imageLink' alt='Product'>
                         <div class='details'>
                             <span class='money'>$price đ</span>

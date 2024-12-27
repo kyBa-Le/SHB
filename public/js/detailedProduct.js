@@ -126,13 +126,13 @@ plusBtn.addEventListener('click', function () {
 let addToCartBtn = document.getElementById('addToCartBtn');
 addToCartBtn.addEventListener('click', async function () {
     let response = await sendData('/api/order-items', {
-        productName: detailedProduct['product_name'],
+        product_name: detailedProduct['product_name'],
         quantity: quantityBuyValue,
-        unitPrice: detailedProduct['price'],
+        unit_price: detailedProduct['price'],
         size: data.dataset.size,
-        productId: detailedProduct['id'],
-        productImageLink: data.dataset.imageLink,
-        productColor: data.dataset.color
+        product_id: detailedProduct['id'],
+        product_image_link: data.dataset.imageLink,
+        product_color: data.dataset.color
     }, false);
     let messageColor = response['isAddToCartSuccess'] ? 'green' : 'red';
     document.getElementById('addToCartMessage').innerHTML = '';

@@ -22,6 +22,10 @@ function renderDistrict(province) {
 
 // xử lý khi ấn nút mua hàng
 document.getElementById('order-btn').addEventListener('click',async function() {
+    const form = this.closest('form');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+    }
     let method = document.querySelector('input[name="payment"]:checked').value;    let fullName = document.getElementById('full-name').value;
     let phone = document.getElementById('phone-number').value;
     let province = document.getElementById('province').value;
@@ -45,24 +49,27 @@ document.getElementById('order-btn').addEventListener('click',async function() {
     } else if(method === 'COD') {
         response = await sendData('/api/payments', data);
     }
-    if (response['isPaid'] === true) {
+    if (response['isPaid'] !== false) {
         let orderItems = document.querySelectorAll('.item');
         let paymentId = response['payment']['id'];
         for (let item of orderItems) {
-            if (item.dataset.isNew == false) {
-                await patchData('/api/order-items/' + item['id'], {payment_id:paymentId});
+            let dataSet = item.dataset;
+            let data = {
+                product_name: dataSet.productName,
+                quantity: dataSet.quantity,
+                unit_price: dataSet.unitPrice,
+                size: dataSet.size,
+                product_id: dataSet.productId,
+                product_image_link: dataSet.imageLink,
+                product_color: dataSet.productColor,
+                payment_id : paymentId
+            }
+            console.log(dataSet.isNew);
+            if (dataSet.isNew  == false) {
+                console.log(dataSet.id);
+                response = await patchData('/api/order-items/' + dataSet.id, data);
             } else {
-                let dataSet = item.dataset;;
-                let data = {
-                    product_name: dataSet.productName,
-                    quantity: dataSet.quantity,
-                    unit_price: dataSet.unitPrice,
-                    size: dataSet.size,
-                    product_id: dataSet.productId,
-                    product_image_link: dataSet.productImageLink,
-                    product_color: dataSet.productColor
-                }
-                await sendData('/api/order-items', data);
+                response = await sendData('/api/order-items', data);
             }
         }
     }

@@ -53,7 +53,7 @@ class OrderItemService
                 $addToCart = false;
             }
         } else {
-            $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+            $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,$paymentId, $userId, $status);
         }
         return $addToCart;
     }

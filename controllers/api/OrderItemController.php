@@ -38,13 +38,13 @@ class OrderItemController extends BaseController
     public function createNewOrderItem() {
         $userId = (int) $_SESSION['user']['id'];
         $data = $this->request->getBody();
-        $productName = $data['product_name'];
-        $quantity = (int) $data['quantity'];
-        $unitPrice = (int) $data['unit_price'];
-        $size = $data['size'];
-        $productId = (int) $data['product_id'];
-        $productImageLink = $data['product_image_link'];
-        $productColor = $data['product_color'];
+        $productName = $data['product_name'] ?? null;
+        $quantity = (int) $data['quantity'] ?? null;
+        $unitPrice = (int) $data['unit_price'] ?? null;
+        $size = $data['size'] ?? null;
+        $productId = (int) $data['product_id'] ?? null;
+        $productImageLink = $data['product_image_link'] ?? null;
+        $productColor = $data['product_color'] ?? null;
         if (isset($data['payment_id']) && !empty($data['payment_id'])) {
             $paymentId = $data['payment_id'];
         } else {
