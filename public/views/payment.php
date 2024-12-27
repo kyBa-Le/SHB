@@ -14,16 +14,16 @@
       <label><input type="radio" name="payment" value="cod" checked class="payment-check"> COD</label>
       <label><input type="radio" name="payment" value="momo" class="payment-check"> Momo</label>
       <form>
-        <input id="full-name" type="text" placeholder="Full Name" value="<?php echo $data['fullName'] ?? '' ?>">
+        <input id="full-name" type="text" placeholder="Full Name"  required value="<?php echo $data['fullName'] ?? '' ?>">
         <input id="phone-number" type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
         <div class="form-group form-group-select">
             <select name="province" id="province">
-                <option value="<?php echo $data['province'] ?? '' ?>"><?php echo $data['province'] ?? '' ?></option>
+                <option  required value="<?php echo $data['province'] ?? '' ?>"><?php echo $data['province'] ?? '' ?></option>
             </select>
             <select name="district" id="district">
-                <option value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
+                <option  required value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
             </select>
-            <input type="text" name="detailed_address" placeholder="Detail address" id="detailed-address">
+            <input type="text" name="detailed_address" placeholder="Detail address" id="detailed-address"  required>
         </div>
         <input type="text" placeholder="Note" id="description">
         <div>
