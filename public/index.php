@@ -23,6 +23,7 @@ $apiUserController = new \app\controllers\api\UserController();
 $apiProductController = new \app\controllers\api\ProductController();
 $apiProductColorController = new \app\controllers\api\ProductColorController();
 $apiOrderItemController = new \app\controllers\api\OrderItemController();
+$apiPaymentController = new \app\controllers\api\PaymentController();
 
 // Create routes
 
@@ -62,7 +63,8 @@ $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsBy
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
 $app->router->post('/api/users/otp', [$apiUserController, 'getOTPCode']);
-$app->router->post('/api/order-items', [$apiOrderItemController,'addToCart']);
+$app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
+$app->router->post('/api/payments', [$apiPaymentController,'createPayment']);
 
 // put API
 
@@ -76,6 +78,8 @@ $app->router->patch('/api/order-items/{id}', function ($id) {
     (new \app\controllers\api\OrderItemController())->updateOrderItemQuantityById($id);
 });
 $app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangePassword']);
-
+$app->router->patch('/api/order-items/{id}', function ($id) {
+    (new \app\controllers\api\OrderItemController())->updateOrderItem($id);
+});
 
 $app->run();

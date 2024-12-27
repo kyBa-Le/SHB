@@ -33,11 +33,16 @@ class OrderItemService
         return $this->orderItemsModel->deleteOrderItemById($id);
     }
 
-    public function createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
-        return $this->orderItemsModel->createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId);
+    public function createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $paymentId,  $userId, $status) {
+        if ($paymentId !== NULL) {
+            $paymentId = (int) $paymentId;
+        } else {
+            $paymentId = 'NULL';
+        }
+        return $this->orderItemsModel->createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId, $userId, $status);
     }
 
-    public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,  $userId) {
+    public function addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId,  $userId, $status) {
         $existingOrderItem = $this->getExistingOrderItem($userId, $size, $productId,  $productColor);
         if ($existingOrderItem !== false) {
             $orderItemId = $existingOrderItem['id'];
@@ -57,6 +62,12 @@ class OrderItemService
         $userId = (int) $userId;
         $productId = (int) $productId;
         return $this->orderItemsModel->getExistingOrderItem($userId, $size, $productId,  $productColor);
+    }
+
+    public function updateOrderItem($paymentId, $status, $orderItem_id) {
+        $paymentId = (int) $paymentId;
+        $orderItem_id = (int) $orderItem_id;
+        return $this->orderItemsModel->updateOrderItem($paymentId, $status, $orderItem_id);
     }
 
     public function getOrderItemById($id) {
