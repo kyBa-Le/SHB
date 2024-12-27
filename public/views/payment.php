@@ -11,11 +11,11 @@
   <div class="payment-method-container">
     <div class="payment-method">
       <h4>Payment Method</h4>
-      <label><input type="radio" name="payment" value="cod" checked> COD</label>
-      <label><input type="radio" name="payment" value="momo"> Momo</label>
+      <label><input type="radio" name="payment" value="cod" checked class="payment-check"> COD</label>
+      <label><input type="radio" name="payment" value="momo" class="payment-check"> Momo</label>
       <form>
-        <input type="text" placeholder="Full Name" value="<?php echo $data['fullName'] ?? '' ?>">
-        <input type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
+        <input id="full-name" type="text" placeholder="Full Name" value="<?php echo $data['fullName'] ?? '' ?>">
+        <input id="phone-number" type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
         <div class="form-group form-group-select">
             <select name="province" id="province">
                 <option value="<?php echo $data['province'] ?? '' ?>"><?php echo $data['province'] ?? '' ?></option>
@@ -23,14 +23,14 @@
             <select name="district" id="district">
                 <option value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
             </select>
-            <input type="text" name="detailed_address" placeholder="Detail address">
+            <input type="text" name="detailed_address" placeholder="Detail address" id="detailed-address">
         </div>
-        <input type="text" placeholder="Note">
+        <input type="text" placeholder="Note" id="description">
         <div>
           <h3>Order Summary</h3>
-          <p>Order Total: <span class="money"><?php echo $totalPrice ?>₫</span></p>
+          <p>Order Total: <span class="money" data-value="<?php echo $totalPrice ?>" id="total-price"><?php echo $totalPrice ?>₫</span></p>
         </div>
-        <button class="btn-buy">Order</button>
+        <button class="btn-buy" id="order-btn">Order</button>
       </form>
     </div>
   </div>

@@ -19,3 +19,22 @@ function renderDistrict(province) {
         }); 
     }
 }
+
+// xử lý khi ấn nút mua hàng
+document.getElementById('order-btn').addEventListener('click',async function() {
+    let method = this.querySelector('.payment-check:checked').value;
+    let fullName = document.getElementById('full-name').value;
+    let phone = document.getElementById('phone-number').value;
+    let province = document.getElementById('province').value;
+    let district = document.getElementById('district').value;
+    let description = document.getElementById('description').value;
+    let totalPrice = document.getElementById('total-price').dataset.value;
+    let detailedAddress = document.getElementById('detailed-address').value;
+    let data = {total_cost: totalPrice, description:description, method:method, province:province, district:district, detailed_address:detailedAddress};
+    if (method === 'Momo') {
+
+    } else if(method === 'COD') {
+        let response = await sendData('/api/payments', data);
+    }
+
+})
