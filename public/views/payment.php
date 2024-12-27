@@ -3,10 +3,7 @@
         header('Location: /login');
         exit;
     }
-    $data = $_SESSION['user'];
-    if (!isset($orderItems)) {
-        header('Location: /');
-    }
+    $data = $_SESSION['user'];  
 ?>
 <link rel="stylesheet" href="css/payment.css">
 
@@ -17,7 +14,7 @@
       <label><input type="radio" name="payment" value="COD" checked class="payment-check"> COD</label>
       <label><input type="radio" name="payment" value="Momo" class="payment-check"> Momo</label>
       <form>
-        <input id="full-name" type="text" placeholder="Full Name" value="<?php echo $data['fullName'] ?? '' ?>" required>
+        <input id="full-name" type="text" placeholder="Full Name"  required value="<?php echo $data['fullName'] ?? '' ?>">
         <input id="phone-number" type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
         <div class="form-group form-group-select">
             <select name="province" id="province" required>
@@ -26,7 +23,7 @@
             <select name="district" id="district" required>
                 <option disabled value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
             </select>
-            <input type="text" name="detailed_address" placeholder="Detail address" id="detailed-address">
+            <input type="text" name="detailed_address" placeholder="Detail address" id="detailed-address"  required>
         </div>
         <input type="text" placeholder="Note" id="description">
         <div>
@@ -90,7 +87,6 @@
         } else {
             echo "Không có dữ liệu sản phẩm.";
         }
-        
         ?>
     </div>
   </div>
