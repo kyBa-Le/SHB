@@ -28,15 +28,22 @@ class OrderItemModel extends Model {
         return $this->queryOneRow($sql);
     }
 
-    public function createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $userId){
+    public function createNewOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId, $userId, $status){
         $sql = "INSERT INTO $this->table (product_name, quantity, unit_price, size, product_id, product_image_link, product_color, payments_id, user_id, status) 
-               VALUES ('$productName', $quantity, $unitPrice, '$size', $productId, '$productImageLink', '$productColor', NULL, $userId, 'Pending')";
+               VALUES ('$productName', $quantity, $unitPrice, '$size', $productId, '$productImageLink', '$productColor', $paymentId, $userId, '$status')";
         return $this->excuteSql($sql);
     }
 
     public function getExistingOrderItem($userId, $size, $productId,  $productColor) {
         $sql = "SELECT * FROM $this->table 
-            WHERE user_id = $userId AND size ='$size' AND product_id = $productId AND product_color = '$productColor'";
+            WHERE user_id = $userId AND size ='$size' AND product_id = $productId AND product_color = '$productColor' AND status = 'Pending'";
         return $this->queryOneRow($sql);
+    }
+
+    public function updateOrderItem($paymentId, $status, $orderItem_id) {
+        $sql = "UPDATE $this->table SET status = '$status', payments_id = $paymentId 
+                WHERE id = $orderItem_id;
+          "; 
+        return $this->excuteSql($sql);
     }
 }

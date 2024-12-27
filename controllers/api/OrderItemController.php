@@ -35,30 +35,63 @@ class OrderItemController extends BaseController
             $this->response->sendJson($id);
         }
     }
-    public function addToCart() {
+    public function createNewOrderItem() {
         $userId = (int) $_SESSION['user']['id'];
         $data = $this->request->getBody();
-        $productName = $data['productName'];
+        $productName = $data['product_name'];
         $quantity = (int) $data['quantity'];
-        $unitPrice = (int) $data['unitPrice'];
+        $unitPrice = (int) $data['unit_price'];
         $size = $data['size'];
-        $productId = (int) $data['productId'];
-        $productImageLink = $data['productImageLink'];
-        $productColor = $data['productColor'];
+        $productId = (int) $data['product_id'];
+        $productImageLink = $data['product_image_link'];
+        $productColor = $data['product_color'];
+        if (isset($data['payment_id']) && !empty($data['payment_id'])) {
+            $paymentId = $data['payment_id'];
+        } else {
+            $paymentId = NULL;
+        }
+        
         if ($userId) {
-            $idAddedToCart = $this->orderItemService->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $userId);
-            if ($idAddedToCart) {
-                $message['message'] = 'Successfully added to cart';
-                $message['isAddToCartSuccess'] = true;
+            if (!empty($paymentId)) {
+                $status = 'Shipping';
+                $createNewOrderItem = $this->orderItemService->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId,  $userId, $status);
+                if ($createNewOrderItem) {
+                    $message['message'] = 'Order successfully placed';
+                    $message['isCreateNewOrderItem'] = true;
+                } else {
+                    $message['message'] = 'Order placement unsuccessful';
+                    $message['isCreateNewOrderItem'] = false;
+                }
             } else {
-                $message['message'] = 'Failed to add to cart, please check and try again !';
-                $message['isAddToCartSuccess'] = false;
+                $status = 'Pending';
+                $idAddedToCart = $this->orderItemService->addToCart($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId, $userId, $status);
+                if ($idAddedToCart) {
+                    $message['message'] = 'Successfully added to cart';
+                    $message['isAddToCartSuccess'] = true;
+                } else {
+                    $message['message'] = 'Failed to add to cart, please check and try again !';
+                    $message['isAddToCartSuccess'] = false;
+                }
             }
         } else {
             $message['isUpdate'] = false;
-            $message['message'] = 'Please log in before adding items to the cart';
+            $message['message'] = 'Please log in and try again !';
         }
         $this->response->sendJson($message);
     }
 
+    public function updateOrderItem($id) {
+        $data = $this->request->getBody();
+        $status = 'Shipping';
+        $paymentId = $data['payment_id'];
+        $updateOrderItem = $this->orderItemService->updateOrderItem($paymentId, $status, $id);
+        if ($updateOrderItem) {
+                $message['message'] = 'Order successfully placed';
+                $message['isCreateNewOrderItem'] = true;
+            } else {
+                $message['message'] = 'Order placement unsuccessful';
+                $message['isCreateNewOrderItem'] = false;
+        }
+        $this->response->sendJson($message);
+    }
 }
