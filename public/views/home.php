@@ -38,7 +38,7 @@
             $price = $product["price"];
             $purchases = $product["purchases"];
             echo "<div>
-                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\" onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">
+                    <div class=\"product-card\" style=\"background-image: url('$imageLink');\" onclick=\"{window.location.href='/products/$id'}\">
                         <div class=\"product-card-overlay w-100 h-100\"></div>
                         <div class=\"product-card-hover\">
                             <h5 style='font-weight: bold' onclick=\"{window.location.href='/detailed-product?product-id=$id'}\">$name</h5>

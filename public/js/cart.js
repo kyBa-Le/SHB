@@ -81,7 +81,7 @@ async function renderOrderByStatus(orderItems, status, orderBodyElement) {
             }
             totalOrderPrice += itemTotalPrice;
             orderBodyElement.innerHTML += `
-                    <div class="product-item-infor mb-3">
+                    <div class="product-item-infor mb-3" onclick="{window.location.href='/products/${product['product_id']}'}" >
                         <span class="product-name-color-size d-flex flex-column">
                             <span class="product-name">${product['product_name']}</span>
                             <span class="product-color-size">
@@ -108,7 +108,7 @@ await renderOrderByStatus(orderItems, 'Shipping', orderShippingBody);
 
 async function updateQuantity (updatedQuantity, id) {
      let quantity = parseInt(updatedQuantity);
-     let orderItem = await patchData(`/api/order-items/${id}`, {quantity: quantity}, false);
+     let orderItem = await patchData(`/api/order-items/quantity/${id}`, {quantity: quantity}, false);
      let totalPrice = orderItem['quantity'] * orderItem['unit_price'];
      document.getElementById('input-quantity-' + id).value = orderItem['quantity'];
      document.getElementById('total-price-' + id).dataset.value = totalPrice;
@@ -166,7 +166,7 @@ function updatePurchaseButton() {
         totalQuantity += quantity;
         totalPricePurchase += totalPrice ;
     })
-    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' ';
+    document.getElementById('total-price-purchase').innerHTML = moneyFormater(totalPricePurchase) + ' đ';
     document.getElementById('quantity-purchase').innerHTML = `Purchases (${totalQuantity})`;
 }
 
@@ -226,3 +226,35 @@ orderShippingBtn.addEventListener('click', function () {
     orderPaidBtn.style.backgroundColor = 'white';
     orderPaidBtn.style.color = 'black';
 });
+
+
+document.getElementById('quantity-purchase').addEventListener('click', function() {
+    const checkedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+    const selectedIds = [];
+    checkedCheckboxes.forEach((checkbox) => {
+        let id = checkbox.dataset.id; // Lấy id từ thuộc tính data-id của checkbox
+        selectedIds.push(id); // Thêm id vào mảng selectedIds
+    });
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/payment'; // Địa chỉ nhận request
+
+    // Tạo input ẩn để chứa dữ liệu ids
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'ids';  // Tên của trường sẽ được gửi lên server
+    input.value = JSON.stringify(selectedIds);  // Chuyển mảng thành chuỗi JSON
+    form.appendChild(input);
+
+    // Thêm form vào body và submit
+    document.body.appendChild(form);
+
+    // Gửi form đi mà không cần tải lại trang
+    form.submit();  // Tương tự như submit form truyền thống
+
+});
+
+
+
+

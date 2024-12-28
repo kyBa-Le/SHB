@@ -126,3 +126,21 @@ export function moneyFormater(price) {
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function redirectToPost(url, data) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = url;
+    form.style.display = 'none';
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        }
+    }
+    document.body.appendChild(form);
+    form.submit();
+}

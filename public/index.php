@@ -23,6 +23,7 @@ $apiUserController = new \app\controllers\api\UserController();
 $apiProductController = new \app\controllers\api\ProductController();
 $apiProductColorController = new \app\controllers\api\ProductColorController();
 $apiOrderItemController = new \app\controllers\api\OrderItemController();
+$apiPaymentController = new \app\controllers\api\PaymentController();
 
 // Create routes
 
@@ -42,12 +43,16 @@ $app->router->get('/products/{id}', 'details');
 $app->router->get('/product/filter', [$productController, 'filter']);
 $app->router->get('/cart', 'cart');
 $app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
+$app->router->get('/payment', 'payment');
+$app->router->get('/payment/momo/handle-callback', [new \app\controllers\PaymentController(), 'handleMomoCallback']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
 $app->router->post('/login', [$userController, 'login']);
 $app->router->post('/user/edit',[$userController, 'editProfile']);
 $app->router->post('/user/forgot-password', [$userController,'saveNewPassword']);
+$app->router->post('/payment', [new app\controllers\PaymentController(), 'show']);
+$app->router->post('/payment/momo', [new \app\controllers\PaymentController(),'momoPayment']);
 
 // API REQUEST
 // get API
@@ -63,9 +68,11 @@ $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageCon
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
 $app->router->post('/api/users/otp', [$apiUserController, 'getOTPCode']);
-$app->router->post('/api/order-items', [$apiOrderItemController,'addToCart']);
-$app->router->post('/api/reviews', [new \app\controllers\api\ReviewController(), 'reviewOrder']); //todo: change the callback
-$app->router->post('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'reviewOrder']); //todo: remove this
+$app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
+$app->router->post('/api/payments', [$apiPaymentController,'createPayment']);
+$app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
+$app->router->post('/api/reviews', [new \app\controllers\api\ReviewController(), 'reviewOrder']);
+$app->router->post('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'reviewOrder']);
 
 // put API
 
@@ -75,10 +82,12 @@ $app->router->delete('/api/order-items/{id}', function ($id) {
 });
 
 // patch API
-$app->router->patch('/api/order-items/{id}', function ($id) {
+$app->router->patch('/api/order-items/quantity/{id}', function ($id) {
     (new \app\controllers\api\OrderItemController())->updateOrderItemQuantityById($id);
 });
 $app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangePassword']);
-
+$app->router->patch('/api/order-items/{id}', function ($id) {
+    (new \app\controllers\api\OrderItemController())->updateOrderItem($id);
+});
 
 $app->run();

@@ -96,4 +96,9 @@ class UserController extends Controller
         return $this->render('login', $message);
     }
 
+    public function payment(){
+        $request = new Request();
+        $data = $request->getBody();
+
+    }
 }
