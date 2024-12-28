@@ -2,7 +2,6 @@
 
 namespace app\controllers\api;
 
-use app\models\PaymentModel;
 use app\services\PaymentService;
 
 class PaymentController extends BaseController

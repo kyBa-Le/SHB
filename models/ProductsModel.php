@@ -76,4 +76,10 @@ class ProductsModel extends Model
             ORDER BY price DESC";
         return $this->queryManyRows($sql);
     }
+
+    public function updateQuantity($id, $quantity)
+    {
+        $sql = "UPDATE $this->table SET quantity = '$quantity' WHERE id = '$id'";
+        return $this->queryOneRow($sql);
+    }
 }

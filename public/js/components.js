@@ -122,3 +122,21 @@ export async function deleteData (path, data = null, isDisplayWaiting = false) {
 export function moneyFormater(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+export function redirectToPost(url, data) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = url;
+    form.style.display = 'none';
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        }
+    }
+    document.body.appendChild(form);
+    form.submit();
+}

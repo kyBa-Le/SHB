@@ -71,7 +71,7 @@ function renderOrderByStatus(orderItems, status, orderBodyElement) {
             const itemTotalPrice = product['quantity'] * product['unit_price'];
             totalOrderPrice += itemTotalPrice;
             orderBodyElement.innerHTML += `
-                    <div class="product-item-infor mb-3">
+                    <div class="product-item-infor mb-3" onclick="{window.location.href='/products/${product['product_id']}'}" >
                         <span class="product-name-color-size d-flex flex-column">
                             <span class="product-name">${product['product_name']}</span>
                             <span class="product-color-size">
@@ -98,7 +98,7 @@ await renderOrderByStatus(orderItems, 'Shipping', orderShippingBody);
 
 async function updateQuantity (updatedQuantity, id) {
      let quantity = parseInt(updatedQuantity);
-     let orderItem = await patchData(`/api/order-items/${id}`, {quantity: quantity}, false);
+     let orderItem = await patchData(`/api/order-items/quantity/${id}`, {quantity: quantity}, false);
      let totalPrice = orderItem['quantity'] * orderItem['unit_price'];
      document.getElementById('input-quantity-' + id).value = orderItem['quantity'];
      document.getElementById('total-price-' + id).dataset.value = totalPrice;

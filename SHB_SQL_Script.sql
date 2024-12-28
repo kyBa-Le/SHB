@@ -137,7 +137,7 @@ VALUES
     (NULL, 7, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
     (NULL, 10, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
     (NULL, 9, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-cut-out-asymmetric-funnel-oversized-jumper-in-grey/206872273-1-grey?$n_640w$&wid=513&fit=constrain'),
-    (NULL, 10, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
+    (NULL, 10, 'BLACK', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
     (NULL, 11, 'BROWN', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
     (NULL, 11, 'WHITE', 'https://images.asos-media.com/products/topshop-knitted-ultra-fluffy-roll-neck-crop-jumper-in-charcoal/205997232-1-charcoal?$n_640w$&wid=513&fit=constrain'),
     (NULL, 12, 'WHITE', 'https://images.asos-media.com/products/only-roll-neck-jumper-in-light-grey-melange/206796337-1-lightgrey?$n_640w$&wid=513&fit=constrain'),

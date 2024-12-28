@@ -127,7 +127,8 @@ div p span {
 .form-group-select input {
     flex: 2; 
 }
-@media (max-width: 768px) {
+
+@media (max-width: 1200px) {
     .wrapper {
         flex-direction: column;
         width: 100vw; 
