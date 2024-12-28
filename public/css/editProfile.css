@@ -1,3 +1,9 @@
+.editProfile {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container-edit-profile {
     width: 60vw;
     margin: 50px auto; 
@@ -98,5 +104,8 @@ form .form {
     .form-group-select select,
     .form-group-select input {
         width: 100%;
+    }
+    .form-container-profile {
+        padding: 10px;
     }
 }

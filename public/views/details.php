@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/detailProducts.css">
+<span id="product-details-data" class="d-none" data-color="" data-image-link="" data-size="S"></span>
 <div class="container-detailProducts">
     <div class="product-header">
         <div class="product-image-detail">
@@ -23,22 +24,24 @@
             <div class="size-selection-detail">
                 <p class="mt-3">Size:</p>
                 <div class="button-size-detail">
-                    <button>S</button>
-                    <button>M</button>
-                    <button>L</button>
-                    <button>XL</button>
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
                 </div>
             </div>
             <hr>
             <div class="quantity-detail">
                     <p>Quantity:</p>
-                    <button>-</button>
-                    <input type="text" value="1" style="width: 30px; text-align: center; border:none;">
-                    <button>+</button>
-                </div>
-            <div class="button-detail">
-                <button class="addToCartBtn-detail">Add to cart</button>
-                <button class="orderBtn-detail">Order</button>
+                    <button id="minusBtn">-</button>
+                    <input type="text" id="quantity-buy" value="1" style="width: 30px; text-align: center; border:none;">
+                    <button id="plusBtn">+</button>
+                    <span id="quantity-error" style="color: red; margin-left: 5px;"></span>
+            </div>
+            <span id="addToCartMessage"></span>
+            <div class="button-detail" id="button-place">
+                <button id="addToCartBtn" class="addToCartBtn-detail">Add to cart</button>
+                <button class="orderBtn-detail" id="orderBtn">Order</button>
             </div>
         </div>
     </div>
@@ -47,14 +50,8 @@
         <ul id="product-detail-description">Highlighted features of oversized unisex T-shirts.
         </ul>
     </div>
-    <div class="product-reviews-detail">
+    <div class="product-reviews-detail" id="review-container">
         <h4>Product reviews</h4>
-        <div class="review-detail">
-            <img src="https://via.placeholder.com/40" alt="User">
-            <div class="review-content-detail">
-                <h5>Username</h5>
-                <p>Chất lượng quá tuyệt vời! Áo rất đẹp và mình sẽ ủng hộ thêm nhiều lần nữa.</p>
-            </div>
-        </div>
+
     </div>
 <script src="js/detailedProduct.js" type="module"></script>

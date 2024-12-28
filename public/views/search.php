@@ -1,4 +1,7 @@
-<link rel="stylesheet" href="css/searchProduct.css">
+<?php
+    $selectValue = ['500000' => 'Under 500.000 đ', '1000000' => 'Under 1.000.000 đ', '1001000' => 'Over 1.000.000 đ'];
+?>
+<link rel="stylesheet" href="css/search.css">
 <div class="searchProduct-container">
     <div class="search-text-result d-flex justify-content-center align-items-center flex-column mt-5">
         <?php
@@ -19,15 +22,15 @@
             <option disabled selected>
                 <?php
                     if (isset($_GET['filter-price'])) {
-                        echo $_GET['filter-price'];
+                        echo $selectValue[$_GET['filter-price']];
                     }else {
                         echo 'Price';
                     }
                 ?>
             </option>
-            <option value="500000">under 500.000 vnd</option>
-            <option value="1000000">under 1.000.000 vnd</option>
-            <option value="1001000">over 1.000.000 vnd</option>
+            <option value="500000">Under 500.000 đ</option>
+            <option value="1000000">Under 1.000.000 đ</option>
+            <option value="1001000">Over 1.000.000 đ</option>
         </select>
         <select id="search-filter-categories" name='filter-categories'>
             <option disabled selected>

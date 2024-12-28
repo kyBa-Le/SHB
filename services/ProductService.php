@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controller;
+namespace app\services;
 
-use app\model\ProductsModel;
+use app\models\ProductsModel;
 
-class ProductController
+class ProductService
 {
     private $productModel;
     public function __construct()
@@ -29,23 +29,30 @@ class ProductController
     public function getProductById($id){
         return $this->productModel->getProductById($id);
     }
-    
+
     public function getFilteredProducts ($data) {
-       $name = $data['product-name'];
-       $price = $data['filter-price'];
-       $categories = $data['filter-categories'];
-       if ($name &&  $price && $categories) {
+        $name = $data['product-name'];
+        $price = $data['filter-price'];
+        $categories = $data['filter-categories'];
+        if ($name &&  $price && $categories) {
             return $this->productModel->getFilteredProducts($name, $price, $categories);
-       } elseif ($name && $categories && !$price) {
+        } elseif ($name && $categories && !$price) {
             return $this->productModel->getProductsByCategories($name, $categories);
-       } elseif ($name && $price) {
+        } elseif ($name && $price) {
             return $this->productModel->getProductsByPrice($name, $price);
-       } elseif ($price && $categories) {
+        } elseif ($price && $categories) {
             return $this->productModel->getProductsByPriceCategories ($price, $categories);
-       } elseif ($name) {
+        } elseif ($name) {
             return $this->productModel->getProductsByName ($name);
-       }else {
+        }else {
             return $this->productModel->getProducts();
-       }
+        }
     }
+
+    public function decreaseQuantity($id, $quantity) {
+        $product = $this->productModel->getProductById($id);
+        $newQuantity = $product['quantity'] - $quantity;
+        return $this->productModel->updateQuantity($id, $newQuantity);
+    }
+
 }

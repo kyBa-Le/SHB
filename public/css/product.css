@@ -14,10 +14,12 @@
     width: 20vw;
     padding: 7px 0;
     border-radius: 10px;
+    transition: all 0.1s ease-in;
 }
 #category-products-see-more:hover {
     background-color: #0F0E0E;
     color: white;
+    transition: all 0.1s ease-in;
 }
 @media (max-width: 1100px) {
     #category-products-container {

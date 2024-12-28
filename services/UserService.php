@@ -1,17 +1,17 @@
 <?php
 
-namespace app\controller;
+namespace app\services;
 
-use app\model\UserModel;
+use app\models\UsersModel;
 use app\validation\UserValidation;
 
-class UserController
+class UserService
 {
     private $userModel;
     private $userValidation;
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->userModel = new UsersModel();
         $this->userValidation = new UserValidation();
     }
 
@@ -45,19 +45,19 @@ class UserController
         }else {
             return ['isLoggedIn' => false];
         }
-    }  
+    }
 
     public function editProfile($data) {
-        $userID = $_SESSION['user']['id'];
+        $userId = $_SESSION['user']['id'];
         $username = $data['username'];
         $fullName = $data['fullName'];
         $phone = $data['phone'];
         $province = $data['province'];
         $district = $data['district'];
         $detailed_address = $data['detailed_address'];
-        $updateUser = $this->userModel->updateUserById($username, $fullName,  $phone,  $province, $district, $detailed_address, $userID);
+        $updateUser = $this->userModel->updateUserById($username, $fullName,  $phone,  $province, $district, $detailed_address, $userId);
         if ($updateUser !== false) {
-            $user = $this->userModel->getUserById($userID);
+            $user = $this->userModel->getUserById($userId);
             $_SESSION['user'] = $user;
             $_SESSION['login_time'] = time();
             return ['isEdited' => true];
@@ -75,7 +75,7 @@ class UserController
         $newPassword = $data['newPassword'];
         $this->userModel->updatePasswordByEmail($email, md5($newPassword ));
     }
-  
+
     public function editAvatarLink($link, $userId){
         $this->userModel->changeAvatar($link, $userId);
         $user = $this->userModel->getUserById($userId);
@@ -84,6 +84,6 @@ class UserController
     }
 
     public function saveChangePassword($data, $email) {
-        $this->userModel->updatePasswordByEmail($email, md5($data['newPassword'] ));
+        return $this->userModel->updatePasswordByEmail($email, md5($data['newPassword'] ));
     }
 }

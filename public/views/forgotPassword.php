@@ -2,7 +2,7 @@
 <div id="container-forgotPassword">
     <div class="position-absolute top-50 start-50 translate-middle d-flex justify-content-around flex-column" id="forgotPassword-box" style="background-color: white;">
         <h1 class="text-center">Forgot Password</h1>
-        <span style="text-align: center;"><i>Please note: Your OTP code is only valid for 60 seconds !!!</i></span>
+        <span style="text-align: center;"><i id="countdown">Please note: Your OTP code is only valid for 60 seconds !!!</i></span>
         
         <!-- Form nhập email -->
         <div id="email-container">

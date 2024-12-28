@@ -4,6 +4,7 @@
         background-color: #0F0E0E;
         box-sizing: border-box;
         padding: 1vh 2vw;
+        z-index: 9999;
     }
 
     .header-content {
@@ -80,6 +81,7 @@
         color: #0F0E0E;
         right: 12%;
         top: 150%;
+        z-index: 1;
     }
     .infor-profile {
         padding: 0px 20px 0px 20px;
@@ -171,7 +173,7 @@
         }
     }
 </style>
-<div class="container-fluid p-0" id="container-header">
+<div class="container-fluid p-0 position-sticky top-0" id="container-header">
     <div class="header-content">
         <img id="header-logo" src="images/logo.png" onclick="{window.location.href='/'}">
         <div class="header-nav">

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\model;
+namespace app\models;
 
 use app\core\Model;
 
@@ -75,5 +75,11 @@ class ProductsModel extends Model
             AND category = '$categories'
             ORDER BY price DESC";
         return $this->queryManyRows($sql);
+    }
+
+    public function updateQuantity($id, $quantity)
+    {
+        $sql = "UPDATE $this->table SET quantity = '$quantity' WHERE id = '$id'";
+        return $this->queryOneRow($sql);
     }
 }

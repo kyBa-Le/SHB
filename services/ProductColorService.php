@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controller;
+namespace app\services;
 
-use app\model\ProductColorsModel;
+use app\models\ProductColorsModel;
 
-class ProductColorsController
+class ProductColorService
 {
     private $productColorsModel;
     public function __construct() {
@@ -14,4 +14,5 @@ class ProductColorsController
     public function getProductColorsByProductId($productId) {
         return $this->productColorsModel->getProductColorsByProductId($productId);
     }
+
 }

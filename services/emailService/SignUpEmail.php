@@ -1,12 +1,12 @@
 <?php
 
-namespace app\thirdPartyService;
+namespace app\services\emailService;
 
-class OtpEmail
+class SignUpEmail
 {
     public string $emailContent ;
-    public string $subject = "Request to change password";
-    public function __construct($username, $otp)
+    public string $subject = "Welcome to SHB";
+    public function __construct($username)
     {
         $this->emailContent = "
         <!DOCTYPE html>
@@ -53,11 +53,14 @@ class OtpEmail
         <body>
             <div class='email-container'>
                 <div class='header'>
-                    <h1>Your OTP code!</h1>
+                    <h1>Welcome to SHB store!</h1>
                 </div>
                 <div class='content'>
                     <p>Dear <strong>$username</strong>,</p>
-                    <p>Your OTP code: <strong>$otp</strong>,</p>
+                    <p>Thank you for registering on <strong>SHB Store</strong>. We're thrilled to have you join our community!</p>
+                    <p>Explore our features, connect with others, and make the most of your experience on SHB Store.</p>
+                    <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
+                    <p>Have a great day!</p>
                 </div>
                 <div class='footer'>
                     <p>&copy; " . date("Y") . " SHB. All rights reserved.</p>

@@ -1,4 +1,4 @@
-import { getData, sendData } from "./components.js";
+import {getData, patchData, sendData, updateData} from "./components.js";
 
 let editButton = document.getElementById('edit-profile-button');
 let submitButton = document.getElementById('edit-profile-submit');
@@ -39,7 +39,6 @@ editButton.addEventListener('click', async function(){
             }); 
         }
     }
-
 })
 
 changePassword.addEventListener('click', function(){ 
@@ -93,12 +92,12 @@ clickSaveNewPassword.addEventListener('click', async function () {
         confirmInput.reportValidity(); 
     } else {
         confirmInput.setCustomValidity('');
-        let response = await sendData('/api/user/edit/password', data);
+        let response = await patchData('/api/users/edit-password', data);
         console.log(response);
         if (response['isUpdate'] == false) {
             document.getElementById('current-password-group').innerHTML += `<span style='color: red' id='current-password-error'> ${response['error']} </span>`
         } else {
-            window.location.href = '/user/edit';
+            window.location.href = '/users/edit';
         }
     }
 });

@@ -20,12 +20,37 @@ class Router
         $this->routes['post'][$path] = $callback;
     }
 
+    public function put($path, $callback): void
+    {
+        $this->routes['put'][$path] = $callback;
+    }
+
+    public function delete($path, $callback): void
+    {
+        $this->routes['delete'][$path] = $callback;
+    }
+
+    public function patch($path, $callback): void
+    {
+        $this->routes['patch'][$path] = $callback;
+    }
+
     public function resolve()
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
-        if ($callback === false) {
+        if (!$callback) {
+            foreach ($this->routes[$method] as $pattern => $routeCallback) {
+                $regexPattern = "#^" . preg_replace('#\{(\w+)\}#', '([^/]+)', $pattern) . "$#";
+                if (preg_match($regexPattern, $path, $matches)) {
+                    array_shift($matches);
+                    $callback = $routeCallback;
+                    break;
+                }
+            }
+        }
+        if (!$callback) {
             $this->response->setStatusCode(404);
             Application::$app->controller->layout = 'noLayout';
             return $this->renderView('notFound');
@@ -34,10 +59,12 @@ class Router
             return $this->renderView($callback);
         }
         if (is_array($callback)) {
-            Application::$app->controller = $callback[0];
+            Application::$app->controller = new $callback[0]();
+            return call_user_func_array([$callback[0], $callback[1]], $matches ?? []);
         }
-        return call_user_func($callback, $this->request);
+        return call_user_func_array($callback, $matches ?? []);
     }
+
 
     public function renderView($view, $params = []) {
         $layoutContent = $this->layoutContent();

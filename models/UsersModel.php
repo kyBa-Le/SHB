@@ -1,17 +1,17 @@
 <?php
 
-namespace app\model;
+namespace app\models;
 
 use app\core\Model;
 
-class UserModel extends Model
+class UsersModel extends Model
 {
     protected $table = 'users';
 
     public function saveUser($email, $username, $password, $fullName, $phone, $province, $district, $detailed_address ) {
         $sql = "INSERT INTO $this->table (`email`, `username`, `password`, `fullName`, `phone`, `avatar_link`, `province`, `district`, `detailed_address`)
-                VALUES ('$email', '$username', '$password', '$fullName', '$phone', NULL, '$province', '$district', '$detailed_address')";
-        return Model::$db->query($sql);
+                VALUES ('$email', '$username', '$password', '$fullName', '$phone', 'images/avatarDefault.png', '$province', '$district', '$detailed_address')";
+        return $this->excuteSql($sql);
     }
 
     public function getUserByEmail(mixed $email)
@@ -29,7 +29,7 @@ class UserModel extends Model
     {
         $sql = "UPDATE $this->table SET username = '$username', fullName = '$fullName', phone = '$phone', province = '$province', district = '$district', detailed_address = '$detailed_address'
                 WHERE id = '$userID'";
-        return Model::$db->query($sql);
+        return $this->excuteSql($sql);
     }
 
     public function getUserById(mixed $userID)
@@ -42,12 +42,12 @@ class UserModel extends Model
     {
         $sql = "UPDATE $this->table SET password = '$newPassword'
                 WHERE email = '$email'";
-        return Model::$db->query($sql);
+        return $this->excuteSql($sql);
     }
     
     public function changeAvatar($link, $userId) 
     {
         $sql = "UPDATE $this->table SET avatar_link = '$link' WHERE id = '$userId'";
-        return Model::$db->query($sql);
+        return $this->excuteSql($sql);
     }
 }
