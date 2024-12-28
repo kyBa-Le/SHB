@@ -54,7 +54,7 @@ function groupByPaymentId(orderItems) {
         return acc;
     }, {});
 }
-function renderOrderByStatus(orderItems, status, orderBodyElement) {
+async function renderOrderByStatus(orderItems, status, orderBodyElement) {
     const filteredItems = orderItems.filter(item => item['status'] === status);
     if (filteredItems.length === 0) {
         orderBodyElement.innerHTML = `<p>No ${status.toLowerCase()} orders found.</p>`;
@@ -65,10 +65,20 @@ function renderOrderByStatus(orderItems, status, orderBodyElement) {
         let totalOrderPrice = 0;
         orderBodyElement.innerHTML += `
             <div class="product-infor-content">
-                <p class="noOfOrder">Order ID: ${paymentId}</p>
+                <p class="noOfOrder">Payment id: ${paymentId}</p>
         `;
-        products.forEach(product => {
+        for (const product of products) {
             const itemTotalPrice = product['quantity'] * product['unit_price'];
+            let id = product['id'];
+            let review = await getData('/api/reviews?order-item-id=' + id);
+            let reviewButton;
+            if (review === false) {
+                let linkToReview = "/review?order-item-id=" + id;
+                reviewButton = `<button class="review-product" onclick="{window.location.href='${linkToReview}'}">Review</button>`;
+            } else {
+                let linkProduct = '/products/' + product['product_id'];
+                reviewButton = `<button class="review-product" onclick="{window.location.href='${linkProduct}'}">Order again</button>`
+            }
             totalOrderPrice += itemTotalPrice;
             orderBodyElement.innerHTML += `
                     <div class="product-item-infor mb-3" onclick="{window.location.href='/products/${product['product_id']}'}" >
@@ -82,10 +92,10 @@ function renderOrderByStatus(orderItems, status, orderBodyElement) {
                         </span>
                         <span class="product-quantity">x ${product['quantity']}</span>
                         <span class="product-total-price">Total price: ${itemTotalPrice.toLocaleString()}đ</span>
-                        ${status === 'Delivered' ? '<button class="review-product">Review</button>' : ''}
+                        ${status === 'Delivered' ? reviewButton : ''}
                     </div>
             `;
-        });
+        }
         orderBodyElement.innerHTML += `
                 <hr>
                 <p class="product-total-order me-3" style="font-weight:bold; text-align:end;">Total order price: ${totalOrderPrice.toLocaleString()}đ</p>

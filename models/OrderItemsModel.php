@@ -2,7 +2,7 @@
 namespace app\models;
 
 use app\core\Model;
-class OrderItemModel extends Model {
+class OrderItemsModel extends Model {
     protected $table = 'order_items';
 
     public function getOrderItemsByUserId($userId){
@@ -43,7 +43,7 @@ class OrderItemModel extends Model {
     public function updateOrderItem($paymentId, $status, $orderItem_id) {
         $sql = "UPDATE $this->table SET status = '$status', payments_id = $paymentId 
                 WHERE id = $orderItem_id;
-          "; 
+          ";
         return $this->excuteSql($sql);
     }
 }

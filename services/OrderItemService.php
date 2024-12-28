@@ -2,7 +2,7 @@
 
 namespace app\services;
 
-use app\models\OrderItemModel;
+use app\models\OrderItemsModel;
 use app\validation\OrderItemValidation;
 
 class OrderItemService
@@ -11,7 +11,7 @@ class OrderItemService
     private $orderItemValidation;
     public function __construct()
     {
-        $this->orderItemsModel = new OrderItemModel();
+        $this->orderItemsModel = new OrderItemsModel();
         $this->orderItemValidation = new OrderItemValidation();
     }
 
@@ -63,6 +63,7 @@ class OrderItemService
         $productId = (int) $productId;
         return $this->orderItemsModel->getExistingOrderItem($userId, $size, $productId,  $productColor);
     }
+
 
     public function updateOrderItem($paymentId, $status, $orderItem_id) {
         $paymentId = (int) $paymentId;

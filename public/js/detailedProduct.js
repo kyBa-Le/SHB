@@ -194,5 +194,27 @@ document.getElementById('orderBtn').addEventListener('click', function(event) {
 
 });
 
+// Xử lý hiển thị
+let reviews = await getData('/api/reviews?product-id=' + detailedProduct['id']);
+for (let review of reviews) {
+    document.getElementById('review-container').innerHTML += `
+    <div class="review-detail">
+            <img src="${review['avatar_link']}" class="user-avatar"  alt="User">
+            <div class="review-content-detail">
+                <h5>${review['username']}</h5>
+                <p>Classify: ${review['product_color']} - ${review['size']}</p>
+                <p style="color: black">${review['content']}</p>
+                <div class="image-review-container mt-2" id='image-review-container-${review['id']}'></div>
+            </div>
+            <div></div>
+        </div>
+`
+    let imageReviews = await getData('/api/review-images?review-id=' + review['id']);
+    for (let image of imageReviews) {
+        document.getElementById("image-review-container-" + review['id']).innerHTML += `
+            <img class="image-review" src="${image['image_link']}">
+        `
+    }
+}
 
 

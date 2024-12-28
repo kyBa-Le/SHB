@@ -123,6 +123,10 @@ export function moneyFormater(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+export function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export function redirectToPost(url, data) {
     const form = document.createElement('form');
     form.method = 'POST';

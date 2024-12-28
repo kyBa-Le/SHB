@@ -28,9 +28,9 @@
                     }
                 ?>
             </option>
-            <option value="500000">under 500.000 đ</option>
-            <option value="1000000">under 1.000.000 đ</option>
-            <option value="1001000">over 1.000.000 đ</option>
+            <option value="500000">Under 500.000 đ</option>
+            <option value="1000000">Under 1.000.000 đ</option>
+            <option value="1001000">Over 1.000.000 đ</option>
         </select>
         <select id="search-filter-categories" name='filter-categories'>
             <option disabled selected>

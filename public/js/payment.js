@@ -1,4 +1,4 @@
-import {getData, patchData, sendData, redirectToPost} from "./components.js";
+import {getData, patchData, sendData, redirectToPost, sleep} from "./components.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const paymentId = urlParams.get('paymentId');
