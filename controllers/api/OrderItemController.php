@@ -3,14 +3,17 @@
 namespace app\controllers\api;
 
 use app\services\OrderItemService;
+use app\services\ProductService;
 
 class OrderItemController extends BaseController
 {
     private $orderItemService;
+    private $productService;
 
     public function __construct() {
         parent::__construct();
         $this->orderItemService = new OrderItemService();
+        $this->productService = new ProductService();
     }
     public function getOrderItemsByUserId() {
         $id = $_SESSION['user']['id'];
@@ -38,13 +41,13 @@ class OrderItemController extends BaseController
     public function createNewOrderItem() {
         $userId = (int) $_SESSION['user']['id'];
         $data = $this->request->getBody();
-        $productName = $data['product_name'];
-        $quantity = (int) $data['quantity'];
-        $unitPrice = (int) $data['unit_price'];
-        $size = $data['size'];
-        $productId = (int) $data['product_id'];
-        $productImageLink = $data['product_image_link'];
-        $productColor = $data['product_color'];
+        $productName = $data['product_name'] ?? null;
+        $quantity = (int) $data['quantity'] ?? null;
+        $unitPrice = (int) $data['unit_price'] ?? null;
+        $size = $data['size'] ?? null;
+        $productId = (int) $data['product_id'] ?? null;
+        $productImageLink = $data['product_image_link'] ?? null;
+        $productColor = $data['product_color'] ?? null;
         if (isset($data['payment_id']) && !empty($data['payment_id'])) {
             $paymentId = $data['payment_id'];
         } else {
@@ -55,6 +58,7 @@ class OrderItemController extends BaseController
             if (!empty($paymentId)) {
                 $status = 'Shipping';
                 $createNewOrderItem = $this->orderItemService->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId,  $userId, $status);
+                $this->productService->decreaseQuantity($productId, $quantity);
                 if ($createNewOrderItem) {
                     $message['message'] = 'Order successfully placed';
                     $message['isCreateNewOrderItem'] = true;
@@ -85,6 +89,8 @@ class OrderItemController extends BaseController
         $status = 'Shipping';
         $paymentId = $data['payment_id'];
         $updateOrderItem = $this->orderItemService->updateOrderItem($paymentId, $status, $id);
+        $orderItem = $this->orderItemService->getOrderItemById($id);
+        $this->productService->decreaseQuantity($orderItem['product_id'], $orderItem['quantity']);
         if ($updateOrderItem) {
                 $message['message'] = 'Order successfully placed';
                 $message['isCreateNewOrderItem'] = true;

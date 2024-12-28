@@ -125,15 +125,24 @@ plusBtn.addEventListener('click', function () {
 // handle API to add to cart
 let addToCartBtn = document.getElementById('addToCartBtn');
 addToCartBtn.addEventListener('click', async function () {
-    let response = await sendData('/api/order-items', {
-        productName: detailedProduct['product_name'],
-        quantity: quantityBuyValue,
-        unitPrice: detailedProduct['price'],
-        size: data.dataset.size,
-        productId: detailedProduct['id'],
-        productImageLink: data.dataset.imageLink,
-        productColor: data.dataset.color
-    }, false);
+    let response
+    if (quantityBuyValue > detailedProduct['quantity']) {
+        response = {
+            message : 'sorry, the quantity in stock is not enough',
+            isAddToCartSuccess: false
+        };
+    }else {
+        response = await sendData('/api/order-items', {
+            product_name: detailedProduct['product_name'],
+            quantity: quantityBuyValue,
+            unit_price: detailedProduct['price'],
+            size: data.dataset.size,
+            product_id: detailedProduct['id'],
+            product_image_link: data.dataset.imageLink,
+            product_color: data.dataset.color
+        }, false);
+    }
+
     let messageColor = response['isAddToCartSuccess'] ? 'green' : 'red';
     document.getElementById('addToCartMessage').innerHTML = '';
     document.getElementById('addToCartMessage').innerHTML += `<span style="color: ${messageColor};">${response['message']}</span>`;
@@ -141,5 +150,49 @@ addToCartBtn.addEventListener('click', async function () {
         document.getElementById('addToCartMessage').innerHTML = '';
     }, 1500);
 });
+
+// handle order button
+document.getElementById('orderBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    let response;
+    if (quantityBuyValue > detailedProduct['quantity']) {
+        response = {
+            message: 'sorry, the quantity in stock is not enough',
+            isAddToCartSuccess: false
+        };
+        let messageColor = response['isAddToCartSuccess'] ? 'green' : 'red';
+        document.getElementById('addToCartMessage').innerHTML = '';
+        document.getElementById('addToCartMessage').innerHTML += `<span style="color: ${messageColor};">${response['message']}</span>`;
+        setTimeout(() => {
+            document.getElementById('addToCartMessage').innerHTML = '';
+        }, 1500);
+    } else {
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/payment';
+        const productData = [{
+            product_name: detailedProduct['product_name'],
+            quantity: quantityBuyValue,
+            unit_price: detailedProduct['price'],
+            size: data.dataset.size,
+            product_id: detailedProduct['id'],
+            product_image_link: data.dataset.imageLink,
+            product_color: data.dataset.color
+        }];
+        productData.forEach(item => {
+            Object.keys(item).forEach(key => {
+                let input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = item[key];
+                form.appendChild(input);
+            });
+        });
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+});
+
 
 

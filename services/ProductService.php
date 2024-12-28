@@ -49,4 +49,10 @@ class ProductService
         }
     }
 
+    public function decreaseQuantity($id, $quantity) {
+        $product = $this->productModel->getProductById($id);
+        $newQuantity = $product['quantity'] - $quantity;
+        return $this->productModel->updateQuantity($id, $newQuantity);
+    }
+
 }

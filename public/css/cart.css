@@ -244,6 +244,10 @@ input[type="checkbox"] {
     grid-template-columns:  25% 25% 25% 25%;
     align-items: center;
     margin-right: 10px;
+    cursor: pointer;
+}
+.product-item-infor:hover {
+    background-color: #e1dfdf;
 }
 .order-infor-content {
     min-height: 30vh;

@@ -2,7 +2,6 @@
 
 namespace app\controllers\api;
 
-use app\models\PaymentModel;
 use app\services\PaymentService;
 
 class PaymentController extends BaseController
@@ -24,15 +23,15 @@ class PaymentController extends BaseController
         $detailed_address = $data['detailed_address'];
         $phone = $data['phone'];
         $fullName = $data['full_name'];
+        $payment = null;
         $isPaid = $this->paymentService->createPayment($dateTime, $total_cost, $description, $method, $province, $district, $detailed_address, $id, $phone, $fullName);
-        if ($isPaid) {
-            $message['isPaid'] = true;
+        if ($isPaid !== false) {
             $payment = $this->paymentService->getPaymentByTimeUser($dateTime, $id);
         } else {
-            $message['isPaid'] = false;
+            $isPaid = false;
         }
         $this->response->sendJson([
-            'payment' => $payment, $message
+            'payment' => $payment, 'isPaid' => $isPaid
         ]);
     }
 }

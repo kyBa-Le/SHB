@@ -53,7 +53,7 @@ class OrderItemService
                 $addToCart = false;
             }
         } else {
-            $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId, $userId, $status);
+            $addToCart = $this->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor,$paymentId, $userId, $status);
         }
         return $addToCart;
     }
@@ -68,5 +68,10 @@ class OrderItemService
         $paymentId = (int) $paymentId;
         $orderItem_id = (int) $orderItem_id;
         return $this->orderItemsModel->updateOrderItem($paymentId, $status, $orderItem_id);
+    }
+
+    public function getOrderItemById($id) {
+        $id = (int) $id;
+        return $this->orderItemsModel->getOrderItemById($id);
     }
 }

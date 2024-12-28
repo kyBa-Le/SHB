@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(!$authentication) {
         header('Location: /login');
         exit;
@@ -6,96 +6,85 @@
     $data = $_SESSION['user'];
 ?>
 <link rel="stylesheet" href="css/payment.css">
-<div class="wrapper">
+
+<div class="wrapper" id="full-container">
   <div class="payment-method-container">
     <div class="payment-method">
       <h4>Payment Method</h4>
-      <label><input type="radio" name="payment" value="cod" checked> COD</label>
-      <label><input type="radio" name="payment" value="momo"> Momo</label>
+      <label><input type="radio" name="payment" value="COD" checked class="payment-check"> COD</label>
+      <label><input type="radio" name="payment" value="Momo" class="payment-check"> Momo</label>
       <form>
-        <input type="text" placeholder="Full Name" value="<?php echo $data['fullName'] ?? '' ?>">
-        <input type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
+        <input id="full-name" type="text" placeholder="Full Name"  required value="<?php echo $data['fullName'] ?? '' ?>">
+        <input id="phone-number" type="text" placeholder="Phone Number" minlength="10" maxlength="10" required value="<?php echo $data['phone'] ?? '' ?>">
         <div class="form-group form-group-select">
-            <select name="province" id="province">
-                <option value="<?php echo $data['province'] ?? '' ?>"><?php echo $data['province'] ?? '' ?></option>
+            <select name="province" id="province" required>
+                <option disabled value="<?php echo $data['province'] ?? '' ?>"><?php echo $data['province'] ?? '' ?></option>
             </select>
-            <select name="district" id="district">
-                <option value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
+            <select name="district" id="district" required>
+                <option disabled value="<?php echo $data['district'] ?? '' ?>"><?php echo $data['district'] ?? '' ?></option>
             </select>
-            <input type="text" name="detailed_address" placeholder="Detail address">
+            <input type="text" name="detailed_address" placeholder="Detail address" id="detailed-address"  required>
         </div>
-        <input type="text" placeholder="Note">
+        <input type="text" placeholder="Note" id="description">
         <div>
           <h3>Order Summary</h3>
-          <p>Order Total: <span>885,000₫</span></p>
+          <p>Order Total: <span class="money" data-value="<?php if(isset($totalPrice)) {echo $totalPrice;} ?>" id="total-price"><?php if(isset($totalPrice)) {echo $totalPrice;} ?>₫</span></p>
         </div>
-        <button class="btn-buy">Order</button>
+        <button type="button" class="btn-buy" id="order-btn">Order</button>
       </form>
     </div>
   </div>
-  <div class="order-summary-container">
+  <div class="order-summary-container" id="order-container">
     <h4>Product</h4>
     <div class="order-summary">
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/50" alt="Product">
-            <div class="details">
-                <span>295.000</span>
-                <p>Product name</p>
-                <p>Black / M</p>
-                <p>x 1</p> 
-            </div>
-            <p>Total: <span>295.000đ</span></p>
-        </div>
+        <?php
+        if (is_array($orderItems) && !empty($orderItems)) {
+            if (isset($orderItems[0]) && is_array($orderItems[0]) && array_keys($orderItems[0]) !== range(0, count($orderItems[0]) - 1)) {
+                foreach ($orderItems as $value) {
+                    $imageLink = $value['product_image_link'];
+                    $price = (int) $value['unit_price'];
+                    $quantity = (int) $value['quantity'];
+                    $name = $value['product_name'];
+                    $color = $value['product_color'];
+                    $total = $quantity * $price;
+                    $size = $value['size'];
+                    $product_id = $value['product_id'];
+                    $id = $value['id'];
+                    echo "<div class='item'  data-id='$id' data-is-new='false' data-product-name='$name' data-quantity='$quantity', data-unit-price='$price', data-size='$size', data-product-id='$product_id', data-image-link='$imageLink', data-product-color='$color'>
+                            <img src='$imageLink' alt='Product'>
+                            <div class='details'>
+                                <span class='money'>$price đ</span>
+                                <p>$name</p>
+                                <p>$color / M</p>
+                                <p>x $quantity</p> 
+                            </div>
+                            <p>Total: <span> $total đ</span></p>
+                        </div>";
+                }
+            } else {
+                $imageLink = $orderItems['product_image_link'];
+                $price = (int) $orderItems['unit_price'];
+                $quantity = (int) $orderItems['quantity'];
+                $name = $orderItems['product_name'];
+                $color = $orderItems['product_color'];
+                $total = $quantity * $price;
+                $size = $orderItems['size'];
+                $product_id = $orderItems['product_id'];
+                echo "<div class='item' data-is-new='true' data-product-name='$name' data-quantity='$quantity', data-unit-price='$price', data-size='$size', data-product-id='$product_id', data-image-link='$imageLink', data-product-color='$color'>
+                        <img src='$imageLink' alt='Product'>
+                        <div class='details'>
+                            <span class='money'>$price đ</span>
+                            <p>$name</p>
+                            <p>$color / $size</p>
+                            <p>x $quantity</p> 
+                        </div>
+                        <p>Total: <span> $total đ</span></p>
+                    </div>";
+            }
+        } else {
+            echo "Không có dữ liệu sản phẩm.";
+        }
+        ?>
     </div>
   </div>
 </div>
