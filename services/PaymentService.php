@@ -2,14 +2,14 @@
 
 namespace app\services;
 
-use app\models\PaymentModel;
+use app\models\PaymentsModel;
 
 class PaymentService
 {
     private $paymentModel;
     public function __construct()
     {
-        $this->paymentModel = new PaymentModel();
+        $this->paymentModel = new PaymentsModel();
     }
     public function createPayment($dateTime, $total_cost, $description, $method, $province, $district, $detailed_address, $id, $phone, $fullName) {
         $total_cost = (int) $total_cost;

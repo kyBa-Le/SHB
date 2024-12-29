@@ -230,6 +230,10 @@ orderShippingBtn.addEventListener('click', function () {
 
 document.getElementById('quantity-purchase').addEventListener('click', function() {
     const checkedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+    if (checkedCheckboxes.length === 0) {
+        window.alert('Please choose the items before purchase !!!');
+        return;
+    }
     const selectedIds = [];
     checkedCheckboxes.forEach((checkbox) => {
         let id = checkbox.dataset.id; // Lấy id từ thuộc tính data-id của checkbox

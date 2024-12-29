@@ -4,7 +4,7 @@ namespace app\models;
 
 use app\core\Model;
 
-class PaymentModel extends Model
+class PaymentsModel extends Model
 {
     protected $table='payments';
 
