@@ -45,7 +45,7 @@ $app->router->get('/cart', 'cart');
 $app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
 $app->router->get('/payment', 'payment');
 $app->router->get('/payment/momo/handle-callback', [new \app\controllers\PaymentController(), 'handleMomoCallback']);
-$app->router->get('/admin', 'admin/dashboard');
+$app->router->get('/admin', [new SiteController(), 'dashboard']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
@@ -69,7 +69,7 @@ $app->router->get('/api/admin/users/total', [new \app\controllers\api\UserContro
 $app->router->get('/api/admin/order-items/total', [new \app\controllers\api\OrderItemController(), 'getTotalOrderItemQuantityAndMonthAndYear']);
 $app->router->get('/api/admin/payments/total', [new \app\controllers\api\PaymentController(), 'getTotalPaymentByMonthAndYear']);
 $app->router->get('/api/admin/payments/total-income', [new \app\controllers\api\PaymentController(), 'getTotalIncomeByMonthAndYear']);
-
+$app->router->get('/api/admin/users', [new \app\controllers\api\UserController(), 'getAllUsers']);
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);

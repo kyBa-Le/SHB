@@ -100,4 +100,8 @@ class UserService
     public function getTotalUserByMonthAndYear($month, $year) {
         return $this->userModel->getTotalUserByMonthAndYear($month, $year);
     }
+
+    public function getAllUsers() {
+        return $this->userModel->getAllUsers();
+    }
 }

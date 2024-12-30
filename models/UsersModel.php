@@ -58,5 +58,8 @@ class UsersModel extends Model
         return $this->queryOneRow($sql);
     }
 
-
+    public function getAllUsers() {
+        $sql = "SELECT * FROM $this->table";
+        return $this->queryManyRows($sql);
+    }
 }

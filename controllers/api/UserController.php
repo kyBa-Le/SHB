@@ -81,4 +81,9 @@ class UserController extends BaseController
         $this->response->sendJson($total);
     }
 
+    public function getAllUsers() {
+        $users = $this->userService->getAllUsers();
+        $this->response->sendJson($users);
+    }
+
 }

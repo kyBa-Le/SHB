@@ -1,11 +1,11 @@
 import {getData, moneyFormater} from "../components.js";
 //render overview data
-const currentMonth = new Date().getMonth() + 1;
-const currentYear = new Date().getFullYear();
-let totalUser = await getData(`/api/admin/users/total?month=${currentMonth}&&year=${currentYear}`);
-let totalOrderItem = await getData(`/api/admin/order-items/total?month=${currentMonth}&&year=${currentYear}`);
-let totalOrder = await getData(`/api/admin/payments/total?month=${currentMonth}&&year=${currentYear}`);
-let totalIncome = await getData(`/api/admin/payments/total-income?month=${currentMonth}&&year=${currentYear}`)
+const month = new Date().getMonth() + 1;
+const year = new Date().getFullYear();
+let totalUser = await getData(`/api/admin/users/total?month=${month}&year=${year}`);
+let totalOrderItem = await getData(`/api/admin/order-items/total?month=${month}&year=${year}`);
+let totalOrder = await getData(`/api/admin/payments/total?month=${month}&year=${year}`);
+let totalIncome = await getData(`/api/admin/payments/total-income?month=${month}&year=${year}`)
 
 // Function to animate numbers counting up
 function animateValue(elementId, start, end, increment, duration, formatter = null) {
@@ -43,72 +43,118 @@ animateValue('total-product', 0,totalOrderItem['total'], totalOrderItem['total']
 animateValue('total-order', 0, totalOrder['total'], totalOrder['total'], 1000);
 animateValue('total-income', 0, totalIncome['total'],100, 2000, moneyFormatter);
 
-// Dữ liệu
-const data = [
-    { date: "2023-12-20", value: 10 },
-    { date: "2023-12-21", value: 20 },
-    { date: "2023-12-22", value: 15 },
-    { date: "2023-12-23", value: 25 },
-    { date: "2023-12-24", value: 30 },
-];
+// Hàm tạo mảng đối tượng chứa ngày từ 30 ngày trước đến hiện tại
+const generateLast30DaysData = () => {
+    const result = [];
+    const today = new Date();
 
-// Kích thước SVG
-const margin = { top: 20, right: 30, bottom: 50, left: 50 };
-const width = 1000 - margin.left - margin.right;
-const height = 500 - margin.top - margin.bottom;
+    for (let i = 30; i >= 0; i--) {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+        result.push({
+            date: date.toISOString().split("T")[0],
+            value: 0,
+        });
+    }
+    return result;
+};
 
-// Tạo SVG
-const svg = d3.select("#chart-container")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// Chuyển đổi dữ liệu ngày
-const parseDate = d3.timeParse("%Y-%m-%d");
-data.forEach(d => {
-    d.date = parseDate(d.date);
-});
+// Sử dụng hàm
+async function renderUserChart() {
+    let users = await getData(`/api/admin/users`);
+    const data = generateLast30DaysData();
+    for (let user of users) {
+        let createdDate = new Date(user['created_date']);
+        let createdDateString = createdDate.toISOString().split("T")[0];
+        for (let i = 0; i < data.length; i++) {
+            let itemDateString = data[i].date;
+            if (createdDateString <= itemDateString) {
+                data[i].value += 1;
+            }
+        }
+    }
+    drawLineChart('#chart-container', data);
+}
 
-// Tạo scale cho X và Y
-const xScale = d3.scaleTime()
-    .domain(d3.extent(data, d => d.date))
-    .range([0, width]);
+function drawLineChart(element, data) {
+    const margin = { top: 20, right: 30, bottom: 50, left: 50 };
+    const width = window.innerWidth * 0.7 - margin.left - margin.right;
+    const height = window.innerHeight * 0.6 - margin.top - margin.bottom;
+    const svg = d3.select(element)
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+    const tooltip = d3.select(element)
+        .append("div")
+        .style("position", "absolute")
+        .style("background-color", "white")
+        .style("border", "1px solid #ccc")
+        .style("padding", "8px")
+        .style("border-radius", "4px")
+        .style("box-shadow", "0px 0px 5px rgba(0,0,0,0.2)")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+    const parseDate = d3.timeParse("%Y-%m-%d");
+    data.forEach(d => {
+        d.date = parseDate(d.date);
+    });
+    const xScale = d3.scaleTime()
+        .domain(d3.extent(data, d => d.date))
+        .range([0, width]);
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.value)])
+        .range([height, 0]);
+    const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b %d"));
+    const yAxis = d3.axisLeft(yScale);
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(xAxis);
+    svg.append("g")
+        .call(yAxis);
+    const line = d3.line()
+        .x(d => xScale(d.date))
+        .y(d => yScale(d.value));
+    svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#3299FE")
+        .attr("stroke-width", 4)
+        .attr("d", line);
+    svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .filter((d, i, arr) => {
+            return i === 0 || d.value !== data[i - 1].value;
+        })
+        .append("circle")
+        .attr("cx", d => xScale(d.date))
+        .attr("cy", d => yScale(d.value))
+        .attr("r", 5)
+        .attr("fill", "#DA5D5B")
+        .style("cursor", "pointer")
+        .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                .html(`<strong>Date:</strong> ${d3.timeFormat("%b %d, %Y")(d.date)}<br><strong>Value:</strong> ${d.value}`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mousemove", (event) => {
+            tooltip.style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseout", () => {
+            tooltip.style("opacity", 0);
+        });
+}
 
-const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.value)])
-    .range([height, 0]);
 
-// Vẽ trục X và Y
-const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b %d"));
-const yAxis = d3.axisLeft(yScale);
+await renderUserChart();
 
-svg.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(xAxis);
-
-svg.append("g")
-    .call(yAxis);
-
-// Vẽ đường line
-const line = d3.line()
-    .x(d => xScale(d.date))
-    .y(d => yScale(d.value));
-
-svg.append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 2)
-    .attr("d", line);
-
-// Vẽ các điểm trên đường line
-svg.selectAll("circle")
-    .data(data)
-    .enter()
-    .append("circle")
-    .attr("cx", d => xScale(d.date))
-    .attr("cy", d => yScale(d.value))
-    .attr("r", 4)
-    .attr("fill", "red");
+document.getElementById('total-user-container').addEventListener('click', async function () {
+    document.getElementById('chart-container').innerHTML = '';
+    await renderUserChart();
+    document.getElementById('chart-title').innerHTML = 'Total user in the lasted 30 days';
+})
