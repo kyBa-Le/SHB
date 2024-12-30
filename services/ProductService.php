@@ -55,4 +55,10 @@ class ProductService
         return $this->productModel->updateQuantity($id, $newQuantity);
     }
 
+    public function increasePurchases($id, $quantity) {
+        $product = $this->productModel->getProductById($id);
+        $newQuantity = $product['purchases'] + $quantity;
+        return $this->productModel->updatePurchases($id, $newQuantity);
+    }
+
 }

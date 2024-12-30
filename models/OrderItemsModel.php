@@ -42,8 +42,12 @@ class OrderItemsModel extends Model {
 
     public function updateOrderItem($paymentId, $status, $orderItem_id) {
         $sql = "UPDATE $this->table SET status = '$status', payments_id = $paymentId 
-                WHERE id = $orderItem_id;
-          ";
+                WHERE id = $orderItem_id;";
         return $this->excuteSql($sql);
+    }
+
+    public function getTotalOrderItemQuantityByMonthAndYear($month, $year) {
+        $sql = "SELECT SUM(quantity) as total FROM $this->table JOIN payments ON payments_id = payments.id WHERE MONTH(datetime) = $month AND YEAR(datetime) = $year AND $this->table.status != 'Pending'";
+        return $this->queryOneRow($sql);
     }
 }

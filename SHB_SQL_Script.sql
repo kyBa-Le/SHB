@@ -23,7 +23,8 @@ create table Users (
     avatar_link VARCHAR(255) DEFAULT 'images/avatarDefault.png',
     province VARCHAR(255),
     district VARCHAR(255),
-    detailed_address VARCHAR(255)
+    detailed_address VARCHAR(255),
+    created_date DATETIME NOT NULL
 );
 
 create table Product_colors (
@@ -127,18 +128,18 @@ WHERE description IS NULL;
 SET SQL_SAFE_UPDATES = 1;
 
 
-INSERT INTO Users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address)
+INSERT INTO Users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address, created_date)
 VALUES 
-('holykimsa05@gmail.com', 'kimsa', MD5('holykimsa@123'), 'Hồ Ly Kim Sa', '0877152961', NULL, NULL, NULL, NULL),
-('jane.smith@example.com', 'janesmith', MD5('securepass456'), 'Jane Smith', '0987654321', NULL, NULL, NULL, NULL),
-('alex.taylor@example.com', 'alextaylor', MD5('mypassword789'), 'Alex Taylor', '0112233445', NULL, NULL, NULL, NULL),
-('michael.brown@example.com', 'michaelb', MD5('passw0rd123'), 'Michael Brown', '0123451122', NULL, NULL, NULL, NULL),
-('emily.davis@example.com', 'emilyd', MD5('1234abcd'), 'Emily Davis', '0987745632', NULL, NULL, NULL, NULL),
-('chris.wilson@example.com', 'chrisw', MD5('qwerty789'), 'Chris Wilson', '0178901234', NULL, NULL, NULL, NULL),
-('sarah.jones@example.com', 'sarahj', MD5('ilovecoding'), 'Sarah Jones', '0912233445', NULL, NULL, NULL, NULL),
-('david.lee@example.com', 'davidl', MD5('passme123'), 'David Lee', '0908877665', NULL, NULL, NULL, NULL),
-('laura.martin@example.com', 'lauram', MD5('letmein2023'), 'Laura Martin', '0865543321', NULL, NULL, NULL, NULL),
-('kevin.thomas@example.com', 'kevint', MD5('kevinrocks'), 'Kevin Thomas', '0934567890', NULL, NULL, NULL, NULL);
+('holykimsa05@gmail.com', 'kimsa', MD5('holykimsa@123'), 'Hồ Ly Kim Sa', '0877152961', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('jane.smith@example.com', 'janesmith', MD5('securepass456'), 'Jane Smith', '0987654321', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('alex.taylor@example.com', 'alextaylor', MD5('mypassword789'), 'Alex Taylor', '0112233445', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('michael.brown@example.com', 'michaelb', MD5('passw0rd123'), 'Michael Brown', '0123451122', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('emily.davis@example.com', 'emilyd', MD5('1234abcd'), 'Emily Davis', '0987745632', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('chris.wilson@example.com', 'chrisw', MD5('qwerty789'), 'Chris Wilson', '0178901234', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('sarah.jones@example.com', 'sarahj', MD5('ilovecoding'), 'Sarah Jones', '0912233445', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('david.lee@example.com', 'davidl', MD5('passme123'), 'David Lee', '0908877665', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('laura.martin@example.com', 'lauram', MD5('letmein2023'), 'Laura Martin', '0865543321', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
+('kevin.thomas@example.com', 'kevint', MD5('kevinrocks'), 'Kevin Thomas', '0934567890', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00');
 
 -- insert data mẫu cho product details
 INSERT INTO Product_colors (id, product_id, color, image_link) 
@@ -195,3 +196,32 @@ VALUES
 ('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 3),
 ('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 4),
 ('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 5);
+
+-- insert data mẫu cho đẹp biểu đồ ở trang chủ:
+INSERT INTO Users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address, created_date)
+VALUES
+-- Ngày 15/12/2024
+('user7@example.com', 'user7', MD5('password7'), 'User Seven', '0900000007', NULL, NULL, NULL, NULL, '2024-12-15 08:45:00'),
+('user8@example.com', 'user8', MD5('password8'), 'User Eight', '0900000008', NULL, NULL, NULL, NULL, '2024-12-15 13:50:00'),
+
+-- Ngày 20/12/2024
+('user9@example.com', 'user9', MD5('password9'), 'User Nine', '0900000009', NULL, NULL, NULL, NULL, '2024-12-20 10:00:00'),
+('user10@example.com', 'user10', MD5('password10'), 'User Ten', '0900000010', NULL, NULL, NULL, NULL, '2024-12-20 15:45:00'),
+
+-- Ngày 25/12/2024
+('user11@example.com', 'user11', MD5('password11'), 'User Eleven', '0900000011', NULL, NULL, NULL, NULL, '2024-12-25 09:10:00'),
+('user12@example.com', 'user12', MD5('password12'), 'User Twelve', '0900000012', NULL, NULL, NULL, NULL, '2024-12-25 17:30:00'),
+
+-- Ngày 28/12/2024
+('user13@example.com', 'user13', MD5('password13'), 'User Thirteen', '0900000013', NULL, NULL, NULL, NULL, '2024-12-28 08:20:00'),
+('user14@example.com', 'user14', MD5('password14'), 'User Fourteen', '0900000014', NULL, NULL, NULL, NULL, '2024-12-28 20:00:00'),
+
+-- Ngày 29/12/2024
+('user15@example.com', 'user15', MD5('password15'), 'User Fifteen', '0900000015', NULL, NULL, NULL, NULL, '2024-12-29 11:15:00'),
+('user16@example.com', 'user16', MD5('password16'), 'User Sixteen', '0900000016', NULL, NULL, NULL, NULL, '2024-12-29 18:45:00'),
+
+-- Một số ngày ngẫu nhiên
+('user17@example.com', 'user17', MD5('password17'), 'User Seventeen', '0900000017', NULL, NULL, NULL, NULL, '2024-12-03 09:00:00'),
+('user18@example.com', 'user18', MD5('password18'), 'User Eighteen', '0900000018', NULL, NULL, NULL, NULL, '2024-12-12 10:30:00'),
+('user19@example.com', 'user19', MD5('password19'), 'User Nineteen', '0900000019', NULL, NULL, NULL, NULL, '2024-12-18 15:00:00'),
+('user20@example.com', 'user20', MD5('password20'), 'User Twenty', '0900000020', NULL, NULL, NULL, NULL, '2024-12-26 16:45:00');

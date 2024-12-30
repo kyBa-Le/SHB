@@ -81,9 +81,9 @@ async function renderOrderByStatus(orderItems, status, orderBodyElement) {
             }
             totalOrderPrice += itemTotalPrice;
             orderBodyElement.innerHTML += `
-                    <div class="product-item-infor mb-3" onclick="{window.location.href='/products/${product['product_id']}'}" >
+                    <div class="product-item-infor mb-3">
                         <span class="product-name-color-size d-flex flex-column">
-                            <span class="product-name">${product['product_name']}</span>
+                            <span  onclick="{window.location.href='/products/${product['product_id']}'}" class="product-name">${product['product_name']}</span>
                             <span class="product-color-size">
                                 <span class="product-color" style="font-size: 16px; color: #777070;">${product['product_color']}</span>
                                 <span style="font-size: 16px; color: #777070;">/</span>
@@ -230,6 +230,10 @@ orderShippingBtn.addEventListener('click', function () {
 
 document.getElementById('quantity-purchase').addEventListener('click', function() {
     const checkedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+    if (checkedCheckboxes.length === 0) {
+        window.alert('Please choose the items before purchase !!!');
+        return;
+    }
     const selectedIds = [];
     checkedCheckboxes.forEach((checkbox) => {
         let id = checkbox.dataset.id; // Lấy id từ thuộc tính data-id của checkbox

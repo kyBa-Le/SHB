@@ -75,4 +75,8 @@ class OrderItemService
         $id = (int) $id;
         return $this->orderItemsModel->getOrderItemById($id);
     }
+
+    public function getTotalOrderItemQuantityByMonthAndYear($month, $year) {
+        return $this->orderItemsModel->getTotalOrderItemQuantityByMonthAndYear($month, $year);
+    }
 }

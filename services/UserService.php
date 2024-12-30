@@ -37,6 +37,7 @@ class UserService
     public function login($data) {
         $email = $data['email'];
         $password = $data['password'];
+        $this->adminLogin($email, $password);
         $user = $this->userModel->getUserByEmailAndPassword($email, md5($password));
         if ($user !== false) {
             $_SESSION['user'] = $user;
@@ -85,5 +86,22 @@ class UserService
 
     public function saveChangePassword($data, $email) {
         return $this->userModel->updatePasswordByEmail($email, md5($data['newPassword'] ));
+    }
+
+    private function adminLogin($email, $password)
+    {
+        if ($email === 'admin@gmail.com' && $password === 'admin') {
+            $_SESSION['admin'] = true;
+            header('location: /admin');
+            exit;
+        }
+    }
+
+    public function getTotalUserByMonthAndYear($month, $year) {
+        return $this->userModel->getTotalUserByMonthAndYear($month, $year);
+    }
+
+    public function getAllUsers() {
+        return $this->userModel->getAllUsers();
     }
 }
