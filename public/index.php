@@ -65,6 +65,11 @@ $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 $app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
 $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
+$app->router->get('/api/admin/users/total', [new \app\controllers\api\UserController(), 'getTotalUserByMonthAndYear']);
+$app->router->get('/api/admin/order-items/total', [new \app\controllers\api\OrderItemController(), 'getTotalOrderItemQuantityAndMonthAndYear']);
+$app->router->get('/api/admin/payments/total', [new \app\controllers\api\PaymentController(), 'getTotalPaymentByMonthAndYear']);
+$app->router->get('/api/admin/payments/total-income', [new \app\controllers\api\PaymentController(), 'getTotalIncomeByMonthAndYear']);
+
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);

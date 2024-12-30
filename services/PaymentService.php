@@ -21,4 +21,12 @@ class PaymentService
         $id = (int) $id;
         return $this->paymentModel->getPaymentByTimeUserId($dateTime, $id);
     }
+
+    public function getTotalPaymentByMonthAndYear($month, $year) {
+        return $this->paymentModel->getTotalPaymentByMonthAndYear($month, $year);
+    }
+
+    public function getTotalIncomeByMonthAndYear($month, $year) {
+        return $this->paymentModel->getTotalIncomeByMonthAndYear($month, $year);
+    }
 }

@@ -1,3 +1,48 @@
+import {getData, moneyFormater} from "../components.js";
+//render overview data
+const currentMonth = new Date().getMonth() + 1;
+const currentYear = new Date().getFullYear();
+let totalUser = await getData(`/api/admin/users/total?month=${currentMonth}&&year=${currentYear}`);
+let totalOrderItem = await getData(`/api/admin/order-items/total?month=${currentMonth}&&year=${currentYear}`);
+let totalOrder = await getData(`/api/admin/payments/total?month=${currentMonth}&&year=${currentYear}`);
+let totalIncome = await getData(`/api/admin/payments/total-income?month=${currentMonth}&&year=${currentYear}`)
+
+// Function to animate numbers counting up
+function animateValue(elementId, start, end, increment, duration, formatter = null) {
+    const element = document.getElementById(elementId);
+    const range = end - start;
+    const stepTime = Math.abs(Math.floor(duration / range));
+    let current = start;
+    increment = end > start ? end/increment : -1;
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (formatter) {
+            element.innerHTML = formatter(current);
+        } else {
+            element.innerHTML = current;
+        }
+
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
+// Custom money formatter
+function moneyFormatter(value) {
+    return value.toLocaleString('vi-VN') + 'đ';
+}
+
+// Example usage
+
+
+// Animate the values
+animateValue('total-user', 0,totalUser['total'], totalUser['total'], 1000);
+animateValue('total-product', 0,totalOrderItem['total'], totalOrderItem['total'], 1000);
+animateValue('total-order', 0, totalOrder['total'], totalOrder['total'], 1000);
+animateValue('total-income', 0, totalIncome['total'],100, 2000, moneyFormatter);
+
 // Dữ liệu
 const data = [
     { date: "2023-12-20", value: 10 },

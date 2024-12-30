@@ -96,4 +96,8 @@ class UserService
             exit;
         }
     }
+
+    public function getTotalUserByMonthAndYear($month, $year) {
+        return $this->userModel->getTotalUserByMonthAndYear($month, $year);
+    }
 }

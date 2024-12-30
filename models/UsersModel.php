@@ -51,4 +51,12 @@ class UsersModel extends Model
         $sql = "UPDATE $this->table SET avatar_link = '$link' WHERE id = '$userId'";
         return $this->excuteSql($sql);
     }
+
+    public function getTotalUserByMonthAndYear($month, $year)
+    {
+        $sql = "SELECT COUNT(*) as total FROM $this->table WHERE MONTH(created_date) = $month AND YEAR(created_date) = $year";
+        return $this->queryOneRow($sql);
+    }
+
+
 }

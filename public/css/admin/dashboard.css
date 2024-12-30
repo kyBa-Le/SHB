@@ -1,8 +1,14 @@
+#overview-container {
+    display: grid;
+    grid-template-columns: 23% 23% 23% 23%;
+    column-gap: 2%;
+}
 #overview-container > .block {
     padding: 50px;
-    width: 400px;
+    width: 100%;
     height: 200px;
     margin-top: 100px;
+    box-sizing: border-box;
 }
 .block > * {
     color:white

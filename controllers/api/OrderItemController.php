@@ -101,4 +101,12 @@ class OrderItemController extends BaseController
         }
         $this->response->sendJson($message);
     }
+
+    public function getTotalOrderItemQuantityAndMonthAndYear() {
+        $data = $this->request->getBody();
+        $month = $data['month'];
+        $year = $data['year'];
+        $total = $this->orderItemService->getTotalOrderItemQuantityByMonthAndYear($month, $year);
+        $this->response->sendJson($total);
+    }
 }

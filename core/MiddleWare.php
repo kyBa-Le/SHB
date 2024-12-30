@@ -42,7 +42,7 @@ class MiddleWare
     public function handleRequest() {
         $url = Application::$app->request->getPath();
         foreach ($this->needToCheck as $needCheck) {
-            if (str_contains($url, $needCheck)) {
+            if (str_contains($url, $needCheck) && !$this->isAdmin()) {
                 if (!$this->isLoggedIn()) {
                     $this->redirect('/login');
                     exit;

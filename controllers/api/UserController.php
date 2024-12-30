@@ -73,4 +73,12 @@ class UserController extends BaseController
         $this->response->sendJson($message);
     }
 
+    public function getTotalUserByMonthAndYear() {
+        $data = $this->request->getBody();
+        $month = $data['month'];
+        $year = $data['year'];
+        $total = $this->userService->getTotalUserByMonthAndYear($month, $year);
+        $this->response->sendJson($total);
+    }
+
 }

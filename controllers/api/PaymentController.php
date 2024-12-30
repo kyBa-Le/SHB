@@ -34,4 +34,20 @@ class PaymentController extends BaseController
             'payment' => $payment, 'isPaid' => $isPaid
         ]);
     }
+
+    public function getTotalPaymentByMonthAndYear() {
+        $data = $this->request->getBody();
+        $month = $data['month'];
+        $year = $data['year'];
+        $total = $this->paymentService->getTotalPaymentByMonthAndYear($month, $year);
+        $this->response->sendJson($total);
+    }
+
+    public function getTotalIncomeByMonthAndYear() {
+        $data = $this->request->getBody();
+        $month = $data['month'];
+        $year = $data['year'];
+        $total = $this->paymentService->getTotalIncomeByMonthAndYear($month, $year);
+        $this->response->sendJson($total);
+    }
 }
