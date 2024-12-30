@@ -46,4 +46,9 @@ class OrderItemsModel extends Model {
           ";
         return $this->excuteSql($sql);
     }
+
+    public function getAllOrderItems() {
+        $sql = "SELECT * FROM $this->table";
+        return $this->queryManyRows($sql);
+    }
 }

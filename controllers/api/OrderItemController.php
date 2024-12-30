@@ -100,4 +100,8 @@ class OrderItemController extends BaseController
         }
         $this->response->sendJson($message);
     }
+    public function getAllOrderItems() {
+        $orderItems = $this->orderItemService->getAllOrderItems();
+        $this->response->sendJson($orderItems);
+    }
 }

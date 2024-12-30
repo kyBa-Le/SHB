@@ -75,4 +75,7 @@ class OrderItemService
         $id = (int) $id;
         return $this->orderItemsModel->getOrderItemById($id);
     }
+    public function getAllOrderItems() {
+        return $this->orderItemsModel->getAllOrderItems();
+    }
 }
