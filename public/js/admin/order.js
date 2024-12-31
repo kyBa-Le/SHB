@@ -1,9 +1,19 @@
 import {moneyFormater, getData, sendData, patchData, deleteData} from "../components.js";
-let orderItems = [];
 
+let orderItems = [];
 orderItems = await getData('/api/admin/order-items');
-let lengthOfOrder = orderItems.length;
-console.log(lengthOfOrder);
+
+// lọc sô lượng orders theo payments_id
+const filteredOrders = orderItems.filter(item => item['status'] !== 'Pending');
+const groupedOrders = filteredOrders.reduce((acc, item) => {
+    const paymentId = item['payments_id'];
+    if (!acc[paymentId]) {
+        acc[paymentId] = [];
+    }
+    acc[paymentId].push(item);
+    return acc;
+}, {});
+const lengthOfOrder = Object.keys(groupedOrders).length;
 document.getElementById('order-quantity').innerHTML = lengthOfOrder + ' orders found';
 let allOfOrder = document.getElementById('products-infor-orders');
 // render orders
@@ -17,8 +27,16 @@ function groupByPaymentId(orderItems) {
         return acc;
     }, {});
 }
-async function renderOrderByStatus(orderItems) {
-    const filteredItems = orderItems.filter(item => item['status'] === 'Shipping' || item['status'] === 'Delivered');
+// Hiển thị order theo status
+async function renderOrderByStatus(orderItems, status) {
+    let filteredItems = [];
+    if (status == 'Shipping') {
+        filteredItems = orderItems.filter(item => item['status'] === 'Shipping');
+    } else if (status == 'Delivered') {
+        filteredItems = orderItems.filter(item => item['status'] === 'Delivered');
+    } else {
+        filteredItems = orderItems.filter(item => item['status'] !== 'Pending');
+    }
     if (filteredItems.length === 0) {
         allOfOrder.innerHTML = `<p>No orders found.</p>`;
         return;
@@ -31,16 +49,30 @@ async function renderOrderByStatus(orderItems) {
         let orderHtml = `
             <div class="product-infor-content">
                 <div class="noOfOrder-status-btn d-flex justify-content-between">
-                    <p class="noOfOrder">Order ${paymentId}</p>
+                    <p class="noOfOrder">Payment ID: ${paymentId}</p>
                     ${products[0]['status'] === 'Delivered' ? 
-                        `<p class="delivered status-btn" style="background-color: #4cfd7e4c; color: #167E53;">Delivered</p>` :
-                        `<p class="shipping status-btn" style="background-color: #ff000049; color: #DC3333;">Shipping <i class="fa-solid fa-angle-down"></i></p>`
-                    }
+                        `<div id="delivered-status-container">
+                            <p class="delivered-status status-btn" style="background-color: #4cfd7e4c; color: #167E53;">Delivered</p>
+                        </div>` :
+                        `<div id="shipping-status-container" class="shipping-status-container">
+                            <div id="button-container-${paymentId}">
+                                <p data-id="${paymentId}" class="shipping-status status-btn" style="background-color: #ff000049; color: #DC3333;">Shipping <i id="down-${paymentId}" class="fa-solid fa-angle-down"></i> <i id="up-${paymentId}" class="fa-solid fa-angle-up d-none"></i></p>
+                            </div>
+                            <div id="box-status-order-${paymentId}" class="box-status-order d-none">
+                                <div class="box-status-content-order">
+                                    <span>Confirm delivery completed</span><i class="fa-regular fa-face-smile"></i>
+                                </div>
+                                <div class="change-button">
+                                    <button id="status-change-btn-${paymentId}" data-id="${paymentId}" class="status-change-btn">Confirm</button>
+                                </div>
+                            </div>
+                        </div>`}
                 </div>
-                <div class="user-infor d-flex justify-content-between mb-3" style="font-weight: bold;">
-                    <span>User name: Kim Sa</span>
-                    <span class="phone-number">Phone number: 0123456789</span>
-                    <span class="address">Address: Quảng Trị</span>
+                <div class="user-infor mb-3" style="font-weight: bold;">
+                    <span>User name: ${products[0]['fullName']}</span>
+                    <span class="phone-number">Phone number: ${products[0]['phone']}</span>
+                    <span class="date-order">Date: ${products[0]['dateTime']}</span>
+                    <span class="address">Address: ${products[0]['detailed_address']} - ${products[0]['district']} - ${products[0]['province']}</span>
                 </div>
                 <div class="product-item" style="max-height: 0px; overflow: hidden; transition: max-height 0.5s ease;">
         `;
@@ -70,7 +102,7 @@ async function renderOrderByStatus(orderItems) {
                 </p>
                 <hr>
                 <div class="view-detail pb-4" id="view-detail" style="text-align: center;font-size:18px; cursor:pointer;">View detail <i class="fa-solid fa-angle-down"></i></div>
-                <div class="contract d-none pb-4" id="contract" style="text-align: center;font-size:18px; cursor:pointer;">Contract <i class="fa-solid fa-chevron-up"></i></div>
+                <div class="contract d-none pb-4" id="contract" style="text-align: center;font-size:18px; cursor:pointer;">Contract <i class="fa-solid fa-angle-up"></i></div>
             </div>
         `;
         allOrdersHtml += orderHtml;
@@ -115,6 +147,62 @@ async function renderOrderByStatus(orderItems) {
             }, 500);
         });
     });
+    changeStatus();
 }
-
-await renderOrderByStatus(orderItems);
+// Xử lý nút bấm
+let buttons = [
+    { elementId: 'all-orders', status: 'allOrder' },
+    { elementId: 'delivered', status: 'Delivered' },
+    { elementId: 'shipping', status: 'Shipping' },
+];
+// Hiển thị mặc định khi load trang 
+changeStatus();
+await renderOrderByStatus(orderItems, 'allOrder');
+document.getElementById('all-orders').classList.add('active');
+buttons.forEach(button => {
+    const element = document.getElementById(button.elementId);
+    if (element) {
+        element.addEventListener('click', async () => {
+            await renderOrderByStatus(orderItems, button.status);
+            buttons.forEach(btn => {
+                const btnElement = document.getElementById(btn.elementId);
+                if (btnElement) btnElement.classList.remove('active');
+            });
+            element.classList.add('active');
+        });
+    }
+});
+// Xử lý đổi status
+async function changeStatus() {
+    let statusBtn = document.querySelectorAll('.shipping-status');
+    for (let button of statusBtn) {
+        let id = button.dataset.id;
+        button.addEventListener('click', function () {
+            let boxStatus = document.getElementById(`box-status-order-${id}`);
+            let upIcon = document.getElementById(`up-${id}`);
+            let downIcon = document.getElementById(`down-${id}`);
+            if (boxStatus.classList.contains('d-none')) {
+                upIcon.classList.remove('d-none');
+                downIcon.classList.add('d-none');
+                boxStatus.classList.remove('d-none'); 
+            } else {
+                downIcon.classList.remove('d-none');
+                upIcon.classList.add('d-none');
+                boxStatus.classList.add('d-none'); 
+            }  
+            let changeBtn = document.getElementById(`status-change-btn-${id}`)
+            console.log(changeBtn)
+            if (changeBtn) {
+                changeBtn.addEventListener('click', async function () {
+                    let response = await patchData('/api/admin/order-items', {payment_id: id});
+                    boxStatus.classList.add('d-none'); 
+                    if (response['isUpdate'] == true) {
+                        let id = changeBtn.dataset.id;
+                        document.getElementById(`button-container-${id}`).innerHTML = `<p class="delivered-status status-btn" style="background-color: #4cfd7e4c; color: #167E53;">Delivered</p>`;
+                        orderItems = await getData('/api/admin/order-items');
+                    }
+                });
+            }      
+        });
+    }
+}

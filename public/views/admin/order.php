@@ -10,9 +10,9 @@
             <button class="order-date-filter-btn"><i class="fa-regular fa-calendar-days"></i>Mar - April, 2024 <i class="fa-solid fa-angle-down"></i></button>
         </div>
         <div class="nav-order mt-4 mb-4">
-            <span class="all-orders">All orders</span>
-            <span class="delivered">Delivered</span>
-            <span class="shipping">Shipping</span>
+            <span class="all-orders" id="all-orders">All orders</span>
+            <span class="delivered" id="delivered">Delivered</span>
+            <span class="shipping" id="shipping">Shipping</span>
         </div>
         <!-- Orders content -->
         <div class="products-infor-orders" id="products-infor-orders">
