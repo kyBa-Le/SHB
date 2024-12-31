@@ -1,0 +1,36 @@
+.table-container {
+    background-color: #fff;
+    padding: 20px;
+}
+.table th,
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
+.btn-add {
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 8px 16px;
+    text-transform: uppercase;
+}
+.btn-add:hover {
+    background-color: #333;
+}
+.btn-edit,
+.btn-delete {
+    color: #333;
+    border: none;
+    background: none;
+}
+.btn-edit:hover {
+    color: #007bff;
+}
+.btn-delete:hover {
+    color: #dc3545;
+}
+.see-more {
+    text-align: center;
+    margin-top: 20px;
+}
