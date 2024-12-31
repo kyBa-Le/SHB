@@ -1,36 +1,88 @@
-.table-container {
-    background-color: #fff;
+.container-products-admin {
     padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.table th,
-.table td {
-    vertical-align: middle;
-    text-align: center;
-}
-.btn-add {
-    background-color: #000;
+.btn.btn-add {
+    background-color: black;
     color: #fff;
-    border-radius: 5px;
-    font-size: 14px;
-    padding: 8px 16px;
-    text-transform: uppercase;
-}
-.btn-add:hover {
-    background-color: #333;
-}
-.btn-edit,
-.btn-delete {
-    color: #333;
     border: none;
-    background: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
 }
-.btn-edit:hover {
-    color: #007bff;
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
 }
-.btn-delete:hover {
-    color: #dc3545;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: #fff;
+}
+table thead th {
+    background-color: #f1f1f1;
+    text-align: left;
+    padding: 10px;
+}
+table tbody td {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+table tbody tr:hover {
+    background-color: #f5f5f5;
+    transition: background-color 0.2s ease;
+}
+table tbody td img {
+    width: 10vw;
+    height: auto;
+}
+.btn {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn.btn-edit:hover {
+    color: #0056b3;
+}
+.btn.btn-delete:hover {
+    color: #c82333;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.input-group .form-control {
+    border: 1px solid #ced4da;
+    border-right: none;
+    padding: 8px;
+}
+.input-group .btn-outline-secondary {
+    background-color: #fff;
+}
+.btn.btn-outline-secondary {
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid #ced4da;
+}
+.btn.btn-outline-secondary:hover {
+    background-color: black;
+    color: white;
 }
 .see-more {
+    margin: 20px;
     text-align: center;
-    margin-top: 20px;
 }

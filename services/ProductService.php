@@ -55,4 +55,7 @@ class ProductService
         return $this->productModel->updateQuantity($id, $newQuantity);
     }
 
+    public function getAllProducts(){
+        return $this->productModel->getAllProducts();
+    }
 }

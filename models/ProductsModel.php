@@ -82,4 +82,9 @@ class ProductsModel extends Model
         $sql = "UPDATE $this->table SET quantity = '$quantity' WHERE id = '$id'";
         return $this->queryOneRow($sql);
     }
+
+    public function getAllProducts() {
+        $sql = "SELECT * FROM $this->table";
+        return $this->queryManyRows($sql);
+    }
 }

@@ -45,6 +45,7 @@ $app->router->get('/cart', 'cart');
 $app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
 $app->router->get('/payment', 'payment');
 $app->router->get('/payment/momo/handle-callback', [new \app\controllers\PaymentController(), 'handleMomoCallback']);
+$app->router->get('/admin/products', [$productController,'admin']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);

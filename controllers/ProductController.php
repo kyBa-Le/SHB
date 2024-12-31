@@ -10,6 +10,7 @@ class ProductController extends Controller
 {
     private $productService;
     private $request;
+    protected $productsModel;
 
     public function __construct() {
         $this->productService = new ProductService();
@@ -45,5 +46,10 @@ class ProductController extends Controller
         $products = $this->productService->getFilteredProducts($data);
         $data = ['products' => $products];
         return $this->render('search', $data);
+    }
+
+    public function admin() {
+        $products = $this->productService->getAllProducts();
+        return $this->render('admin/products',  ['products' => $products]);
     }
 }
