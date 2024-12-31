@@ -65,6 +65,7 @@ $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 $app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
 $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
+$app->router->get('/api/products/search', [$apiProductController, 'searchProducts']);
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);

@@ -8,8 +8,8 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold">Product List</h6>
             <div class="input-group w-25">
-                <input type="text" class="form-control" placeholder="Search">
-                <button class="btn btn-outline-secondary" type="button">
+                <input type="text" class="form-control" id="search-input" placeholder="Search">
+                <button class="btn btn-outline-secondary" type="button" id="submit-btn">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -27,7 +27,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="products-list">
                 <?php
                     foreach ($products as $product){
                         $id = $product['id'];
@@ -55,9 +55,7 @@
             </tbody>
         </table>
     </div>
-    <div class="see-more">
-      <button class="btn btn-outline-secondary">See more <i class="fa fa-chevron-down"></i></button>
-    </div>
 </div>
+<script src="js/admin/products.js" type="module"></script>
 
 

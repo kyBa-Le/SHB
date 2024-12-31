@@ -87,4 +87,13 @@ class ProductsModel extends Model
         $sql = "SELECT * FROM $this->table";
         return $this->queryManyRows($sql);
     }
+
+    public function searchProductsByKeyword($keyword)
+    {
+        $sql = "SELECT * FROM $this->table 
+                WHERE product_name LIKE '%$keyword%' 
+                OR category LIKE '%$keyword%'
+                OR description LIKE '%$keyword%'";
+        return $this->queryManyRows($sql);
+    }
 }

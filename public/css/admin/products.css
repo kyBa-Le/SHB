@@ -41,7 +41,7 @@ table tbody tr:hover {
     transition: background-color 0.2s ease;
 }
 table tbody td img {
-    width: 10vw;
+    width: 5vw;
     height: auto;
 }
 .btn {

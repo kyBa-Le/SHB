@@ -58,4 +58,8 @@ class ProductService
     public function getAllProducts(){
         return $this->productModel->getAllProducts();
     }
+
+    public function searchProductsByKeyword($keyword){
+        return $this->productModel->searchProductsByKeyword($keyword);
+    }
 }
