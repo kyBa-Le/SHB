@@ -46,4 +46,19 @@ class OrderItemsModel extends Model {
           ";
         return $this->excuteSql($sql);
     }
+
+    public function getAllOrderItems() {
+        $sql = "SELECT $this->table.*, payments.fullName, payments.detailed_address, payments.province, payments.district, payments.phone, payments.dateTime 
+        FROM $this->table
+        JOIN payments ON payments_id = payments.id 
+        ORDER BY payments.dateTime DESC";
+        return $this->queryManyRows($sql);
+    }
+
+    public function updateOrderByPaymentId($paymentId, $status) {
+        $sql = "UPDATE $this->table SET status = '$status'
+                WHERE payments_id = $paymentId;
+          ";
+        return $this->excuteSql($sql);
+    }
 }

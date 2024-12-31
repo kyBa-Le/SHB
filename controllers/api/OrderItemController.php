@@ -100,4 +100,20 @@ class OrderItemController extends BaseController
         }
         $this->response->sendJson($message);
     }
+    public function getAllOrderItems() {
+        $orderItems = $this->orderItemService->getAllOrderItems();
+        $this->response->sendJson($orderItems);
+    }
+    public function updateOrderByPaymentId() {
+        $data = $this->request->getBody();
+        $status = 'Delivered';
+        $paymentId = $data['payment_id'];
+        $updateOrderItem = $this->orderItemService->updateOrderByPaymentId($paymentId, $status);
+        if ($updateOrderItem) {
+                $message['isUpdate'] = true;
+            } else {
+                $message['isUpdate'] = false;
+        }
+        $this->response->sendJson($message);
+    }
 }

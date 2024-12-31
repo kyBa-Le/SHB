@@ -75,4 +75,11 @@ class OrderItemService
         $id = (int) $id;
         return $this->orderItemsModel->getOrderItemById($id);
     }
+    public function getAllOrderItems() {
+        return $this->orderItemsModel->getAllOrderItems();
+    }
+    public function updateOrderByPaymentId($paymentId, $status) {
+        $paymentId = (int) $paymentId;
+        return $this->orderItemsModel->updateOrderByPaymentId($paymentId, $status);
+    }
 }
