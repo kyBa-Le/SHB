@@ -86,3 +86,7 @@ table tbody td img {
     margin: 20px;
     text-align: center;
 }
+.sort-btn {
+    background-color: black;
+    color: white;
+}

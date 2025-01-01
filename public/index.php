@@ -46,6 +46,7 @@ $app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
 $app->router->get('/payment', 'payment');
 $app->router->get('/payment/momo/handle-callback', [new \app\controllers\PaymentController(), 'handleMomoCallback']);
 $app->router->get('/admin/products', [$productController,'admin']);
+$app->router->get('/admin/products/sort-price', [$productController,'sortPrice']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
@@ -65,7 +66,8 @@ $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 $app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
 $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
-$app->router->get('/api/products/search', [$apiProductController, 'searchProducts']);
+$app->router->get('/api/admin/products/search', [$apiProductController, 'searchProducts']);
+$app->router->get('/api/admin/products', [$apiProductController, 'getAllProducts']);
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);

@@ -7,6 +7,11 @@
     <div class="table-container">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold">Product List</h6>
+            <form id="sort-form">
+                <label><input type="radio" name="sort" value="increase" checked class="sort-price" id="increase"> Price Increase</label>
+                <label><input type="radio" name="sort" value="decrease" class="sort-price" id="decrease"> Price Decrease</label>
+                <button class="sort-btn" type="button" id="sort-btn">Sort</button>
+            </form>
             <div class="input-group w-25">
                 <input type="text" class="form-control" id="search-input" placeholder="Search">
                 <button class="btn btn-outline-secondary" type="button" id="submit-btn">

@@ -33,4 +33,8 @@ class ProductController extends BaseController
         $products = $this->productService->searchProductsByKeyword($keyword);
         $this->response->sendJson($products);
     }
+    public function getAllProducts(){
+        $products = $this->productService->getAllProducts();
+        $this->response->sendJson($products);
+    }
 }

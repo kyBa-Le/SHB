@@ -1,7 +1,7 @@
 import {moneyFormater, getData, sendData, patchData, deleteData} from "../components.js";
 async function searchProducts() {
     let keyword = document.getElementById('search-input').value;
-    let path = '/api/products/search?keyword=' + keyword;
+    let path = '/api/admin/products/search?keyword=' + keyword;
     let products = await getData(path);
     updateProductTable(products);
 }
@@ -29,3 +29,21 @@ function updateProductTable(products) {
         tbody.appendChild(row);
     });
 }
+
+async function sortPrice(selectedSort) {
+    let products = await getData('/api/admin/products');
+    if (selectedSort === 'increase') {
+        products.sort((a, b) => a.price - b.price);
+
+    } else if (selectedSort === 'decrease') {
+        products.sort((a, b) => b.price - a.price);
+    }
+    updateProductTable(products);
+}
+
+const sortButton = document.getElementById('sort-btn');
+sortButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const selectedSort = document.querySelector('input[name="sort"]:checked').value;
+    await sortPrice(selectedSort);
+});
