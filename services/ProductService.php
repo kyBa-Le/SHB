@@ -62,4 +62,10 @@ class ProductService
     public function searchProductsByKeyword($keyword){
         return $this->productModel->searchProductsByKeyword($keyword);
     }
+
+    public function saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description){
+        $quantity = (int) $quantity;
+        $price = (int) $price;
+        return $this->productModel->saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description);
+    }
 }

@@ -47,3 +47,19 @@ sortButton.addEventListener('click', async (event) => {
     const selectedSort = document.querySelector('input[name="sort"]:checked').value;
     await sortPrice(selectedSort);
 });
+
+const addProductBtn = document.querySelector('.btn-add');
+const overlay = document.getElementById('overlay');
+const formContainer = document.getElementById('form-container');
+
+addProductBtn.addEventListener('click', () => {
+    overlay.style.display = 'block'; 
+    formContainer.style.display = 'block';
+});
+
+overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+        overlay.style.display = 'none';
+        formContainer.style.display = 'none';
+    }
+});

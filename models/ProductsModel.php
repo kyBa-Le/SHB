@@ -96,4 +96,10 @@ class ProductsModel extends Model
                 OR description LIKE '%$keyword%'";
         return $this->queryManyRows($sql);
     }
+
+    public function saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description){
+        $sql = "INSERT INTO Products (product_name, image_link, category, color, price, quantity, `description`) 
+            VALUES ('$product_name', '$image_link', '$category', '$color', $price, $quantity, '$description')";
+        return $this->excuteSql($sql);
+    }
 }

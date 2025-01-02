@@ -77,6 +77,7 @@ $app->router->post('/api/payments', [$apiPaymentController,'createPayment']);
 $app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
 $app->router->post('/api/reviews', [new \app\controllers\api\ReviewController(), 'reviewOrder']);
 $app->router->post('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'reviewOrder']);
+$app->router->post('/api/admin/products', [$apiProductController, 'createNewProduct']);
 
 // put API
 
