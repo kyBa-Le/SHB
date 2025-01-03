@@ -38,6 +38,8 @@ class UserController extends Controller
     }
 
     public function login() {
+        session_destroy();
+        session_start();
         $request = new Request();
         $data = $request->getBody();
         $message = $this->userService->login($data);

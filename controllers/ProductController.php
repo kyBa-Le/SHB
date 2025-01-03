@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\services\ProductService;
@@ -10,6 +11,7 @@ class ProductController extends Controller
 {
     private $productService;
     private $request;
+    protected $productsModel;
 
     public function __construct() {
         $this->productService = new ProductService();
@@ -45,5 +47,17 @@ class ProductController extends Controller
         $products = $this->productService->getFilteredProducts($data);
         $data = ['products' => $products];
         return $this->render('search', $data);
+    }
+
+    public function admin() {
+        $this->setLayout("admin");
+        $data = $this->request->getBody();
+        if (!isset($data['page']) && !isset($data['size'])) {
+            $data['page'] = 1;
+            $data['size'] = 10;
+        }
+        $products = $this->productService->getProductWithPagination($data['page'], $data['size']);
+        $totalProducts = $this->productService->getTotalProducts();
+        return $this->render('admin/products',  ['products' => $products, 'totalProducts' => $totalProducts['total'] ?? null]);
     }
 }

@@ -18,4 +18,9 @@ class SiteController extends Controller
         return $this->render('home', $data);
     }
 
+    public function dashboard() {
+        $this->setLayout('admin');
+        return $this->render('admin/dashboard');
+    }
+
 }

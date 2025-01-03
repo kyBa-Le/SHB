@@ -19,6 +19,7 @@ class Application
     }
 
     public function run() {
+        MiddleWare::getInstance()->handleRequest();
         echo $this->router->resolve();
     }
 
