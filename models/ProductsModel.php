@@ -83,11 +83,6 @@ class ProductsModel extends Model
         return $this->queryOneRow($sql);
     }
 
-    public function getAllProducts() {
-        $sql = "SELECT * FROM $this->table";
-        return $this->queryManyRows($sql);
-    }
-
     public function searchProductsByKeyword($keyword)
     {
         $sql = "SELECT * FROM $this->table 
@@ -95,5 +90,17 @@ class ProductsModel extends Model
                 OR category LIKE '%$keyword%'
                 OR description LIKE '%$keyword%'";
         return $this->queryManyRows($sql);
+    }
+
+    public function getProductWithPagination($page, $size) {
+        $offset = ((int)$page - 1) * (int)$size;
+        $sql = "SELECT * FROM $this->table LIMIT $size OFFSET $offset";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getTotalProducts()
+    {
+        $sql =  "SELECT COUNT(*) as total FROM $this->table";
+        return $this->queryOneRow($sql);
     }
 }

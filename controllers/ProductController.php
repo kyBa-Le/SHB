@@ -50,8 +50,14 @@ class ProductController extends Controller
     }
 
     public function admin() {
-        Application::$app->controller->setLayout("admin");
-        $products = $this->productService->getAllProducts();
-        return $this->render('admin/products',  ['products' => $products]);
+        $this->setLayout("admin");
+        $data = $this->request->getBody();
+        if (!isset($data['page']) && !isset($data['size'])) {
+            $data['page'] = 1;
+            $data['size'] = 10;
+        }
+        $products = $this->productService->getProductWithPagination($data['page'], $data['size']);
+        $totalProducts = $this->productService->getTotalProducts();
+        return $this->render('admin/products',  ['products' => $products, 'totalProducts' => $totalProducts['total'] ?? null]);
     }
 }

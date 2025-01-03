@@ -13,22 +13,23 @@
 </head>
 <body>
 <link rel="stylesheet" href="css/admin/admin-dashboard.css">
+<?php require_once 'views/components/loading.php' ?>
 <div class="header">
-    <img src="images/logo.png" alt="logo" style="width:5vw">
-    <h1>Admin</h1>
+    <img src="images/logo.png" alt="logo" style="width:4vw">
+    <h4>Admin</h4>
     <div class="logout">
-        <h5>Logout</h5>
+        <p>Logout</p>
     </div>
 </div>
 <div class="container-dashboard">
     <div class="sidebar">
-        <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Orders</a></li>
+        <ul class="w-100">
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin/products">Products</a></li>
+            <li><a href="/admin/order">Orders</a></li>
         </ul>    
     </div>
-    <div style="overflow: scroll;">
+    <div style="overflow: scroll; z-index: 1000" class="w-100">
         {{content}}
     </div>     
 </div>

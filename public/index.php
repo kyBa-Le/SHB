@@ -67,7 +67,7 @@ $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsBy
 $app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
 $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
 $app->router->get('/api/admin/products/search', [$apiProductController, 'searchProducts']);
-$app->router->get('/api/admin/products', [$apiProductController, 'getAllProducts']);
+$app->router->get('/api/admin/products', [$apiProductController, 'getAllProductsWithPagination']);
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);

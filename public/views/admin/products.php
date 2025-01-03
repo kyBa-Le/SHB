@@ -61,6 +61,27 @@
         </table>
     </div>
 </div>
+<nav  class="w-100 d-flex justify-content-end align-items-center pe-5 mt-5">
+    <ul class="pagination pagination-lg" style="max-width: 25vw; overflow-x: scroll">
+        <?php
+            $totalPage = $totalProducts / 10 + 1;
+            if (!isset($_GET['page'])) {
+                $page = 1;
+            } else{
+                $page = $_GET['page'];
+            }
+            for ($i = 1; $i <= $totalPage; $i++) {
+                $active = "";
+                if ($i == $page) {
+                    $active = "active";
+                }
+                echo "<li class='page-item $active' aria-current='page'>
+                        <a class='page-link' href='/admin/products?page=$i&size=10'>$i</a
+                    </li>";
+            }
+        ?>
+    </ul>
+</nav>
 <script src="js/admin/products.js" type="module"></script>
 
 
