@@ -225,3 +225,44 @@ VALUES
 ('user18@example.com', 'user18', MD5('password18'), 'User Eighteen', '0900000018', NULL, NULL, NULL, NULL, '2024-12-12 10:30:00'),
 ('user19@example.com', 'user19', MD5('password19'), 'User Nineteen', '0900000019', NULL, NULL, NULL, NULL, '2024-12-18 15:00:00'),
 ('user20@example.com', 'user20', MD5('password20'), 'User Twenty', '0900000020', NULL, NULL, NULL, NULL, '2024-12-26 16:45:00');
+
+-- Insert data để hiển thị chart với hình dạng kim tự tháp
+INSERT INTO Payments (dateTime, total_cost, description, method, province, district, detailed_address, status, phone, fullName, user_id)
+VALUES
+    -- Ngày 19-22: ít đơn hàng
+    ('2024-12-19 09:00:00', 1200000, 'Payment for casual shirt', 'Momo', 'Hanoi', 'Cau Giay', '23 Duy Tan Street', 'Paid', '0123456789', 'sa', 1),
+    ('2024-12-20 10:00:00', 1500000, 'Payment for shoes', 'COD', 'Ho Chi Minh City', 'District 1', '45 Le Duan Street', 'Paid', '0123456789', 'bá', 2),
+    ('2024-12-21 11:00:00', 2200000, 'Payment for pants', 'Momo', 'Danang', 'Hai Chau', '56 Tran Phu Street', 'Paid', '0123456789', 'hiền', 3),
+
+    -- Ngày 23-26: số lượng đơn hàng bắt đầu tăng lên
+    ('2024-12-23 13:00:00', 2800000, 'Payment for sweater', 'Momo', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Paid', '0123456789', 'Đạt', 5),
+    ('2024-12-23 16:00:00', 3100000, 'Payment for dress', 'COD', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'sa', 1),
+    ('2024-12-24 08:30:00', 3300000, 'Payment for shoes', 'Momo', 'Ho Chi Minh City', 'District 2', '56 Nguyen Thi Minh Khai', 'Paid', '0123456789', 'bá', 2),
+    ('2024-12-24 11:00:00', 3500000, 'Payment for coat', 'COD', 'Danang', 'Cam Le', '12 Hoang Hoa Tham', 'Paid', '0123456789', 'hiền', 3),
+    ('2024-12-25 13:00:00', 4000000, 'Payment for jacket', 'Momo', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'nga', 4),
+    ('2024-12-25 16:30:00', 4200000, 'Payment for sweater', 'COD', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Paid', '0123456789', 'Đạt', 5),
+    ('2024-12-25 12:00:00', 2500000, 'Payment for jacket', 'COD', 'Hanoi', 'Dong Da', '78 Nguyen Chi Thanh Street', 'Paid', '0123456789', 'nga', 4),
+
+    -- Ngày 26-28: đạt đỉnh cao nhất
+    ('2024-12-28 09:00:00', 4500000, 'Payment for pants', 'Momo', 'Hanoi', 'Cau Giay', '23 Duy Tan Street', 'Paid', '0123456789', 'sa', 1),
+    ('2024-12-28 11:30:00', 4700000, 'Payment for shoes', 'COD', 'Danang', 'Hai Chau', '56 Tran Phu Street', 'Paid', '0123456789', 'bá', 2),
+    ('2024-12-28 14:00:00', 5000000, 'Payment for jacket', 'Momo', 'Ho Chi Minh City', 'District 2', '56 Nguyen Thi Minh Khai', 'Paid', '0123456789', 'hiền', 3),
+    ('2024-12-28 13:30:00', 5200000, 'Payment for sweater', 'COD', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Paid', '0123456789', 'Đạt', 5),
+    ('2024-12-28 15:00:30', 5400000, 'Payment for shoes', 'Momo', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'nga', 4),
+    ('2024-12-28 15:50:00', 5400000, 'Payment for shoes', 'Momo', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'nga', 4),
+    ('2024-12-28 15:00:00', 5400000, 'Payment for shoes', 'Momo', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'nga', 4),
+    ('2024-12-28 15:20:00', 5400000, 'Payment for shoes', 'Momo', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'nga', 4),
+    ('2024-12-28 15:02:00', 5400000, 'Payment for shoes', 'Momo', 'Hanoi', 'Ba Dinh', '34 Le Hong Phong Street', 'Paid', '0123456789', 'nga', 4),
+
+    -- Ngày 29-31: giảm nhẹ
+    ('2024-12-29 12:00:00', 4500000, 'Payment for jacket', 'COD', 'Danang', 'Cam Le', '12 Hoang Hoa Tham', 'Paid', '0123456789', 'hiền', 3),
+    ('2024-12-29 14:00:00', 4300000, 'Payment for pants', 'Momo', 'Ho Chi Minh City', 'District 1', '45 Le Duan Street', 'Paid', '0123456789', 'bá', 2),
+    ('2024-12-30 11:30:00', 4100000, 'Payment for shoes', 'COD', 'Hanoi', 'Dong Da', '78 Nguyen Chi Thanh Street', 'Paid', '0123456789', 'sa', 1),
+    ('2024-12-31 12:30:00', 4000000, 'Payment for sweater', 'Momo', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Paid', '0123456789', 'Đạt', 5),
+
+    -- Ngày 1-3: giảm dần
+    ('2025-01-01 09:00:00', 3900000, 'Payment for coat', 'COD', 'Ho Chi Minh City', 'District 2', '56 Nguyen Thi Minh Khai', 'Paid', '0123456789', 'hiền', 3),
+    ('2025-01-01 12:00:00', 3700000, 'Payment for pants', 'Momo', 'Hanoi', 'Cau Giay', '23 Duy Tan Street', 'Paid', '0123456789', 'sa', 1),
+    ('2025-01-02 11:00:00', 3600000, 'Payment for shoes', 'COD', 'Danang', 'Hai Chau', '56 Tran Phu Street', 'Paid', '0123456789', 'bá', 2),
+    ('2025-01-02 14:30:00', 3400000, 'Payment for sweater', 'Momo', 'Hanoi', 'Dong Da', '78 Nguyen Chi Thanh Street', 'Paid', '0123456789', 'nga', 4),
+    ('2025-01-03 10:00:00', 3300000, 'Payment for jacket', 'COD', 'Ho Chi Minh City', 'District 1', '45 Le Duan Street', 'Paid', '0123456789', 'hiền', 3);

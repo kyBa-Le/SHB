@@ -29,4 +29,8 @@ class PaymentService
     public function getTotalIncomeByMonthAndYear($month, $year) {
         return $this->paymentModel->getTotalIncomeByMonthAndYear($month, $year);
     }
+
+    public function getOrdersInLast15Days() { 
+        return $this->paymentModel->getOrdersInLast15Days();
+    }
 }

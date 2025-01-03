@@ -10,7 +10,7 @@
             <h1 class="data" id="total-product"></h1>
             <p>Total products sold</p>
         </div>
-        <div class="block" style="background-color: #EDAC12">
+        <div id="total-order-box" class="block" style="background-color: #EDAC12">
             <h1 class="data" id="total-order"></h1>
             <p>Total orders</p>
         </div>
