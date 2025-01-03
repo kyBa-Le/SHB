@@ -18,12 +18,11 @@ function updateProductTable(products) {
             <td>${product.product_name}</td>
             <td><img src="${product.image_link}" alt="${product.product_name}"></td>
             <td>${product.price}</td>
-            <td>${product.quantity}</td>
+            <td>${product.quantity}</td>a
             <td>${product.category}</td>
             <td>${product.description}</td>
             <td>
-                <button class="btn btn-edit"><i class="fa fa-edit" data-id="${product.id}"></i></button>
-                <button class="btn btn-delete"><i class="fa fa-trash" data-id="${product.id}"></i></button>
+                <button id="${product.id}" class="btn btn-edit" data-id="${product.id}"><i class="fa fa-edit"></i></button>
             </td>
         `;
         tbody.appendChild(row);
@@ -48,19 +47,20 @@ sortButton.addEventListener('click', async (event) => {
     await sortPrice(selectedSort);
 });
 
-const addProductBtn = document.querySelector('.btn-add');
+
 const overlay = document.getElementById('overlay');
-const formContainer = document.getElementById('form-container');
+const addForm = document.getElementById('form-container-add-product');
+const updateForm = document.getElementById('form-container-update-product');
 
-addProductBtn.addEventListener('click', () => {
-    overlay.style.display = 'block'; 
-    formContainer.style.display = 'block';
-});
+function hideForm() {
+    overlay.classList.add('d-none');
+    addForm.classList.add('d-none');
+    updateForm.classList.add('d-none');
+}
 
-overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-        overlay.style.display = 'none';
-        formContainer.style.display = 'none';
+overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+        hideForm();
     }
 });
 
@@ -89,6 +89,50 @@ document.getElementById("add-product-btn").addEventListener("click", async funct
     };
 
     await sendData('/api/admin/products', productData);
-    overlay.style.display = 'none';
-    formContainer.style.display = 'none';
+    hideForm();
+    window.location.reload();
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const overlay = document.getElementById("overlay");
+    const updateForm = document.getElementById("form-container-update-product");
+    let editBtn = document.querySelectorAll(".btn-edit");
+    for (let button of editBtn) {
+        let id = button.dataset.id;
+        button.addEventListener('click', async function(){
+            let product = await getData('/api/products/' + id);
+            if (product != null) {
+                document.getElementById("update-product_name").value = product.product_name;
+                document.getElementById("update-price").value = product.price;
+                document.getElementById("update-quantity").value = product.quantity;
+                document.getElementById("update-image_link").value = product.image_link;
+                document.getElementById("update-category").value = product.category;
+                document.getElementById("update-description").value = product.description;
+                document.getElementById("update-product-btn").dataset.id = product.id;
+            }
+            if (overlay.classList.contains('d-none') && updateForm.classList.contains('d-none')) {
+                overlay.classList.remove('d-none');
+                updateForm.classList.remove('d-none');
+            }
+        })
+    }
+});
+
+document.getElementById("update-product-btn").addEventListener("click", async (event) => {
+    const productId = event.target.dataset.id;
+    const updatedProduct = {
+        product_name: document.getElementById("update-product_name").value,
+        price: document.getElementById("update-price").value,
+        quantity: document.getElementById("update-quantity").value,
+        image_link: document.getElementById("update-image_link").value,
+        category: document.getElementById("update-category").value,
+        description: document.getElementById("update-description").value,
+    };
+    await patchData('/api/admin/products/' + productId, updatedProduct);
+    window.location.reload();
+});
+
+document.getElementById('btn-add-product').addEventListener('click', function() {
+    addForm.classList.remove('d-none');
+    overlay.classList.remove('d-none');
 });

@@ -18,7 +18,7 @@
     <img src="images/logo.png" alt="logo" style="width:5vw">
     <h1>Admin</h1>
     <div class="logout">
-        <h5>Logout</h5>
+        <h5 onclick="{window.location.href = '/logout'}">Logout</h5>
     </div>
 </div>
 <div class="container-dashboard">

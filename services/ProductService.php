@@ -68,4 +68,11 @@ class ProductService
         $price = (int) $price;
         return $this->productModel->saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description);
     }
+
+    public function updateProduct($productId, $product_name, $image_link, $category, $price, $quantity, $description){
+        $productId = (int) $productId;
+        $quantity = (int) $quantity;
+        $price = (int) $price;
+        return $this->productModel->updateProduct($productId, $product_name, $image_link, $category, $price, $quantity, $description);
+    }
 }

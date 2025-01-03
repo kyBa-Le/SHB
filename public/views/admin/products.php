@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="css/admin/products.css">
+
 <div class="container-products-admin">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h5 class="fw-bold">Products</h5>
-        <button class="btn btn-add">Add Product</button>
+        <button class="btn btn-add" id="btn-add-product">Add Product</button>
     </div>
     <div class="table-container">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -32,6 +33,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+
             <tbody id="products-list">
                 <?php
                     foreach ($products as $product){
@@ -51,8 +53,7 @@
                             <td>$category</td>
                             <td>$description</td>
                             <td>
-                            <button class='btn btn-edit'><i class='fa fa-edit' data-id=$id></i></button>
-                            <button class='btn btn-delete'><i class='fa fa-trash' data-id=$id></i></button>
+                            <button class='btn btn-edit' data-id=$id><i class='fa fa-edit'></i></button>
                             </td>
                         </tr>";
                     }
@@ -60,8 +61,8 @@
             </tbody>
         </table>
     </div>
-    <div class="overlay" id="overlay">
-        <div class="form-container-add-product" id="form-container">
+    <div class="overlay d-none" id="overlay">
+        <div class="form-container-add-product d-none" id="form-container-add-product">
             <h4>ADD NEW PRODUCT</h4>
             <form id="product-form">
                 <input type="text" name="product_name" id="product_name" placeholder="Enter product name" required>
@@ -84,8 +85,25 @@
                 <button type="button" id="add-product-btn">ADD PRODUCT</button>
             </form>
         </div>
+        <div id="form-container-update-product" class="form-container-update-product d-none">
+            <h4>UPDATE PRODUCT INFORMATION</h4>
+            <form id="update-product-form" >
+                <input type="text" name="product_name" id="update-product_name" placeholder="Enter new product name" required>
+                <input type="text" name="image_link" id="update-image_link" placeholder="Enter new image link" required>
+                <input type="number" name="price" id="update-price" placeholder="Enter new price" required>
+                <input type="number" name="quantity" id="update-quantity" placeholder="Enter new quantity" required>
+                <select name="category" id="update-category" required>
+                    <option value="MEN">MEN</option>
+                    <option value="WOMEN">WOMEN</option>
+                    <option value="CHILDREN">CHILDREN</option>
+                </select>
+                <textarea name="description" id="update-description" placeholder="Enter description" required></textarea> 
+                <button type="button" id="update-product-btn">UPDATE PRODUCT</button>
+            </form>
+        </div>
     </div>
 </div>
+
 <script src="js/admin/products.js" type="module"></script>
 
 

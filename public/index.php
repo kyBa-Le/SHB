@@ -94,5 +94,8 @@ $app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangeP
 $app->router->patch('/api/order-items/{id}', function ($id) {
     (new \app\controllers\api\OrderItemController())->updateOrderItem($id);
 });
+$app->router->patch('/api/admin/products/{id}', function($id) {
+    (new \app\controllers\api\ProductController())->updateProduct($id);
+});
 
 $app->run();

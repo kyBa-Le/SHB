@@ -100,7 +100,6 @@ table tbody td img {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
-    display: none; 
     z-index: 999;
 }
 .form-container-add-product {
@@ -112,7 +111,6 @@ table tbody td img {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    display: none;
     z-index: 1000; 
     width: 30vw;
     text-align: center;
@@ -145,4 +143,78 @@ table tbody td img {
     color: #fff;
     border: none;
     cursor: pointer;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-container-update-product {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-container-update-product h4 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+.form-container-update-product input[type="text"],
+.form-container-update-product input[type="number"],
+.form-container-update-product textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #555;
+}
+.form-container-update-product input[type="text"]:focus,
+.form-container-update-product input[type="number"]:focus,
+.form-container-update-product textarea:focus {
+    outline: none;
+}
+.form-container-update-product button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+.form-container-update-product textarea {
+    resize: none;
+    height: 80px;
+}
+.form-container-update-product .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+}
+.form-container-update-product .close-btn:hover {
+    color: #000;
 }
