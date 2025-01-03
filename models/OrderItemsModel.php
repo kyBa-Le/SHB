@@ -50,4 +50,42 @@ class OrderItemsModel extends Model {
         $sql = "SELECT SUM(quantity) as total FROM $this->table JOIN payments ON payments_id = payments.id WHERE MONTH(datetime) = $month AND YEAR(datetime) = $year AND $this->table.status != 'Pending'";
         return $this->queryOneRow($sql);
     }
+
+    public function getAllOrderItems() {
+        $sql = "SELECT $this->table.*, payments.fullName, payments.detailed_address, payments.province, payments.district, payments.phone, payments.dateTime 
+        FROM $this->table
+        JOIN payments ON payments_id = payments.id 
+        ORDER BY payments.dateTime DESC";
+        return $this->queryManyRows($sql);
+    }
+
+    public function updateOrderByPaymentId($paymentId, $status) {
+        $sql = "UPDATE $this->table SET status = '$status'
+                WHERE payments_id = $paymentId;
+          ";
+        return $this->excuteSql($sql);
+    }
+
+    public function getPurchaseOfProductsInLast30Days() {
+        $sql = "
+        SELECT 
+            SUM(order_items.quantity) AS total_purchase, 
+            products.product_name 
+        FROM 
+            $this->table 
+        JOIN 
+            products 
+            ON order_items.product_id = products.id 
+        JOIN 
+            payments 
+            ON order_items.payments_id = payments.id 
+        WHERE  
+            order_items.status != 'Pending' 
+            AND payments.datetime >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        GROUP BY 
+            products.id
+    ";
+        return $this->queryManyRows($sql);
+    }
+
 }

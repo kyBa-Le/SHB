@@ -61,4 +61,18 @@ class ProductService
         return $this->productModel->updatePurchases($id, $newQuantity);
     }
 
+    public function searchProductsByKeyword($keyword){
+        return $this->productModel->searchProductsByKeyword($keyword);
+    }
+
+    public function getProductWithPagination($page, $size)
+    {
+        $page = (int)$page;
+        $size = (int)$size;
+        return $this->productModel->getProductWithPagination($page, $size);
+    }
+
+    public function getTotalProducts() {
+        return $this->productModel->getTotalProducts();
+    }
 }

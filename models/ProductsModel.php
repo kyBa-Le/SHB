@@ -88,4 +88,25 @@ class ProductsModel extends Model
         $sql = "UPDATE $this->table SET purchases = '$newPurchases' WHERE id = '$id'";
         return $this->excuteSql($sql);
     }
+
+    public function searchProductsByKeyword($keyword)
+    {
+        $sql = "SELECT * FROM $this->table 
+                WHERE product_name LIKE '%$keyword%' 
+                OR category LIKE '%$keyword%'
+                OR description LIKE '%$keyword%'";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getProductWithPagination($page, $size) {
+        $offset = ((int)$page - 1) * (int)$size;
+        $sql = "SELECT * FROM $this->table LIMIT $size OFFSET $offset";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getTotalProducts()
+    {
+        $sql =  "SELECT COUNT(*) as total FROM $this->table";
+        return $this->queryOneRow($sql);
+    }
 }

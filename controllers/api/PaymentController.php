@@ -50,4 +50,9 @@ class PaymentController extends BaseController
         $total = $this->paymentService->getTotalIncomeByMonthAndYear($month, $year);
         $this->response->sendJson($total);
     }
+
+    public function getOrdersInLast15Days() { 
+        $data = $this->paymentService->getOrdersInLast15Days();
+        $this->response->sendJson($data);
+    }
 }

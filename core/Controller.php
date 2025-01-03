@@ -10,6 +10,6 @@ class Controller
         return Application::$app->router->renderView($view, $params);
     }
     public function setLayout($layout) {
-        $this->layout = $layout;
+        Application::$app->controller->layout = $layout;
     }
 }

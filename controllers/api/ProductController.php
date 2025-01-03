@@ -27,4 +27,19 @@ class ProductController extends BaseController
         $product = $this->productService->getProductById($id);
         $this->response->sendJson($product);
     }
+
+    public function searchProducts(){
+        $keyword = $this->request->getBody()['keyword']; 
+        $products = $this->productService->searchProductsByKeyword($keyword);
+        $this->response->sendJson($products);
+    }
+    public function getAllProductsWithPagination(){
+        $data = $this->request->getBody();
+        if (!isset($data['page']) && !isset($data['size'])) {
+            $data['page'] = 1;
+            $data['size'] = 10;
+        }
+        $products = $this->productService->getProductWithPagination($data['page'], $data['size']);
+        $this->response->sendJson($products);
+    }
 }

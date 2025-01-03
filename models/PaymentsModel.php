@@ -28,4 +28,12 @@ class PaymentsModel extends Model
         $sql = "SELECT SUM(total_cost) AS total FROM $this->table WHERE MONTH(datetime) = $month AND YEAR(datetime) = $year";
         return $this->queryOneRow($sql);
     }
+
+    public function getOrdersInLast15Days() {
+        $sql = "SELECT COUNT(*) AS total, DATE(dateTime) AS dateOnly 
+                FROM $this->table 
+                WHERE DATE(dateTime) >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)
+                GROUP BY DATE(dateTime)";
+        return $this->queryManyRows($sql);
+    }
 }

@@ -1,16 +1,16 @@
 <link rel="stylesheet" href="css/admin/dashboard.css">
-<div id="dashboard-container">
+<div id="dashboard-container" class="m-4">
     <h1 class="text-center mt-5 fw-bolder pt-2 pb-2">Overview data in: <?php echo date("F Y") ?></h1>
     <div id="overview-container" class="d-flex justify-content-around align-items-center">
         <div class="block" style="background-color: #5B56D6" id="total-user-container">
             <h1 class="data" id="total-user"></h1>
             <p>Total users</p>
         </div>
-        <div class="block" style="background-color: #3299FE">
+        <div class="block" id="product-box" style="background-color: #3299FE">
             <h1 class="data" id="total-product"></h1>
             <p>Total products sold</p>
         </div>
-        <div class="block" style="background-color: #EDAC12">
+        <div id="total-order-box" class="block" style="background-color: #EDAC12">
             <h1 class="data" id="total-order"></h1>
             <p>Total orders</p>
         </div>
