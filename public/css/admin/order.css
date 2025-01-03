@@ -57,6 +57,9 @@
     height: 100vh;
     padding: 30px;
 }
+.filter-by-date {
+    position: relative;
+}
 .order-date-filter-btn {
     padding: 10px 20px;
     display: flex;
@@ -66,6 +69,47 @@
     color: white;
     background-color: black;
     border-radius: 10px;
+}
+.box-filter-order {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 350px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    z-index: 1;
+}
+.box-filter-content-order {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    input {
+        width: 300px;
+        border-radius: 3px;
+        border: 1px solid #0F0E0E;
+    }
+}
+.filter-order-button {
+    display: flex;
+    justify-content: space-between;
+    .filter-order-btn, .cancel-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 0px;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+        background-color: #0F0E0E;
+        color: white;
+    }
 }
 .order-title-order-quantity-date {
     display: flex;

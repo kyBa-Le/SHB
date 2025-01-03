@@ -206,3 +206,90 @@ async function changeStatus() {
         });
     }
 }
+// Xử lýbox lọc bằng ngày
+let boxFilterOrder = document.getElementById('box-filter-order');
+let filterOrderBtn = document.getElementById('order-date-filter-btn');
+let upIconFilterDate = document.getElementById('up-icon-date-filter-order');
+let downIconFilterDate = document.getElementById('down-icon-date-filter-order');
+
+filterOrderBtn.addEventListener('click', function () {
+    if (boxFilterOrder.classList.contains('d-none')) {
+        upIconFilterDate.classList.remove('d-none');
+        downIconFilterDate.classList.add('d-none');
+        boxFilterOrder.classList.remove('d-none'); 
+    } else {
+        downIconFilterDate.classList.remove('d-none');
+        upIconFilterDate.classList.add('d-none');
+        boxFilterOrder.classList.add('d-none'); 
+    } 
+});
+
+// Xử lý lọc bằng ngày và hiển thị dữ liệu
+
+let selectedDateFilter = null;
+document.getElementById('filter-order-btn').addEventListener('click', async function () {
+    const dateInput = document.querySelector('#date-filter input').value;
+    
+    selectedDateFilter = new Date(dateInput).toISOString().split('T')[0];
+    const filterOrderBtnText = document.getElementById('order-date-filter-btn');
+    filterOrderBtnText.innerHTML = `<i class="fa-regular fa-calendar-days"></i> ${selectedDateFilter} <i id="down-icon-date-filter-order" class="fa-solid fa-angle-down"></i><i id="up-icon-date-filter-order" class="fa-solid fa-angle-up d-none"></i>`;
+
+    await filterAndRenderOrders();
+
+    boxFilterOrder.classList.add('d-none');
+    downIconFilterDate.classList.remove('d-none');
+    upIconFilterDate.classList.add('d-none');
+});
+
+
+document.getElementById('cancel-filter-btn').addEventListener('click', async function () {
+    selectedDateFilter = null;
+    const filterOrderBtnText = document.getElementById('order-date-filter-btn');
+    filterOrderBtnText.innerHTML = `<i class="fa-regular fa-calendar-days"></i> Filter orders by date <i id="down-icon-date-filter-order" class="fa-solid fa-angle-down"></i><i id="up-icon-date-filter-order" class="fa-solid fa-angle-up d-none"></i>`;
+    document.querySelector('#date-filter input').value = '';
+
+    await filterAndRenderOrders();
+
+    boxFilterOrder.classList.add('d-none');
+    downIconFilterDate.classList.remove('d-none');
+    upIconFilterDate.classList.add('d-none');
+});
+
+async function filterAndRenderOrders(status = 'allOrder') {
+    let filteredOrders = orderItems;
+
+    if (selectedDateFilter) {
+        filteredOrders = filteredOrders.filter(item => {
+            const itemDate = new Date(item.dateTime).toISOString().split('T')[0];
+            return itemDate === selectedDateFilter;
+        });
+    }
+
+    if (status !== 'allOrder') {
+        filteredOrders = filteredOrders.filter(item => item.status === status);
+    }
+
+    if (filteredOrders.length > 0) {
+        await renderOrderByStatus(filteredOrders, status);
+    } else {
+        allOfOrder.innerHTML = `<p>No orders found.</p>`;
+    }
+}
+
+buttons.forEach(button => {
+    const element = document.getElementById(button.elementId);
+    if (element) {
+        element.addEventListener('click', async () => {
+            await filterAndRenderOrders(button.status);
+
+            buttons.forEach(btn => {
+                const btnElement = document.getElementById(btn.elementId);
+                if (btnElement) btnElement.classList.remove('active');
+            });
+            element.classList.add('active');
+        });
+    }
+});
+
+await filterAndRenderOrders('allOrder');
+document.getElementById('all-orders').classList.add('active');

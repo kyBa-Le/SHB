@@ -101,6 +101,14 @@ class OrderItemController extends BaseController
         }
         $this->response->sendJson($message);
     }
+
+    public function getTotalOrderItemQuantityAndMonthAndYear() {
+        $data = $this->request->getBody();
+        $month = $data['month'];
+        $year = $data['year'];
+        $total = $this->orderItemService->getTotalOrderItemQuantityByMonthAndYear($month, $year);
+        $this->response->sendJson($total);
+    }
     public function getAllOrderItems() {
         $orderItems = $this->orderItemService->getAllOrderItems();
         $this->response->sendJson($orderItems);
@@ -116,13 +124,5 @@ class OrderItemController extends BaseController
                 $message['isUpdate'] = false;
         }
         $this->response->sendJson($message);
-    }
-
-    public function getTotalOrderItemQuantityAndMonthAndYear() {
-        $data = $this->request->getBody();
-        $month = $data['month'];
-        $year = $data['year'];
-        $total = $this->orderItemService->getTotalOrderItemQuantityByMonthAndYear($month, $year);
-        $this->response->sendJson($total);
     }
 }
