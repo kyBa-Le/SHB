@@ -65,4 +65,27 @@ class OrderItemsModel extends Model {
           ";
         return $this->excuteSql($sql);
     }
+
+    public function getPurchaseOfProductsInLast30Days() {
+        $sql = "
+        SELECT 
+            SUM(order_items.quantity) AS total_purchase, 
+            products.product_name 
+        FROM 
+            $this->table 
+        JOIN 
+            products 
+            ON order_items.product_id = products.id 
+        JOIN 
+            payments 
+            ON order_items.payments_id = payments.id 
+        WHERE  
+            order_items.status != 'Pending' 
+            AND payments.datetime >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        GROUP BY 
+            products.id
+    ";
+        return $this->queryManyRows($sql);
+    }
+
 }

@@ -150,6 +150,133 @@ function drawLineChart(element, data) {
         });
 }
 
+function drawPieChartWithLegend(element, rawData) {
+    // Xử lý dữ liệu: Lấy top 5 sản phẩm
+    const sortedData = rawData.sort((a, b) => b.total_purchase - a.total_purchase);
+    const top5 = sortedData.slice(0, 5);
+    const othersTotal = sortedData.slice(5).reduce((sum, d) => sum + parseInt(d.total_purchase), 0);
+
+    // Gộp dữ liệu
+    const totalSales = sortedData.reduce((sum, d) => sum + parseInt(d.total_purchase), 0);
+    const data = top5.map(d => ({
+        name: d.product_name,
+        value: parseInt(d.total_purchase),
+        percentage: ((parseInt(d.total_purchase) / totalSales) * 100).toFixed(2),
+    }));
+    if (othersTotal > 0) {
+        data.push({
+            name: "Other",
+            value: othersTotal,
+            percentage: ((othersTotal / totalSales) * 100).toFixed(2),
+        });
+    }
+
+    // Kích thước biểu đồ
+    const width = 400;
+    const height = 400;
+    const radius = Math.min(width, height) / 2;
+
+    // Tạo SVG
+    const svg = d3.select(element)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height + 100) // Tăng chiều cao cho chú thích
+        .append("g")
+        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+    // Tạo color scale
+    const color = d3.scaleOrdinal()
+        .domain(data.map(d => d.name))
+        .range(d3.schemeCategory10);
+
+    // Tạo tooltip
+    const tooltip = d3.select(element)
+        .append("div")
+        .style("position", "absolute")
+        .style("background-color", "white")
+        .style("border", "1px solid #ccc")
+        .style("padding", "8px")
+        .style("border-radius", "4px")
+        .style("box-shadow", "0px 0px 5px rgba(0,0,0,0.2)")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+
+    // Tạo pie và arc
+    const pie = d3.pie()
+        .value(d => d.value);
+
+    const arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius);
+
+    const labelArc = d3.arc()
+        .innerRadius(radius * 0.6)
+        .outerRadius(radius * 0.6);
+
+    // Vẽ các phần của biểu đồ
+    svg.selectAll("path")
+        .data(pie(data))
+        .enter()
+        .append("path")
+        .attr("d", arc)
+        .attr("fill", d => color(d.data.name))
+        .style("stroke", "#fff")
+        .style("stroke-width", "2px")
+        .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                .html(`<strong>${d.data.name}</strong><br>Purchases: ${d.data.value}<br>Percentage: ${d.data.percentage}%`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mousemove", (event) => {
+            tooltip.style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseout", () => {
+            tooltip.style("opacity", 0);
+        });
+
+    // Thêm nhãn phần trăm
+    svg.selectAll("text")
+        .data(pie(data))
+        .enter()
+        .append("text")
+        .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+        .attr("text-anchor", "middle")
+        .attr("dy", "0.35em")
+        .style("font-size", "12px")
+        .style("fill", "#fff")
+        .text(d => `${d.data.percentage}%`);
+
+    // Tạo chú thích
+    const legend = d3.select(element)
+        .append("div")
+        .attr("class", "legend")
+        .style("display", "flex")
+        .style("flex-wrap", "wrap")
+        .style("justify-content", "center")
+        .style("margin-top", "20px")
+        .style("max-width", "30vw");
+
+    // Thêm từng mục vào chú thích
+    data.forEach(d => {
+        const legendItem = legend.append("div")
+            .style("display", "flex")
+            .style("align-items", "center")
+            .style("margin", "0 10px");
+
+        legendItem.append("div")
+            .style("width", "12px")
+            .style("height", "12px")
+            .style("background-color", color(d.name))
+            .style("margin-right", "8px");
+
+        legendItem.append("span")
+            .text(`${d.name} (${d.percentage}%)`)
+            .style("font-size", "12px")
+            .style("color", "#333");
+    });
+}
 
 await renderUserChart();
 
@@ -157,4 +284,11 @@ document.getElementById('total-user-container').addEventListener('click', async 
     document.getElementById('chart-container').innerHTML = '';
     await renderUserChart();
     document.getElementById('chart-title').innerHTML = 'Total user in the lasted 30 days';
+})
+
+document.getElementById('product-box').addEventListener('click', async function() {
+    document.getElementById('chart-container').innerHTML = '';
+    let productsPurchase = await getData('/api/admin/order-items/chart');
+    drawPieChartWithLegend('#chart-container', productsPurchase);
+    document.getElementById('chart-title').innerHTML = 'Percentage of each products purchase in the last 30 days';
 })

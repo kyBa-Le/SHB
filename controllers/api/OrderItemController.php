@@ -125,4 +125,9 @@ class OrderItemController extends BaseController
         $total = $this->orderItemService->getTotalOrderItemQuantityByMonthAndYear($month, $year);
         $this->response->sendJson($total);
     }
+
+    public function getPurchaseOfProductsInLast30Days() {
+        $data = $this->orderItemService->getPurchaseOfProductsInLast30Days();
+        $this->response->sendJson($data);
+    }
 }
