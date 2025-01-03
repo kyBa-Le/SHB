@@ -45,8 +45,8 @@ $app->router->get('/cart', 'cart');
 $app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
 $app->router->get('/payment', 'payment');
 $app->router->get('/payment/momo/handle-callback', [new \app\controllers\PaymentController(), 'handleMomoCallback']);
+$app->router->get('/admin', [new SiteController(), 'dashboard']);
 $app->router->get('/admin/products', [$productController,'admin']);
-$app->router->get('/admin/products/sort-price', [$productController,'sortPrice']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
@@ -66,6 +66,11 @@ $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 $app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
 $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
+$app->router->get('/api/admin/users/total', [new \app\controllers\api\UserController(), 'getTotalUserByMonthAndYear']);
+$app->router->get('/api/admin/order-items/total', [new \app\controllers\api\OrderItemController(), 'getTotalOrderItemQuantityAndMonthAndYear']);
+$app->router->get('/api/admin/payments/total', [new \app\controllers\api\PaymentController(), 'getTotalPaymentByMonthAndYear']);
+$app->router->get('/api/admin/payments/total-income', [new \app\controllers\api\PaymentController(), 'getTotalIncomeByMonthAndYear']);
+$app->router->get('/api/admin/users', [new \app\controllers\api\UserController(), 'getAllUsers']);
 $app->router->get('/api/admin/products/search', [$apiProductController, 'searchProducts']);
 $app->router->get('/api/admin/products', [$apiProductController, 'getAllProductsWithPagination']);
 

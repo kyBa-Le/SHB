@@ -5,7 +5,7 @@ namespace app\core;
 class MiddleWare
 {
     private static $instance;
-    private $isLoggedIn = false;
+    private $needToCheck = ['/cart', '/payment', '/user'];
 
     private function __construct() {}
 
@@ -30,5 +30,33 @@ class MiddleWare
             return false;
         }
         return true;
+    }
+
+    public function isAdmin() {
+        if (!isset($_SESSION['admin'])) {
+            return false;
+        }
+        return true;
+    }
+
+    public function handleRequest() {
+        $url = Application::$app->request->getPath();
+        foreach ($this->needToCheck as $needCheck) {
+            if (str_contains($url, $needCheck) && !$this->isAdmin()) {
+                if (!$this->isLoggedIn()) {
+                    $this->redirect('/login');
+                    exit;
+                }
+            }
+        }
+        if (str_contains($url, '/admin')) {
+            if (!$this->isAdmin()) {
+                $this->redirect('/');
+            }
+        }
+    }
+
+    private function redirect($url) {
+        header("Location: $url");
     }
 }

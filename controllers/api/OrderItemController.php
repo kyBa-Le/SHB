@@ -59,6 +59,7 @@ class OrderItemController extends BaseController
                 $status = 'Shipping';
                 $createNewOrderItem = $this->orderItemService->createOrderItem($productName, $quantity, $unitPrice, $size, $productId, $productImageLink, $productColor, $paymentId,  $userId, $status);
                 $this->productService->decreaseQuantity($productId, $quantity);
+                $this->productService->increasePurchases($productId, 1);
                 if ($createNewOrderItem) {
                     $message['message'] = 'Order successfully placed';
                     $message['isCreateNewOrderItem'] = true;
@@ -99,5 +100,13 @@ class OrderItemController extends BaseController
                 $message['isCreateNewOrderItem'] = false;
         }
         $this->response->sendJson($message);
+    }
+
+    public function getTotalOrderItemQuantityAndMonthAndYear() {
+        $data = $this->request->getBody();
+        $month = $data['month'];
+        $year = $data['year'];
+        $total = $this->orderItemService->getTotalOrderItemQuantityByMonthAndYear($month, $year);
+        $this->response->sendJson($total);
     }
 }

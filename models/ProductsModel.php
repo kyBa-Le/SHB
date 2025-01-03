@@ -80,7 +80,13 @@ class ProductsModel extends Model
     public function updateQuantity($id, $quantity)
     {
         $sql = "UPDATE $this->table SET quantity = '$quantity' WHERE id = '$id'";
-        return $this->queryOneRow($sql);
+        return $this->excuteSql($sql);
+    }
+
+    public function updatePurchases($id, $newPurchases)
+    {
+        $sql = "UPDATE $this->table SET purchases = '$newPurchases' WHERE id = '$id'";
+        return $this->excuteSql($sql);
     }
 
     public function searchProductsByKeyword($keyword)

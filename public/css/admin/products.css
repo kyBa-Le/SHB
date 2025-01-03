@@ -100,3 +100,8 @@ table tbody td img {
 .pagination .page-item a {
     color: black !important;
 }
+
+.pagination-lg .page-link {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.25rem;
+}

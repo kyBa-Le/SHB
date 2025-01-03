@@ -197,9 +197,10 @@ document.getElementById('orderBtn').addEventListener('click', function(event) {
 // Xử lý hiển thị
 let reviews = await getData('/api/reviews?product-id=' + detailedProduct['id']);
 for (let review of reviews) {
+    let avatar = review['avatar_link'] ? review['avatar_link'] : 'images/avatarDefault.png';
     document.getElementById('review-container').innerHTML += `
     <div class="review-detail">
-            <img src="${review['avatar_link']}" class="user-avatar"  alt="User">
+            <img src="${avatar}" class="user-avatar"  alt="User">
             <div class="review-content-detail">
                 <h5>${review['username']}</h5>
                 <p>Classify: ${review['product_color']} - ${review['size']}</p>

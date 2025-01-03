@@ -32,7 +32,7 @@ function updateProductTable(products) {
 
 async function sortPrice(selectedSort) {
     const params = new URLSearchParams(window.location.search);
-    let products = await getData('/api/admin/products' + params);
+    let products = await getData('/api/admin/products?' + params);
     if (selectedSort === 'increase') {
         products.sort((a, b) => a.price - b.price);
 
