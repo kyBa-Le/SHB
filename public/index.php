@@ -76,6 +76,7 @@ $app->router->get('/api/admin/users', [new \app\controllers\api\UserController()
 $app->router->get('/api/admin/products/search', [$apiProductController, 'searchProducts']);
 $app->router->get('/api/admin/products', [$apiProductController, 'getAllProductsWithPagination']);
 $app->router->get('/api/admin/order-items', [$apiOrderItemController, 'getAllOrderItems']);
+$app->router->get('/api/admin/order-items/chart', [$apiOrderItemController, 'getPurchaseOfProductsInLast30Days']);
 $app->router->get('/api/admin/payments/chart', [$apiPaymentController, 'getOrdersInLast15Days']);
 
 // post API

@@ -6,7 +6,7 @@
             <h1 class="data" id="total-user"></h1>
             <p>Total users</p>
         </div>
-        <div class="block" style="background-color: #3299FE">
+        <div class="block" id="product-box" style="background-color: #3299FE">
             <h1 class="data" id="total-product"></h1>
             <p>Total products sold</p>
         </div>

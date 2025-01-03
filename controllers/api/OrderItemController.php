@@ -125,4 +125,10 @@ class OrderItemController extends BaseController
         }
         $this->response->sendJson($message);
     }
+
+
+    public function getPurchaseOfProductsInLast30Days() {
+        $data = $this->orderItemService->getPurchaseOfProductsInLast30Days();
+        $this->response->sendJson($data);
+    }
 }
