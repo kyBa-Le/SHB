@@ -63,25 +63,25 @@
     <div class="overlay" id="overlay">
         <div class="form-container-add-product" id="form-container">
             <h4>ADD NEW PRODUCT</h4>
-            <form action="/add-product" method="post" enctype="multipart/form-data">
-                <input type="text" name="product_name" placeholder="Enter product name" required>
-                <input type="text" name="image_link" placeholder="Product Image Link" required>
+            <form id="product-form">
+                <input type="text" name="product_name" id="product_name" placeholder="Enter product name" required>
+                <input type="text" name="image_link" id="image_link" placeholder="Product Image Link" required>
                 <div class="form-row">
-                    <select name="category" required>
+                    <select name="category" id="category" required>
                         <option value="MEN">MEN</option>
                         <option value="WOMEN">WOMEN</option>
                         <option value="CHILDREN">CHILDREN</option>
-                    </select>
-                    <select name="color" required>
+                    </select>                  
+                    <select name="color" id="color" required>
                         <option value="BROWN">BROWN</option>
                         <option value="DARK">DARK</option>
                         <option value="WHITE">WHITE</option>
                     </select>
-                </div>
-                <input type="number" name="price" placeholder="Price" required>
-                <input type="number" name="quantity" placeholder="Quantity" required>
-                <textarea name="description" placeholder="Enter description" required></textarea>
-                <button type="submit">ADD PRODUCT</button>
+                </div>             
+                <input type="number" name="price" id="price" placeholder="Price" required>
+                <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
+                <textarea name="description" id="description" placeholder="Enter description" required></textarea>              
+                <button type="button" id="add-product-btn">ADD PRODUCT</button>
             </form>
         </div>
     </div>

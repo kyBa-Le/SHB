@@ -63,3 +63,32 @@ overlay.addEventListener('click', (e) => {
         formContainer.style.display = 'none';
     }
 });
+
+document.getElementById("add-product-btn").addEventListener("click", async function() {
+    const productName = document.getElementById("product_name").value;
+    const imageLink = document.getElementById("image_link").value;
+    const category = document.getElementById("category").value;
+    const color = document.getElementById("color").value;
+    const price = document.getElementById("price").value;
+    const quantity = document.getElementById("quantity").value;
+    const description = document.getElementById("description").value;
+
+    if (!productName || !imageLink || !category || !color || !price || !quantity || !description) {
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    const productData = {
+        product_name: productName,
+        image_link: imageLink,
+        category: category,
+        color: color,
+        price: parseFloat(price),
+        quantity: parseInt(quantity),
+        description: description
+    };
+
+    await sendData('/api/admin/products', productData);
+    overlay.style.display = 'none';
+    formContainer.style.display = 'none';
+});
