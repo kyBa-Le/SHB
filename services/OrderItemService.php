@@ -75,4 +75,21 @@ class OrderItemService
         $id = (int) $id;
         return $this->orderItemsModel->getOrderItemById($id);
     }
+
+    public function getTotalOrderItemQuantityByMonthAndYear($month, $year) {
+        return $this->orderItemsModel->getTotalOrderItemQuantityByMonthAndYear($month, $year);
+    }
+
+    public function getAllOrderItems() {
+        return $this->orderItemsModel->getAllOrderItems();
+    }
+
+    public function updateOrderByPaymentId($paymentId, $status) {
+        $paymentId = (int) $paymentId;
+        return $this->orderItemsModel->updateOrderByPaymentId($paymentId, $status);
+    }
+
+    public function getPurchaseOfProductsInLast30Days() {
+        return $this->orderItemsModel->getPurchaseOfProductsInLast30Days();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Application;
 use app\core\Model;
 
 class ProductsModel extends Model
@@ -81,5 +82,53 @@ class ProductsModel extends Model
     {
         $sql = "UPDATE $this->table SET quantity = '$quantity' WHERE id = '$id'";
         return $this->queryOneRow($sql);
+    }
+
+    public function getAllProducts() {
+        $sql = "SELECT * FROM $this->table";
+        return $this->queryManyRows($sql);
+    }
+
+    public function searchProductsByKeyword($keyword)
+    {
+        $sql = "SELECT * FROM $this->table 
+                WHERE product_name LIKE '%$keyword%' 
+                OR category LIKE '%$keyword%'
+                OR description LIKE '%$keyword%'";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getProductWithPagination($page, $size) {
+        $offset = ((int)$page - 1) * (int)$size;
+        $sql = "SELECT * FROM $this->table LIMIT $size OFFSET $offset";
+        return $this->queryManyRows($sql);
+    }
+
+    public function getTotalProducts()
+    {
+        $sql =  "SELECT COUNT(*) as total FROM $this->table";
+        return $this->queryOneRow($sql);
+    }
+
+    public function saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description){
+        $sql = "INSERT INTO Products (product_name, image_link, category, color, price, quantity, `description`) 
+            VALUES ('$product_name', '$image_link', '$category', '$color', $price, $quantity, '$description')";
+        return $this->excuteSql($sql);
+    }
+
+    public function updateProduct( $productId, $product_name, $image_link, $category, $price, $quantity, $description){
+        $product_name = addslashes($product_name);
+        $image_link = addslashes($image_link);
+        $category = addslashes($category);
+        $description = addslashes($description);
+        $sql = "UPDATE $this->table SET 
+                    product_name = '$product_name', 
+                    image_link = '$image_link', 
+                    category = '$category', 
+                    price = $price, 
+                    quantity = $quantity, 
+                    description = '$description' 
+                WHERE id = $productId";
+        return $this->excuteSql($sql);
     }
 }

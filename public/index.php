@@ -45,6 +45,10 @@ $app->router->get('/cart', 'cart');
 $app->router->get('/review', [new \app\controllers\ReviewController(), 'show']);
 $app->router->get('/payment', 'payment');
 $app->router->get('/payment/momo/handle-callback', [new \app\controllers\PaymentController(), 'handleMomoCallback']);
+$app->router->get('/admin', [new SiteController(), 'dashboard']);
+$app->router->get('/admin/order', [new \app\controllers\OrderItemController(), 'admin']);
+$app->router->get('/admin', [new SiteController(), 'dashboard']);
+$app->router->get('/admin/products', [$productController,'admin']);
 
 // Post request
 $app->router->post('/sign-up', [$userController, 'signUp']);
@@ -64,6 +68,16 @@ $app->router->get('/api/product-colors', [$apiProductColorController, 'getColors
 $app->router->get('/api/order-items', [$apiOrderItemController, 'getOrderItemsByUserId']);
 $app->router->get('/api/reviews', [new \app\controllers\api\ReviewController(), 'getReviews']);
 $app->router->get('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'getReviewImagesByReviewId']);
+$app->router->get('/api/admin/users/total', [new \app\controllers\api\UserController(), 'getTotalUserByMonthAndYear']);
+$app->router->get('/api/admin/order-items/total', [new \app\controllers\api\OrderItemController(), 'getTotalOrderItemQuantityAndMonthAndYear']);
+$app->router->get('/api/admin/payments/total', [new \app\controllers\api\PaymentController(), 'getTotalPaymentByMonthAndYear']);
+$app->router->get('/api/admin/payments/total-income', [new \app\controllers\api\PaymentController(), 'getTotalIncomeByMonthAndYear']);
+$app->router->get('/api/admin/users', [new \app\controllers\api\UserController(), 'getAllUsers']);
+$app->router->get('/api/admin/products/search', [$apiProductController, 'searchProducts']);
+$app->router->get('/api/admin/products', [$apiProductController, 'getAllProductsWithPagination']);
+$app->router->get('/api/admin/order-items', [$apiOrderItemController, 'getAllOrderItems']);
+$app->router->get('/api/admin/order-items/chart', [$apiOrderItemController, 'getPurchaseOfProductsInLast30Days']);
+$app->router->get('/api/admin/payments/chart', [$apiPaymentController, 'getOrdersInLast15Days']);
 
 // post API
 $app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
@@ -73,6 +87,7 @@ $app->router->post('/api/payments', [$apiPaymentController,'createPayment']);
 $app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
 $app->router->post('/api/reviews', [new \app\controllers\api\ReviewController(), 'reviewOrder']);
 $app->router->post('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'reviewOrder']);
+$app->router->post('/api/admin/products', [$apiProductController, 'createNewProduct']);
 
 // put API
 
@@ -89,5 +104,9 @@ $app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangeP
 $app->router->patch('/api/order-items/{id}', function ($id) {
     (new \app\controllers\api\OrderItemController())->updateOrderItem($id);
 });
+$app->router->patch('/api/admin/products/{id}', function($id) {
+    (new \app\controllers\api\ProductController())->updateProduct($id);
+});
+$app->router->patch('/api/admin/order-items', [$apiOrderItemController,'updateOrderByPaymentId']);
 
 $app->run();

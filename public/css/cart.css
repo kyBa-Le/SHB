@@ -247,9 +247,7 @@ input[type="checkbox"] {
     margin-right: 10px;
     cursor: pointer;
 }
-.product-item-infor:hover {
-    background-color: #e1dfdf;
-}
+
 .order-infor-content {
     min-height: 30vh;
     max-height: 60vh;

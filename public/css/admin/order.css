@@ -1,0 +1,193 @@
+.products-infor-orders {
+    margin-top: 2vh;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.noOfOrder, .status-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    height: 6vh;
+    background-color: #0F0E0E;
+    color: white;
+    width: fit-content;
+}
+.status-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 18px;
+}
+.review-product {
+    justify-self: end; 
+    align-self: center;
+    width: 10vw;
+    border: 1px solid #0F0E0E;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    padding: 5px 0;
+}
+.review-product:hover {
+    background-color: #0F0E0E;
+    color: white;
+    transition: all 0.2s ease;
+}
+.product-item-infor {
+    display: grid;
+    grid-template-columns:  25% 25% 25% 25%;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.order-infor-content {
+    min-height: 30vh;
+    max-height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.order-content {
+    width: 100%;
+    height: 100vh;
+    padding: 30px;
+}
+.filter-by-date {
+    position: relative;
+}
+.order-date-filter-btn {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+}
+.box-filter-order {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 350px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    z-index: 1;
+}
+.box-filter-content-order {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    input {
+        width: 300px;
+        border-radius: 3px;
+        border: 1px solid #0F0E0E;
+    }
+}
+.filter-order-button {
+    display: flex;
+    justify-content: space-between;
+    .filter-order-btn, .cancel-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 0px;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+        background-color: #0F0E0E;
+        color: white;
+    }
+}
+.order-title-order-quantity-date {
+    display: flex;
+    justify-content: space-between;
+    .title-quantity-order {
+        display: flex;
+        align-items: center;
+        gap: 2vw
+    }
+}
+.nav-order {
+    display: flex;
+    width: 30vw;
+    justify-content: space-between;
+    font-size: 20px;
+}
+.nav-order span {
+    font-size: 18px;
+    color: #777070; 
+    cursor: pointer;
+    padding: 0 10px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.nav-order span.active {
+    color: #0F0E0E; 
+    border-bottom: 2px solid #0F0E0E; 
+}
+.user-infor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-align: left;
+} 
+/* Change status */
+.shipping-status-container {
+    position: relative;
+}
+.shipping-status {
+    cursor: pointer;
+}
+.box-status-order {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    right: 20px;
+    width: 300px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    z-index: 1;
+}
+.box-status-content-order {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.change-button {
+    display: flex;
+    justify-content: flex-end;
+}
+.status-change-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0F0E0E; 
+    color: white;
+}
+.status-change-btn:hover {
+    background-color: #0f0e0ec4; 
+}
+
+
+
