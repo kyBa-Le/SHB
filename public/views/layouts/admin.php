@@ -12,13 +12,13 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<link rel="stylesheet" href="css/admin/admin-dashboard.css">
 <?php require_once 'views/components/loading.php' ?>
+<link rel="stylesheet" href="css/admin/admin-dashboard.css">
 <div class="header">
     <img src="images/logo.png" alt="logo" style="width:4vw">
     <h4>Admin</h4>
     <div class="logout">
-        <p>Logout</p>
+        <p style="cursor: pointer" onclick="{window.location.href = '/logout'}">Logout</p>
     </div>
 </div>
 <div class="container-dashboard">
