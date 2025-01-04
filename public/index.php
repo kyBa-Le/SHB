@@ -87,6 +87,7 @@ $app->router->post('/api/payments', [$apiPaymentController,'createPayment']);
 $app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
 $app->router->post('/api/reviews', [new \app\controllers\api\ReviewController(), 'reviewOrder']);
 $app->router->post('/api/review-images', [new \app\controllers\api\ReviewImageController(), 'reviewOrder']);
+$app->router->post('/api/admin/products', [$apiProductController, 'createNewProduct']);
 
 // put API
 
@@ -102,6 +103,9 @@ $app->router->patch('/api/order-items/quantity/{id}', function ($id) {
 $app->router->patch('/api/users/edit-password', [$apiUserController,'saveChangePassword']);
 $app->router->patch('/api/order-items/{id}', function ($id) {
     (new \app\controllers\api\OrderItemController())->updateOrderItem($id);
+});
+$app->router->patch('/api/admin/products/{id}', function($id) {
+    (new \app\controllers\api\ProductController())->updateProduct($id);
 });
 $app->router->patch('/api/admin/order-items', [$apiOrderItemController,'updateOrderByPaymentId']);
 

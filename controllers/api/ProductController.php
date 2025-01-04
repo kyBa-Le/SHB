@@ -42,4 +42,27 @@ class ProductController extends BaseController
         $products = $this->productService->getProductWithPagination($data['page'], $data['size']);
         $this->response->sendJson($products);
     }
+
+    public function createNewProduct(){
+        $product_name = $this->request->getBody()['product_name']; 
+        $image_link = $this->request->getBody()['image_link']; 
+        $category = $this->request->getBody()['category']; 
+        $color = $this->request->getBody()['color']; 
+        $price = $this->request->getBody()['price']; 
+        $quantity = $this->request->getBody()['quantity']; 
+        $description = $this->request->getBody()['description']; 
+        $products = $this->productService->saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description);
+        $this->response->sendJson($products);      
+    }
+
+    public function updateProduct($id){
+        $product_name = $this->request->getBody()['product_name']; 
+        $image_link = $this->request->getBody()['image_link']; 
+        $category = $this->request->getBody()['category']; 
+        $price = $this->request->getBody()['price']; 
+        $quantity = $this->request->getBody()['quantity']; 
+        $description = $this->request->getBody()['description']; 
+        $products = $this->productService->updateProduct($id, $product_name, $image_link, $category, $price, $quantity, $description);
+        $this->response->sendJson($products);
+    }
 }

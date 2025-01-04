@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Application;
 use app\core\Model;
 
 class ProductsModel extends Model
@@ -80,13 +81,12 @@ class ProductsModel extends Model
     public function updateQuantity($id, $quantity)
     {
         $sql = "UPDATE $this->table SET quantity = '$quantity' WHERE id = '$id'";
-        return $this->excuteSql($sql);
+        return $this->queryOneRow($sql);
     }
 
-    public function updatePurchases($id, $newPurchases)
-    {
-        $sql = "UPDATE $this->table SET purchases = '$newPurchases' WHERE id = '$id'";
-        return $this->excuteSql($sql);
+    public function getAllProducts() {
+        $sql = "SELECT * FROM $this->table";
+        return $this->queryManyRows($sql);
     }
 
     public function searchProductsByKeyword($keyword)
@@ -108,5 +108,27 @@ class ProductsModel extends Model
     {
         $sql =  "SELECT COUNT(*) as total FROM $this->table";
         return $this->queryOneRow($sql);
+    }
+
+    public function saveNewProduct($product_name, $image_link, $category, $color, $price, $quantity, $description){
+        $sql = "INSERT INTO Products (product_name, image_link, category, color, price, quantity, `description`) 
+            VALUES ('$product_name', '$image_link', '$category', '$color', $price, $quantity, '$description')";
+        return $this->excuteSql($sql);
+    }
+
+    public function updateProduct( $productId, $product_name, $image_link, $category, $price, $quantity, $description){
+        $product_name = addslashes($product_name);
+        $image_link = addslashes($image_link);
+        $category = addslashes($category);
+        $description = addslashes($description);
+        $sql = "UPDATE $this->table SET 
+                    product_name = '$product_name', 
+                    image_link = '$image_link', 
+                    category = '$category', 
+                    price = $price, 
+                    quantity = $quantity, 
+                    description = '$description' 
+                WHERE id = $productId";
+        return $this->excuteSql($sql);
     }
 }
