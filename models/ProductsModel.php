@@ -84,9 +84,10 @@ class ProductsModel extends Model
         return $this->queryOneRow($sql);
     }
 
-    public function getAllProducts() {
-        $sql = "SELECT * FROM $this->table";
-        return $this->queryManyRows($sql);
+    public function updatePurchases($id, $newPurchases)
+    {
+        $sql = "UPDATE $this->table SET purchases = '$newPurchases' WHERE id = '$id'";
+        return $this->excuteSql($sql);
     }
 
     public function searchProductsByKeyword($keyword)
