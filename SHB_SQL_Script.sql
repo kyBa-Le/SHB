@@ -1,7 +1,7 @@
 drop database SHB;
 create database SHB;
 use SHB;
-create table Products (
+create table products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL, 
     category ENUM('MEN', 'WOMEN', 'CHILDREN') NOT NULL,
@@ -13,7 +13,7 @@ create table Products (
     `description` text
 );
 
-create table Users (
+create table users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     username VARCHAR(50) NOT NULL,
@@ -27,7 +27,7 @@ create table Users (
     created_date DATETIME NOT NULL
 );
 
-create table Product_colors (
+create table product_colors (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     product_id int,
     color ENUM('DARK', 'BROWN', 'WHITE') NOT NULL,
@@ -35,7 +35,7 @@ create table Product_colors (
     CONSTRAINT fk_productColors_products FOREIGN KEY (product_id)  REFERENCES products(id)
 );
 
-CREATE TABLE Payments (
+CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     dateTime DATETIME,
     total_cost INT,
@@ -51,7 +51,7 @@ CREATE TABLE Payments (
     CONSTRAINT fk_payments_users FOREIGN KEY (user_id)  REFERENCES users(id)
 );
 
-CREATE TABLE Order_items (
+CREATE TABLE order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(255),
     quantity INT,
@@ -63,12 +63,12 @@ CREATE TABLE Order_items (
     payments_id INT, 
     user_id INT, 
     status VARCHAR(255),
-    CONSTRAINT fk_orderItems_products FOREIGN KEY (product_id) REFERENCES Products(id),
-    CONSTRAINT fk_orderItems_payments FOREIGN KEY (payments_id) REFERENCES Payments(id),
-    CONSTRAINT fk_orderItems_users FOREIGN KEY (user_id) REFERENCES Users(id)
+    CONSTRAINT fk_orderItems_products FOREIGN KEY (product_id) REFERENCES products(id),
+    CONSTRAINT fk_orderItems_payments FOREIGN KEY (payments_id) REFERENCES payments(id),
+    CONSTRAINT fk_orderItems_users FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE Reviews (
+CREATE TABLE reviews (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     order_items_id INT,
     content TEXT,
@@ -77,14 +77,14 @@ CREATE TABLE Reviews (
     CONSTRAINT fk_reviews_users FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE Review_images (
+CREATE TABLE review_images (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     image_link VARCHAR(255),
     review_id INT,
     CONSTRAINT fk_reviewsImages_review FOREIGN KEY (review_id) REFERENCES reviews(id)
 );
 
-INSERT INTO Products (product_name, category, price, image_link, purchases, quantity, color)
+INSERT INTO products (product_name, category, price, image_link, purchases, quantity, color)
 VALUES
     ('Baggy Jeans', 'MEN', 800000, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 8, 40, 'DARK'),
     ('Oversized knitted midaxi dress with side splits in black', 'WOMEN', 90000, 'https://images.asos-media.com/products/arket-oversized-knitted-midaxi-dress-with-side-splits-in-black/207139601-2?$n_480w$&wid=476&fit=constrain', 12, 25, 'DARK'),
@@ -128,7 +128,7 @@ WHERE description IS NULL;
 SET SQL_SAFE_UPDATES = 1;
 
 
-INSERT INTO Users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address, created_date)
+INSERT INTO users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address, created_date)
 VALUES 
 ('holykimsa05@gmail.com', 'kimsa', MD5('holykimsa@123'), 'Hồ Ly Kim Sa', '0877152961', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
 ('jane.smith@example.com', 'janesmith', MD5('securepass456'), 'Jane Smith', '0987654321', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00'),
@@ -142,7 +142,7 @@ VALUES
 ('kevin.thomas@example.com', 'kevint', MD5('kevinrocks'), 'Kevin Thomas', '0934567890', NULL, NULL, NULL, NULL, '2024-12-01 08:15:00');
 
 -- insert data mẫu cho product details
-INSERT INTO Product_colors (id, product_id, color, image_link) 
+INSERT INTO product_colors (id, product_id, color, image_link) 
 VALUES 
     (NULL, 1, 'WHITE', 'https://images.asos-media.com/products/allsaints-underground-oversized-t-shirt-in-yellow-exclusive-to-asos/206433461-1-yellow?$n_640w$&wid=513&fit=constrain'),
     (NULL, 2, 'BROWN', 'https://images.asos-media.com/products/allsaints-underground-oversized-t-shirt-in-deep-red/206980609-1-winehousered?$n_640w$&wid=513&fit=constrain'),
@@ -165,7 +165,7 @@ VALUES
     (NULL, 16, 'BROWN', 'https://images.asos-media.com/products/monki-knitted-turtleneck-sweater-in-beige-melange/206875726-1-beigemelange?$n_640w$&wid=513&fit=constrain'),
     (NULL, 20, 'BROWN', 'https://images.asos-media.com/products/asos-design-oversized-wool-look-overcoat-in-khaki/206095382-1-khaki?$n_640w$&wid=513&fit=constrain');
 
-INSERT INTO Payments (dateTime, total_cost, description, method, province, district, detailed_address, status, phone, fullName, user_id)
+INSERT INTO payments (dateTime, total_cost, description, method, province, district, detailed_address, status, phone, fullName, user_id)
 VALUES
     ('2024-12-15 10:30:00', 3200000, 'Payment for clothing order', 'Momo', 'Hanoi', 'Cau Giay', '23 Duy Tan Street', 'Paid', '0123456789', 'sa', 1),
     ('2024-12-16 14:45:00', 900000, 'Payment for jacket', 'COD', 'Ho Chi Minh City', 'District 1', '45 Le Duan Street', 'Pending', '0123456789', 'bá', 2),
@@ -173,7 +173,7 @@ VALUES
     ('2024-12-19 16:00:00', 1800000, 'Payment for sweater', 'Momo', 'Hanoi', 'Dong Da', '78 Nguyen Chi Thanh Street', 'Paid', '0123456789', 'nga', 4),
     ('2024-12-20 11:20:00', 3200000, 'Payment for coats', 'COD', 'Hue', 'Phu Nhuan', '12 Hung Vuong Street', 'Pending', '0123456789', 'Đạt', 5);
 
-INSERT INTO Order_items (product_name, quantity, unit_price, size, product_id, product_image_link, product_color, payments_id, user_id, status)
+INSERT INTO order_items (product_name, quantity, unit_price, size, product_id, product_image_link, product_color, payments_id, user_id, status)
 VALUES
     ('Baggy Jeans', 2, 1600000, 'L', 1, 'https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$', 'DARK', 1, 1, 'Shipping'),
     ('Oversized knitted midaxi dress', 1, 900000, 'M', 2, 'https://images.asos-media.com/products/arket-oversized-knitted-midaxi-dress-with-side-splits-in-black/207139601-2?$n_480w$', 'DARK', 1, 1, 'Shipping'),
@@ -181,7 +181,7 @@ VALUES
     ('Logo backprint t-shirt', 2, 900000, 'XL', 8, 'https://images.asos-media.com/products/calvin-klein-jeans-logo-backprint-t-shirt-in-dark-brown-asos-exclusive/207312118-2?$n_480w$', 'DARK', 4, 1, 'Delivered'),
     ('Mini Mock Neck Knit Dress', 4, 800000, 'M', 24, 'https://cdn.shopify.com/s/files/1/0293/9277/files/09-20-23Studio6_RA_AA_15-01-53_57_THRD005_Black_39419_DG.jpg', 'DARK', 4, 1, 'Delivered');
 
-INSERT INTO Reviews (order_items_id, content, user_id)
+INSERT INTO reviews (order_items_id, content, user_id)
 VALUES
 (1, 'Great quality, fits perfectly!', 1),
 (1, 'Nice product, but size runs large.', 1),
@@ -189,7 +189,7 @@ VALUES
 (1, 'Very comfortable, would recommend.', 1),
 (1, 'Not worth the price, returned it.', 1);
 
-INSERT INTO Review_images (image_link, review_id)
+INSERT INTO review_images (image_link, review_id)
 VALUES
 ('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 1),
 ('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 2),
@@ -198,7 +198,7 @@ VALUES
 ('https://images.asos-media.com/products/asos-design-super-baggy-jean-in-light-wash-blue/207091945-2?$n_960w$&wid=952&fit=constrain', 5);
 
 -- insert data mẫu cho đẹp biểu đồ ở trang chủ:
-INSERT INTO Users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address, created_date)
+INSERT INTO users (email, username, password, fullName, phone, avatar_link, province, district, detailed_address, created_date)
 VALUES
 -- Ngày 15/12/2024
 ('user7@example.com', 'user7', MD5('password7'), 'User Seven', '0900000007', NULL, NULL, NULL, NULL, '2024-12-15 08:45:00'),
@@ -227,7 +227,7 @@ VALUES
 ('user20@example.com', 'user20', MD5('password20'), 'User Twenty', '0900000020', NULL, NULL, NULL, NULL, '2024-12-26 16:45:00');
 
 -- Insert data để hiển thị chart với hình dạng kim tự tháp
-INSERT INTO Payments (dateTime, total_cost, description, method, province, district, detailed_address, status, phone, fullName, user_id)
+INSERT INTO payments (dateTime, total_cost, description, method, province, district, detailed_address, status, phone, fullName, user_id)
 VALUES
     -- Ngày 19-22: ít đơn hàng
     ('2024-12-19 09:00:00', 1200000, 'Payment for casual shirt', 'Momo', 'Hanoi', 'Cau Giay', '23 Duy Tan Street', 'Paid', '0123456789', 'sa', 1),
