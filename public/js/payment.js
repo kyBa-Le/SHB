@@ -1,4 +1,4 @@
-import {getData, patchData, sendData, redirectToPost, sleep} from "./components.js";
+import {getData, patchData, sendData, redirectToPost, sleep, moneyFormater} from "./components.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const paymentId = urlParams.get('paymentId');
@@ -140,3 +140,8 @@ document.getElementById('order-btn').addEventListener('click',async function() {
         window.location.href = '/cart';
     }
 })
+
+const moneyElements = document.getElementsByClassName('money');
+for (const element of moneyElements) {
+    element.innerHTML = moneyFormater(element.innerHTML);
+}
