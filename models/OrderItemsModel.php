@@ -69,18 +69,18 @@ class OrderItemsModel extends Model {
     public function getPurchaseOfProductsInLast30Days() {
         $sql = "
         SELECT 
-            SUM(order_items.quantity) AS total_purchase, 
+            SUM($this->table.quantity) AS total_purchase, 
             products.product_name 
         FROM 
             $this->table 
         JOIN 
             products 
-            ON order_items.product_id = products.id 
+            ON $this->table.product_id = products.id 
         JOIN 
             payments 
-            ON order_items.payments_id = payments.id 
+            ON $this->table.payments_id = payments.id 
         WHERE  
-            order_items.status != 'Pending' 
+            $this->table.status != 'Pending' 
             AND payments.datetime >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
         GROUP BY 
             products.id

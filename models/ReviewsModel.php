@@ -20,7 +20,11 @@ class ReviewsModel extends Model
 
     public function getReviewByProductId($id)
     {
-        $sql = "SELECT $this->table.*, users.avatar_link, users.username, oi.product_color, oi.size FROM $this->table JOIN order_items AS oi on order_items_id = oi.id JOIN users ON reviews.user_id = users.id WHERE oi.product_id = $id";
+        $sql = "SELECT $this->table.*, users.avatar_link, users.username, oi.product_color, oi.size 
+                FROM $this->table 
+                JOIN order_items AS oi on order_items_id = oi.id 
+                JOIN users ON reviews.user_id = users.id 
+                WHERE oi.product_id = $id";
         return $this->queryManyRows($sql);
     }
 }

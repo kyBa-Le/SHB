@@ -48,7 +48,7 @@
                             <td>$id</td>
                             <td>$name</td>
                             <td><img src='$img'></td>
-                            <td>$price</td>
+                            <td class='money'>$price</td>
                             <td>$quantity</td>
                             <td>$category</td>
                             <td>$description</td>
