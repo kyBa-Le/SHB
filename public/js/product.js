@@ -14,6 +14,8 @@ document.getElementById('category-products-see-more').addEventListener('click', 
     let products = await getData(path);
     if (products.length !== 0) {
         pageNo.value =  parseInt(pageNo.value) + 1 ;
+    } else {
+        document.getElementById('see-more-box').innerHTML = '<i style="font-size: 20px">That\'s all products <i class="fa-regular fa-face-smile"></i></i>';
     }
     renderProducts(products);
 })
