@@ -35,7 +35,7 @@
             <h1 class="text-center">New Password</h1>
             <span style="text-align: center;"><i>Please enter your new password!!!</i></span>
             <div id="newPassword-container">
-                <form id="form-newPassword"  action="/user/forgot-password" method="post"  class="d-flex flex-column justify-content-between">
+                <form id="form-newPassword"  action="/forgot-password" method="post"  class="d-flex flex-column justify-content-between">
                     <label class="w-100 newPassword-label">
                         <p class="m-0">New password</p>
                         <input type="password" name="newPassword" placeholder="Enter your new password" required minlength="6">
