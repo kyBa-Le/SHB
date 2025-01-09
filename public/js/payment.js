@@ -4,7 +4,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const paymentId = urlParams.get('paymentId');
 if (paymentId) {
     const paymentData = JSON.parse(localStorage.getItem('paymentData'));
-    console.log(paymentData)
     if (paymentData && paymentData.items) {
         for (let item of paymentData.items) {
             const data = {

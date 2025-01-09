@@ -50,7 +50,6 @@ otpBtn.addEventListener('click', async function () {
     }
     let otpInput = document.getElementById('otpCode').value; 
     let response = await sendData('/api/forgot-password/otp', {otp: otpInput});
-    console.log(response['isCorrectOtp']);
     if (response['isCorrectOtp'] == true) {
         newPasswordBox.style.display = 'flex';
         forgotPasswordBox.style.display = 'none';
