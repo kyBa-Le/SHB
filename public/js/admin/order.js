@@ -191,7 +191,6 @@ async function changeStatus() {
                 boxStatus.classList.add('d-none'); 
             }  
             let changeBtn = document.getElementById(`status-change-btn-${id}`)
-            console.log(changeBtn)
             if (changeBtn) {
                 changeBtn.addEventListener('click', async function () {
                     let response = await patchData('/api/admin/order-items', {payment_id: id});

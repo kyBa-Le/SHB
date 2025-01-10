@@ -19,7 +19,7 @@ forgotPasswordBtn.addEventListener('click', async function (event) {
         emailInput.reportValidity();
         return;
     } else {
-        let response = await sendData('/api/users/forgot-password', {email: emailValue});
+        let response = await sendData('/api/forgot-password', {email: emailValue});
         if (response['isSent'] == false) {
             emailContainer.style.display = 'block';
             otpContainer.style.display = 'none';
@@ -49,8 +49,7 @@ otpBtn.addEventListener('click', async function () {
         error.remove();
     }
     let otpInput = document.getElementById('otpCode').value; 
-    let response = await sendData('/api/users/otp', {otp: otpInput});
-    console.log(response['isCorrectOtp']);
+    let response = await sendData('/api/forgot-password/otp', {otp: otpInput});
     if (response['isCorrectOtp'] == true) {
         newPasswordBox.style.display = 'flex';
         forgotPasswordBox.style.display = 'none';

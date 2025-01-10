@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0'); 
+ini_set('log_errors', '1'); 
+ini_set('error_log', '/var/log/php_errors.log'); 
+error_reporting(E_ALL);
+
 use app\controllers\SiteController;
 
 require __DIR__ . "/../vendor/autoload.php";
@@ -37,7 +43,7 @@ $app->router->get('/user/edit', 'editProfile');
 $app->router->get('/women', [$productController, 'women']);
 $app->router->get('/men', [$productController, 'men']);
 $app->router->get('/children', [$productController, 'children']);
-$app->router->get('/user/forgot-password', 'forgotPassword');
+$app->router->get('/forgot-password', 'forgotPassword');
 $app->router->get('/product/search', [$productController, 'search']);
 $app->router->get('/products/{id}', 'details');
 $app->router->get('/product/filter', [$productController, 'filter']);
@@ -54,7 +60,7 @@ $app->router->get('/admin/products', [$productController,'admin']);
 $app->router->post('/sign-up', [$userController, 'signUp']);
 $app->router->post('/login', [$userController, 'login']);
 $app->router->post('/user/edit',[$userController, 'editProfile']);
-$app->router->post('/user/forgot-password', [$userController,'saveNewPassword']);
+$app->router->post('/forgot-password', [$userController,'saveNewPassword']);
 $app->router->post('/payment', [new app\controllers\PaymentController(), 'show']);
 $app->router->post('/payment/momo', [new \app\controllers\PaymentController(),'momoPayment']);
 
@@ -80,8 +86,8 @@ $app->router->get('/api/admin/order-items/chart', [$apiOrderItemController, 'get
 $app->router->get('/api/admin/payments/chart', [$apiPaymentController, 'getOrdersInLast15Days']);
 
 // post API
-$app->router->post('/api/users/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
-$app->router->post('/api/users/otp', [$apiUserController, 'getOTPCode']);
+$app->router->post('/api/forgot-password', [$apiUserController, 'getEmailForgotPassword']);
+$app->router->post('/api/forgot-password/otp', [$apiUserController, 'getOTPCode']);
 $app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);
 $app->router->post('/api/payments', [$apiPaymentController,'createPayment']);
 $app->router->post('/api/order-items', [$apiOrderItemController,'createNewOrderItem']);

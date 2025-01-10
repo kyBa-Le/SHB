@@ -1,10 +1,9 @@
-import {getData, patchData, sendData, redirectToPost, sleep} from "./components.js";
+import {getData, patchData, sendData, redirectToPost, sleep, moneyFormater} from "./components.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const paymentId = urlParams.get('paymentId');
 if (paymentId) {
     const paymentData = JSON.parse(localStorage.getItem('paymentData'));
-    console.log(paymentData)
     if (paymentData && paymentData.items) {
         for (let item of paymentData.items) {
             const data = {
@@ -141,3 +140,8 @@ document.getElementById('order-btn').addEventListener('click',async function() {
         window.location.href = '/cart';
     }
 })
+
+const moneyElements = document.getElementsByClassName('money');
+for (const element of moneyElements) {
+    element.innerHTML = moneyFormater(element.innerHTML);
+}

@@ -9,17 +9,22 @@ use app\services\emailService\EmailSender;
 use app\services\emailService\SignUpEmail;
 use app\services\UserService;
 use app\validation\UserValidation;
+use Cloudinary\Cloudinary;
 
 class UserController extends Controller
 {
-    private $userModel;
-    private $userValidation;
     private $userService;
+    private $cloudinary;
     public function __construct()
     {
-        $this->userModel = new UsersModel();
-        $this->userValidation = new UserValidation();
         $this->userService = new UserService();
+        $this->cloudinary = new Cloudinary([
+            'cloud' => [
+                'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
+                'api_key'    => $_ENV['CLOUDINARY_API_KEY'],
+                'api_secret' => $_ENV['CLOUDINARY_API_SECRET'],
+            ],
+        ]);
     }
 
     public function signUp() {
@@ -59,7 +64,7 @@ class UserController extends Controller
     public function editProfile() {
         $request = new Request();
         $data = $request->getBody();
-        $imageUploaded = $this->saveImage('file_uploaded', 'images/avatar/');
+        $imageUploaded = $this->saveImage('file_uploaded', 'images-avatar');
         if ($imageUploaded){
             $userId = $_SESSION['user']['id'];
             $this->userService->editAvatarLink( $imageUploaded, $userId);
@@ -75,17 +80,18 @@ class UserController extends Controller
         return $this->render('editProfile', $message);
     }
 
-    private function saveImage($fieldName, $path){
+    private function saveImage($fieldName, $uploadPreset) {
+        // Kiểm tra xem file đã được upload chưa
         if (isset($_FILES[$fieldName])) {
+
             $fileTmpPath = $_FILES[$fieldName]['tmp_name'];
-            $originalFileName = $_FILES[$fieldName]['name'];
-            $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-            $newFileName = uniqid('file_', true) . '.' . $fileExtension;
-            $uploadFolder = $path;
-            $destinationPath = $uploadFolder . $newFileName;
-            if (move_uploaded_file($fileTmpPath, $destinationPath)) {
-                return $destinationPath;
-            }
+
+            $result = $this->cloudinary->uploadApi()->upload($fileTmpPath, [
+                'upload_preset' => $uploadPreset,
+            ]);
+
+            // Trả về URL của ảnh
+            return $result['secure_url'];
         }
         return false;
     }
@@ -98,9 +104,4 @@ class UserController extends Controller
         return $this->render('login', $message);
     }
 
-    public function payment(){
-        $request = new Request();
-        $data = $request->getBody();
-
-    }
 }

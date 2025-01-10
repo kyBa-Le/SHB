@@ -1,5 +1,5 @@
 // <script src='js/review.js' type='module'></script>
-import {sendData, sleep} from "./components.js";
+import {sendData, sleep, loadWaiting, hideWaiting} from "./components.js";
 const inputImages = document.getElementById('images');
 const previewContainer = document.getElementById('images-preview');
 let uploadedFiles = []; // Array to hold uploaded files
@@ -48,6 +48,7 @@ form.addEventListener('submit', async function (event) {
     if (response['isSuccess']) {
         const review = response['review'];
         let isSuccess = true;
+        loadWaiting();
         for (let i = 0; i < uploadedFiles.length; i++) {
             let form = new FormData();
             form.append('images', uploadedFiles[i]);
@@ -57,6 +58,7 @@ form.addEventListener('submit', async function (event) {
             }).then(response => {return response.json()});
             isSuccess = response['isSuccess'];
         }
+        hideWaiting();
         if (isSuccess) {
             const inputs = document.querySelectorAll('input, textarea');
             inputs.forEach(input => {

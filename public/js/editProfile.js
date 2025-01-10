@@ -80,7 +80,6 @@ clickSaveNewPassword.addEventListener('click', async function () {
     const currentPasswordInput = document.getElementById('currentPassword');
     let data = {newPassword : passwordInput.value, confirmNewPassword: confirmInput.value, currentPassword: currentPasswordInput.value};
     let inputs = document.getElementsByClassName('edit-password-input');
-    console.log('input is:' + inputs);
     for (let i = 0; i < inputs.length; i++ ) {
         if (inputs[i].value.length < 6) {
             inputs[i].setCustomValidity('Password must be at least 6 characters!'); 
@@ -93,11 +92,10 @@ clickSaveNewPassword.addEventListener('click', async function () {
     } else {
         confirmInput.setCustomValidity('');
         let response = await patchData('/api/users/edit-password', data);
-        console.log(response);
         if (response['isUpdate'] == false) {
             document.getElementById('current-password-group').innerHTML += `<span style='color: red' id='current-password-error'> ${response['error']} </span>`
         } else {
-            window.location.href = '/users/edit';
+            window.location.href = '/user/edit';
         }
     }
 });
