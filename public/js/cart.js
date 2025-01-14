@@ -2,14 +2,12 @@ import {moneyFormater, getData, sendData, patchData, deleteData} from "./compone
 let orderItems = [];
 
 orderItems = await getData('/api/order-items')
-console.log(orderItems);
 const cartItemsBody = document.getElementById('cart-items-body');
 const orderDeliveryBody = document.getElementById('order-delivered-infor-content');
 const orderShippingBody = document.getElementById('order-shipping-infor-content');
 // render data to screen
 async function renderPendingOrder(orderItems) {
     const pendingItems = orderItems.filter(item => item['status'] === 'Pending');
-    console.log(pendingItems.length)
     if (pendingItems.length === 0) {
         await renderEmptyCart(pendingItems);
     }else {

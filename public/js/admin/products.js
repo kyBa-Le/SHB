@@ -17,7 +17,7 @@ async function updateProductTable(products) {
             <td>${product.id}</td>
             <td>${product.product_name}</td>
             <td><img src="${product.image_link}" alt="${product.product_name}"></td>
-            <td>${product.price}</td>
+            <td class='money'>${product.price}</td>
             <td>${product.quantity}</td>
             <td>${product.category}</td>
             <td>${product.description}</td>
@@ -118,6 +118,10 @@ async function addUpdateAction() {
             }
         })
     }
+    let moneys = document.querySelectorAll('.money');
+    for (let money of moneys) {
+        money.innerHTML = moneyFormater(money.innerHTML);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", await addUpdateAction);
@@ -140,3 +144,8 @@ document.getElementById('btn-add-product').addEventListener('click', function() 
     addForm.classList.remove('d-none');
     overlay.classList.remove('d-none');
 });
+
+let moneys = document.querySelectorAll('.money');
+for (let money of moneys) {
+    money.innerHTML = moneyFormater(money.innerHTML);
+}

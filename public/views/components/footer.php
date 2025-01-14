@@ -9,7 +9,7 @@
         color: white;
     }
     #footer-logo {
-        width: 10vh;
+        width: 7vh;
         height: auto;
     }
     .footer-title {

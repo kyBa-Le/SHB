@@ -15,7 +15,7 @@
     }
 
     #header-logo {
-        width: 10vh;
+        width: 7vh;
         cursor: pointer;
     }
 

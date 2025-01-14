@@ -10,7 +10,7 @@ class PaymentsModel extends Model
 
     public function createPayment($dateTime, $total_cost, $description, $method, $province, $district, $detailed_address, $status, $id, $phone, $fullName) {
         $sql = "INSERT INTO $this->table (`dateTime`, `total_cost`, `description`, `method`, `province`, `district`, `detailed_address`, `status`, `phone`,`fullName`, `user_id`)
-                VALUES ('$dateTime', $total_cost, '$description', '$method', '$province', '$district', '$detailed_address', '$status', '$fullName', '$phone', $id )";
+                VALUES ('$dateTime', $total_cost, '$description', '$method', '$province', '$district', '$detailed_address', '$status', '$phone', '$fullName', $id )";
         return $this->excuteSql($sql);
     }
 

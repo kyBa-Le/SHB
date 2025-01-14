@@ -28,7 +28,7 @@
         <input type="text" placeholder="Note" id="description">
         <div>
           <h3>Order Summary</h3>
-          <p>Order Total: <span class="money" data-value="<?php if(isset($totalPrice)) {echo $totalPrice;} ?>" id="total-price"><?php if(isset($totalPrice)) {echo $totalPrice;} ?>₫</span></p>
+          <p>Order Total: <span class="money" data-value="<?php if(isset($totalPrice)) {echo $totalPrice;} ?>" id="total-price"><?php if(isset($totalPrice)) {echo $totalPrice;} ?> đ</span></p>
         </div>
         <button type="button" class="btn-buy" id="order-btn">Order</button>
       </form>
@@ -58,7 +58,7 @@
                                 <p>$color / M</p>
                                 <p>x $quantity</p> 
                             </div>
-                            <p>Total: <span> $total đ</span></p>
+                            <p>Total: <span class='money'> $total đ</span></p>
                         </div>";
                 }
             } else {
@@ -78,7 +78,7 @@
                             <p>$color / $size</p>
                             <p>x $quantity</p> 
                         </div>
-                        <p>Total: <span> $total đ</span></p>
+                        <p>Total: <span class='money'> $total đ</span></p>
                     </div>";
             }
         } else {
